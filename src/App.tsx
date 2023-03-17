@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  Route,
+  Routes,
+  NavLink,
+  HashRouter
+} from "react-router-dom";
+import Configure from "./Configure";
+import View from "./View";
+import Schedule from "./Schedule";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <div className="App">
+        {/* <h1>RaaP Portal</h1> */}
+        <div className="header">
+          <div><NavLink to="/configure">Configure</NavLink></div>
+          <div><NavLink to="/view">View</NavLink></div>
+          <div><NavLink to="/schedule">Schedule</NavLink></div>
+        </div>
+        <div className="content">
+          <Routes>
+            <Route path="/configure" Component={Configure}/>
+            <Route path="/view" Component={View}/>
+            <Route path="/schedule" Component={Schedule}/>
+          </Routes>
+        </div>
+      </div>
+    </HashRouter>
   );
 }
 
