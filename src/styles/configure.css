@@ -1,7 +1,31 @@
-.buttons_container {
+/* .buttons_container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 50vw;
   margin: auto;
+} */
+
+
+.configure_area {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  margin: auto;
+  height: 80vh;
+}
+
+.configure_area_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+  background-color: rgb(228, 233, 237);
+}
+
+.configure_area_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
 }

@@ -4,8 +4,19 @@ import '../styles/button.css';
 
 interface buttonOnClickFunction {
   name: string,
-  onclick: () => void;
+  onclick: () => void,
+  options: string[],
 }
+
+// interface buttonOptionsProps {
+//   options: string[],
+// }
+
+// const ButtonOptions = (props: buttonOptionsProps) => {
+//   return props.options.map((item)=>{
+//     <div>{item}</div>
+//   })
+// }
 
 const Button = (props: buttonOnClickFunction) => {
   // const myContainer = React.useRef<HTMLInputElement>(null)
@@ -18,12 +29,15 @@ const Button = (props: buttonOnClickFunction) => {
 
   return (
     <div className="button_container">
-      <button onClick={/*props.onclick*/showDropdown} className="dropbtn">{props.name}</button>
-      {showResults && <div id="myDropdown" className="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>}
+      <div><button onClick={showDropdown}>{props.name}</button></div>
+      {showResults && 
+        <div className="button_dropdown_container">
+          <div>a</div>
+          <div>b</div>
+          <div>c</div>
+          {/* <ButtonOptions options={props.options}></ButtonOptions> */}
+        </div>
+      }
     </div>
   );
 }
