@@ -5,7 +5,7 @@ import './styles/configure.css'
 function App() {
   return (
     <div className="configure_container">
-      <h1>Configure</h1>
+      {/* <h1>Configure</h1> */}
       <div className="configure_area">
         <div className="configure_area_left">
           <div className="configure_area_table">
