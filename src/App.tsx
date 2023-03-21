@@ -116,7 +116,7 @@ function App() {
           {/* <NavTitle>My App</NavTitle> */}
         </NavLinkContainer>
         <NavLinkContainer>
-          <NavItem to="/configure">Configure</NavItem>
+          <NavItem to="/">Configure</NavItem>
           <NavItem to="/view">View</NavItem>
           <NavItem to="/schedule">Schedule</NavItem>
         </NavLinkContainer>
@@ -124,7 +124,7 @@ function App() {
       </NavbarContainer>
       <MainContainer>
         <Routes>
-          <Route path="/configure" Component={Configure} />
+          <Route path="/" Component={Configure} />
           <Route path="/view" Component={View} />
           <Route path="/schedule" Component={Schedule} />
         </Routes>

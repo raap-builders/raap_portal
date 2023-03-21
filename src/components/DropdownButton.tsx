@@ -34,10 +34,10 @@ const StyledDropdown = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 50px;
+  background-color: none;
+  color: green;
+  border: 2px solid green;
+  border-radius: 20px;
   padding: 10px 30px;
   font-size: 16px;
   cursor: pointer;

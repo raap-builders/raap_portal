@@ -1,6 +1,12 @@
 import React from 'react';
 import Buttons from './components/Buttons'
 import './styles/configure.css'
+import ConfiguratorTable from "./components/Table"
+import DisplayTypes from "./components/DisplayTypes"
+import Notes from "./components/Notes"
+import Slider from './components/Slider'
+
+
 
 function App() {
   return (
@@ -9,13 +15,13 @@ function App() {
       <div className="configure_area">
         <div className="configure_area_left">
           <div className="configure_area_table">
-              Table
+              <ConfiguratorTable></ConfiguratorTable>
           </div>
           <div className="configure_area_display">
-              Display
+              
           </div>
           <div className="configure_area_layout">
-              Layout | Photo | Drawing
+              <DisplayTypes></DisplayTypes>
           </div>
         </div>
         <div className="configure_area_right">
@@ -23,10 +29,10 @@ function App() {
               <Buttons></Buttons>
           </div>
           <div className="configure_area_rooms">
-              Rooms
+            <Slider range={{min:70, max:150}}></Slider>
           </div>
           <div className="configure_area_notes">
-              Notes
+              <Notes></Notes>
           </div>
         </div>
       </div>

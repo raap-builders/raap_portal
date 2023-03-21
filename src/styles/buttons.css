@@ -5,15 +5,3 @@
   padding-left: 20%;
   padding-right: 20%;
 }
-
-.buttons_location {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.buttons_property {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
