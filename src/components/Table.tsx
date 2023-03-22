@@ -45,17 +45,19 @@ const Title2 = styled.h2`
   margin-bottom: 10px;
 `;
 
-const Row = styled.tr`
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
   vertical-align: middle;
 `;
 
-const RowItem = styled.td`
+const RowItem = styled.div`
   padding: 10px;
 `;
 
 const GrayBox = styled.div`
   background-color: #f2f2f2;
-  padding: 10px;
+  padding: 5px 10px;
 `;
 
 const GrayBoxHeading = styled.h3`
@@ -65,10 +67,22 @@ const GrayBoxHeading = styled.h3`
 `;
 
 const GrayBoxText = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
 `;
+
+const GrayBoxContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: baseline;
+`
+
+const GreenTriangle = styled.p`
+  font-size: 1rem;
+  color: green;
+`
 
 const TableComponent = () => {
   return (
@@ -80,7 +94,7 @@ const TableComponent = () => {
           <RowItem>
             <GrayBox>
               <GrayBoxHeading>subheading</GrayBoxHeading>
-              <GrayBoxText>400</GrayBoxText>
+              <GrayBoxContent><GrayBoxText>400</GrayBoxText></GrayBoxContent>
             </GrayBox>
           </RowItem>
         </LeftSection>
@@ -90,13 +104,13 @@ const TableComponent = () => {
             <RowItem>
               <GrayBox>
                 <GrayBoxHeading>subheading</GrayBoxHeading>
-                <GrayBoxText>400</GrayBoxText>
+                <GrayBoxContent><GrayBoxText>400</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
               </GrayBox>
             </RowItem>
             <RowItem>
               <GrayBox>
                 <GrayBoxHeading>subheading</GrayBoxHeading>
-                <GrayBoxText>400</GrayBoxText>
+                <GrayBoxContent><GrayBoxText>400</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
               </GrayBox>
             </RowItem>
           </Row>
@@ -104,7 +118,7 @@ const TableComponent = () => {
             <RowItem>
               <GrayBox>
                 <GrayBoxHeading>subheading</GrayBoxHeading>
-                <GrayBoxText>400</GrayBoxText>
+                <GrayBoxContent><GrayBoxText>400</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
               </GrayBox>
             </RowItem>
           </Row>

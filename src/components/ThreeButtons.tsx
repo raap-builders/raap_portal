@@ -71,7 +71,7 @@ const ButtonGroup: React.FC<Props> = ({ labels, name }) => {
 
   const handleButtonClick = (label: string) => {
     setSelectedButton(label);
-    console.log(`You clicked ${label}`);
+    // console.log(`You clicked ${label}`);
   };
 
   return (

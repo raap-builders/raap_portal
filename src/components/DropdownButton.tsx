@@ -20,7 +20,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, onClickDropdown, options }) =
       {isOpen && (
         <StyledMenu>
           {options.map((item, index) => (
-            <StyledMenuItem key={index} onClick={onClickDropdown(item)}>{item}</StyledMenuItem>
+            <StyledMenuItem key={index} onClick={()=>onClickDropdown(item)}>{item}</StyledMenuItem>
           ))}
         </StyledMenu>
       )}
@@ -44,6 +44,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 190px;
 
   &:hover {
     opacity: 0.8;

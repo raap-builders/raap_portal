@@ -26,17 +26,55 @@ const ButtonsContainerDiv = styled.div`
 
 
 const Buttons = () => {
-  const [state, setState] = React.useState(Object.keys(data.location)[0] || "")
-  // console.log(data);
+  const [state, setState] = React.useState("State")
+  const [city, setCity] = React.useState("City")
 
-  const cities:any = data.location["California"];
+  const [stateList, setStateList] = React.useState(Object.keys(data.location))
+  const [cityList, setCityList] = React.useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
+
+  const updateCityList = (value: string) => {
+    let newCityList = cityList;
+    if(value==="California"){
+      newCityList = Object.keys(data.location["California"])
+    }
+    else if(value==="Arizona"){
+      newCityList = Object.keys(data.location["Arizona"])
+    }
+    else{
+      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]))
+    }
+    if(!(newCityList.includes(city))){
+      let cityAverage = (data.location as any)[value][newCityList[0]]
+      setCity(newCityList[0])
+      console.log("average for "+newCityList[0]+" is "+cityAverage)
+    }
+    setState(value)
+    setCityList(newCityList)
+  }
+
+  const updateState = (value: string) => {
+    let cityAverage = (data.location as any)["average"]
+    setCity(value)
+    if(Object.keys(data.location["Arizona"]).includes(value)){
+      setState("Arizona")
+      cityAverage = (data.location["Arizona"] as any)[value];
+    }
+    else if(Object.keys(data.location["California"]).includes(value)){
+      setState("California")
+      cityAverage = (data.location["California"] as any)[value];
+    }
+    else{
+      setState("State")
+    }
+    console.log("average for "+value+" is "+cityAverage)
+  }
 
   return (
     <ButtonsContainerDiv>
       <LocationDiv>
           <Text>Location</Text>
-          <DropdownButton name="City" onClickDropdown={(value)=>{setState(value)}} options={Object.keys(data.location)}></DropdownButton>
-          <DropdownButton name="State" onClickDropdown={()=>{}} options={Object.keys(cities)}></DropdownButton>
+          <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
+          <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
       </LocationDiv>
         <ThreeButtons name="Brand" labels={["Tru","Home2","Hampton"]}></ThreeButtons>
         <ThreeButtons name="Project Type" labels={["Bathroom Pod","Volumetric Room","Kitchen Pod"]}></ThreeButtons>
