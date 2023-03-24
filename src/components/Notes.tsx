@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const Textbox = styled.textarea`
   width: 500px;
-  height: 125px;
+  height: 100px;
   border-radius: 10px;
   border: 2px solid green;
   padding: 10px;

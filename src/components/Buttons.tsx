@@ -76,8 +76,8 @@ const Buttons = () => {
           <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
           <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
       </LocationDiv>
-        <ThreeButtons name="Brand" labels={["Tru","Home2","Hampton"]}></ThreeButtons>
-        <ThreeButtons name="Project Type" labels={["Bathroom Pod","Volumetric Room","Kitchen Pod"]}></ThreeButtons>
+        <ThreeButtons name="Brand" labels={data.brand}></ThreeButtons>
+        <ThreeButtons name="Project Type" labels={data.projectTypes}></ThreeButtons>
         <ThreeButtons name="Finish" labels={["Glimmer","Spark","Burst"]}></ThreeButtons>
     </ButtonsContainerDiv>
   );

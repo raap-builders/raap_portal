@@ -20,12 +20,22 @@ const data = {
       "Vallejo":287.9,
     }
   },
+  // projectTypes: [
+  //   "Hotel",
+  //   "Student Housing",
+  //   "Affordable Housing",
+  //   "Data Center",
+  //   "Franchise Store",
+  // ],
+  brand: [
+    "Tru",
+    "Home2",
+    "Hampton"
+  ],
   projectTypes: [
-    "Hotel",
-    "Student Housing",
-    "Affordable Housing",
-    "Data Center",
-    "Franchise Store",
+    "Bathroom Pod",
+    "Volumetric Room",
+    "Kitchen Pod"
   ]
 }
 

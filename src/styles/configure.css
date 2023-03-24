@@ -10,9 +10,9 @@
 .configure_area {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  width: 90vw;
   margin: auto;
-  height: 80vh;
+  height: 85vh;
 }
 
 .configure_area_left {
@@ -21,6 +21,7 @@
   justify-content: space-around;
   width: 50%;
   background-color: rgb(255, 255, 255);
+  margin:1rem;
 }
 
 .configure_area_right {
@@ -28,4 +29,5 @@
   flex-direction: column;
   justify-content: space-around;
   width: 50%;
+  margin:1rem;
 }

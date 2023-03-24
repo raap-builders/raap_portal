@@ -17,8 +17,8 @@ const raapLogo = require('./assets/logo.png');
 
 const MainContainer = styled.div`
   // max-width: 800px;
-  margin: 0 auto;
-  padding: 16px;
+  // margin: 0 auto;
+  // padding: 1rem;
 `;
 
 const NavbarContainer = styled.nav`

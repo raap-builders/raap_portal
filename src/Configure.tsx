@@ -3,6 +3,7 @@ import Buttons from './components/Buttons'
 import './styles/configure.css'
 import ConfiguratorTable from "./components/Table"
 import DisplayTypes from "./components/DisplayTypes"
+import ConfiguratorDisplay from "./components/ConfiguratorDisplay"
 import Notes from "./components/Notes"
 import Slider from './components/Slider'
 
@@ -18,7 +19,7 @@ function App() {
               <ConfiguratorTable></ConfiguratorTable>
           </div>
           <div className="configure_area_display">
-              
+              <ConfiguratorDisplay></ConfiguratorDisplay>
           </div>
           <div className="configure_area_layout">
               <DisplayTypes></DisplayTypes>

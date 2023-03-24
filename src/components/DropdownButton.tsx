@@ -20,7 +20,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, onClickDropdown, options }) =
       {isOpen && (
         <StyledMenu>
           {options.map((item, index) => (
-            <StyledMenuItem key={index} onClick={()=>onClickDropdown(item)}>{item}</StyledMenuItem>
+            <StyledMenuItem key={index} onClick={()=>{onClickDropdown(item); toggleDropdown()}}>{item}</StyledMenuItem>
           ))}
         </StyledMenu>
       )}
@@ -71,6 +71,7 @@ const StyledMenu = styled.ul`
   position: absolute;
   top: 100%;
   width: 100%;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.25);
   z-index: 1;
 `;
 
