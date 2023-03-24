@@ -7,6 +7,10 @@ import ThreeButtons from './ThreeButtons'
 import styled from 'styled-components';
 
 
+interface Props {
+  setTraditionalBuildTime: (arg0: number) => any,
+}
+
 const LocationDiv = styled.div`
   display:flex;
   flex-direction:row;
@@ -25,12 +29,18 @@ const ButtonsContainerDiv = styled.div`
 `
 
 
-const Buttons = () => {
+const Buttons = ({setTraditionalBuildTime}:Props) => {
   const [state, setState] = React.useState("State")
   const [city, setCity] = React.useState("City")
 
   const [stateList, setStateList] = React.useState(Object.keys(data.location))
   const [cityList, setCityList] = React.useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
+
+  const setNewCity = (value:string, average:number) => {
+    setCity(value)
+    setTraditionalBuildTime(average)
+    console.log("average for "+value+" is "+average)
+  }
 
   const updateCityList = (value: string) => {
     let newCityList = cityList;
@@ -45,8 +55,7 @@ const Buttons = () => {
     }
     if(!(newCityList.includes(city))){
       let cityAverage = (data.location as any)[value][newCityList[0]]
-      setCity(newCityList[0])
-      console.log("average for "+newCityList[0]+" is "+cityAverage)
+      setNewCity(newCityList[0],cityAverage)
     }
     setState(value)
     setCityList(newCityList)
@@ -54,7 +63,6 @@ const Buttons = () => {
 
   const updateState = (value: string) => {
     let cityAverage = (data.location as any)["average"]
-    setCity(value)
     if(Object.keys(data.location["Arizona"]).includes(value)){
       setState("Arizona")
       cityAverage = (data.location["Arizona"] as any)[value];
@@ -66,7 +74,7 @@ const Buttons = () => {
     else{
       setState("State")
     }
-    console.log("average for "+value+" is "+cityAverage)
+    setNewCity(value,cityAverage)
   }
 
   return (

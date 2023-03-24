@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
+interface Props {
+  raapBuildTime: number,
+  raapIncrementalRevenue: number,
+  traditionalBuildTime: number,
+  traditionalCost: number
+}
 
 // const Table = styled.table`
 //   width: 610px;
@@ -96,13 +101,13 @@ const GreenTriangle = styled.p`
   color: green;
 `
 
-const TableComponent = () => {
+const TableComponent = ({raapBuildTime, raapIncrementalRevenue, traditionalBuildTime, traditionalCost}:Props) => {
   return (
     <SectionWrapper>
         <LeftSection>
           <Title1>Traditional Construction</Title1>
-          <RowItem>Build Time: 25 Months</RowItem>
-          <RowItem>Cost: $8M</RowItem>
+          <RowItem>Build Time: {traditionalBuildTime} Months</RowItem>
+          <RowItem>Cost: ${traditionalCost}M</RowItem>
           <RowItem>
             <GrayBox>
               <GrayBoxHeading>Price / Sq Ft</GrayBoxHeading>
@@ -116,13 +121,13 @@ const TableComponent = () => {
             <RowItem>
               <GrayBox>
                 <GrayBoxHeading>Build Time</GrayBoxHeading>
-                <GrayBoxContent><GrayBoxText>18 Months</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
+                <GrayBoxContent><GrayBoxText>{raapBuildTime} Months</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
               </GrayBox>
             </RowItem>
             <RowItem>
               <GrayBox>
                 <GrayBoxHeading>Incremental Revenue</GrayBoxHeading>
-                <GrayBoxContent><GrayBoxText>$1.3M</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
+                <GrayBoxContent><GrayBoxText>${raapIncrementalRevenue}M</GrayBoxText><GreenTriangle>&#9652;25%</GreenTriangle></GrayBoxContent>
               </GrayBox>
             </RowItem>
           </Row>

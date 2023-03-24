@@ -43,7 +43,7 @@ const StyledButton = styled.button<{ selected: boolean }>`
   color:  ${(props) =>
     props.selected ? "white" : "green"};
   border: 1px solid green;
-  border-radius: 20px;
+  border-radius: 10px;
   // padding: 10px 30px;
   padding: 12px;
   width: 150px;

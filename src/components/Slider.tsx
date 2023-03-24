@@ -5,7 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
 
 interface Props {
-  range: { min: number; max: number };
+  range: { min: number; max: number },
+  setRaapIncrementalRevenue: (arg0: number) => any,
 }
 
 const Container = styled.div`
@@ -78,11 +79,53 @@ const LabelSlider = styled.div`
   margin: 0.2rem 1rem;
 `
 
-const RangeSlider = ({ range }: Props) => {
+const RangeSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
   const [value, setValue] = useState(range.min);
 
+  const convertToInternationalCurrencySystem = (labelValue:number) => {
+
+    return parseFloat((Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2))
+
+    // // Nine Zeroes for Billions
+    // return Math.abs(Number(labelValue)) >= 1.0e+9
+
+    // ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+    // // Six Zeroes for Millions 
+    // : Math.abs(Number(labelValue)) >= 1.0e+6
+
+    // ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+    // // Three Zeroes for Thousands
+    // : Math.abs(Number(labelValue)) >= 1.0e+3
+
+    // ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+
+    // : Math.abs(Number(labelValue));
+
+}
+
+
+  const calculateIncrementalRevenue = (rooms:number) => {
+    let projectTimeAiota = 14
+    let projectTimeOnSite = 20
+    let squareFeetPerRoom = 500
+
+    // let totalSquareFeet = squareFeetPerRoom * rooms
+
+    let financialSavingPerMonth = 55000/8
+    let financialSavings = financialSavingPerMonth * (projectTimeOnSite - projectTimeAiota)
+    let occupancy = 0.55 //55%
+    let adr = 125 //$125
+    let additionalRoomRevenues = rooms * adr * occupancy * 30 * (projectTimeOnSite - projectTimeAiota)
+    let benefitsTotal = financialSavings + additionalRoomRevenues
+
+    return convertToInternationalCurrencySystem(benefitsTotal);
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(parseInt(e.target.value));
+    let newValue = parseInt(e.target.value);
+    let incrementalRevenue = calculateIncrementalRevenue(newValue)
+    setRaapIncrementalRevenue(incrementalRevenue)
+    setValue(newValue);
   };
 
   return (

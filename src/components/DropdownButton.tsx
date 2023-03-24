@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 interface DropdownProps {
@@ -11,8 +11,29 @@ const Dropdown: React.FC<DropdownProps> = ({ name, onClickDropdown, options }) =
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  // const [selectedOption, setSelectedOption] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleOptionClick = (option: string) => {
+    // setSelectedOption(option);
+    setIsOpen(false);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <StyledDropdown>
+    <StyledDropdown ref={ref}>
       <StyledButton onClick={toggleDropdown}>
         {name}
         <StyledIcon className={isOpen ? 'open' : ''}>&#9660;</StyledIcon>
@@ -37,7 +58,7 @@ const StyledButton = styled.button`
   background-color: none;
   color: green;
   border: 2px solid green;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px 30px;
   font-size: 16px;
   cursor: pointer;

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const backgroundImage = require("../assets/DesignBackground.png");
+
+
 const Container = styled.div`
   display: flex;
-  height: 80vh;
+  height: 85vh;
 `;
 
 const Left = styled.div`
   flex: 1;
-  background: url("https://source.unsplash.com/random") no-repeat center center fixed;
-  background-size: cover;
+  background: url(${backgroundImage}) no-repeat center center fixed;
+  // background-size: cover;
 `;
 
 const Right = styled.div`
@@ -26,6 +29,7 @@ const TabsContainer = styled.div`
   border-radius: 10px;
   border: 2px solid green;
   margin: 20px;
+  width: 500px;
 `;
 
 const TabButton = styled.button<{ active: boolean }>`
@@ -49,6 +53,51 @@ const Content = styled.div`
   flex: 1;
   padding: 20px;
 `;
+
+const DetailViewer =  styled.div`
+  display:flex;
+  flex-direction:column;
+  width:100%;
+`
+
+const ViewerDiv =  styled.div`
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  align-items:center;
+`
+
+const DownloadButtons = styled.div`
+  display:flex;
+  flex-direction:column;
+`
+
+const GrayBox = styled.div`
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  background-color:lightgray;
+  margin: 1rem;
+`
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0.5rem;
+`
+
+const BoxCaption = styled.p`
+  color:darkgray;
+`
+
+const DownloadButton = styled.button`
+  width: 200px;
+  height: 60px;
+  background: rgba(81, 146, 89, 0.2);
+  color:darkgreen;
+  border-radius: 10px;
+`
 
 type TabProps = {
   active: boolean;
@@ -79,17 +128,35 @@ const ViewContent = () => {
       <Right>
         <TabsContainer>
           <TabButton active={activeTab === "A"} onClick={() => handleTabClick("A")}>
-            A
+            Layout
           </TabButton>
           <TabButton active={activeTab === "B"} onClick={() => handleTabClick("B")}>
-            B
+            Structure
           </TabButton>
           <TabButton active={activeTab === "C"} onClick={() => handleTabClick("C")}>
-            C
+            MEP
           </TabButton>
         </TabsContainer>
         <Content>
-          <TabA active={activeTab === "A"}>Tab A content goes here</TabA>
+          <TabA active={activeTab === "A"}>
+            <DetailViewer>
+              <h2>Detail Viewer</h2>
+              <ViewerDiv>
+                <GrayBox></GrayBox>
+                <BoxCaption>Detail A8.712: Connection Module to On Site</BoxCaption>
+              </ViewerDiv>
+            </DetailViewer>
+            <DownloadButtons>
+              <ButtonRow>
+                <DownloadButton>Design Files & Drawings</DownloadButton>
+                <DownloadButton>Installation Guide</DownloadButton>
+              </ButtonRow>
+              <ButtonRow>
+                <DownloadButton>Product Documentation</DownloadButton>
+                <DownloadButton>Installation Videos</DownloadButton>
+              </ButtonRow>
+            </DownloadButtons>
+          </TabA>
           <TabB active={activeTab === "B"}>Tab B content goes here</TabB>
           <TabC active={activeTab === "C"}>Tab C content goes here</TabC>
         </Content>
@@ -99,97 +166,3 @@ const ViewContent = () => {
 };
 
 export default ViewContent;
-
-
-
-
-
-
-// import { useState } from 'react';
-// import styled from 'styled-components';
-
-// const Container = styled.div`
-//   display: flex;
-//   height: 100vh;
-// `;
-
-// const LeftPane = styled.div`
-//   flex: 1;
-//   background-image: url('your-image-url');
-//   background-size: cover;
-//   opacity: 0.5;
-// `;
-
-// const RightPane = styled.div`
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-// `;
-
-// const TabsContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 0 20px;
-//   height: 80px;
-//   background-color: #ffffff;
-//   border: 2px solid #00aa00;
-//   border-radius: 20px;
-//   margin-top: 20px;
-// `;
-
-// const TabButton = styled.button`
-//   padding: 10px 20px;
-//   background-color: ${({ isActive }) => (isActive ? '#00aa00' : 'transparent')};
-//   color: ${({ isActive }) => (isActive ? '#ffffff' : '#00aa00')};
-//   border: none;
-//   border-radius: 10px;
-//   font-size: 16px;
-//   cursor: pointer;
-//   outline: none;
-// `;
-
-// const ContentContainer = styled.div`
-//   flex: 1;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 32px;
-//   color: #555555;
-// `;
-
-// const AContent = () => <ContentContainer>Content A</ContentContainer>;
-// const BContent = () => <ContentContainer>Content B</ContentContainer>;
-// const CContent = () => <ContentContainer>Content C</ContentContainer>;
-
-// const ViewContent = () => {
-//   const [activeTab, setActiveTab] = useState('A');
-
-//   const handleTabClick = (tabName) => {
-//     setActiveTab(tabName);
-//   };
-
-//   return (
-//     <Container>
-//       <LeftPane />
-//       <RightPane>
-//         <TabsContainer>
-//           <TabButton isActive={activeTab === 'A'} onClick={() => handleTabClick('A')}>
-//             A
-//           </TabButton>
-//           <TabButton isActive={activeTab === 'B'} onClick={() => handleTabClick('B')}>
-//             B
-//           </TabButton>
-//           <TabButton isActive={activeTab === 'C'} onClick={() => handleTabClick('C')}>
-//             C
-//           </TabButton>
-//         </TabsContainer>
-//         {activeTab === 'A' && <AContent />}
-//         {activeTab === 'B' && <BContent />}
-//         {activeTab === 'C' && <CContent />}
-//       </RightPane>
-//     </Container>
-//   );
-// };
-
-// export default ViewContent;
