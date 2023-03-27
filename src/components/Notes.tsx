@@ -8,14 +8,15 @@ const Container = styled.div`
 `;
 
 const Textbox = styled.textarea`
-  width: 500px;
-  height: 100px;
+  width: 80%;
+  height: 50%;
   border-radius: 10px;
   border: 2px solid green;
   padding: 10px;
   font-size: 1rem;
   color: gray;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  margin-bottom: 0.2rem;
 
   &:focus {
     outline: none;
@@ -35,9 +36,9 @@ const Text = styled.div`
   font-weight: bold;
   font-size: 1rem;
   color: black;
-  width: 100%;
+  width: 80%;
   float: left;
-  padding: 0.5rem 4rem;
+  // padding: 0.5rem 4rem;
 `;
 
 const Notes = () => {

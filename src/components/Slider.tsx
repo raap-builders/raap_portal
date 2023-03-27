@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
+import { calculateIncrementalRevenue } from "../utils/configuratorUtils";
+import data from '../data/configurator'
 
 interface Props {
   range: { min: number; max: number },
@@ -80,46 +82,7 @@ const LabelSlider = styled.div`
 `
 
 const RangeSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
-  const [value, setValue] = useState(range.min);
-
-  const convertToInternationalCurrencySystem = (labelValue:number) => {
-
-    return parseFloat((Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2))
-
-    // // Nine Zeroes for Billions
-    // return Math.abs(Number(labelValue)) >= 1.0e+9
-
-    // ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
-    // // Six Zeroes for Millions 
-    // : Math.abs(Number(labelValue)) >= 1.0e+6
-
-    // ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
-    // // Three Zeroes for Thousands
-    // : Math.abs(Number(labelValue)) >= 1.0e+3
-
-    // ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
-
-    // : Math.abs(Number(labelValue));
-
-}
-
-
-  const calculateIncrementalRevenue = (rooms:number) => {
-    let projectTimeAiota = 14
-    let projectTimeOnSite = 20
-    let squareFeetPerRoom = 500
-
-    // let totalSquareFeet = squareFeetPerRoom * rooms
-
-    let financialSavingPerMonth = 55000/8
-    let financialSavings = financialSavingPerMonth * (projectTimeOnSite - projectTimeAiota)
-    let occupancy = 0.55 //55%
-    let adr = 125 //$125
-    let additionalRoomRevenues = rooms * adr * occupancy * 30 * (projectTimeOnSite - projectTimeAiota)
-    let benefitsTotal = financialSavings + additionalRoomRevenues
-
-    return convertToInternationalCurrencySystem(benefitsTotal);
-  }
+  const [value, setValue] = useState(data.rooms.total);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = parseInt(e.target.value);
@@ -150,8 +113,8 @@ const RangeSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
           onChange={handleChange}
         />
         <LabelSlider>
-         <div className="slider-min">70</div>
-         <div className="slider-max">150</div>
+         <div className="slider-min">{range.min}</div>
+         <div className="slider-max">{range.max}</div>
        </LabelSlider>
       </Container>
     </ThemeProvider>

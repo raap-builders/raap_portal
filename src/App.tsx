@@ -14,6 +14,7 @@ import View from "./View";
 import Schedule from "./Schedule";
 
 const raapLogo = require('./assets/logo.png');
+const hiltonLogo = require('./assets/HiltonLogo.png');
 
 const MainContainer = styled.div`
   // max-width: 800px;
@@ -28,6 +29,7 @@ const NavbarContainer = styled.nav`
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: white;
+  height: 10.5vh;
 
   & a {
     font-family: 'Inter', sans-serif;
@@ -48,7 +50,7 @@ const NavbarContainer = styled.nav`
       position: absolute;
       width: 0;
       height: 3px;
-      bottom: -5px;
+      bottom: -2vh;
       left: 50%;
       background-color: #48bb78;
       transition: all 0.2s ease-out;
@@ -74,15 +76,17 @@ const NavTitle = styled.h1`
 `;
 
 const NavLinkContainer = styled.div`
+  width: 60%;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
 const NavItem = styled(NavLink)`
   text-decoration: none;
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 500;
+  // color: #333;
+  // font-size: 1.1rem;
+  // font-weight: 500;
   margin-left: 2rem;
   transition: all 0.2s ease-in-out;
   &:hover {
@@ -91,10 +95,25 @@ const NavItem = styled(NavLink)`
   &.active {
     color: #2acfcf;
   }
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 41px;
+  text-align: center;
+
+  color: #000000;
 `;
 
 const Logo = styled.img`
   height: 50px;
+  // width: 50px;
+  margin-right: 2rem;
+`;
+
+const LogoHilton = styled.img`
+  height: 45px;
   // width: 50px;
   margin-right: 2rem;
 `;
@@ -111,16 +130,13 @@ function App() {
     <>
     <BrowserRouter>
       <NavbarContainer>
-        <NavLinkContainer>
           <Logo src={raapLogo} alt="Company Logo" />
-          {/* <NavTitle>My App</NavTitle> */}
-        </NavLinkContainer>
         <NavLinkContainer>
-          <NavItem to="/">Configure</NavItem>
-          <NavItem to="/view">View</NavItem>
-          <NavItem to="/schedule">Schedule</NavItem>
+          <NavItem to="/">Configuration</NavItem>
+          <NavItem to="/view">Design Docs</NavItem>
+          <NavItem to="/schedule">Construction Docs</NavItem>
         </NavLinkContainer>
-        <NavLinkContainer><LogoEmpty src={raapLogo} alt="Company Logo" /></NavLinkContainer>
+        <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
       </NavbarContainer>
       <MainContainer>
         <Routes>

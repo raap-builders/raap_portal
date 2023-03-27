@@ -86,7 +86,7 @@ const Buttons = ({setTraditionalBuildTime}:Props) => {
       </LocationDiv>
         <ThreeButtons name="Brand" labels={data.brand}></ThreeButtons>
         <ThreeButtons name="Project Type" labels={data.projectTypes}></ThreeButtons>
-        <ThreeButtons name="Finish" labels={["Glimmer","Spark","Burst"]}></ThreeButtons>
+        <ThreeButtons name="Finish" labels={data.finishTypes}></ThreeButtons>
     </ButtonsContainerDiv>
   );
 }

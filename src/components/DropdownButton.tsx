@@ -98,8 +98,9 @@ const StyledMenu = styled.ul`
 
 const StyledMenuItem = styled.li`
   border-bottom: 1px solid green;
-  padding: 5px;
+  // padding: 5px;
   font-size: 16px;
+  padding: 3px;
 
   &:last-child {
     border-bottom: none;

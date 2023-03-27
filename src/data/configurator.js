@@ -36,8 +36,21 @@ const data = {
     "Bathroom Pod",
     "Volumetric Room",
     "Kitchen Pod"
-  ]
+  ],
+  finishTypes: [
+    "Glimmer",
+    "Spark",
+    "Burst"
+  ],
+  rooms: {
+    kingRoom: 30,
+    queenRoom: 30,
+    standardRoom: 40,
+    total: 80,
+  }
 }
+
+
 var kingRoom = 30
 var queenRoom = 30
 var standardRoom = 40
@@ -111,5 +124,7 @@ var occupancy = 0.55 //55%
 var adr = 125 //$125
 var additionalRoomRevenues = rooms * adr * occupancy * 30 * (projectTimeOnSite - projectTimeAiota)
 var benefitsTotal = financialSavings + additionalRoomRevenues
+
+
 
 export default data;

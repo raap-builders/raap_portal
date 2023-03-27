@@ -18,9 +18,9 @@ type ItemProps = {
 const ItemsContainer = styled.div`
   display:flex;
   flex-direction:row;
-  padding: 1rem;
-  margin-left: 10rem;
-  margin-right: 12rem;
+  // padding: 1rem;
+  // margin-left: 10rem;
+  // margin-right: 12rem;
 `
 
 const ItemWrapper = styled.div<{ isSelected: boolean }>`
@@ -37,13 +37,16 @@ const ItemWrapper = styled.div<{ isSelected: boolean }>`
 
 const Title = styled.h2`
   font-weight: bold;
-  margin-top: 10px;
+  // margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
-  height: auto;
+  // max-width: 100%;
+  //width: auto;
+  height:4vh;
+  width: auto;
 `;
 
 const ImageContainer = styled.div`
@@ -55,7 +58,7 @@ const ImageContainer = styled.div`
 `
 
 const DisplayTypes: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
     if (index === selectedItem) {

@@ -31,3 +31,9 @@
   width: 50%;
   margin:1rem;
 }
+
+.configurator_new_area {
+  height: 89.5vh;
+  width: 100%;
+  /* background-color:yellow; */
+}
