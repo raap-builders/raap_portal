@@ -9,6 +9,7 @@ import styled from 'styled-components';
 
 interface Props {
   setTraditionalBuildTime: (arg0: number) => any,
+  changeDisplayImage: (arg0: string) => any
 }
 
 const LocationDiv = styled.div`
@@ -29,7 +30,7 @@ const ButtonsContainerDiv = styled.div`
 `
 
 
-const Buttons = ({setTraditionalBuildTime}:Props) => {
+const Buttons = ({setTraditionalBuildTime, changeDisplayImage}:Props) => {
   const [state, setState] = React.useState("State")
   const [city, setCity] = React.useState("City")
 
@@ -77,6 +78,10 @@ const Buttons = ({setTraditionalBuildTime}:Props) => {
     setNewCity(value,cityAverage)
   }
 
+  const onChangeFinish = (value: string) => {
+    changeDisplayImage(value)
+  }
+
   return (
     <ButtonsContainerDiv>
       <LocationDiv>
@@ -86,7 +91,7 @@ const Buttons = ({setTraditionalBuildTime}:Props) => {
       </LocationDiv>
         <ThreeButtons name="Brand" labels={data.brand}></ThreeButtons>
         <ThreeButtons name="Project Type" labels={data.projectTypes}></ThreeButtons>
-        <ThreeButtons name="Finish" labels={data.finishTypes}></ThreeButtons>
+        <ThreeButtons name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></ThreeButtons>
     </ButtonsContainerDiv>
   );
 }

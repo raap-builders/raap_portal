@@ -47,9 +47,8 @@ const Slider = styled.input.attrs({ type: "range" })`
 `;
 
 const Value = styled.input`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align:center;
+  padding-left:10px;
   width: 60px;
   height: 40px;
   font-size: 1rem;
@@ -99,8 +98,8 @@ const RangeSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
           {/* <Value>{value}</Value> */}
           <Value
             type="number"
-            min={70}
-            max={150}
+            min={range.min}
+            max={range.max}
             value={value}
             onChange={handleChange}
             className="slider"

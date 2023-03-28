@@ -47,6 +47,13 @@ const data = {
     queenRoom: 30,
     standardRoom: 40,
     total: 80,
+    min:70,
+    max:150
+  },
+  notes: {
+    title: "Notes",
+    placeholderText: "Enter text here",
+    submitButtonText: "Send me this Estimate"
   }
 }
 

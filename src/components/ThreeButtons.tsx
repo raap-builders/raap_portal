@@ -4,6 +4,7 @@ import styled from "styled-components";
 type Props = {
   labels: string[];
   name: string;
+  onClickButton?: (arg0: string) => any,
 };
 
 const ButtonsContainer = styled.div`
@@ -66,11 +67,14 @@ const Text = styled.div`
   padding: 0.2rem 0;
 `;
 
-const ButtonGroup: React.FC<Props> = ({ labels, name }) => {
+const ButtonGroup: React.FC<Props> = ({ labels, name, onClickButton }) => {
   const [selectedButton, setSelectedButton] = useState<string>("");
 
   const handleButtonClick = (label: string) => {
     setSelectedButton(label);
+    if(onClickButton){
+      onClickButton(label);
+    }
     // console.log(`You clicked ${label}`);
   };
 

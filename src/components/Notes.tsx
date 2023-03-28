@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+interface Props {
+  title: string;
+  placeholderText: string;
+  submitButtonText: string;
+}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,7 +47,7 @@ const Text = styled.div`
   // padding: 0.5rem 4rem;
 `;
 
-const Notes = () => {
+const Notes = ({title, placeholderText, submitButtonText}: Props) => {
   const [text, setText] = useState('');
 
   const handleClick = () => {
@@ -54,9 +60,9 @@ const Notes = () => {
 
   return (
     <Container>
-      <Text>Notes</Text>
-      <Textbox placeholder='Enter text here' value={text} onChange={handleChange} />
-      <SubmitButton onClick={handleClick}>Send me this Estimate</SubmitButton>
+      <Text>{title}</Text>
+      <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+      <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
     </Container>
   );
 };

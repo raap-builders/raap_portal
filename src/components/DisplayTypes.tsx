@@ -8,12 +8,9 @@ const photo = require('../assets/Photo.png');
 const drawing = require('../assets/Drawing.png');
 
 
-type ItemProps = {
-  title: string;
-  image: string;
-  isSelected: boolean;
-  onClick: () => void;
-};
+interface Props{
+  onClickButton: (arg0: string) => any
+}
 
 const ItemsContainer = styled.div`
   display:flex;
@@ -57,7 +54,7 @@ const ImageContainer = styled.div`
   justify-content: space-around;
 `
 
-const DisplayTypes: React.FC = () => {
+const DisplayTypes = ({onClickButton}:Props) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
@@ -66,6 +63,16 @@ const DisplayTypes: React.FC = () => {
     } else {
       setSelectedItem(index);
     }
+
+    //to be refactored
+    let layoutType = "Layout"
+    if(index == 1){
+      layoutType = "Photo"
+    }
+    if(index ==2 ){
+      layoutType = "Drawing"
+    }
+    onClickButton(layoutType)
   };
 
   return (
