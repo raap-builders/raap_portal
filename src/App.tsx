@@ -33,10 +33,10 @@ const NavbarContainer = styled.nav`
 
   & a {
     font-family: 'Inter', sans-serif;
-    font-size: 24px;
+    font-size: 3vmin;
     font-weight: 500;
     letter-spacing: 0.02em; //0.1em
-    margin-right: 2rem;
+    margin-right: 2%;
     color: #4a5568;
     text-decoration: none;
     position: relative;
@@ -84,10 +84,7 @@ const NavLinkContainer = styled.div`
 
 const NavItem = styled(NavLink)`
   text-decoration: none;
-  // color: #333;
-  // font-size: 1.1rem;
-  // font-weight: 500;
-  margin-left: 2rem;
+  margin-left: 2%;
   transition: all 0.2s ease-in-out;
   &:hover {
     color: #2acfcf;
@@ -99,23 +96,21 @@ const NavItem = styled(NavLink)`
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  font-size: 30px;
-  line-height: 41px;
   text-align: center;
 
   color: #000000;
 `;
 
 const Logo = styled.img`
-  height: 50px;
+  height: 3vw;
   // width: 50px;
-  margin-right: 2rem;
+  margin-right: 2vw;
 `;
 
 const LogoHilton = styled.img`
-  height: 45px;
+  width: 6vw;
   // width: 50px;
-  margin-right: 2rem;
+  margin-right: 2vw;
 `;
 
 const LogoEmpty = styled.img`

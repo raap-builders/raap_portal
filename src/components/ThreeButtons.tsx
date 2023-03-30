@@ -46,10 +46,10 @@ const StyledButton = styled.button<{ selected: boolean }>`
   border: 1px solid green;
   border-radius: 10px;
   // padding: 10px 30px;
-  padding: 12px;
-  width: 150px;
-  height: 40px;
-  font-size: 16px;
+  padding: 1vw;
+  width: 10vw;
+  height: 5vh;
+  font-size: 2vh;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -62,9 +62,9 @@ const StyledButton = styled.button<{ selected: boolean }>`
 
 const Text = styled.div`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 2vmin;
   color: black;
-  padding: 0.2rem 0;
+  padding: 0.5vmin 0;
 `;
 
 const ButtonGroup: React.FC<Props> = ({ labels, name, onClickButton }) => {

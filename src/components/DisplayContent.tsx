@@ -16,6 +16,7 @@ interface Props {
 const PlaceholderImage = styled.img`
   height: 50vh;
   width: auto;
+  object-fit: contain;
 `
 
 const DisplayContent = ({ finishType, layoutType }: Props) => {

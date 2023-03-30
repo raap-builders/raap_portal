@@ -59,13 +59,13 @@ const StyledButton = styled.button`
   color: green;
   border: 2px solid green;
   border-radius: 10px;
-  padding: 10px 30px;
-  font-size: 16px;
+  padding: 1vmin 3vmin;
+  font-size: 2vmin;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 190px;
+  width: 10vw;
 
   &:hover {
     opacity: 0.8;

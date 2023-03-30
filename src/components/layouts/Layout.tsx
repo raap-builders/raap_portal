@@ -76,59 +76,68 @@ const FirstColumnDiv = styled.div`
   height: 100%;
   background-color:rgba(135,135,135,0.22);
   border-radius: 16px;
-  margin-right: 0.5rem;
+  margin-right: 1vw;
+  padding: 1vh 0;
 `
 
 const OtherBenefitsHeader = styled.p`
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  font-size: 1rem;
-  // line-height: 38px;
+  font-size: 2.2vmin;
   text-decoration-line: underline;
-  padding-left:0.5rem;
+  padding-left:2vw;
   color: #3D3D3D;
 `
 
 const BulletPointsDiv = styled.div`
-  padding-left:0.5rem;
-  font-size:0.7rem;
+  padding-left:1vw;
+  font-size: 1.8vmin;
+  overflow:hidden;
 `
 
 const ColumnDiv = styled.div`
   height: 100%;
   width: 100%;
-  margin: 0 0.5rem;
+  margin: 0 1vw;
+  overflow:hidden;
 `
 const MiddleColumnDiv = styled.div`
   height: 100%;
   width: 100%;
-  margin: 0 0.5rem;
+  margin: 0 1vw;
+  overflow:hidden;
 `
 
 const LastColumnDiv = styled.div`
+  margin-left: 1vw;
+  padding: 0.5vw;
+  display:flex;
+  flex-direction: column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 16px;
   width: 100%;
   height: 100%;
-  margin-left: 0.5rem;
-  display:flex;
-  flex-direction: column;
+  overflow: hidden;
 `
 
 const LeftTitleDiv = styled.div`
   width: 100%;
   text-align:right;
-  font-size: 20px;
-  height: 30%;
+  font-size: 2vmin;
+  line-height: 2.5vmin;
+  font-weight:500;
+  height: 20%;
 `
 
 const RightTitleDiv = styled.div`
   width: 100%;
   text-align:left;
-  font-size: 20px;
-  height: 30%;
+  font-size: 2vmin;
+  line-height: 2.5vmin;
+  font-weight:500;
+  height: 20%;
 `
 
 const BarContainerLeft = styled.div`
@@ -136,7 +145,7 @@ const BarContainerLeft = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:end;
-  height: 70%;
+  height: 80%;
 `
 
 const BarContainerRight = styled.div`
@@ -144,7 +153,7 @@ const BarContainerRight = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:start;
-  height: 70%;
+  height: 80%;
 `
 
 const GrayDiv = styled.div`
@@ -152,18 +161,20 @@ const GrayDiv = styled.div`
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
   width: 70%;
-  height:1rem;
+  height:3vmin;
   text-align:right;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 const GreenDiv = styled.div`
   background: #519259;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
   width: 60%;
-  height:1rem;
+  height:3vmin;
   text-align:right;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 
 const YellowDiv = styled.div`
@@ -171,9 +182,10 @@ const YellowDiv = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
   width: 40%;
-  height: 1rem;
+  height:3vmin;
   visibility: hidden;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 
 const GrayDivRight = styled.div`
@@ -181,18 +193,20 @@ const GrayDivRight = styled.div`
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
   width: 70%;
-  height:1rem;
+  height:3vmin;
   text-align:left;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 const GreenDivRight = styled.div`
   background: #519259;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
   width: 50%;
-  height:1rem;
+  height:3vmin;
   text-align:left;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 
 const YellowDivRight = styled.div`
@@ -200,9 +214,10 @@ const YellowDivRight = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
   width: 40%;
-  height: 1rem;
+  height:3vmin;
   text-align:left;
-  font-size: 0.7rem;
+  font-size: 1.7vmin;
+  overflow:hidden;
 `
 
 const BulletList = styled.ul`
@@ -216,23 +231,20 @@ const ListItem = styled.ul`
 `
 
 const FourDivs = styled.div`
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   height: 100%;
   width: 100%;
 `
 
 const Row = styled.div`
   display:flex;
-  flex-direction: row;
+  flex-direction:row;
   height: 100%;
-  margin: 0.25rem;
+  margin:0.2vh;
 `
+
 const WhiteBox = styled.div`
-  margin: 0.25rem;
   background-color:white;
   width: 100%;
   height: 100%;
@@ -240,23 +252,22 @@ const WhiteBox = styled.div`
   display:flex;
   flex-direction:column;
   justify-content: space-around;
+  margin: 0.2vh;
 `
 
 const BuildingRoomsHeader = styled.div`
   text-align: center;
-  font-size: 1rem;
+  font-size: 2vh;
 `
 
 const BoldText = styled.p`
   font-weight: 500;
-  font-size: 0.7rem;
-  line-height: 0.7rem;
+  font-size: 1.8vmin;
   text-align:center;
 `
 
 const NormalText = styled.p`
-  font-size: 0.5rem;
-  line-height: 0.5rem;
+  font-size: 1.5vmin;
   text-align: center;
   align-items:center;
 `
@@ -266,15 +277,15 @@ const EmptyTitleDiv = styled.div`
   display:flex;
   flex-direction:row;
   justify-content:space-around;
-  font-size: 20px;
-  height: 30%;
+  font-size: 5vw;
+  height: 20%;
   visibility: hidden;
 `
 
 const EmptySliderDiv = styled.div`
   text-align: center;
   width: 90%;
-  height:1rem;
+  font-size:2vmin;
 `
 
 const EmptyBarContainer = styled.div`
@@ -282,7 +293,7 @@ const EmptyBarContainer = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:center;
-  height: 60%;
+  height: 80%;
 `
 
 
@@ -344,16 +355,16 @@ const Layout = () => {
             <FourDivs>
               <Row>
                 <WhiteBox>
-                  <BoldText>18 Months</BoldText>
-                  <NormalText>Build Time</NormalText>
-                </WhiteBox>
-                <WhiteBox>
-                  <BoldText>$6.7M</BoldText>
-                  <NormalText>Project Cost</NormalText>
-                </WhiteBox>
+                    <BoldText>18 Months</BoldText>
+                    <NormalText>Build Time</NormalText>
+                  </WhiteBox>
+                  <WhiteBox>
+                    <BoldText>$6.7M</BoldText>
+                    <NormalText>Project Cost</NormalText>
+                  </WhiteBox>
               </Row>
               <Row>
-              <WhiteBox>
+                <WhiteBox>
                   <BoldText>$84K</BoldText>
                   <NormalText>Per Room</NormalText>
                 </WhiteBox>

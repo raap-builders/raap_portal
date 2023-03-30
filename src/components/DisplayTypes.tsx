@@ -42,7 +42,7 @@ const Title = styled.h2`
 const Image = styled.img`
   // max-width: 100%;
   //width: auto;
-  height:4vh;
+  height:3vh;
   width: auto;
 `;
 

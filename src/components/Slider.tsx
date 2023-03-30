@@ -15,7 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin:0 3rem;
+  margin:0 2.2vw;
 `;
 
 const Slider = styled.input.attrs({ type: "range" })`

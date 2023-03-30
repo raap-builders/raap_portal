@@ -14,15 +14,15 @@ const Container = styled.div`
 `;
 
 const Textbox = styled.textarea`
-  width: 80%;
-  height: 50%;
+  width: 85%;
+  height: 8vh;
   border-radius: 10px;
   border: 2px solid green;
-  padding: 10px;
-  font-size: 1rem;
+  padding: 1vh;
+  font-size: 2vh;
   color: gray;
   // margin-bottom: 20px;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1vh;
 
   &:focus {
     outline: none;
@@ -32,17 +32,17 @@ const Textbox = styled.textarea`
 const SubmitButton = styled.button`
   background-color: green;
   color: white;
-  font-size: 1rem;
+  font-size: 2vh;
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 1vh 2vh;
   cursor: pointer;
 `;
 
 const Text = styled.div`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 2vh;
   color: black;
-  width: 80%;
+  width: 85%;
   float: left;
   // padding: 0.5rem 4rem;
 `;
