@@ -3,7 +3,7 @@ import '../styles/buttons.css';
 import data from '../data/configurator'
 
 import DropdownButton from './DropdownButton'
-import ThreeButtons from './ThreeButtons'
+import RadioButton from './RadioButtons/RadioButton'
 import styled from 'styled-components';
 
 
@@ -17,17 +17,18 @@ const LocationDiv = styled.div`
   flex-direction:row;
   justify-content:space-between;
   align-items:center;
+  background: #D9D9D9;
+  border-radius: 1.5vmin;
+  width: 21vw;
+  height: 3.5vw;
+  padding: 0.3vw;
+
+  // filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
 `
 
-const Text = styled.div`
-  font-weight: bold;
-  font-size: 1rem;
-  color: black;
-`;
-
-const ButtonsContainerDiv = styled.div`
-  margin:0.1rem 3rem;
-`
+// const ButtonsContainerDiv = styled.div`
+//   margin:0.1rem 3rem;
+// `
 
 
 const Buttons = ({setTraditionalBuildTime, changeDisplayImage}:Props) => {
@@ -83,16 +84,15 @@ const Buttons = ({setTraditionalBuildTime, changeDisplayImage}:Props) => {
   }
 
   return (
-    <ButtonsContainerDiv>
+    <div>
       <LocationDiv>
-          <Text>Location</Text>
           <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
           <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
       </LocationDiv>
-        <ThreeButtons name="Brand" labels={data.brand}></ThreeButtons>
-        <ThreeButtons name="Project Type" labels={data.projectTypes}></ThreeButtons>
-        <ThreeButtons name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></ThreeButtons>
-    </ButtonsContainerDiv>
+        <RadioButton name="Brand" labels={data.brand}></RadioButton>
+        <RadioButton name="Project Type" labels={data.projectTypes}></RadioButton>
+        <RadioButton name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></RadioButton>
+    </div>
   );
 }
 

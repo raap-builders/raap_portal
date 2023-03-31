@@ -5,9 +5,12 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../../theme';
 import DisplayTypes from "../DisplayTypes"
 import Buttons from '../Buttons'
-import Slider from '../Slider'
-import Notes from "../Notes"
+import VerticalSlider from '../Slider/VerticalSlider'
+// import Notes from "../Notes"
 import DisplayContent from "../DisplayContent"
+import "../../styles/layouts.css"
+
+import RadioButton from "../RadioButtons/RadioButton"
 
 import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
 import data from '../../data/configurator'
@@ -388,7 +391,7 @@ const Layout = () => {
               ></DisplayTypes>
             </LayoutButtons>
           </DisplayArea>
-          <ButtonArea>
+          {/* <ButtonArea>
               <Buttons
                 setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
                 changeDisplayImage={(value: string)=>setDisplayImage(value)}
@@ -402,7 +405,17 @@ const Layout = () => {
               placeholderText={data.notes.placeholderText}
               submitButtonText={data.notes.submitButtonText}
             ></Notes>
-          </ButtonArea>
+          </ButtonArea> */}
+          <div className="buttons_area">
+              <Buttons
+                setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
+                changeDisplayImage={(value: string)=>setDisplayImage(value)}
+              ></Buttons>
+              <VerticalSlider 
+              range={{min:roomsMin, max:roomsMax}}
+              setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
+            ></VerticalSlider>
+          </div>
         </MainArea>
       </Container>
     </ThemeProvider>

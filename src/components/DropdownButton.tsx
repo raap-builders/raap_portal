@@ -55,17 +55,19 @@ const StyledDropdown = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: none;
-  color: green;
-  border: 2px solid green;
-  border-radius: 10px;
+  background-color: #519259;
+  color: white;
+  // border: 2px solid green;
+  border-radius: 1vw;
   padding: 1vmin 3vmin;
-  font-size: 2vmin;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 10vw;
+  width: 9vw;
+
+  font-size: 0.9vw;
+  font-weight: 500;
 
   &:hover {
     opacity: 0.8;
@@ -73,8 +75,8 @@ const StyledButton = styled.button`
 `;
 
 const StyledIcon = styled.span`
-  margin-left: 10px;
-  font-size: 12px;
+  margin-left: 2vw;
+  font-size: 0.8vw;
   transition: transform 0.3s ease;
 
   &.open {
@@ -99,8 +101,8 @@ const StyledMenu = styled.ul`
 const StyledMenuItem = styled.li`
   border-bottom: 1px solid green;
   // padding: 5px;
-  font-size: 16px;
-  padding: 3px;
+  font-size: 0.9vw;
+  padding: 0.2vw;
 
   &:last-child {
     border-bottom: none;
