@@ -84,7 +84,7 @@ const Buttons = ({setTraditionalBuildTime, changeDisplayImage}:Props) => {
   }
 
   return (
-    <div>
+    <div className="scrollable_buttons">
       <LocationDiv>
           <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
           <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>

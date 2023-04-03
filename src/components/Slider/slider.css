@@ -1,9 +1,46 @@
 
 
 .verticalSlider__background {
-  width: 3vw;
-  height: 48vh;
+  margin-top: 18vh;
+  width: 41vh;
+  height: 3vw;
+  transform: rotateZ(270deg);
   background-color: gray;
   background: #D9D9D9;
   border-radius: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verticalSlider__container {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verticalSlider__minmax {
+  padding: 0.1vw;
+  transform: rotateZ(-270deg);
+}
+
+.verticalSlider_container {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  height: 48vh;
+}
+
+.verticalSlider__label {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2vw;
+  line-height: 2vw;
+  text-align: center;
+
+  color: #000000;
 }

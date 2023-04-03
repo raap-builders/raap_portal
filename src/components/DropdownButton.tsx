@@ -59,12 +59,16 @@ const StyledButton = styled.button`
   color: white;
   // border: 2px solid green;
   border-radius: 1vw;
-  padding: 1vmin 3vmin;
+  padding-left:0.5vw;
+  padding-right: 0.3vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 9vw;
+  height:2.5vw;
 
   font-size: 0.9vw;
   font-weight: 500;
@@ -75,7 +79,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledIcon = styled.span`
-  margin-left: 2vw;
+  margin-left: 1vw;
   font-size: 0.8vw;
   transition: transform 0.3s ease;
 

@@ -81,7 +81,7 @@ function App() {
           </EmptyBox>
         </RightDiv>
       </ConstructionDiv>
-      <TimelineDiv>
+      {/* <TimelineDiv>
       <Timeline 
           events={
             [
@@ -104,7 +104,7 @@ function App() {
           orangeTitle={"Timeline 1"}
           greenTitle={"Timeline 2"}
           ></Timeline>
-      </TimelineDiv>
+      </TimelineDiv> */}
       
     </div>
   );

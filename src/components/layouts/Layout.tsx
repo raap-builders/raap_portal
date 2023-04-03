@@ -10,8 +10,6 @@ import VerticalSlider from '../Slider/VerticalSlider'
 import DisplayContent from "../DisplayContent"
 import "../../styles/layouts.css"
 
-import RadioButton from "../RadioButtons/RadioButton"
-
 import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
 import data from '../../data/configurator'
 
@@ -415,6 +413,7 @@ const Layout = () => {
               range={{min:roomsMin, max:roomsMax}}
               setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
             ></VerticalSlider>
+            {/* <VerticalSlider></VerticalSlider> */}
           </div>
         </MainArea>
       </Container>
