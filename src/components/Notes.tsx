@@ -9,20 +9,20 @@ interface Props {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4.8vw;
+  margin-right: 8vw;
 `;
 
 const Textbox = styled.textarea`
-  width: 85%;
+  width: 21vw;
   height: 8vh;
   border-radius: 10px;
   border: 2px solid green;
-  padding: 1vh;
-  font-size: 2vh;
+  padding: 0.2vw;
+  font-size: 0.8vw;
   color: gray;
-  // margin-bottom: 20px;
-  margin-bottom: 1vh;
 
   &:focus {
     outline: none;
@@ -30,21 +30,14 @@ const Textbox = styled.textarea`
 `;
 
 const SubmitButton = styled.button`
-  background-color: green;
+  background-color: #519259;
+  height: 5vh;
   color: white;
-  font-size: 2vh;
+  font-size: 1vw;
   border-radius: 10px;
-  padding: 1vh 2vh;
   cursor: pointer;
-`;
-
-const Text = styled.div`
-  font-weight: bold;
-  font-size: 2vh;
-  color: black;
-  width: 85%;
-  float: left;
-  // padding: 0.5rem 4rem;
+  width: 12vw;
+  margin-top: 3vh;
 `;
 
 const Notes = ({title, placeholderText, submitButtonText}: Props) => {
@@ -60,7 +53,6 @@ const Notes = ({title, placeholderText, submitButtonText}: Props) => {
 
   return (
     <Container>
-      <Text>{title}</Text>
       <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
       <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
     </Container>

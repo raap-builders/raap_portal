@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
@@ -6,17 +6,19 @@ import theme from '../../theme';
 import DisplayTypes from "../DisplayTypes"
 import Buttons from '../Buttons'
 import VerticalSlider from '../Slider/VerticalSlider'
-// import Notes from "../Notes"
+import Notes from "../Notes"
 import DisplayContent from "../DisplayContent"
 import "../../styles/layouts.css"
 
-import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
+import { calculateIncrementalRevenue, fetchXlxs } from "../../utils/configuratorUtils";
 import data from '../../data/configurator'
-
 
 
 const backgroundImage = require("../../assets/ConfiguratorBackground.png");
 
+interface BarDivProps {
+  barWidth: number;
+}
 
 const GreenBox = styled.div`
   display:flex;
@@ -157,64 +159,64 @@ const BarContainerRight = styled.div`
   height: 80%;
 `
 
-const GrayDiv = styled.div`
+const GrayDiv = styled.div<BarDivProps>`
   background: #878787;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 70%;
+  width: 70%;   //${(props) => ((props.barWidth-10)*100/40)}%
   height:3vmin;
   text-align:right;
   font-size: 1.7vmin;
   overflow:hidden;
 `
-const GreenDiv = styled.div`
+const GreenDiv = styled.div<BarDivProps>`
   background: #519259;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 60%;
+  width: 60%;   //${(props) => ((props.barWidth-10)*100/40)}%
   height:3vmin;
   text-align:right;
   font-size: 1.7vmin;
   overflow:hidden;
 `
 
-const YellowDiv = styled.div`
+const YellowDiv = styled.div<BarDivProps>`
   background: #F0BB62;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 40%;
+  width: 40%; //${(props) => ((props.barWidth-10)*100/40)}%
   height:3vmin;
   visibility: hidden;
   font-size: 1.7vmin;
   overflow:hidden;
 `
 
-const GrayDivRight = styled.div`
+const GrayDivRight = styled.div<BarDivProps>`
   background: #878787;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 70%;
+  width: 70%; //${(props) => ((props.barWidth-3)*100/8)}%
   height:3vmin;
   text-align:left;
   font-size: 1.7vmin;
   overflow:hidden;
 `
-const GreenDivRight = styled.div`
+const GreenDivRight = styled.div<BarDivProps>`
   background: #519259;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 50%;
+  width: 50%; //${(props) => ((props.barWidth-3)*100/8)}%; 
   height:3vmin;
   text-align:left;
   font-size: 1.7vmin;
   overflow:hidden;
 `
 
-const YellowDivRight = styled.div`
+const YellowDivRight = styled.div<BarDivProps>`
   background: #F0BB62;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 40%;
+  width: 40% //${(props) => ((props.barWidth)*100/20)}%;
   height:3vmin;
   text-align:left;
   font-size: 1.7vmin;
@@ -297,6 +299,8 @@ const EmptyBarContainer = styled.div`
   height: 80%;
 `
 
+// todo: move styled components to css file
+
 
 const Layout = () => {
   const [traditionalBuildTime, setTraditionalBuildTime] = useState(25);
@@ -309,6 +313,13 @@ const Layout = () => {
 
   const [displayImage, setDisplayImage] = useState("Glimmer")
   const [layoutType, setlayoutType] = useState("Layout")
+
+
+  // useEffect(()=>{
+  //   console.log("Fetching Excel...")
+  //   let exceldata = fetchXlxs();
+  //   console.log(exceldata)
+  // },[])
 
   return (
     <ThemeProvider theme={theme}>
@@ -328,9 +339,9 @@ const Layout = () => {
           <ColumnDiv>
             <LeftTitleDiv>Time to complete</LeftTitleDiv>
             <BarContainerLeft>
-              <GrayDiv>25 Months</GrayDiv>
-              <GreenDiv>18 Months (28% faster)</GreenDiv>
-              <YellowDiv></YellowDiv>
+              <GrayDiv barWidth={traditionalBuildTime}>{traditionalBuildTime} Months</GrayDiv>
+              <GreenDiv barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</GreenDiv>
+              <YellowDiv barWidth={4}></YellowDiv>
             </BarContainerLeft>
           </ColumnDiv>
           <MiddleColumnDiv>
@@ -344,9 +355,9 @@ const Layout = () => {
           <ColumnDiv>
             <RightTitleDiv>Project Cost</RightTitleDiv>
             <BarContainerRight>
-              <GrayDivRight>$8M</GrayDivRight>
-              <GreenDivRight>$7.6M (5% lower)</GreenDivRight>
-              <YellowDivRight>$6.7M (16% lower)</YellowDivRight>
+              <GrayDivRight barWidth={traditionalCost}>${traditionalCost}M</GrayDivRight>
+              <GreenDivRight barWidth={7.6}>$7.6M (5% lower)</GreenDivRight>
+              <YellowDivRight barWidth={7.6 - raapIncrementalRevenue}>$6.7M (16% lower)</YellowDivRight>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -404,16 +415,25 @@ const Layout = () => {
               submitButtonText={data.notes.submitButtonText}
             ></Notes>
           </ButtonArea> */}
-          <div className="buttons_area">
-              <Buttons
-                setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
-                changeDisplayImage={(value: string)=>setDisplayImage(value)}
-              ></Buttons>
-              <VerticalSlider 
-              range={{min:roomsMin, max:roomsMax}}
-              setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
-            ></VerticalSlider>
-            {/* <VerticalSlider></VerticalSlider> */}
+          <div className="controls_container">
+            <div className="buttons_area">
+                <Buttons
+                  setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
+                  changeDisplayImage={(value: string)=>setDisplayImage(value)}
+                ></Buttons>
+                <VerticalSlider 
+                range={{min:roomsMin, max:roomsMax}}
+                setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
+              ></VerticalSlider>
+              {/* <VerticalSlider></VerticalSlider> */}
+            </div>
+            <div className="notes_container">
+              <Notes
+                title={data.notes.title}
+                placeholderText={data.notes.placeholderText}
+                submitButtonText={data.notes.submitButtonText}
+              ></Notes>
+            </div>
           </div>
         </MainArea>
       </Container>

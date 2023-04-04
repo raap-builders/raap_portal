@@ -32,11 +32,12 @@ const ItemWrapper = styled.div<{ isSelected: boolean }>`
   transition: background-color 0.2s ease-in-out, border-bottom 0.2s ease-in-out;
 `;
 
-const Title = styled.h2`
+const Title = styled.p`
   font-weight: bold;
   // margin-top: 10px;
   margin-top: 5px;
   text-align: center;
+  font-size: 1.2vw;
 `;
 
 const Image = styled.img`
