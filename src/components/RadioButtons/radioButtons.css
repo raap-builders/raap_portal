@@ -6,11 +6,36 @@
   align-items: center;
   background: #D9D9D9;
   border-radius: 1.5vmin;
-  width: 21vw;
+  width: 21.3vw;
   height: 3.5vw;
   padding: 0.3vw;
   
   filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
-  margin: 6vh 0;
+  /* margin: 6vh 0; */
+  
 
+}
+
+.radioButton__container {
+  display: flex;
+  flex-direction: row;
+  height: 3.5vw;
+  margin: 2vw 0;
+}
+
+.radioButton__label {
+  /* font-family: 'Open Sans'; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1vw;
+  line-height: 27px;
+  text-align: right;
+
+  color: #000000;
+  display:flex;
+  align-items: center;
+  justify-content: right;
+  width: 8vw;
+  padding-right:1.5vw;
+  margin: 2vw 0;
 }

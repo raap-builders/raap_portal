@@ -7,17 +7,18 @@ interface Props {
   submitButtonText: string;
 }
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 4.8vw;
-  margin-right: 8vw;
+  margin-right: 5vw;
+  width:100%;
 `;
 
 const Textbox = styled.textarea`
-  width: 21vw;
-  height: 8vh;
+  width: 21.3vw;
+  height: 11.5vh;
   border-radius: 10px;
   border: 2px solid green;
   padding: 0.2vw;
@@ -40,6 +41,21 @@ const SubmitButton = styled.button`
   margin-top: 3vh;
 `;
 
+const NotesLabel = styled.div`
+  /* font-family: 'Open Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1vw;
+    line-height: 27px;
+    text-align: right;
+
+    color: #000000;
+    display:flex;
+    justify-content: right;
+    width: 8vw;
+    padding-right:1.5vw;
+`
+
 const Notes = ({title, placeholderText, submitButtonText}: Props) => {
   const [text, setText] = useState('');
 
@@ -52,10 +68,13 @@ const Notes = ({title, placeholderText, submitButtonText}: Props) => {
   };
 
   return (
-    <Container>
-      <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
-      <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
-    </Container>
+    <>
+      <NotesLabel>Notes</NotesLabel>
+      <Container>
+        <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+        <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
+      </Container>
+    </>
   );
 };
 

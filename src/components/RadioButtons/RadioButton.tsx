@@ -61,7 +61,9 @@ const RadioButton = ({ labels, name, onClickButton }: Props) => {
   };
   
   return (
-    <div className="radioButton__background">
+    <div className="radioButton__container">
+      <div className="radioButton__label">{name}</div>
+      <div className="radioButton__background">
         {labels.map((label) => (
           <StyledButton
             key={label}
@@ -71,6 +73,7 @@ const RadioButton = ({ labels, name, onClickButton }: Props) => {
             {label}
           </StyledButton>
         ))}
+      </div>
     </div>
   )
 }

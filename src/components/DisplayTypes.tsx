@@ -37,7 +37,7 @@ const Title = styled.p`
   // margin-top: 10px;
   margin-top: 5px;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
 `;
 
 const Image = styled.img`
