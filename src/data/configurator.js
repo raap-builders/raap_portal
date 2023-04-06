@@ -54,7 +54,13 @@ const data = {
     title: "Notes",
     placeholderText: "Enter text here",
     submitButtonText: "Send me this Estimate"
-  }
+  },
+  disabledButtons: [
+    "Home2",
+    "Hampton",
+    "Volumetric Room",
+    "Kitchen Pod"
+  ]
 }
 
 

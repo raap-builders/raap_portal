@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "./radioButtons.css"
+import data from '../../data/configurator'
 
 interface Props {
   labels: string[];
@@ -30,11 +31,12 @@ interface Props {
 //   }
 // `;
 
-const StyledButton = styled.button<{ selected: boolean }>`
+const StyledButton = styled.button<{ selected: boolean, isDisabled: boolean }>`
   background-color:  ${(props) =>
     props.selected ? "#519259;" : "transparent"};
   color:  ${(props) =>
-    props.selected ? "white" : "black"};
+    props.selected ? "white" : (props) =>
+    props.isDisabled ? "gray" : "black"};
   // border: 1px solid green;
   border-radius: 1vw;
   width: 100%;
@@ -46,7 +48,8 @@ const StyledButton = styled.button<{ selected: boolean }>`
   font-weight: 500;
 
   &:hover {
-    opacity: 0.8;
+    opacity: ${(props) =>
+      props.isDisabled ? 1 : 0.8};
   }
 `;
 
@@ -54,9 +57,11 @@ const RadioButton = ({ labels, name, onClickButton }: Props) => {
   const [selectedButton, setSelectedButton] = useState<string>(labels[0]);
 
   const handleButtonClick = (label: string) => {
-    setSelectedButton(label);
-    if(onClickButton){
-      onClickButton(label);
+    if(!data.disabledButtons.includes(label)){
+      setSelectedButton(label);
+      if(onClickButton){
+        onClickButton(label);
+      }
     }
   };
   
@@ -68,6 +73,7 @@ const RadioButton = ({ labels, name, onClickButton }: Props) => {
           <StyledButton
             key={label}
             selected={selectedButton === label}
+            isDisabled={data.disabledButtons.includes(label)}
             onClick={() => handleButtonClick(label)}
           >
             {label}

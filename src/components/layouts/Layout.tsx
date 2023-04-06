@@ -18,14 +18,17 @@ const backgroundImage = require("../../assets/ConfiguratorBackground.png");
 
 interface BarDivProps {
   barWidth: number;
+  barColor: string;
+  barAlign: string;
 }
 
 const GreenBox = styled.div`
   display:flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: 1rem;
-  height:22vh;
+  // padding: 1rem;
+  min-height:22vh;
+  max-height:22vh;
   width:100%;
   background: rgba(81, 146, 89, 0.22);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); //, inset 0px 4px 4px rgba(0, 0, 0, 0.25)
@@ -39,7 +42,7 @@ const MainArea = styled.div`
 `
 
 const DisplayArea = styled.div`
-  width: 46vw;
+  width: 45.5vw;
   height: 100%;
   background-image: url(${backgroundImage});
   background-size: cover;
@@ -75,12 +78,12 @@ const FirstColumnDiv = styled.div`
   flex-direction:column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  width: 100%;
+  width: 19vw;//100%;
   height: 100%;
   background-color:rgba(135,135,135,0.22);
   border-radius: 16px;
-  margin-right: 1vw;
-  padding: 1vh 0;
+  // margin-right: 1vw;
+  // padding: 1vh 0;
 `
 
 const OtherBenefitsHeader = styled.p`
@@ -101,26 +104,25 @@ const BulletPointsDiv = styled.div`
 
 const ColumnDiv = styled.div`
   height: 100%;
-  width: 100%;
   margin: 0 1vw;
   overflow:hidden;
 `
 const MiddleColumnDiv = styled.div`
   height: 100%;
-  width: 100%;
+  width: 20.4vw; //100%;
   margin: 0 1vw;
   overflow:hidden;
 `
 
 const LastColumnDiv = styled.div`
-  margin-left: 1vw;
+  margin-left: 7vw;
   padding: 0.5vw;
   display:flex;
   flex-direction: column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 16px;
-  width: 100%;
+  width: 15.9vw//100%;
   height: 100%;
   overflow: hidden;
 `
@@ -128,19 +130,19 @@ const LastColumnDiv = styled.div`
 const LeftTitleDiv = styled.div`
   width: 100%;
   text-align:right;
-  font-size: 2vmin;
-  line-height: 2.5vmin;
-  font-weight:500;
-  height: 20%;
+  // font-size: 2vmin;
+  // line-height: 2.5vmin;
+  // font-weight:500;
+  // height: 20%;
 `
 
 const RightTitleDiv = styled.div`
   width: 100%;
   text-align:left;
-  font-size: 2vmin;
-  line-height: 2.5vmin;
-  font-weight:500;
-  height: 20%;
+  // font-size: 2vmin;
+  // line-height: 2.5vmin;
+  // font-weight:500;
+  // height: 20%;
 `
 
 const BarContainerLeft = styled.div`
@@ -148,7 +150,7 @@ const BarContainerLeft = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:end;
-  height: 80%;
+  height: 11.7vh//80%;
 `
 
 const BarContainerRight = styled.div`
@@ -156,71 +158,7 @@ const BarContainerRight = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:start;
-  height: 80%;
-`
-
-const GrayDiv = styled.div<BarDivProps>`
-  background: #878787;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 70%;   //${(props) => ((props.barWidth-10)*100/40)}%
-  height:3vmin;
-  text-align:right;
-  font-size: 1.7vmin;
-  overflow:hidden;
-`
-const GreenDiv = styled.div<BarDivProps>`
-  background: #519259;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 60%;   //${(props) => ((props.barWidth-10)*100/40)}%
-  height:3vmin;
-  text-align:right;
-  font-size: 1.7vmin;
-  overflow:hidden;
-`
-
-const YellowDiv = styled.div<BarDivProps>`
-  background: #F0BB62;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8.90141px 0px 0px 8.90141px;
-  width: 40%; //${(props) => ((props.barWidth-10)*100/40)}%
-  height:3vmin;
-  visibility: hidden;
-  font-size: 1.7vmin;
-  overflow:hidden;
-`
-
-const GrayDivRight = styled.div<BarDivProps>`
-  background: #878787;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 70%; //${(props) => ((props.barWidth-3)*100/8)}%
-  height:3vmin;
-  text-align:left;
-  font-size: 1.7vmin;
-  overflow:hidden;
-`
-const GreenDivRight = styled.div<BarDivProps>`
-  background: #519259;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 50%; //${(props) => ((props.barWidth-3)*100/8)}%; 
-  height:3vmin;
-  text-align:left;
-  font-size: 1.7vmin;
-  overflow:hidden;
-`
-
-const YellowDivRight = styled.div<BarDivProps>`
-  background: #F0BB62;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 8.90141px 8.90141px 0px;
-  width: 40% //${(props) => ((props.barWidth)*100/20)}%;
-  height:3vmin;
-  text-align:left;
-  font-size: 1.7vmin;
-  overflow:hidden;
+  height: 11.7vh//80%;
 `
 
 const BulletList = styled.ul`
@@ -275,16 +213,6 @@ const NormalText = styled.p`
   align-items:center;
 `
 
-const EmptyTitleDiv = styled.div`
-  width: 100%;
-  display:flex;
-  flex-direction:row;
-  justify-content:space-around;
-  font-size: 5vw;
-  height: 20%;
-  visibility: hidden;
-`
-
 const EmptySliderDiv = styled.div`
   text-align: center;
   width: 90%;
@@ -296,7 +224,35 @@ const EmptyBarContainer = styled.div`
   flex-direction:column;
   justify-content:space-around;
   align-items:center;
-  height: 80%;
+  height: 11.7vh//80%;
+`
+
+const ColoredBar = styled.div<BarDivProps>`
+  justify-content:${props => props.barAlign == "right" ? "right" : "left"};
+  font-style: normal;
+  font-weight: 600;
+  // font-size: 24px;
+  // line-height: 33px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: ${props => props.barColor == "yellow" ? "#000000" : "#FFFFFF"};
+
+  background: ${props => props.theme.barColors[props.barColor]};
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: ${props => props.barAlign == "right" ? "0.4vw 0px 0px 0.4vw" : "0px 0.4vw 0.4vw 0px"};
+  padding: 0 0.4vw;
+  
+  font-size: 1.7vmin;
+  overflow:hidden;
+  // height:3vmin;
+  height: 3vh;
+  width: ${(props) => 
+    props.barAlign == "left" ? "14vw":"14vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
+    }
+  }};
 `
 
 // todo: move styled components to css file
@@ -324,8 +280,8 @@ const Layout = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <GreenBox>
-          <FirstColumnDiv>
+        <GreenBox style={{padding:"0.7vh 0.4vw 0.7vh 0.4vw"}}>
+          <FirstColumnDiv style={{margin:"0 0.07vh"}}>
             <OtherBenefitsHeader>Other RaaP Benefits:</OtherBenefitsHeader>
             <BulletPointsDiv>
               <BulletList>
@@ -336,33 +292,37 @@ const Layout = () => {
               </BulletList>
             </BulletPointsDiv>
           </FirstColumnDiv>
-          <ColumnDiv>
-            <LeftTitleDiv>Time to complete</LeftTitleDiv>
+          <ColumnDiv style={{width:"20vw"}}>
+            <div className="configurator__barHeader" style={{textAlign:"right", paddingRight:"2.6vw"}}>Time to complete</div>
             <BarContainerLeft>
-              <GrayDiv barWidth={traditionalBuildTime}>{traditionalBuildTime} Months</GrayDiv>
-              <GreenDiv barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</GreenDiv>
-              <YellowDiv barWidth={4}></YellowDiv>
+              <ColoredBar barAlign="right" barColor="gray" barWidth={traditionalBuildTime}>{traditionalBuildTime} Months</ColoredBar>
+              <ColoredBar barAlign="right" barColor="green" barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</ColoredBar>
+              <ColoredBar style={{visibility: "hidden"}} barAlign="right" barColor="yellow" barWidth={4}></ColoredBar>
             </BarContainerLeft>
           </ColumnDiv>
           <MiddleColumnDiv>
-          <EmptyTitleDiv>Time to complete</EmptyTitleDiv>
-            <EmptyBarContainer>
+          <div className="configurator__barHeader" style={{visibility:"hidden"}}>Time to complete</div>
+            <EmptyBarContainer className="configurator__middleText">
                 <EmptySliderDiv>Traditional Construction</EmptySliderDiv>
                 <EmptySliderDiv>RaaP</EmptySliderDiv>
                 <EmptySliderDiv>RaaP Net Cost (less incr. rev.)</EmptySliderDiv>
             </EmptyBarContainer>
           </MiddleColumnDiv>
-          <ColumnDiv>
-            <RightTitleDiv>Project Cost</RightTitleDiv>
+          <ColumnDiv style={{width:"20vw"}}>
+            <div className="configurator__barHeader" style={{textAlign:"left", paddingLeft:"3.6vw"}}>Project Cost</div>
             <BarContainerRight>
-              <GrayDivRight barWidth={traditionalCost}>${traditionalCost}M</GrayDivRight>
-              <GreenDivRight barWidth={7.6}>$7.6M (5% lower)</GreenDivRight>
-              <YellowDivRight barWidth={7.6 - raapIncrementalRevenue}>$6.7M (16% lower)</YellowDivRight>
+              <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${traditionalCost}M</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>$7.6M (5% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>$6.7M (16% lower)</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
             <BuildingRoomsHeader>
-              Building Rooms
+              Building 
+            <label className="toggle__switch">
+              <input type="checkbox"></input>
+              <span className="toggle__slider toggle__round"></span>
+            </label> Rooms
             </BuildingRoomsHeader>
             <FourDivs>
               <Row>

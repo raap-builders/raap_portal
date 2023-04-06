@@ -38,7 +38,7 @@ const SubmitButton = styled.button`
   border-radius: 10px;
   cursor: pointer;
   width: 12vw;
-  margin-top: 3vh;
+  margin-top: 6.5vh;
 `;
 
 const NotesLabel = styled.div`

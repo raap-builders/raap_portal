@@ -8,6 +8,11 @@ const theme = {
     green: "#006400",
     figmaGreen: "rgba(81, 146, 89, 1)"
   },
+  barColors: {
+    yellow: "#F0BB62",
+    green: "#519259",
+    gray: "#878787"
+  },
   borderRadius: '4px',
 };
 

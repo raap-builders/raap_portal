@@ -81,7 +81,7 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
       <div className="verticalSlider_container">
       <div className="verticalSlider__background">
         <div className="verticalSlider__container">
-          <div className="verticalSlider__minmax">{range.min}</div>
+          <div className="verticalSlider__minmax">{range.max}</div>
             <Slider
               style={{paddingLeft: 0}}
               sx={{
@@ -98,7 +98,7 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
               color="secondary"
             />
           
-        <div className="verticalSlider__minmax">{range.max}</div>
+        <div className="verticalSlider__minmax">{range.min}</div>
         {/* <div>Rooms</div> */}
         </div>
       </div>
