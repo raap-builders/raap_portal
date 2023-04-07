@@ -52,7 +52,7 @@ const data = {
   },
   notes: {
     title: "Notes",
-    placeholderText: "Enter text here",
+    placeholderText: "Any other customizations?",
     submitButtonText: "Send me this Estimate"
   },
   disabledButtons: [

@@ -12,7 +12,47 @@ import styled from 'styled-components';
 import Configure from "./Configure";
 import View from "./View";
 import Schedule from "./Schedule";
+// import { Login } from '@microsoft/mgt-react';
+import axios from 'axios';
+import * as xlsx from 'xlsx';
 
+// Define the URL of the xlsx file
+// const url = 'https://sharepoint-site.com/path/to/file.xlsx';
+const url = "https://artsunitymovement-my.sharepoint.com/personal/rj_mahadev_aiota_solutions/_layouts/15/download.aspx?e=11mpJE&share=EUNnr8D7kKtGibbMGaQz1yYBfNOd0c0SSEbPxzm9_0s0Iw"
+
+// Make an HTTP GET request to fetch the file
+// console.log("axios fetch")
+const fetchDataFromExcel = async () => {
+  axios.get(url, {
+    headers: {
+      // Add any required authentication headers here
+    },
+    responseType: 'arraybuffer',
+  }).then((response) => {
+    // Parse the file data using the xlsx library
+    const workbook = xlsx.read(response.data, { type: 'array' });
+
+    // Do something with the parsed data, e.g. log the first sheet
+    // console.log("before workbook")
+    console.log(workbook.Sheets[workbook.SheetNames[2]]);
+    // let worksheets:any = {};
+    // console.log("before sheets")
+    let count = 0
+    // for(const sheetName of workbook.SheetNames){
+      // worksheets[sheetName] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName])
+      // console.log(workbook.Sheets[workbook.SheetNames[count]]);
+      // count+=1
+      // console.log("json:\n", JSON.stringify(worksheets[sheetName]),"\n\n")
+    // }
+    // console.log("after workbook")
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+fetchDataFromExcel()
+
+// console.log("after axios")
 const raapLogo = require('./assets/logo.png');
 const hiltonLogo = require('./assets/HiltonLogo.png');
 
@@ -121,6 +161,7 @@ const LogoEmpty = styled.img`
 `;
 
 function App() {
+
   return (
     <>
     <BrowserRouter>
@@ -134,6 +175,7 @@ function App() {
         <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
       </NavbarContainer>
       <MainContainer>
+        {/* <Login /> */}
         <Routes>
           <Route path="/" Component={Configure} />
           <Route path="/view" Component={View} />

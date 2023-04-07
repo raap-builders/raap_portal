@@ -36,11 +36,11 @@ declare module '@mui/material/Button' {
 
 const Value = styled.input`
   text-align:center;
-  padding-left:0.8vw;
+  padding-left:0.4vw;
   margin-left:0.5vw;
   width: 4vw;
   height: 1.5vw;
-  font-size: 1.1vw;
+  font-size: 1vw;
   color: ${props => props.theme.colors.figmaGreen};
   border-radius: 10px;
   border: 2px solid ${props => props.theme.colors.figmaGreen};
@@ -70,7 +70,7 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
   };
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    console.log(newValue)
+    // console.log(newValue)
     let incrementalRevenue = calculateIncrementalRevenue(newValue as number)
     setRaapIncrementalRevenue(incrementalRevenue)
     setValue(newValue as number);

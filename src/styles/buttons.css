@@ -26,8 +26,11 @@
 
 
 .scrollable_buttons::-webkit-scrollbar-thumb{
-  background-color: rgba(81, 146, 89, 1);
+  /* background-color: rgba(81, 146, 89, 1); */
+  background-color: lightgray;
+  border: 1px solid white;
   border-radius: 10px;
+  /* height: 20%; */
 }
 
 

@@ -23,8 +23,8 @@ const DisplayContent = ({ finishType, layoutType }: Props) => {
   const [curImage, setCurImage] =  useState(GlimmerLayout)
 
   useEffect(()=>{
-    console.log("finishType, layoutType")
-    console.log(finishType, layoutType)
+    // console.log("finishType, layoutType")
+    // console.log(finishType, layoutType)
     if(finishType == "Glimmer"){
       if(layoutType == "Photo"){
         setCurImage(GlimmerPhoto)

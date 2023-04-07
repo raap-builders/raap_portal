@@ -10,7 +10,7 @@ import Notes from "../Notes"
 import DisplayContent from "../DisplayContent"
 import "../../styles/layouts.css"
 
-import { calculateIncrementalRevenue, fetchXlxs } from "../../utils/configuratorUtils";
+import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
 import data from '../../data/configurator'
 
 
@@ -74,48 +74,60 @@ const LayoutButtons = styled.div`
 `
 
 const FirstColumnDiv = styled.div`
+  // background-color:blue;
   display:flex;
   flex-direction:column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  width: 19vw;//100%;
+  width: 16vw;//100%;
   height: 100%;
   background-color:rgba(135,135,135,0.22);
   border-radius: 16px;
   // margin-right: 1vw;
-  // padding: 1vh 0;
+  padding-top:0.4vw;
 `
 
 const OtherBenefitsHeader = styled.p`
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  font-size: 2.2vmin;
+  font-size: 1.3vw;
   text-decoration-line: underline;
-  padding-left:2vw;
+  padding-left:1vw;
+  padding-top:1vh;
   color: #3D3D3D;
 `
 
 const BulletPointsDiv = styled.div`
-  padding-left:1vw;
-  font-size: 1.8vmin;
+  padding-left:0.5vw;
   overflow:hidden;
 `
 
 const ColumnDiv = styled.div`
+  // background-color:red;
   height: 100%;
-  margin: 0 1vw;
+  margin: 0 0.5vw;
   overflow:hidden;
+  // width: 20vw;
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding-bottom:1.5vh;
 `
 const MiddleColumnDiv = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
   height: 100%;
-  width: 20.4vw; //100%;
-  margin: 0 1vw;
+  width: 18.4vw; //100%;
+  margin: 0 0.5vw;
   overflow:hidden;
+  // background-color:green;
+  padding-bottom:1.7vh;
 `
 
 const LastColumnDiv = styled.div`
-  margin-left: 7vw;
+  // margin-left: 4vw;
   padding: 0.5vw;
   display:flex;
   flex-direction: column;
@@ -125,6 +137,7 @@ const LastColumnDiv = styled.div`
   width: 15.9vw//100%;
   height: 100%;
   overflow: hidden;
+  // background-color:purple;
 `
 
 const LeftTitleDiv = styled.div`
@@ -148,7 +161,7 @@ const RightTitleDiv = styled.div`
 const BarContainerLeft = styled.div`
   display:flex;
   flex-direction:column;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items:end;
   height: 11.7vh//80%;
 `
@@ -156,13 +169,20 @@ const BarContainerLeft = styled.div`
 const BarContainerRight = styled.div`
   display:flex;
   flex-direction:column;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items:start;
   height: 11.7vh//80%;
 `
 
 const BulletList = styled.ul`
   margin: 0.1em;
+  // font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1vw;
+  line-height: 1.5vw;
+
+  color: #000000;
 `
 
 const ListItem = styled.ul`
@@ -187,18 +207,24 @@ const Row = styled.div`
 
 const WhiteBox = styled.div`
   background-color:white;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 80%;
   border-radius: 10px;
   display:flex;
   flex-direction:column;
   justify-content: space-around;
-  margin: 0.2vh;
+  margin: 0.4vw;
 `
 
 const BuildingRoomsHeader = styled.div`
-  text-align: center;
-  font-size: 2vh;
+  display:flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:space-around;
+  margin-left:1vw;
+  margin-right:1vw;
+  font-size: 1vw;
+  height:6vh;
 `
 
 const BoldText = styled.p`
@@ -215,14 +241,13 @@ const NormalText = styled.p`
 
 const EmptySliderDiv = styled.div`
   text-align: center;
-  width: 90%;
-  font-size:2vmin;
+  width: 100%;
 `
 
 const EmptyBarContainer = styled.div`
   display:flex;
   flex-direction:column;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items:center;
   height: 11.7vh//80%;
 `
@@ -245,12 +270,12 @@ const ColoredBar = styled.div<BarDivProps>`
   border-radius: ${props => props.barAlign == "right" ? "0.4vw 0px 0px 0.4vw" : "0px 0.4vw 0.4vw 0px"};
   padding: 0 0.4vw;
   
-  font-size: 1.7vmin;
+  font-size: 0.9vw;//1.7vmin;
   overflow:hidden;
   // height:3vmin;
   height: 3vh;
   width: ${(props) => 
-    props.barAlign == "left" ? "14vw":"14vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
+    props.barAlign == "right" ? props.barWidth/1.4+"vw" : props.barWidth*2.1+"vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
     }
   }};
 `
@@ -272,9 +297,9 @@ const Layout = () => {
 
 
   // useEffect(()=>{
-  //   console.log("Fetching Excel...")
-  //   let exceldata = fetchXlxs();
-  //   console.log(exceldata)
+    // console.log("Fetching Excel...")
+    // fetchXlxs();
+    // console.log(exceldata)
   // },[])
 
   return (
@@ -292,8 +317,8 @@ const Layout = () => {
               </BulletList>
             </BulletPointsDiv>
           </FirstColumnDiv>
-          <ColumnDiv style={{width:"20vw"}}>
-            <div className="configurator__barHeader" style={{textAlign:"right", paddingRight:"2.6vw"}}>Time to complete</div>
+          <ColumnDiv style={{width:"24vw"}}>
+            <div className="configurator__barHeader" style={{textAlign:"right", paddingRight:"2vw"}}>Time to complete</div>
             <BarContainerLeft>
               <ColoredBar barAlign="right" barColor="gray" barWidth={traditionalBuildTime}>{traditionalBuildTime} Months</ColoredBar>
               <ColoredBar barAlign="right" barColor="green" barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</ColoredBar>
@@ -308,7 +333,7 @@ const Layout = () => {
                 <EmptySliderDiv>RaaP Net Cost (less incr. rev.)</EmptySliderDiv>
             </EmptyBarContainer>
           </MiddleColumnDiv>
-          <ColumnDiv style={{width:"20vw"}}>
+          <ColumnDiv style={{width:"24vw"}}>
             <div className="configurator__barHeader" style={{textAlign:"left", paddingLeft:"3.6vw"}}>Project Cost</div>
             <BarContainerRight>
               <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${traditionalCost}M</ColoredBar>
