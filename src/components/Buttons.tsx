@@ -40,8 +40,8 @@ const Buttons = ({setTraditionalBuildTime, changeDisplayImage}:Props) => {
 
   const setNewCity = (value:string, average:number) => {
     setCity(value)
-    setTraditionalBuildTime(average)
-    // console.log("average for "+value+" is "+average)
+    // setTraditionalBuildTime(average)
+    console.log("average for "+value+" is "+average)
   }
 
   const updateCityList = (value: string) => {
