@@ -5,7 +5,6 @@ import data from '../data/configurator'
 import DropdownButton from './DropdownButton'
 import RadioButton from './RadioButtons/RadioButton'
 import styled from 'styled-components';
-import { getValues } from '../data/configurator'
 
 
 interface Props {
@@ -46,6 +45,7 @@ const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived }
   const setNewCity = (value: string, average: number) => {
     setCity(value)
     setAverageValue(average)
+    onDataReceived(average)
     // setTraditionalBuildTime(average)
     console.log("average for " + value + " is " + average)
   }

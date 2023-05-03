@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
@@ -388,9 +388,6 @@ const NotesLabel = styled.div`
 `
 
 // todo: move styled components to css file
-type ParentProps = {
-  onDataReceived: (data: number) => void;
-}
 
 const Layout = () => {
   const [traditionalBuildTime, setTraditionalBuildTime] = useState(25);
@@ -409,13 +406,23 @@ const Layout = () => {
   const [roomsMax, setRoomsMax] = useState(data.rooms.max);
   const [roomValue, setRoomValue] = useState(0)
   const [averageValue, setAverageValue] = useState(0)
-  const resp = getValues(roomValue)
   const [receivedData, setReceivedData] = useState('');
+
+
+  useCallback(() => {
+    const resp = getValues(roomValue, averageValue)
+    console.log('adadw', resp)
+
+    setTotalCost(resp.raapTotalCost)
+    setPerRoom(resp.raapNetPerRoom)
+    setPerSqr(resp.raapNetPerSqft)
+    setTraditionalCost(resp.siteTotalCost)
+  }, [roomValue, averageValue])
 
   const onDataReceived = (data: number) => {
     setAverageValue(data);
   }
-  console.log('aasssdddwd',averageValue)
+
   const [displayImage, setDisplayImage] = useState("Glimmer")
   const [layoutType, setlayoutType] = useState("Layout")
   const [sliderValue, setSliderValue] = useState<number>(0);
@@ -465,7 +472,7 @@ const Layout = () => {
   const [stateList, setStateList] = useState(Object.keys(data.location))
   const [cityList, setCityList] = useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
 
-  const setNewCity = (value: string, average: number) => {
+  const setNewCity = (value: string) => {
     setCity(value)
     // setTraditionalBuildTime(average)
     // console.log("average for " + value + " is " + average)
@@ -483,7 +490,7 @@ const Layout = () => {
     }
     if (!(newCityList.includes(city))) {
       let cityAverage = (data.location as any)[value][newCityList[0]]
-      setNewCity(newCityList[0], cityAverage)
+      setNewCity(newCityList[0])
     }
     setState(value)
     setCityList(newCityList)
@@ -502,7 +509,8 @@ const Layout = () => {
     else {
       setState("State")
     }
-    setNewCity(value, cityAverage)
+    console.log('the speial value', value)
+    setNewCity(value)
   }
 
   return (
@@ -540,8 +548,8 @@ const Layout = () => {
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
               <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${siteTotal}M</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>${(Number(siteTotal) * 5) / 100}M (5% lower)</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${(Number(siteTotal) * 16) / 100}M (16% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>${siteTotal}M (5% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${totalCost}M (16% lower)</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -611,13 +619,15 @@ const Layout = () => {
                   <Buttons
                     setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                     changeDisplayImage={(value: string) => setDisplayImage(value)}
-                    onDataReceived={(value: number) => onDataReceived}
+                    onDataReceived={onDataReceived}
                   ></Buttons>
                   <VerticalSlider
                     onData={handleDataFromChild}
                     range={{ min: roomsMin, max: roomsMax }}
                     setRaapIncrementalRevenue={(value: number) => {
-                      // console.log('adadw',resp)
+                      const resp = getValues(roomValue, averageValue)
+                      console.log('adadw', resp)
+
                       setRoomValue(value)
                       setTotalCost(resp.raapTotalCost)
                       setPerRoom(resp.raapNetPerRoom)

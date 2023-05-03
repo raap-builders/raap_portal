@@ -122,12 +122,12 @@ const data = {
 // cost_percent = RaaP room cost vs on-site room cost
 // project_cost_percent = RaaP project cost vs on-site project cost
 
-export function getValues(rooms,average) {
-  
-  console.log('value',average)
+export function getValues(rooms, rsMeans) {
+
+  console.log('value', rooms, rsMeans)
   var rooms = rooms
   const king = 0.50
-  const RSMeans = 317.7
+  const RSMeans = rsMeans
   const RSMeansAvg = 261.6
   const startBuild = 0
   const schematics = 2
