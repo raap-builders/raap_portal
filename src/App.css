@@ -7,3 +7,16 @@
   flex-direction: row;
   justify-content: space-around;
 }
+
+.sc-fsQiph, .hCpXUZ {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+/* .sc-fsQiph, .hCpXUZ::-webkit-scrollbar {
+  display: none;
+} */
+.sc-fsQiph::-webkit-scrollbar {
+  display: none;
+  background-color: white;
+  width: 0.4vw;
+}

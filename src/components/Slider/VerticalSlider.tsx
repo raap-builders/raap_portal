@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
@@ -57,33 +57,43 @@ interface VerticalSliderProps {
 interface Props {
   range: { min: number; max: number },
   setRaapIncrementalRevenue: (arg0: number) => any,
+  onData: (value: number) => void; // Add onData property to interface
 }
 
-const VerticalSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
+const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData }: Props) => {
   const [value, setValue] = useState(data.rooms.total);
-
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = parseInt(e.target.value);
-    let incrementalRevenue = calculateIncrementalRevenue(newValue)
-    setRaapIncrementalRevenue(incrementalRevenue)
-    setValue(newValue);
-  };
+  const [childData, setChildData] = useState<number>(0);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     // console.log(newValue)
     let incrementalRevenue = calculateIncrementalRevenue(newValue as number)
     setRaapIncrementalRevenue(incrementalRevenue)
     setValue(newValue as number);
+    setChildData(value)
+    onData(newValue as number ?? 0);
   };
 
+  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = parseInt(e.target.value);
+    let incrementalRevenue = calculateIncrementalRevenue(newValue);
+    setRaapIncrementalRevenue(incrementalRevenue);
+    setValue(newValue);
+    setChildData(value)
+    onData(newValue ?? 0);
+  };
+  
+  
+  useEffect(()=> {
+    onData(value ?? 0);
+  },[])
   return (
     <MuiThemeProvider theme={theme}>
       <div className="verticalSlider_container">
-      <div className="verticalSlider__background">
-        <div className="verticalSlider__container">
-          <div className="verticalSlider__minmax">{range.max}</div>
+        <div className="verticalSlider__background">
+          <div className="verticalSlider__container">
+            <div className="verticalSlider__minmax">{range.max}</div>
             <Slider
-              style={{paddingLeft: 0}}
+              style={{ paddingLeft: 0 }}
               sx={{
                 '& input[type="range"]': {
                   WebkitAppearance: 'slider-vertical',
@@ -97,20 +107,20 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue }: Props) => {
               onChange={handleChange}
               color="secondary"
             />
-          
-        <div className="verticalSlider__minmax">{range.min}</div>
-        {/* <div>Rooms</div> */}
+
+            <div className="verticalSlider__minmax">{range.min}</div>
+            {/* <div>Rooms</div> */}
+          </div>
         </div>
-      </div>
-      <div className="verticalSlider__label">#Rooms
-            <Value
-              type="number"
-              min={range.min}
-              max={range.max}
-              value={value}
-              onChange={handleNumberChange}
-              className="slider"
-            /></div>
+        <div className="verticalSlider__label">#Rooms
+          <Value
+            type="number"
+            min={range.min}
+            max={range.max}
+            value={value}
+            onChange={handleNumberChange}
+            className="slider"
+          /></div>
       </div>
     </MuiThemeProvider>
   );

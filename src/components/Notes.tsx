@@ -58,6 +58,7 @@ const NotesLabel = styled.div`
 
 const Notes = ({title, placeholderText, submitButtonText}: Props) => {
   const [text, setText] = useState('');
+  const [showBtn, setShowBtn] = useState("display: 'none'");
 
   const handleClick = () => {
     alert('Estimate sent.');
@@ -73,6 +74,7 @@ const Notes = ({title, placeholderText, submitButtonText}: Props) => {
       <Container>
         <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
         <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
+        {/* <SubmitButton onClick={handleClick}>Send Scheduele Docs</SubmitButton> */}
       </Container>
     </>
   );
