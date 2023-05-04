@@ -58,9 +58,10 @@ interface Props {
   range: { min: number; max: number },
   setRaapIncrementalRevenue: (arg0: number) => any,
   onData: (value: number) => void; // Add onData property to interface
+  setRoomsValue?: any;
 }
 
-const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData }: Props) => {
+const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData, setRoomsValue }: Props) => {
   const [value, setValue] = useState(data.rooms.total);
   const [childData, setChildData] = useState<number>(0);
 
@@ -69,6 +70,7 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData }: Props) => 
     let incrementalRevenue = calculateIncrementalRevenue(newValue as number)
     setRaapIncrementalRevenue(incrementalRevenue)
     setValue(newValue as number);
+    setRoomsValue(newValue as number)
     setChildData(value)
     onData(newValue as number ?? 0);
   };
@@ -78,14 +80,17 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData }: Props) => 
     let incrementalRevenue = calculateIncrementalRevenue(newValue);
     setRaapIncrementalRevenue(incrementalRevenue);
     setValue(newValue);
+    setRoomsValue(newValue)
+
     setChildData(value)
     onData(newValue ?? 0);
   };
-  
-  
-  useEffect(()=> {
+
+
+  useEffect(() => {
     onData(value ?? 0);
-  },[])
+  }, [])
+
   return (
     <MuiThemeProvider theme={theme}>
       <div className="verticalSlider_container">

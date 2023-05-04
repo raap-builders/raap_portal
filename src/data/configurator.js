@@ -198,11 +198,15 @@ export function getValues(rooms, rsMeans) {
   var raapNetSav = (siteTotalCost - netTotalCost) / siteTotalCost
   var raapNetPerRoom = (netTotalCost / rooms)
   var raapNetPerSqft = (netTotalCost / bldgSqft)
+
   return {
     siteTotalCost,
     raapTotalCost,
+    netTotalCost,
     raapNetPerRoom,
     raapNetPerSqft,
+    raapComplete,
+    siteComplete
   }
 }
 

@@ -394,30 +394,22 @@ const Layout = () => {
   const [toggleMain, setToggleMain] = useState(true)
   const [raapBuildTime, setRaapBuildTime] = useState(18);
   const [traditionalCost, setTraditionalCost] = useState(0);
+  const [raapTotalCost, setRaapTotalCost] = useState(0);
   const [raapIncrementalRevenue, setRaapIncrementalRevenue] = useState(calculateIncrementalRevenue(data.rooms.total));
-  const [totalCost, setTotalCost] = useState(0);
+  const [raapTotalNetCost, setRaapTotalNetCost] = useState(0);
   const [perRoom, setPerRoom] = useState(0);
   const [perSqft, setPerSqr] = useState(0);
-  const total = formatNumberAsMillion(totalCost);
-  const siteTotal = formatNumberAsMillion(traditionalCost);
-  const room = formatNumberAsThousand(perRoom);
+  const total = raapTotalNetCost;
+  const siteTotal = traditionalCost;
+  const room = perRoom;
   const square = Math.floor(perSqft);
   const [roomsMin, setRoomsMin] = useState(data.rooms.min);
   const [roomsMax, setRoomsMax] = useState(data.rooms.max);
-  const [roomValue, setRoomValue] = useState(0)
+  const [roomValue, setRoomValue] = useState(70)
   const [averageValue, setAverageValue] = useState(0)
+  const [siteCompTime, setSiteCompTime] = useState(0)
   const [receivedData, setReceivedData] = useState('');
 
-
-  useCallback(() => {
-    const resp = getValues(roomValue, averageValue)
-    console.log('adadw', resp)
-
-    setTotalCost(resp.raapTotalCost)
-    setPerRoom(resp.raapNetPerRoom)
-    setPerSqr(resp.raapNetPerSqft)
-    setTraditionalCost(resp.siteTotalCost)
-  }, [roomValue, averageValue])
 
   const onDataReceived = (data: number) => {
     setAverageValue(data);
@@ -434,13 +426,6 @@ const Layout = () => {
   const pic6 = require("../../assets/pic6.jpg");
   const pic7 = require("../../assets/pic7.jpg");
 
-  const marks = [
-    { value: 1, label: <Bs1CircleFill /> },
-    { value: 2, label: <Bs2CircleFill /> },
-    { value: 3, label: <Bs3CircleFill /> },
-    { value: 4, label: <Bs4CircleFill /> },
-    { value: 5, label: <Bs5CircleFill /> }
-  ];
   const handleSliderChange = (event: any, value: number | number[]) => {
     setSliderValue(value as number);
   };
@@ -448,22 +433,38 @@ const Layout = () => {
 
   const handleDataFromChild = (data: number) => {
     setDataFromChild(data);
+    const resp = getValues(roomValue, averageValue)
+
+    setRaapTotalNetCost(resp.netTotalCost ?? 0)
+    setRaapTotalCost(resp.raapTotalCost)
+    setPerRoom(resp.raapNetPerRoom ?? 0)
+    setPerSqr(resp.raapNetPerSqft ?? 0)
+    setTraditionalCost(resp.siteTotalCost ?? 0)
+    setRaapBuildTime(resp.raapComplete)
+    setTraditionalBuildTime(resp.siteComplete)
   };
 
-  // useEffect(()=>{
-  // console.log("Fetching Excel...")
-  // fetchXlxs();
-  // console.log(exceldata)
-  // },[])
-  function formatNumberAsMillion(number: number): string {
-    const million = 1000000;
-    const result = number / million;
-    return result.toFixed(1);
-  }
-  function formatNumberAsThousand(number: number): string {
-    const thousand = 1000;
-    const result2 = number / thousand;
-    return result2.toFixed(1);
+  useEffect(() => {
+    const resp = getValues(roomValue, averageValue)
+
+    setRaapTotalNetCost(resp.netTotalCost)
+    setRaapTotalCost(resp.raapTotalCost)
+    setPerRoom(resp.raapNetPerRoom)
+    setPerSqr(resp.raapNetPerSqft)
+    setTraditionalCost(resp.siteTotalCost)
+    setRaapBuildTime(resp.raapComplete)
+    setTraditionalBuildTime(resp.siteComplete)
+  }, [roomValue, averageValue])
+
+
+  function formatNumber(num: number): string {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(2) + 'M';
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(2) + 'K';
+    } else {
+      return num.toString();
+    }
   }
 
   const [state, setState] = useState("State")
@@ -474,8 +475,6 @@ const Layout = () => {
 
   const setNewCity = (value: string) => {
     setCity(value)
-    // setTraditionalBuildTime(average)
-    // console.log("average for " + value + " is " + average)
   }
   const updateCityList = (value: string) => {
     let newCityList = cityList;
@@ -547,9 +546,9 @@ const Layout = () => {
           <ColumnDiv style={{ width: "24vw" }}>
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
-              <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${siteTotal}M</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>${siteTotal}M (5% lower)</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${totalCost}M (16% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${formatNumber(siteTotal)}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -564,21 +563,21 @@ const Layout = () => {
             <FourDivs>
               <Row>
                 <WhiteBox>
-                  <BoldText>18 Months</BoldText>
+                  <BoldText>{raapBuildTime} Months</BoldText>
                   <NormalText>Build Time</NormalText>
                 </WhiteBox>
                 <WhiteBox>
-                  <BoldText>${total}M</BoldText>
+                  <BoldText>${formatNumber(total)}</BoldText>
                   <NormalText>Project Cost</NormalText>
                 </WhiteBox>
               </Row>
               <Row>
                 <WhiteBox>
-                  <BoldText>${room}K</BoldText>
+                  <BoldText>${formatNumber(room)}</BoldText>
                   <NormalText>Per Room</NormalText>
                 </WhiteBox>
                 <WhiteBox>
-                  <BoldText>${square}</BoldText>
+                  <BoldText>${formatNumber(square)}</BoldText>
                   <NormalText>Per sq. ft.</NormalText>
                 </WhiteBox>
               </Row>
@@ -624,15 +623,9 @@ const Layout = () => {
                   <VerticalSlider
                     onData={handleDataFromChild}
                     range={{ min: roomsMin, max: roomsMax }}
+                    setRoomsValue={setRoomValue}
                     setRaapIncrementalRevenue={(value: number) => {
-                      const resp = getValues(roomValue, averageValue)
-                      console.log('adadw', resp)
-
                       setRoomValue(value)
-                      setTotalCost(resp.raapTotalCost)
-                      setPerRoom(resp.raapNetPerRoom)
-                      setPerSqr(resp.raapNetPerSqft)
-                      setTraditionalCost(resp.siteTotalCost)
                       setRaapIncrementalRevenue(value)
                     }}
                   ></VerticalSlider>
