@@ -553,12 +553,12 @@ const Layout = () => {
           </ColumnDiv>
           <LastColumnDiv>
             <BuildingRoomsHeader>
-              Building
+              Rooms
               <label className="toggle__switch">
                 <input type="checkbox"></input>
                 <span onClick={() => setToggleMain(toggleMain ? false : true)} className="toggle__slider toggle__round"></span>
               </label>
-              Rooms
+              Building
             </BuildingRoomsHeader>
             <FourDivs>
               <Row>
