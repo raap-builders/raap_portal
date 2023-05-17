@@ -100,7 +100,7 @@ const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived }
         </LocationDiv>
       </div>
       <RadioButton name="Brand" labels={data.brand}></RadioButton>
-      <RadioButton name="Project Type" labels={data.projectTypes}></RadioButton>
+      <RadioButton name="Project Type" labels={data.projectTypes} onClickButton={onChangeFinish}></RadioButton>
       <RadioButton name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></RadioButton>
     </div>
   );

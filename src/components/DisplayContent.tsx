@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import React, {useState, useEffect} from "react";
 
-const GlimmerLayout = require("../assets/GlimmerLayout.png");
-const SparkLayout = require("../assets/SparkPhoto.png");
-const BurstLayout = require("../assets/GlimmerPhoto.png");
-const GlimmerPhoto = require("../assets/GlimmerPhoto.png");
-const SparkPhoto = require("../assets/SparkPhoto.png");
+const GlimmerLayout = require("../assets/RoomLayout/pic2.png");
+const SparkLayout = require("../assets/RoomLayout/pic3.png");
+const BurstLayout = require("../assets/RoomLayout/pic4.png");
+const GlimmerPhoto = require("../assets/RoomLayout/pic4.png");
+const SparkPhoto = require("../assets/RoomLayout/pic3.png");
 
 
 interface Props {

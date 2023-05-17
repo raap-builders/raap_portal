@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Modal, Input, Button } from 'antd';
 
 interface Props {
   title: string;
@@ -56,12 +57,27 @@ const NotesLabel = styled.div`
     padding-right:1.5vw;
 `
 
-const Notes = ({title, placeholderText, submitButtonText}: Props) => {
+const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
   const [text, setText] = useState('');
   const [showBtn, setShowBtn] = useState("display: 'none'");
+  const [visible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
 
-  const handleClick = () => {
-    alert('Estimate sent.');
+  const handleOk = () => {
+    // Handle the email sending logic here
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOpenModal = () => {
+    setVisible(true);
+  };
+
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -69,14 +85,31 @@ const Notes = ({title, placeholderText, submitButtonText}: Props) => {
   };
 
   return (
-    <>
+    <div>
       <NotesLabel>Notes</NotesLabel>
       <Container>
         <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
-        <SubmitButton onClick={handleClick}>{submitButtonText}</SubmitButton>
-        {/* <SubmitButton onClick={handleClick}>Send Scheduele Docs</SubmitButton> */}
+        <SubmitButton onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+        <Modal
+          title="Email Form"
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleOk}>
+              Send Email
+            </Button>,
+          ]}
+        >
+          <div style={{ padding: '10px 0px' }}>
+            <Input type='email' placeholder="Email Address" value={email} onChange={handleEmailChange} />
+          </div>
+        </Modal>
       </Container>
-    </>
+    </div>
   );
 };
 

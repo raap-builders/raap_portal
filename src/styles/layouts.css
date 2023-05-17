@@ -8,27 +8,22 @@
   justify-content: space-around;
   /* background-color: blue; */
 }
-
-.vertical_scroll {
-  width: 0.005vw;
-  height: 80%;
-  background-color: white;
-  margin-left: 35vw;
+.ant-btn-primary {
+  background-color: #519259;
 }
 
-.controls_container {
-  width: 54.5vw;
-  height: 67.5vh;
+.SliderMark {
+  padding: 8px;
+  border-radius: 50px;
+  background-color: #404040;
+  border: 5px solid rgba(255,255,255,0.4);
+  position: relative;
+  bottom: 28px;
 }
-
-.notes_container {
-  height: 16.5vh;
-  padding-top: 3vh;
-  display: flex;
-  flex-direction: row;
-  margin-left: 4.7vw;
+.SliderMarkRaap {
+  background-color: #519259;
+  border: 5px solid rgba(31, 31, 31, 0.8);
 }
-
 /* toggle */
 
 /* The switch - the box around the slider */
@@ -142,6 +137,7 @@ input:checked + .toggle__slider:before {
 }
 .RoomsContent .notes_container {
   height: auto;
+  display: flex;
 }
 .RoomsContent .verticalSlider_container {
   margin-top: 20px;
@@ -149,7 +145,7 @@ input:checked + .toggle__slider:before {
 }
 .bottomSlider {
   position: relative;
-  bottom: 120px;
+  bottom: 35px;
   width: 65%;
   margin-bottom: 20px;
 }

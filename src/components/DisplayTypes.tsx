@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import RadioButton from './RadioButtons/RadioButton'
+import data from '../data/configurator'
 
 // const raapLogo = require('../assets/logo.png');
 
-const layout = require('../assets/Layout.png');
-const photo = require('../assets/Photo.png');
-const drawing = require('../assets/Drawing.png');
+const layout = require('../assets/RoomLayout/pic5.png');
+const photo = require('../assets/RoomLayout/pic6.png');
+const drawing = require('../assets/RoomLayout/pic7.png');
 
 
-interface Props{
+interface Props {
   onClickButton: (arg0: string) => any
 }
 
@@ -38,6 +40,7 @@ const Title = styled.p`
   margin-top: 5px;
   text-align: center;
   font-size: 1vw;
+  white-space: nowrap;
 `;
 
 const Image = styled.img`
@@ -55,7 +58,7 @@ const ImageContainer = styled.div`
   justify-content: space-around;
 `
 
-const DisplayTypes = ({onClickButton}:Props) => {
+const DisplayTypes = ({ onClickButton }: Props) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
@@ -67,10 +70,10 @@ const DisplayTypes = ({onClickButton}:Props) => {
 
     //to be refactored
     let layoutType = "Layout"
-    if(index == 1){
+    if (index == 1) {
       layoutType = "Photo"
     }
-    if(index ==2 ){
+    if (index == 2) {
       layoutType = "Drawing"
     }
     onClickButton(layoutType)
@@ -80,17 +83,20 @@ const DisplayTypes = ({onClickButton}:Props) => {
     <ItemsContainer>
       <ItemWrapper isSelected={selectedItem === 0} onClick={() => handleItemClick(0)}>
         <ImageContainer><Image src={layout} alt="Layout" /></ImageContainer>
-        <Title>Layout</Title>
+        <Title>3D View</Title>
       </ItemWrapper>
       <ItemWrapper isSelected={selectedItem === 1} onClick={() => handleItemClick(1)}>
         <ImageContainer><Image src={photo} alt="Photo" /></ImageContainer>
         <Title>Photo</Title>
       </ItemWrapper>
       <ItemWrapper isSelected={selectedItem === 2} onClick={() => handleItemClick(2)}>
-      <ImageContainer><Image src={drawing} alt="Drawing" /></ImageContainer>
-        <Title>Drawing</Title>
+        <ImageContainer><Image src={drawing} alt="Drawing" /></ImageContainer>
+        <Title>Layout</Title>
       </ItemWrapper>
     </ItemsContainer>
+    // <div className="scrollable_buttons">
+    //   <RadioButton name="" labels={data.Layout}></RadioButton>
+    // </div>
   );
 };
 
