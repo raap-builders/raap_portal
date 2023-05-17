@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const backgroundImage = require("../assets/DesignBackground.png");
+const backgroundImage = require("../assets/DesignDocs/DesignImg1.png");
 
 
 const Container = styled.div`

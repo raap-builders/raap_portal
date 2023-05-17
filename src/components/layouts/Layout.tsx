@@ -18,8 +18,7 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill, Bs4CircleFill, Bs5CircleFill, Bs6CircleFill } from 'react-icons/bs';
 
-const backgroundImage = require("../../assets/ConfiguratorBackground.png");
-
+const backgroundImage = require("../../assets/RoomLayout/pic1.png");
 interface BarDivProps {
   barWidth: number;
   barColor: string;
@@ -140,7 +139,7 @@ const LastColumnDiv = styled.div`
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 16px;
-  width: 15.9vw//100%;
+  width: 270px;
   height: 100%;
   overflow: hidden;
   // background-color:purple;
@@ -248,6 +247,11 @@ const NormalText = styled.p`
 const EmptySliderDiv = styled.div`
   text-align: center;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 3px;
+  padding: 6px 0px
 `
 
 const EmptyBarContainer = styled.div`
@@ -281,7 +285,7 @@ const ColoredBar = styled.div<BarDivProps>`
   // height:3vmin;
   height: 3vh;
   width: ${(props) =>
-    props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 2.1 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
+    props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 1.6 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
   }
   }};
 `
@@ -363,7 +367,7 @@ const Textbox = styled.textarea`
 `;
 const SubmitButton = styled.button`
   background-color: #519259;
-  height: 7vh;
+  height: 5vh;
   color: white;
   font-size: 1vw;
   border-radius: 10px;
@@ -410,24 +414,100 @@ const Layout = () => {
   const [siteCompTime, setSiteCompTime] = useState(0)
   const [receivedData, setReceivedData] = useState('');
 
+  const marks = [
+    {
+      value: 1,
+      label: <div className="SliderMark"></div>,
+    },
+    {
+      value: 2,
+      label: <div className="SliderMark"></div>,
+    },
+    {
+      value: 3,
+      label: <div className="SliderMark"></div>,
+    },
+    {
+      value: 4,
+      label: <div className="SliderMark"></div>,
+    },
+    {
+      value: 5,
+      label: <div className="SliderMark"></div>,
+    },
+    {
+      value: 6,
+      label: <div className="SliderMark"></div>,
+    },
+  ];
+  const marksRaap = [
+    {
+      value: 1,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 2,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 3,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 4,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 5,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 6,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 7,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 8,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+    {
+      value: 9,
+      label: <div className="SliderMarkRaap SliderMark"></div>,
+    },
+  ];
 
   const onDataReceived = (data: number) => {
     setAverageValue(data);
   }
 
   const [displayImage, setDisplayImage] = useState("Glimmer")
+  const [projectType, setProjectType] = useState("Bathroom Pod")
   const [layoutType, setlayoutType] = useState("Layout")
   const [sliderValue, setSliderValue] = useState<number>(0);
-  const pic1 = require("../../assets/pic1.jpg");
-  const pic2 = require("../../assets/pic2.jpg");
-  const pic3 = require("../../assets/pic3.jpg");
-  const pic4 = require("../../assets/pic4.jpg");
-  const pic5 = require("../../assets/pic5.jpg");
-  const pic6 = require("../../assets/pic6.jpg");
-  const pic7 = require("../../assets/pic7.jpg");
+  const [sliderValue2, setSliderValue2] = useState<number>(0);
+  const trad1 = require("../../assets/Progress/Traditional/pic1.jpg");
+  const trad2 = require("../../assets/Progress/Traditional/pic2.jpg");
+  const trad3 = require("../../assets/Progress/Traditional/pic3.jpg");
+  const trad4 = require("../../assets/Progress/Traditional/pic4.jpg");
+  const trad5 = require("../../assets/Progress/Traditional/pic5.jpg");
+  const pic1 = require("../../assets/Progress/raap/pic1.jpg");
+  const pic2 = require("../../assets/Progress/raap/pic2.jpg");
+  const pic3 = require("../../assets/Progress/raap/pic3.jpg");
+  const pic4 = require("../../assets/Progress/raap/pic4.jpg");
+  const pic5 = require("../../assets/Progress/raap/pic5.jpg");
+  const pic6 = require("../../assets/Progress/raap/pic6.jpg");
+  const pic7 = require("../../assets/Progress/raap/pic7.jpg");
+  const pic8 = require("../../assets/Progress/raap/pic8.jpg");
+  const pic9 = require("../../assets/Progress/raap/pic9.jpg");
 
   const handleSliderChange = (event: any, value: number | number[]) => {
     setSliderValue(value as number);
+  };
+  const handleSliderChange2 = (event: any, value: number | number[]) => {
+    setSliderValue2(value as number);
   };
   const [dataFromChild, setDataFromChild] = useState<number>(0);
 
@@ -456,25 +536,50 @@ const Layout = () => {
     setTraditionalBuildTime(resp.siteComplete)
   }, [roomValue, averageValue])
 
-
+  console.log()
   function formatNumber(num: number): string {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(2) + 'M';
-    } else if (num >= 1000) {
-      return (num / 1000).toFixed(2) + 'K';
+    if (num < 0) {
+      num = 0;
+    }
+
+    // Extract the non-decimal part of the number
+    const nonDecimalPart = Math.floor(num);
+
+    if (nonDecimalPart >= 1000000) {
+      const roundedNum = Math.round(nonDecimalPart / 1000000);
+      return roundedNum.toFixed(0) + 'M';
+    } else if (nonDecimalPart >= 1000) {
+      const roundedNum = Math.round(nonDecimalPart / 1000);
+      return roundedNum.toFixed(0) + 'K';
     } else {
-      return num.toString();
+      return nonDecimalPart.toString();
     }
   }
 
+  const [formattedValue, setFormattedValue] = useState('');
+  const [numericValue, setNumericValue] = useState(0);
+
+  useEffect(() => {
+    const formatted = formatNumber(siteTotal);
+    setFormattedValue(formatted);
+
+    const splitArray = formatted.split(/[A-Za-z]+/);
+    const newNumericValue = parseInt(splitArray[0]);
+    setNumericValue(newNumericValue);
+    console.log('siteTotal', newNumericValue)
+  }, [siteTotal]);
   const [state, setState] = useState("State")
   const [city, setCity] = useState("City")
 
   const [stateList, setStateList] = useState(Object.keys(data.location))
   const [cityList, setCityList] = useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
 
-  const setNewCity = (value: string) => {
+  const setNewCity = (value: string, average: number) => {
     setCity(value)
+    setAverageValue(average)
+    onDataReceived(average)
+    // setTraditionalBuildTime(average)
+    console.log("average for " + value + " is " + average)
   }
   const updateCityList = (value: string) => {
     let newCityList = cityList;
@@ -489,7 +594,7 @@ const Layout = () => {
     }
     if (!(newCityList.includes(city))) {
       let cityAverage = (data.location as any)[value][newCityList[0]]
-      setNewCity(newCityList[0])
+      setNewCity(newCityList[0], cityAverage)
     }
     setState(value)
     setCityList(newCityList)
@@ -508,8 +613,7 @@ const Layout = () => {
     else {
       setState("State")
     }
-    console.log('the speial value', value)
-    setNewCity(value)
+    setNewCity(value, cityAverage)
   }
 
   return (
@@ -530,7 +634,7 @@ const Layout = () => {
           <ColumnDiv style={{ width: "24vw" }}>
             <div className="configurator__barHeader" style={{ textAlign: "right", paddingRight: "2vw" }}>Time to complete</div>
             <BarContainerLeft>
-              <ColoredBar barAlign="right" barColor="gray" barWidth={traditionalBuildTime}>{traditionalBuildTime} Months</ColoredBar>
+              <ColoredBar barAlign="right" barColor="gray" barWidth={traditionalBuildTime - 5}>{traditionalBuildTime} Months</ColoredBar>
               <ColoredBar barAlign="right" barColor="green" barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</ColoredBar>
               <ColoredBar style={{ visibility: "hidden" }} barAlign="right" barColor="yellow" barWidth={4}></ColoredBar>
             </BarContainerLeft>
@@ -538,27 +642,35 @@ const Layout = () => {
           <MiddleColumnDiv>
             <div className="configurator__barHeader" style={{ visibility: "hidden" }}>Time to complete</div>
             <EmptyBarContainer className="configurator__middleText">
-              <EmptySliderDiv>Traditional Construction</EmptySliderDiv>
-              <EmptySliderDiv>RaaP</EmptySliderDiv>
+              <EmptySliderDiv>
+                <div style={{ width: '100%', borderBottom: '2px solid #878787' }}></div>
+                <span style={{ whiteSpace: 'nowrap' }}>Traditional Construction</span>
+                <div style={{ width: '100%', borderBottom: '2px solid #878787' }}></div>
+              </EmptySliderDiv>
+              <EmptySliderDiv>
+                <div style={{ width: '100%', borderBottom: '2px solid #519259' }}></div>
+                <span style={{ whiteSpace: 'nowrap' }}>RaaP</span>
+                <div style={{ width: '100%', borderBottom: '2px solid #519259' }}></div>
+              </EmptySliderDiv>
               <EmptySliderDiv>RaaP Net Cost (less incr. rev.)</EmptySliderDiv>
             </EmptyBarContainer>
           </MiddleColumnDiv>
           <ColumnDiv style={{ width: "24vw" }}>
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
-              <ColoredBar barAlign="left" barColor="gray" barWidth={traditionalCost}>${formatNumber(siteTotal)}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={7.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 3.2}>${formatNumber(siteTotal)}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 3.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
               <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
             <BuildingRoomsHeader>
-              Rooms
+              Hotel
               <label className="toggle__switch">
                 <input type="checkbox"></input>
                 <span onClick={() => setToggleMain(toggleMain ? false : true)} className="toggle__slider toggle__round"></span>
               </label>
-              Building
+              Rooms
             </BuildingRoomsHeader>
             <FourDivs>
               <Row>
@@ -567,7 +679,7 @@ const Layout = () => {
                   <NormalText>Build Time</NormalText>
                 </WhiteBox>
                 <WhiteBox>
-                  <BoldText>${formatNumber(total)}</BoldText>
+                  <BoldText>${formatNumber(Math.round(total))}</BoldText>
                   <NormalText>Project Cost</NormalText>
                 </WhiteBox>
               </Row>
@@ -586,6 +698,204 @@ const Layout = () => {
         </GreenBox>
         {
           toggleMain ?
+
+            <div>
+              <div className="RoomsContent">
+                <div className="imageBoxes">
+                  <ConstructionDiv>
+                    <LeftDiv>
+                      <LeftHeading>Traditional Contruction</LeftHeading>
+                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
+                      <EmptyBox style={{ borderColor: '#519259' }}>
+                        <img
+                          className='emptyImageBox'
+                          src={
+                            sliderValue == 0 ?
+                              trad1 : sliderValue == 1 ?
+                                trad1 : sliderValue == 2 ?
+                                  trad2 : sliderValue == 3 ?
+                                    trad2 : sliderValue == 4 ?
+                                      trad3 : sliderValue == 5 ?
+                                        trad4 : sliderValue == 6 ?
+                                          trad5 : null
+                          }
+                        />
+                      </EmptyBox>
+                    </LeftDiv>
+                    <RightDiv>
+                      <RightHeading>RaaP Offsite</RightHeading>
+                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
+                      <EmptyBox style={{ borderColor: '#F6AA2A' }}>
+                        <img
+                          className='emptyImageBox'
+                          src={
+                            sliderValue2 == 0 ?
+                              pic1 : sliderValue2 == 1 ?
+                                pic1 : sliderValue2 == 2 ?
+                                  pic2 : sliderValue2 == 3 ?
+                                    pic3 : sliderValue2 == 4 ?
+                                      pic4 : sliderValue2 == 5 ?
+                                        pic5 : sliderValue2 == 6 ?
+                                          pic6 : sliderValue2 == 7 ?
+                                            pic7 : sliderValue2 == 8 ?
+                                              pic8 : sliderValue2 == 9 ?
+                                                pic9 : null
+                          }
+                        />
+                      </EmptyBox>
+                    </RightDiv>
+                  </ConstructionDiv>
+                </div>
+                <div style={{ marginTop: 20, width: '94%' }}>
+                  <div style={{ height: 'auto', width: 'auto' }} className="scrollable_buttons">
+                    <div className="location__container">
+                      <div className="location__label">Location</div>
+                      <LocationDiv>
+                        <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
+                        <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
+                      </LocationDiv>
+                    </div>
+                    <RadioButton name="Brand" labels={data.brand}></RadioButton>
+                    <div style={{ marginLeft: 0 }} className="notes_container">
+                      {/* <Notes
+                        title={data.notes.title}
+                        placeholderText={data.notes.placeholderText}
+                        submitButtonText={data.notes.submitButtonText}
+                      ></Notes> */}
+                      <NotesLabel>Notes</NotesLabel>
+                      <Containers>
+                        <Textbox placeholder="Anything Other Customization" />
+                        <SubmitButton>Send me this estimate</SubmitButton>
+                      </Containers>
+                    </div>
+                  </div>
+                </div>
+                <VerticalSlider
+                  onData={handleDataFromChild}
+                  range={{ min: roomsMin, max: roomsMax }}
+                  setRoomsValue={setRoomValue}
+                  setRaapIncrementalRevenue={(value: number) => {
+                    setRoomValue(value)
+                    setRaapIncrementalRevenue(value)
+                  }}
+                ></VerticalSlider>
+              </div>
+              <div style={{ display: 'flex', gridGap: 20, alignItems: 'center' }}>
+                <div className="bottomSlider" style={{ marginLeft: 30 }}>
+                  <div style={{ justifyContent: 'space-between', marginBottom: 10 }} className="sliderTitles">
+
+                    <div className="titleFlex">
+                      <h2>Day 0</h2>
+                      <p>Start</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2>Month 2</h2>
+                      <p>Schematics</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2>Month 7</h2>
+                      <p>Pre-construction</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2>Month 12</h2>
+                      <p>Permits & Loans</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2>Month 18</h2>
+                      <p>Foundation</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2>Month 30</h2>
+                      <p>Delivery</p>
+                    </div>
+                  </div>
+                  <Box sx={{ width: "100%" }}>
+                    <div >
+                      <Slider
+                        value={sliderValue}
+                        onChange={handleSliderChange}
+                        marks={marks}
+                        step={1}
+                        min={1}
+                        max={6}
+                        sx={{
+                          color: '#404040', // specify your custom color here
+                          '& .MuiSlider-thumb': {
+                            color: '#a6a6a6', // apply the same color to the thumb
+                            padding: 1,
+                            border: '6px solid #404040'
+                          }
+                        }}
+                      />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px', alignItems: 'flex-start', }}>
+                      <Slider
+                        value={sliderValue2}
+                        onChange={handleSliderChange2}
+                        defaultValue={1}
+                        step={1}
+                        marks={marksRaap}
+                        min={1}
+                        max={9}
+                        sx={{
+                          color: '#404040', // specify your custom color here
+                          '& .MuiSlider-thumb': {
+                            color: '#519259', // apply the same color to the thumb
+                            padding: 1,
+                            border: '6px solid #404040',
+                            marginBottom: 0
+                          },
+                        }}
+                      />
+                      <div style={{
+                        borderBottom: '3px solid',
+                        borderStyle: 'dashed',
+                        width: '100%',
+                        marginTop: 14,
+                        borderColor: '#a6a6a6'
+                      }}></div>
+                    </div>
+                  </Box>
+                  <div style={{ justifyContent: 'space-between', marginRight: 130 }} className="sliderTitles">
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Day 0</h2>
+                      <p>Start</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Month 2</h2>
+                      <p>Schematics</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Month 5</h2>
+                      <p>Pre-construction</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Month 9</h2>
+                      <p>Permits & Loans</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Month 15</h2>
+                      <p>Foundation</p>
+                    </div>
+                    <div className="titleFlex">
+                      <h2 style={{ color: '#edaa38' }}>Month 21</h2>
+                      <p>Delivery</p>
+                    </div>
+                  </div>
+                </div>
+                <div style={{
+                  display: 'grid',
+                  position: "relative",
+                  bottom: 45,
+                  gridGap: 28,
+                  marginBottom: 18
+                }}>
+                  <h2 style={{ width: 90, fontWeight: 700, marginBottom: 10 }}>Traditional</h2>
+                  <h2 style={{ color: '#edaa38', width: 90, fontWeight: 700 }}>RaaP</h2>
+                </div>
+              </div>
+            </div>
+            :
             <MainArea>
               <DisplayArea>
                 <DisplayContent
@@ -640,182 +950,6 @@ const Layout = () => {
                 </div>
               </div>
             </MainArea>
-            :
-            <div>
-              <div className="RoomsContent">
-                <div className="imageBoxes">
-                  <ConstructionDiv>
-                    <LeftDiv>
-                      <LeftHeading>Traditional Contruction</LeftHeading>
-                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
-                      <EmptyBox>
-                        <img
-                          className='emptyImageBox'
-                          src={
-                            sliderValue == 1 ?
-                              pic1 : sliderValue == 2 ?
-                                pic2 : sliderValue == 3 ?
-                                  pic3 : sliderValue == 4 ?
-                                    pic4 : sliderValue == 5 ?
-                                      pic5 : sliderValue == 6 ?
-                                        pic6 : sliderValue == 7 ?
-                                          pic7 : null
-                          }
-                        />
-                      </EmptyBox>
-                    </LeftDiv>
-                    <RightDiv>
-                      <RightHeading>RaaP Offsite</RightHeading>
-                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
-                      <EmptyBox>
-                        <img
-                          className='emptyImageBox'
-                          src={
-                            sliderValue == 1 ?
-                              pic1 : sliderValue == 2 ?
-                                pic3 : sliderValue == 3 ?
-                                  pic4 : sliderValue == 4 ?
-                                    pic5 : sliderValue == 5 ?
-                                      pic6 : sliderValue == 6 ?
-                                        pic7 : sliderValue == 7 ?
-                                          pic7 : null
-                          }
-                        />
-                      </EmptyBox>
-                    </RightDiv>
-                  </ConstructionDiv>
-                </div>
-                <div style={{ marginTop: 20, width: '94%' }}>
-                  <div style={{ height: 'auto', width: 'auto' }} className="scrollable_buttons">
-                    <div className="location__container">
-                      <div className="location__label">Location</div>
-                      <LocationDiv>
-                        <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
-                        <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
-                      </LocationDiv>
-                    </div>
-                    <RadioButton name="Brand" labels={data.brand}></RadioButton>
-                    <div style={{ marginLeft: 0 }} className="notes_container">
-                      {/* <Notes
-                        title={data.notes.title}
-                        placeholderText={data.notes.placeholderText}
-                        submitButtonText={data.notes.submitButtonText}
-                      ></Notes> */}
-                      <NotesLabel>Notes</NotesLabel>
-                      <Containers>
-                        <Textbox placeholder="Anything Other Customization" />
-                        <SubmitButton>Send me this estimate</SubmitButton>
-                        <SubmitButton>Send Scheduele Docs</SubmitButton>
-                      </Containers>
-                    </div>
-                  </div>
-                </div>
-                <VerticalSlider
-                  onData={handleDataFromChild}
-                  range={{ min: roomsMin, max: roomsMax }}
-                  setRaapIncrementalRevenue={(value: number) => setRaapIncrementalRevenue(value)}
-                ></VerticalSlider>
-              </div>
-              <div style={{ display: 'flex', gridGap: 20, alignItems: 'center' }}>
-                <div className="bottomSlider" style={{ marginLeft: 30 }}>
-                  <div style={{ justifyContent: 'space-between', marginBottom: 10 }} className="sliderTitles">
-                    <div className="titleFlex">
-                      <h2>Day 0</h2>
-                      <p>Start Hotel Projct</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month 6</h2>
-                      <p>Pre Construction</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month 12</h2>
-                      <p>Design</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month 18</h2>
-                      <p>Foundation</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month 30</h2>
-                      <p>Delivery</p>
-                    </div>
-                  </div>
-                  <Box sx={{ width: "100%" }}>
-                    <div >
-                      <Slider
-                        value={sliderValue}
-                        onChange={handleSliderChange}
-                        // marks={marks}
-                        step={1}
-                        min={1}
-                        max={5}
-                        sx={{
-                          color: '#a6a6a6', // specify your custom color here
-                          '& .MuiSlider-thumb': {
-                            color: '#a6a6a6', // apply the same color to the thumb
-                            padding: 1,
-                            border: '6px solid #404040'
-                          }
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <Slider
-                        value={sliderValue}
-                        onChange={handleSliderChange}
-                        defaultValue={1}
-                        step={1}
-                        marks
-                        min={1}
-                        max={6}
-                        sx={{
-                          color: '#519259', // specify your custom color here
-                          '& .MuiSlider-thumb': {
-                            color: '#519259', // apply the same color to the thumb
-                            padding: 1,
-                            border: '6px solid #404040'
-                          },
-                        }}
-                      />
-                    </div>
-                  </Box>
-                  <div style={{ justifyContent: 'space-between' }} className="sliderTitles">
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Day 0</h2>
-                      <p>Start Hotel Projct</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 6</h2>
-                      <p>Pre Construction</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 12</h2>
-                      <p>Design</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 18</h2>
-                      <p>Foundation</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 16</h2>
-                      <p>Build Rooms</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 21</h2>
-                      <p>Delivery</p>
-                    </div>
-                  </div>
-                </div>
-                <div style={{
-                  position: "relative",
-                  bottom: 130
-                }}>
-                  <h2 style={{ width: 90, fontWeight: 700, marginBottom: 10 }}>Traditional</h2>
-                  <h2 style={{ color: '#edaa38', width: 90, fontWeight: 700 }}>RaaP</h2>
-                </div>
-              </div>
-            </div>
-
         }
       </Container>
     </ThemeProvider>

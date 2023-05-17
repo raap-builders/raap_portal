@@ -53,8 +53,8 @@ const fetchDataFromExcel = async () => {
 fetchDataFromExcel()
 
 // console.log("after axios")
-const raapLogo = require('./assets/logo.png');
-const hiltonLogo = require('./assets/HiltonLogo.png');
+const raapLogo = require('./assets/Header/pic1.png');
+const hiltonLogo = require('./assets/Header/pic2.png');
 
 const MainContainer = styled.div`
   // max-width: 800px;

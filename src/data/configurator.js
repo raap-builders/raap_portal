@@ -32,6 +32,11 @@ const data = {
     "Home2",
     "Hampton"
   ],
+  Layout: [
+    "3D View",
+    "Photo",
+    "Layout"
+  ],
   projectTypes: [
     "Bathroom Pod",
     "Volumetric Room",
@@ -58,7 +63,6 @@ const data = {
   disabledButtons: [
     "Home2",
     "Hampton",
-    "Volumetric Room",
     "Kitchen Pod"
   ]
 
