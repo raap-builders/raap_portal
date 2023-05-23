@@ -103,6 +103,12 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData, setRoomsValu
                 '& input[type="range"]': {
                   WebkitAppearance: 'slider-vertical',
                 },
+                '& .MuiSlider-thumb': {
+                  color: 'grey', // apply the same color to the thumb
+                  padding: 1,
+                  border: '6px solid #404040',
+                  marginBottom: 0
+                },
               }}
               orientation="vertical"
               min={range.min}

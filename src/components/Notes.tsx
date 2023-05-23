@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Modal, Input, Button } from 'antd';
+import html2canvas from 'html2canvas';
 
 interface Props {
   title: string;
@@ -8,13 +9,12 @@ interface Props {
   submitButtonText: string;
 }
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-right: 5vw;
-  width:100%;
+  width: 100%;
 `;
 
 const Textbox = styled.textarea`
@@ -44,27 +44,42 @@ const SubmitButton = styled.button`
 
 const NotesLabel = styled.div`
   /* font-family: 'Open Sans'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1vw;
-    line-height: 27px;
-    text-align: right;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1vw;
+  line-height: 27px;
+  text-align: right;
+  color: #000000;
+  display: flex;
+  justify-content: right;
+  width: 8vw;
+  padding-right: 1.5vw;
+`;
+const FullScreenContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+`;
 
-    color: #000000;
-    display:flex;
-    justify-content: right;
-    width: 8vw;
-    padding-right:1.5vw;
-`
 
-const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
+const Notes: React.FC<Props> = ({ title, placeholderText, submitButtonText }) => {
   const [text, setText] = useState('');
-  const [showBtn, setShowBtn] = useState("display: 'none'");
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleOk = () => {
-    // Handle the email sending logic here
+  const handleOk = async () => {
+    if (containerRef.current) {
+      // Take a screenshot of the screen
+      const canvas = await html2canvas(containerRef.current);
+      const screenshot = canvas.toDataURL('image/png');
+  
+      // Handle the email sending logic here, including attaching the screenshot
+      console.log('Screenshot:', screenshot);
+    }
+  
     setVisible(false);
   };
 
@@ -76,16 +91,16 @@ const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
     setVisible(true);
   };
 
-  const handleEmailChange = (e: any) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
 
   return (
-    <div>
+    <div ref={containerRef}>
       <NotesLabel>Notes</NotesLabel>
       <Container>
         <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
@@ -105,7 +120,7 @@ const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
           ]}
         >
           <div style={{ padding: '10px 0px' }}>
-            <Input type='email' placeholder="Email Address" value={email} onChange={handleEmailChange} />
+            <Input type="email" placeholder="Email Address" value={email} onChange={handleEmailChange} />
           </div>
         </Modal>
       </Container>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
@@ -17,6 +17,8 @@ import DropdownButton from '../DropdownButton'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill, Bs4CircleFill, Bs5CircleFill, Bs6CircleFill } from 'react-icons/bs';
+import { Button, Input, Modal } from "antd";
+import html2canvas from "html2canvas";
 
 const backgroundImage = require("../../assets/RoomLayout/pic1.png");
 interface BarDivProps {
@@ -413,7 +415,34 @@ const Layout = () => {
   const [averageValue, setAverageValue] = useState(0)
   const [siteCompTime, setSiteCompTime] = useState(0)
   const [receivedData, setReceivedData] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  const handleOk = async () => {
+    if (containerRef.current) {
+      // Take a screenshot of the screen
+      const canvas = await html2canvas(containerRef.current);
+      const screenshot = canvas.toDataURL('image/png');
+  
+      // Handle the email sending logic here, including attaching the screenshot
+      console.log('Screenshot:', screenshot);
+    }
+  
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOpenModal = () => {
+    setVisible(true);
+  };
+
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
   const marks = [
     {
       value: 1,
@@ -536,7 +565,6 @@ const Layout = () => {
     setTraditionalBuildTime(resp.siteComplete)
   }, [roomValue, averageValue])
 
-  console.log()
   function formatNumber(num: number): string {
     if (num < 0) {
       num = 0;
@@ -566,7 +594,6 @@ const Layout = () => {
     const splitArray = formatted.split(/[A-Za-z]+/);
     const newNumericValue = parseInt(splitArray[0]);
     setNumericValue(newNumericValue);
-    console.log('siteTotal', newNumericValue)
   }, [siteTotal]);
   const [state, setState] = useState("State")
   const [city, setCity] = useState("City")
@@ -618,7 +645,7 @@ const Layout = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container ref={containerRef}>
         <GreenBox style={{ padding: "0.7vh 0.4vw 0.7vh 0.4vw" }}>
           <FirstColumnDiv style={{ margin: "0 0.07vh" }}>
             <OtherBenefitsHeader>Other RaaP Benefits:</OtherBenefitsHeader>
@@ -660,7 +687,7 @@ const Layout = () => {
             <BarContainerRight>
               <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 3.2}>${formatNumber(siteTotal)}</ColoredBar>
               <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 3.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 4.2}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -765,8 +792,26 @@ const Layout = () => {
                       <NotesLabel>Notes</NotesLabel>
                       <Containers>
                         <Textbox placeholder="Anything Other Customization" />
-                        <SubmitButton>Send me this estimate</SubmitButton>
+                        <SubmitButton onClick={handleOpenModal}>Send me this estimate</SubmitButton>
                       </Containers>
+                      <Modal
+                        title="Email Form"
+                        visible={visible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        footer={[
+                          <Button key="back" onClick={handleCancel}>
+                            Cancel
+                          </Button>,
+                          <Button key="submit" type="primary" onClick={handleOk}>
+                            Send Email
+                          </Button>,
+                        ]}
+                      >
+                        <div style={{ padding: '10px 0px' }}>
+                          <Input type='email' placeholder="Email Address" value={email} onChange={handleEmailChange} />
+                        </div>
+                      </Modal>
                     </div>
                   </div>
                 </div>

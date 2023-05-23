@@ -21,7 +21,6 @@ import * as xlsx from 'xlsx';
 const url = "https://artsunitymovement-my.sharepoint.com/personal/rj_mahadev_aiota_solutions/_layouts/15/download.aspx?e=11mpJE&share=EUNnr8D7kKtGibbMGaQz1yYBfNOd0c0SSEbPxzm9_0s0Iw"
 
 // Make an HTTP GET request to fetch the file
-// console.log("axios fetch")
 const fetchDataFromExcel = async () => {
   axios.get(url, {
     headers: {

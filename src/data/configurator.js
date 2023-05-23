@@ -128,7 +128,7 @@ const data = {
 
 export function getValues(rooms, rsMeans) {
 
-  console.log('value', rooms, rsMeans)
+  // console.log('value', rooms, rsMeans)
   var rooms = rooms
   const king = 0.50
   const RSMeans = rsMeans
