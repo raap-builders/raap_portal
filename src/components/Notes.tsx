@@ -6,6 +6,7 @@ interface Props {
   title: string;
   placeholderText: string;
   submitButtonText: string;
+  isUpper: boolean;
 }
 
 
@@ -57,7 +58,7 @@ const NotesLabel = styled.div`
     padding-right:1.5vw;
 `
 
-const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
+const Notes = ({ title, placeholderText, submitButtonText, isUpper }: Props) => {
   const [text, setText] = useState('');
   const [showBtn, setShowBtn] = useState("display: 'none'");
   const [visible, setVisible] = useState(false);
@@ -88,8 +89,19 @@ const Notes = ({ title, placeholderText, submitButtonText }: Props) => {
     <div>
       <NotesLabel>Notes</NotesLabel>
       <Container>
-        <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
-        <SubmitButton onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+        {
+          isUpper ?
+            <div style={{ width: '100%', display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
+              <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+              <SubmitButton style={{ alignSelf: 'end' }} onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+            </div>
+            :
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+              <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+              <SubmitButton onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+            </div>
+
+        }
         <Modal
           title="Email Form"
           visible={visible}

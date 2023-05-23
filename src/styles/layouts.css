@@ -8,6 +8,7 @@
   justify-content: space-around;
   /* background-color: blue; */
 }
+
 .ant-btn-primary {
   background-color: #519259;
 }
@@ -16,14 +17,16 @@
   padding: 8px;
   border-radius: 50px;
   background-color: #404040;
-  border: 5px solid rgba(255,255,255,0.4);
+  border: 5px solid rgba(255, 255, 255, 0.4);
   position: relative;
   bottom: 28px;
 }
+
 .SliderMarkRaap {
   background-color: #519259;
   border: 5px solid rgba(31, 31, 31, 0.8);
 }
+
 /* toggle */
 
 /* The switch - the box around the slider */
@@ -67,15 +70,15 @@
   transition: 0.4s;
 }
 
-input:checked + .toggle__slider {
+input:checked+.toggle__slider {
   background-color: #519259;
 }
 
-input:focus + .toggle__slider {
+input:focus+.toggle__slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .toggle__slider:before {
+input:checked+.toggle__slider:before {
   -webkit-transform: translateX(1vw);
   -ms-transform: translateX(1vw);
   transform: translateX(1vw);
@@ -117,49 +120,66 @@ input:checked + .toggle__slider:before {
   grid-template-columns: 2fr 1fr 110px;
   grid-gap: 20px;
 }
+
 .RoomsContent .radioButton__label {
   width: 6vw;
 }
+
 .RoomsContent .location__label {
   width: 6vw;
 }
+
 .RoomsContent .sc-ktEKTO {
   justify-content: flex-start;
   padding-right: 0px;
 }
+
+.notes_container {
+  margin-left: 80px;
+  display: flex;
+}
+
 .RoomsContent .notes_container .sc-csCMJt {
   flex-direction: column;
   margin-right: 0px;
   align-items: flex-end;
 }
+
 .RoomsContent .notes_container .sc-csCMJt .sc-brKeYL {
   margin-top: 20px;
 }
+
 .RoomsContent .notes_container {
   height: auto;
   display: flex;
 }
+
 .RoomsContent .verticalSlider_container {
   margin-top: 20px;
   width: auto;
 }
+
 .bottomSlider {
   position: relative;
   bottom: 35px;
   width: 65%;
   margin-bottom: 20px;
 }
+
 .bottomSlider .sliderTitles {
   display: flex;
   grid-gap: 65px;
 }
+
 .bottomSlider .sliderTitles .titleFlex h2 {
   font-weight: 700;
   font-size: 18px;
 }
+
 .bottomSlider .sliderTitles .titleFlex p {
   font-size: 12px;
 }
+
 .emptyImageBox {
   width: 95%;
   height: 95%;

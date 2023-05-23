@@ -757,16 +757,12 @@ const Layout = () => {
                     </div>
                     <RadioButton name="Brand" labels={data.brand}></RadioButton>
                     <div style={{ marginLeft: 0 }} className="notes_container">
-                      {/* <Notes
+                      <Notes
                         title={data.notes.title}
                         placeholderText={data.notes.placeholderText}
                         submitButtonText={data.notes.submitButtonText}
-                      ></Notes> */}
-                      <NotesLabel>Notes</NotesLabel>
-                      <Containers>
-                        <Textbox placeholder="Anything Other Customization" />
-                        <SubmitButton>Send me this estimate</SubmitButton>
-                      </Containers>
+                        isUpper={true}
+                      ></Notes>
                     </div>
                   </div>
                 </div>
@@ -838,9 +834,9 @@ const Layout = () => {
                         min={1}
                         max={9}
                         sx={{
-                          color: '#404040', // specify your custom color here
+                          color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#519259', // apply the same color to the thumb
+                            color: '#519259',
                             padding: 1,
                             border: '6px solid #404040',
                             marginBottom: 0
@@ -908,23 +904,13 @@ const Layout = () => {
                   ></DisplayTypes>
                 </LayoutButtons>
               </DisplayArea>
-              {/* <ButtonArea>
-              <Buttons
-                setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
-                changeDisplayImage={(value: string)=>setDisplayImage(value)}
-              ></Buttons>
-              <Slider 
-              range={{min:roomsMin, max:roomsMax}}
-              setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
-            ></Slider>
-            <Notes
-              title={data.notes.title}
-              placeholderText={data.notes.placeholderText}
-              submitButtonText={data.notes.submitButtonText}
-            ></Notes>
-          </ButtonArea> */}
+
               <div className="controls_container">
                 <div className="buttons_area">
+                  <LocationDiv>
+                    <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
+                    <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
+                  </LocationDiv>
                   <Buttons
                     setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                     changeDisplayImage={(value: string) => setDisplayImage(value)}
@@ -941,8 +927,9 @@ const Layout = () => {
                   ></VerticalSlider>
                   {/* <VerticalSlider></VerticalSlider> */}
                 </div>
-                <div className="notes_container">
+                <div>
                   <Notes
+                    isUpper={false}
                     title={data.notes.title}
                     placeholderText={data.notes.placeholderText}
                     submitButtonText={data.notes.submitButtonText}
@@ -952,7 +939,7 @@ const Layout = () => {
             </MainArea>
         }
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 
