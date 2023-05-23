@@ -7,6 +7,7 @@ interface Props {
   title: string;
   placeholderText: string;
   submitButtonText: string;
+  isUpper: boolean;
 }
 
 const Container = styled.div`
@@ -64,7 +65,7 @@ const FullScreenContainer = styled.div`
 `;
 
 
-const Notes: React.FC<Props> = ({ title, placeholderText, submitButtonText }) => {
+const Notes = ({ title, placeholderText, submitButtonText, isUpper }: Props) => {
   const [text, setText] = useState('');
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
@@ -100,11 +101,22 @@ const Notes: React.FC<Props> = ({ title, placeholderText, submitButtonText }) =>
   };
 
   return (
-    <div ref={containerRef}>
+    <div style={{display: 'grid',gridTemplateColumns: 'auto 1fr', gridGap: 10}} ref={containerRef}>
       <NotesLabel>Notes</NotesLabel>
       <Container>
-        <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
-        <SubmitButton onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+        {
+          isUpper ?
+            <div style={{ width: '100%', display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
+              <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+              <SubmitButton style={{ alignSelf: 'end' }} onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+            </div>
+            :
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+              <Textbox placeholder={placeholderText} value={text} onChange={handleChange} />
+              <SubmitButton onClick={handleOpenModal}>{submitButtonText}</SubmitButton>
+            </div>
+
+        }
         <Modal
           title="Email Form"
           visible={visible}

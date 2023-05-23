@@ -11,6 +11,7 @@ interface Props {
   setTraditionalBuildTime: (arg0: number) => any,
   changeDisplayImage: (arg0: string) => any
   onDataReceived: (data: number) => void;
+  showButton: boolean;
 }
 
 const LocationDiv = styled.div`
@@ -31,7 +32,7 @@ const LocationDiv = styled.div`
 //   margin:0.1rem 3rem;
 // `
 
-const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived }: Props) => {
+const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived, showButton }: Props) => {
   const [state, setState] = React.useState("State")
   const [city, setCity] = React.useState("City")
   const [averageValue, setAverageValue] = React.useState(0)
@@ -100,8 +101,15 @@ const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived }
         </LocationDiv>
       </div>
       <RadioButton name="Brand" labels={data.brand}></RadioButton>
-      <RadioButton name="Project Type" labels={data.projectTypes} onClickButton={onChangeFinish}></RadioButton>
-      <RadioButton name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></RadioButton>
+      {
+       showButton ?
+       <>
+       <RadioButton name="Project Type" labels={data.projectTypes} onClickButton={onChangeFinish}></RadioButton>
+       <RadioButton name="Finish" labels={data.finishTypes} onClickButton={onChangeFinish}></RadioButton>
+       </>
+        :
+        null
+      }
     </div>
   );
 }
