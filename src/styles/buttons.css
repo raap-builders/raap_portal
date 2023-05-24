@@ -7,7 +7,7 @@
 }
 
 .scrollable_buttons{
-  height: 45vh;
+  height: 100%;
   overflow-y:scroll;
   overflow-x:hidden;
   /* width: 25vw; */
@@ -15,6 +15,7 @@
   /* padding: 1vw; */
   scrollbar-width: normal;
   scrollbar-color: #333;
+  padding-bottom: 3vw;
 }
 
 .scrollable_buttons::-webkit-scrollbar {
@@ -22,9 +23,9 @@
   background-color: white;
   width: 0.4vw;
 }
-
- 
-
+.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
 
 .scrollable_buttons::-webkit-scrollbar-thumb{
   /* background-color: rgba(81, 146, 89, 1); */

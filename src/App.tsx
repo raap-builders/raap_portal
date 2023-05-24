@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import {
   Route,
@@ -38,10 +38,10 @@ const fetchDataFromExcel = async () => {
     // console.log("before sheets")
     let count = 0
     // for(const sheetName of workbook.SheetNames){
-      // worksheets[sheetName] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName])
-      // console.log(workbook.Sheets[workbook.SheetNames[count]]);
-      // count+=1
-      // console.log("json:\n", JSON.stringify(worksheets[sheetName]),"\n\n")
+    // worksheets[sheetName] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName])
+    // console.log(workbook.Sheets[workbook.SheetNames[count]]);
+    // count+=1
+    // console.log("json:\n", JSON.stringify(worksheets[sheetName]),"\n\n")
     // }
     // console.log("after workbook")
   }).catch((error) => {
@@ -160,28 +160,52 @@ const LogoEmpty = styled.img`
 `;
 
 function App() {
+  const [showMessage, setShowMessage] = useState(false);
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 786) {
+        setShowMessage(true);
+      } else {
+        setShowMessage(false);
+      }
+    }
 
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check on initial load
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <>
-    <BrowserRouter>
-      <NavbarContainer>
-          <Logo src={raapLogo} alt="Company Logo" />
-        <NavLinkContainer>
-          <NavItem to="/">Configuration</NavItem>
-          <NavItem to="/view">Design Docs</NavItem>
-          <NavItem to="/schedule">Construction Docs</NavItem>
-        </NavLinkContainer>
-        <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
-      </NavbarContainer>
-      <MainContainer>
-        {/* <Login /> */}
-        <Routes>
-          <Route path="/" Component={Configure} />
-          <Route path="/view" Component={View} />
-          <Route path="/schedule" Component={Schedule} />
-        </Routes>
-      </MainContainer>
-      </BrowserRouter>
+      <div className='AppMain'>
+        <BrowserRouter>
+          <NavbarContainer>
+            <Logo src={raapLogo} alt="Company Logo" />
+            <NavLinkContainer>
+              <NavItem to="/">Configuration</NavItem>
+              <NavItem to="/view">Design Docs</NavItem>
+              <NavItem to="/schedule">Construction Docs</NavItem>
+            </NavLinkContainer>
+            <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
+          </NavbarContainer>
+          <MainContainer>
+            {/* <Login /> */}
+            <Routes>
+              <Route path="/" Component={Configure} />
+              <Route path="/view" Component={View} />
+              <Route path="/schedule" Component={Schedule} />
+            </Routes>
+          </MainContainer>
+        </BrowserRouter>
+      </div>
+      {showMessage && (
+        <div id="message">
+          <h2>Please use a bigger screen</h2>
+          <h1>(Above 786px)</h1>
+        </div>
+      )}
     </>
   );
 }

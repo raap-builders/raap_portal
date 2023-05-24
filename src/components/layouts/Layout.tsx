@@ -411,6 +411,7 @@ const Layout = () => {
   const square = Math.floor(perSqft);
   const [roomsMin, setRoomsMin] = useState(data.rooms.min);
   const [roomsMax, setRoomsMax] = useState(data.rooms.max);
+  const [roomsNumber, setRoomNumbers] = useState(0);
   const [roomValue, setRoomValue] = useState(70)
   const [averageValue, setAverageValue] = useState(0)
   const [siteCompTime, setSiteCompTime] = useState(0)
@@ -431,7 +432,6 @@ const Layout = () => {
 
     setVisible(false);
   };
-
   const handleCancel = () => {
     setVisible(false);
   };
@@ -507,6 +507,10 @@ const Layout = () => {
       label: <div className="SliderMarkRaap SliderMark"></div>,
     },
   ];
+
+  const handleStateUpdate = (updatedValue: number) => {
+    setRoomNumbers(updatedValue)
+  };
 
   const onDataReceived = (data: number) => {
     setAverageValue(data);
@@ -685,9 +689,9 @@ const Layout = () => {
           <ColumnDiv style={{ width: "24vw" }}>
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
-              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 3.2}>${formatNumber(siteTotal)}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 3.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 4.2}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 4.7}>${formatNumber(siteTotal)}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 5.1}>${formatNumber(raapTotalCost)} {roomsNumber >= 101 ? "(5% Lower)" : null}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 5.6}>${formatNumber(raapTotalNetCost)} {roomsNumber >= 101 ? "(16% Lower)" : null}</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -779,7 +783,7 @@ const Layout = () => {
                       setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                       changeDisplayImage={(value: string) => setDisplayImage(value)}
                       onDataReceived={onDataReceived}
-                      showButton={true}
+                      showButton={toggleMain}
                     ></Buttons>
                     <div style={{ marginLeft: 0 }} className="notes_container">
                       <Notes
@@ -799,6 +803,7 @@ const Layout = () => {
                     setRoomValue(value)
                     setRaapIncrementalRevenue(value)
                   }}
+                  onStateUpdate={handleStateUpdate}
                 ></VerticalSlider>
               </div>
               <div style={{ display: 'flex', gridGap: 20, alignItems: 'center' }}>
@@ -861,7 +866,7 @@ const Layout = () => {
                         sx={{
                           color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#519259',
+                            color: '#a6a6a6',
                             padding: 1,
                             border: '6px solid #404040',
                             marginBottom: 0
@@ -940,7 +945,7 @@ const Layout = () => {
                     setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                     changeDisplayImage={(value: string) => setDisplayImage(value)}
                     onDataReceived={onDataReceived}
-                    showButton={false}
+                    showButton={toggleMain}
                   ></Buttons>
                   <VerticalSlider
                     onData={handleDataFromChild}
@@ -950,6 +955,7 @@ const Layout = () => {
                       setRoomValue(value)
                       setRaapIncrementalRevenue(value)
                     }}
+                    onStateUpdate={handleStateUpdate}
                   ></VerticalSlider>
                   {/* <VerticalSlider></VerticalSlider> */}
                 </div>

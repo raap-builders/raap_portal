@@ -14,7 +14,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 5vw;
+  // margin-right: 5vw;
   width: 100%;
 `;
 
@@ -40,7 +40,7 @@ const SubmitButton = styled.button`
   border-radius: 10px;
   cursor: pointer;
   width: 12vw;
-  margin-top: 6.5vh;
+  margin-top: 4.5vh;
 `;
 
 const NotesLabel = styled.div`
