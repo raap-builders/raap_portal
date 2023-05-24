@@ -101,22 +101,7 @@ const StyledMenu = styled.ul`
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.25);
   z-index: 1;
   overflow-y: scroll;
-  max-height: 170px;
-  
-  /* Hide the scrollbar track */
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  /* Hide the scrollbar handle */
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-
-  /* Hide the scrollbar corner */
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
+  max-height: 300px;
 `;
 
 const StyledMenuItem = styled.li`

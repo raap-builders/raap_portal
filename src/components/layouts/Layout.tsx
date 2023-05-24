@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef, ChangeEvent } from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
@@ -21,10 +21,18 @@ import { Button, Input, Modal } from "antd";
 import html2canvas from "html2canvas";
 
 const backgroundImage = require("../../assets/RoomLayout/pic1.png");
+const sliderImg = require("../../assets/sliderback.png");
 interface BarDivProps {
   barWidth: number;
   barColor: string;
   barAlign: string;
+}
+interface LocationData {
+  location: {
+    [key: string]: {
+      [key: string]: any;
+    };
+  };
 }
 function valuetext(value: number) {
   return `${value}°C`;
@@ -290,6 +298,8 @@ const ColoredBar = styled.div<BarDivProps>`
     props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 1.6 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
   }
   }};
+  min-width: 45px;
+  max-width: 99%;
 `
 const ConstructionDiv = styled.div`
   display:flex;
@@ -419,14 +429,15 @@ const Layout = () => {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
+  const [text, setText] = useState('');
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
 
   const handleOk = async () => {
     if (containerRef.current) {
-      // Take a screenshot of the screen
       const canvas = await html2canvas(containerRef.current);
       const screenshot = canvas.toDataURL('image/png');
-
-      // Handle the email sending logic here, including attaching the screenshot
       console.log('Screenshot:', screenshot);
     }
 
@@ -435,11 +446,9 @@ const Layout = () => {
   const handleCancel = () => {
     setVisible(false);
   };
-
   const handleOpenModal = () => {
     setVisible(true);
   };
-
   const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
   };
@@ -602,8 +611,8 @@ const Layout = () => {
   const [state, setState] = useState("State")
   const [city, setCity] = useState("City")
 
-  const [stateList, setStateList] = useState(Object.keys(data.location))
-  const [cityList, setCityList] = useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
+  const [stateList, setStateList] = useState<string[]>(Object.keys(data.location));
+  const [cityList, setCityList] = useState<string[]>(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])));
 
   const setNewCity = (value: string, average: number) => {
     setCity(value)
@@ -613,39 +622,35 @@ const Layout = () => {
     console.log("average for " + value + " is " + average)
   }
   const updateCityList = (value: string) => {
-    let newCityList = cityList;
+    let newCityList: string[] = [];
     if (value === "California") {
-      newCityList = Object.keys(data.location["California"])
+      newCityList = Object.keys(data.location["California"]);
+    } else if (value === "Arizona") {
+      newCityList = Object.keys(data.location["Arizona"]);
+    } else {
+      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]));
     }
-    else if (value === "Arizona") {
-      newCityList = Object.keys(data.location["Arizona"])
+    if (!newCityList.includes(city)) {
+      const cityAverage = (data.location as any)[value][newCityList[0]];
+      setNewCity(newCityList[0], cityAverage);
     }
-    else {
-      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]))
-    }
-    if (!(newCityList.includes(city))) {
-      let cityAverage = (data.location as any)[value][newCityList[0]]
-      setNewCity(newCityList[0], cityAverage)
-    }
-    setState(value)
-    setCityList(newCityList)
-  }
+    setState(value);
+    setCityList(newCityList);
+  };
 
   const updateState = (value: string) => {
-    let cityAverage = (data.location as any)["average"]
+    let cityAverage = (data.location as any)["average"];
     if (Object.keys(data.location["Arizona"]).includes(value)) {
-      setState("Arizona")
+      setState("Arizona");
       cityAverage = (data.location["Arizona"] as any)[value];
-    }
-    else if (Object.keys(data.location["California"]).includes(value)) {
-      setState("California")
+    } else if (Object.keys(data.location["California"]).includes(value)) {
+      setState("California");
       cityAverage = (data.location["California"] as any)[value];
+    } else {
+      setState("State");
     }
-    else {
-      setState("State")
-    }
-    setNewCity(value, cityAverage)
-  }
+    setNewCity(value, cityAverage);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -782,16 +787,31 @@ const Layout = () => {
                     <Buttons
                       setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                       changeDisplayImage={(value: string) => setDisplayImage(value)}
+                      stateList={stateList}
+                      cityList={cityList}
+                      updateCityList={updateCityList}
+                      updateState={updateState}
                       onDataReceived={onDataReceived}
+                      cityName={city}
+                      stateName={state}
                       showButton={toggleMain}
                     ></Buttons>
                     <div style={{ marginLeft: 0 }} className="notes_container">
-                      <Notes
+                      {/* <Notes
                         title={data.notes.title}
                         placeholderText={data.notes.placeholderText}
                         submitButtonText={data.notes.submitButtonText}
                         isUpper={true}
-                      ></Notes>
+                      ></Notes> */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
+                        <NotesLabel>Notes</NotesLabel>
+                        <Container>
+                          <div style={{ width: '100%', display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
+                            <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
+                            <SubmitButton style={{ alignSelf: 'end' }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
+                          </div>
+                        </Container>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -869,7 +889,7 @@ const Layout = () => {
                             color: '#a6a6a6',
                             padding: 1,
                             border: '6px solid #404040',
-                            marginBottom: 0
+                            marginBottom: 0,
                           },
                         }}
                       />
@@ -946,6 +966,12 @@ const Layout = () => {
                     changeDisplayImage={(value: string) => setDisplayImage(value)}
                     onDataReceived={onDataReceived}
                     showButton={toggleMain}
+                    stateList={stateList}
+                    cityList={cityList}
+                    updateCityList={updateCityList}
+                    updateState={updateState}
+                    cityName={city}
+                    stateName={state}
                   ></Buttons>
                   <VerticalSlider
                     onData={handleDataFromChild}
@@ -960,16 +986,38 @@ const Layout = () => {
                   {/* <VerticalSlider></VerticalSlider> */}
                 </div>
                 <div>
-                  <Notes
-                    isUpper={false}
-                    title={data.notes.title}
-                    placeholderText={data.notes.placeholderText}
-                    submitButtonText={data.notes.submitButtonText}
-                  ></Notes>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
+                    <NotesLabel>Notes</NotesLabel>
+                    <Container>
+                      <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '0px 10px' }}>
+                        <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
+                        <SubmitButton style={{ marginTop: 50 }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
+                      </div>
+                    </Container>
+                  </div>
                 </div>
               </div>
+
             </MainArea>
         }
+        <Modal
+          title="Email Form"
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleOk}>
+              Send Email
+            </Button>,
+          ]}
+        >
+          <div style={{ padding: '10px 0px' }}>
+            <Input type="email" placeholder="Email Address" value={email} onChange={handleEmailChange} />
+          </div>
+        </Modal>
       </Container>
     </ThemeProvider >
   )

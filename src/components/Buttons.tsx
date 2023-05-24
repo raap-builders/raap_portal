@@ -10,8 +10,14 @@ import styled from 'styled-components';
 interface Props {
   setTraditionalBuildTime: (arg0: number) => any,
   changeDisplayImage: (arg0: string) => any
+  stateList: string[];
+  cityList: string[];
+  updateCityList: (value: string) => void;
+  updateState: (value: string) => void;
   onDataReceived: (data: number) => void;
   showButton: boolean;
+  cityName: string;
+  stateName: string;
 }
 
 const LocationDiv = styled.div`
@@ -32,59 +38,67 @@ const LocationDiv = styled.div`
 //   margin:0.1rem 3rem;
 // `
 
-const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived, showButton }: Props) => {
-  const [state, setState] = React.useState("State")
-  const [city, setCity] = React.useState("City")
+const Buttons = ({ cityName,stateName,stateList, cityList, updateCityList, updateState, setTraditionalBuildTime, changeDisplayImage, onDataReceived, showButton }: Props) => {
+  // const [state, setState] = React.useState("State")
+  // const [city, setCity] = React.useState("City")
   const [averageValue, setAverageValue] = React.useState(0)
   // const [locationAverage, setLocationAverage] = React.useState<number>(0)
 
-  const [stateList, setStateList] = React.useState(Object.keys(data.location))
-  const [cityList, setCityList] = React.useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
+  // const [stateList, setStateList] = React.useState(Object.keys(data.location))
+  // const [cityList, setCityList] = React.useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
   const sendDataToParent = () => {
     onDataReceived(averageValue); // Call the callback function with the data to send to the parent
   }
-  const setNewCity = (value: string, average: number) => {
-    setCity(value)
-    setAverageValue(average)
-    onDataReceived(average)
-    // setTraditionalBuildTime(average)
-    console.log("average for " + value + " is " + average)
-  }
+  // const setNewCity = (value: string, average: number) => {
+  //   setCity(value)
+  //   setAverageValue(average)
+  //   onDataReceived(average)
+  //   // setTraditionalBuildTime(average)
+  //   console.log("average for " + value + " is " + average)
+  // }
+  const handleCityListUpdate = (value: string) => {
+    updateCityList(value);
+    // Other logic specific to Buttons component
+  };
 
-  const updateCityList = (value: string) => {
-    let newCityList = cityList;
-    if (value === "California") {
-      newCityList = Object.keys(data.location["California"])
-    }
-    else if (value === "Arizona") {
-      newCityList = Object.keys(data.location["Arizona"])
-    }
-    else {
-      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]))
-    }
-    if (!(newCityList.includes(city))) {
-      let cityAverage = (data.location as any)[value][newCityList[0]]
-      setNewCity(newCityList[0], cityAverage)
-    }
-    setState(value)
-    setCityList(newCityList)
-  }
+  const handleStateUpdate = (value: string) => {
+    updateState(value);
+    // Other logic specific to Buttons component
+  };
+  // const updateCityList = (value: string) => {
+  //   let newCityList = cityList;
+  //   if (value === "California") {
+  //     newCityList = Object.keys(data.location["California"])
+  //   }
+  //   else if (value === "Arizona") {
+  //     newCityList = Object.keys(data.location["Arizona"])
+  //   }
+  //   else {
+  //     newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]))
+  //   }
+  //   if (!(newCityList.includes(city))) {
+  //     let cityAverage = (data.location as any)[value][newCityList[0]]
+  //     setNewCity(newCityList[0], cityAverage)
+  //   }
+  //   setState(value)
+  //   setCityList(newCityList)
+  // }
 
-  const updateState = (value: string) => {
-    let cityAverage = (data.location as any)["average"]
-    if (Object.keys(data.location["Arizona"]).includes(value)) {
-      setState("Arizona")
-      cityAverage = (data.location["Arizona"] as any)[value];
-    }
-    else if (Object.keys(data.location["California"]).includes(value)) {
-      setState("California")
-      cityAverage = (data.location["California"] as any)[value];
-    }
-    else {
-      setState("State")
-    }
-    setNewCity(value, cityAverage)
-  }
+  // const updateState = (value: string) => {
+  //   let cityAverage = (data.location as any)["average"]
+  //   if (Object.keys(data.location["Arizona"]).includes(value)) {
+  //     setState("Arizona")
+  //     cityAverage = (data.location["Arizona"] as any)[value];
+  //   }
+  //   else if (Object.keys(data.location["California"]).includes(value)) {
+  //     setState("California")
+  //     cityAverage = (data.location["California"] as any)[value];
+  //   }
+  //   else {
+  //     setState("State")
+  //   }
+  //   setNewCity(value, cityAverage)
+  // }
 
   const onChangeFinish = (value: string) => {
     changeDisplayImage(value)
@@ -96,8 +110,8 @@ const Buttons = ({ setTraditionalBuildTime, changeDisplayImage, onDataReceived, 
         <>{sendDataToParent}</>
         <div className="location__label">Location</div>
         <LocationDiv>
-          <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
-          <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
+          <DropdownButton name={cityName} onClickDropdown={updateState} options={cityList}></DropdownButton>
+          <DropdownButton name={stateName} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
         </LocationDiv>
       </div>
       <RadioButton name="Brand" labels={data.brand}></RadioButton>
