@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef, ChangeEvent } from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from 'styled-components';
@@ -17,12 +17,22 @@ import DropdownButton from '../DropdownButton'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill, Bs4CircleFill, Bs5CircleFill, Bs6CircleFill } from 'react-icons/bs';
+import { Button, Input, Modal } from "antd";
+import html2canvas from "html2canvas";
 
 const backgroundImage = require("../../assets/RoomLayout/pic1.png");
+const sliderImg = require("../../assets/sliderback.png");
 interface BarDivProps {
   barWidth: number;
   barColor: string;
   barAlign: string;
+}
+interface LocationData {
+  location: {
+    [key: string]: {
+      [key: string]: any;
+    };
+  };
 }
 function valuetext(value: number) {
   return `${value}°C`;
@@ -288,6 +298,8 @@ const ColoredBar = styled.div<BarDivProps>`
     props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 1.6 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
   }
   }};
+  min-width: 45px;
+  max-width: 99%;
 `
 const ConstructionDiv = styled.div`
   display:flex;
@@ -394,6 +406,13 @@ const NotesLabel = styled.div`
 // todo: move styled components to css file
 
 const Layout = () => {
+  const [raapPlans, setRaapPlans] = useState(3);
+  const [sitePlans, setSitePlans] = useState(3);
+  const [raapLoan, setRaapLoan] = useState(9);
+  const [siteLoan, setSiteLoan] = useState(12);
+  const [raapFoundation, setRaapFoundation] = useState(15);
+  const [siteFoundation, setSiteFoundation] = useState(18);
+
   const [traditionalBuildTime, setTraditionalBuildTime] = useState(25);
   const [toggleMain, setToggleMain] = useState(true)
   const [raapBuildTime, setRaapBuildTime] = useState(18);
@@ -409,11 +428,39 @@ const Layout = () => {
   const square = Math.floor(perSqft);
   const [roomsMin, setRoomsMin] = useState(data.rooms.min);
   const [roomsMax, setRoomsMax] = useState(data.rooms.max);
+  const [roomsNumber, setRoomNumbers] = useState(0);
   const [roomValue, setRoomValue] = useState(70)
   const [averageValue, setAverageValue] = useState(0)
   const [siteCompTime, setSiteCompTime] = useState(0)
   const [receivedData, setReceivedData] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [text, setText] = useState('');
 
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
+
+
+  const handleOk = async () => {
+    if (containerRef.current) {
+      const canvas = await html2canvas(containerRef.current);
+      const screenshot = canvas.toDataURL('image/png');
+      console.log('Screenshot:', screenshot);
+    }
+
+    setVisible(false);
+  };
+  const handleCancel = () => {
+    setVisible(false);
+  };
+  const handleOpenModal = () => {
+    setVisible(true);
+  };
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
   const marks = [
     {
       value: 1,
@@ -479,6 +526,10 @@ const Layout = () => {
     },
   ];
 
+  const handleStateUpdate = (updatedValue: number) => {
+    setRoomNumbers(updatedValue)
+  };
+
   const onDataReceived = (data: number) => {
     setAverageValue(data);
   }
@@ -522,6 +573,12 @@ const Layout = () => {
     setTraditionalCost(resp.siteTotalCost ?? 0)
     setRaapBuildTime(resp.raapComplete)
     setTraditionalBuildTime(resp.siteComplete)
+    setRaapPlans(resp.raapPlans) 
+    setSitePlans(resp.sitePlans)
+    setRaapLoan(resp.raapLoan)
+    setSiteLoan(resp.siteLoan)
+    setRaapFoundation(resp.raapFoundation)
+    setSiteFoundation(resp.siteFoundation)
   };
 
   useEffect(() => {
@@ -536,7 +593,6 @@ const Layout = () => {
     setTraditionalBuildTime(resp.siteComplete)
   }, [roomValue, averageValue])
 
-  console.log()
   function formatNumber(num: number): string {
     if (num < 0) {
       num = 0;
@@ -566,13 +622,12 @@ const Layout = () => {
     const splitArray = formatted.split(/[A-Za-z]+/);
     const newNumericValue = parseInt(splitArray[0]);
     setNumericValue(newNumericValue);
-    console.log('siteTotal', newNumericValue)
   }, [siteTotal]);
   const [state, setState] = useState("State")
   const [city, setCity] = useState("City")
 
-  const [stateList, setStateList] = useState(Object.keys(data.location))
-  const [cityList, setCityList] = useState(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])))
+  const [stateList, setStateList] = useState<string[]>(Object.keys(data.location));
+  const [cityList, setCityList] = useState<string[]>(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])));
 
   const setNewCity = (value: string, average: number) => {
     setCity(value)
@@ -582,43 +637,39 @@ const Layout = () => {
     console.log("average for " + value + " is " + average)
   }
   const updateCityList = (value: string) => {
-    let newCityList = cityList;
+    let newCityList: string[] = [];
     if (value === "California") {
-      newCityList = Object.keys(data.location["California"])
+      newCityList = Object.keys(data.location["California"]);
+    } else if (value === "Arizona") {
+      newCityList = Object.keys(data.location["Arizona"]);
+    } else {
+      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]));
     }
-    else if (value === "Arizona") {
-      newCityList = Object.keys(data.location["Arizona"])
+    if (!newCityList.includes(city)) {
+      const cityAverage = (data.location as any)[value][newCityList[0]];
+      setNewCity(newCityList[0], cityAverage);
     }
-    else {
-      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]))
-    }
-    if (!(newCityList.includes(city))) {
-      let cityAverage = (data.location as any)[value][newCityList[0]]
-      setNewCity(newCityList[0], cityAverage)
-    }
-    setState(value)
-    setCityList(newCityList)
-  }
+    setState(value);
+    setCityList(newCityList);
+  };
 
   const updateState = (value: string) => {
-    let cityAverage = (data.location as any)["average"]
+    let cityAverage = (data.location as any)["average"];
     if (Object.keys(data.location["Arizona"]).includes(value)) {
-      setState("Arizona")
+      setState("Arizona");
       cityAverage = (data.location["Arizona"] as any)[value];
-    }
-    else if (Object.keys(data.location["California"]).includes(value)) {
-      setState("California")
+    } else if (Object.keys(data.location["California"]).includes(value)) {
+      setState("California");
       cityAverage = (data.location["California"] as any)[value];
+    } else {
+      setState("State");
     }
-    else {
-      setState("State")
-    }
-    setNewCity(value, cityAverage)
-  }
+    setNewCity(value, cityAverage);
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container ref={containerRef}>
         <GreenBox style={{ padding: "0.7vh 0.4vw 0.7vh 0.4vw" }}>
           <FirstColumnDiv style={{ margin: "0 0.07vh" }}>
             <OtherBenefitsHeader>Other RaaP Benefits:</OtherBenefitsHeader>
@@ -658,9 +709,9 @@ const Layout = () => {
           <ColumnDiv style={{ width: "24vw" }}>
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
-              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 3.2}>${formatNumber(siteTotal)}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 3.6}>${formatNumber(raapTotalCost)} (5% lower)</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={7.6 - raapIncrementalRevenue}>${formatNumber(raapTotalNetCost)} (16% lower)</ColoredBar>
+              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 4.7}>${formatNumber(siteTotal)}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 5.1}>${formatNumber(raapTotalCost)} {roomsNumber >= 101 ? "(5% Lower)" : null}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 5.6}>${formatNumber(raapTotalNetCost)} {roomsNumber >= 101 ? "(16% Lower)" : null}</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -748,25 +799,34 @@ const Layout = () => {
                 </div>
                 <div style={{ marginTop: 20, width: '94%' }}>
                   <div style={{ height: 'auto', width: 'auto' }} className="scrollable_buttons">
-                    <div className="location__container">
-                      <div className="location__label">Location</div>
-                      <LocationDiv>
-                        <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
-                        <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
-                      </LocationDiv>
-                    </div>
-                    <RadioButton name="Brand" labels={data.brand}></RadioButton>
+                    <Buttons
+                      setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
+                      changeDisplayImage={(value: string) => setDisplayImage(value)}
+                      stateList={stateList}
+                      cityList={cityList}
+                      updateCityList={updateCityList}
+                      updateState={updateState}
+                      onDataReceived={onDataReceived}
+                      cityName={city}
+                      stateName={state}
+                      showButton={toggleMain}
+                    ></Buttons>
                     <div style={{ marginLeft: 0 }} className="notes_container">
                       {/* <Notes
                         title={data.notes.title}
                         placeholderText={data.notes.placeholderText}
                         submitButtonText={data.notes.submitButtonText}
+                        isUpper={true}
                       ></Notes> */}
-                      <NotesLabel>Notes</NotesLabel>
-                      <Containers>
-                        <Textbox placeholder="Anything Other Customization" />
-                        <SubmitButton>Send me this estimate</SubmitButton>
-                      </Containers>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
+                        <NotesLabel>Notes</NotesLabel>
+                        <Container>
+                          <div style={{ width: '100%', display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
+                            <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
+                            <SubmitButton style={{ alignSelf: 'end' }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
+                          </div>
+                        </Container>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -778,6 +838,7 @@ const Layout = () => {
                     setRoomValue(value)
                     setRaapIncrementalRevenue(value)
                   }}
+                  onStateUpdate={handleStateUpdate}
                 ></VerticalSlider>
               </div>
               <div style={{ display: 'flex', gridGap: 20, alignItems: 'center' }}>
@@ -790,25 +851,26 @@ const Layout = () => {
                     </div>
                     <div className="titleFlex">
                       <h2>Month 2</h2>
-                      <p>Schematics</p>
+                      <p>Entitlement</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 7</h2>
-                      <p>Pre-construction</p>
+                      <h2>Month {sitePlans}</h2>
+                      <p>Construction Docs</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 12</h2>
+                      <h2>Month {siteLoan}</h2>
                       <p>Permits & Loans</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 18</h2>
+                      <h2>Month {siteFoundation}</h2>
                       <p>Foundation</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 30</h2>
+                      <h2>Month {traditionalBuildTime}</h2>
                       <p>Delivery</p>
                     </div>
                   </div>
+                  <div className="sliderOpacityBtn"></div>
                   <Box sx={{ width: "100%" }}>
                     <div >
                       <Slider
@@ -819,9 +881,9 @@ const Layout = () => {
                         min={1}
                         max={6}
                         sx={{
-                          color: '#404040', // specify your custom color here
+                          color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#a6a6a6', // apply the same color to the thumb
+                            color: '#a6a6a6', 
                             padding: 1,
                             border: '6px solid #404040'
                           }
@@ -838,12 +900,19 @@ const Layout = () => {
                         min={1}
                         max={9}
                         sx={{
-                          color: '#404040', // specify your custom color here
+                          color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#519259', // apply the same color to the thumb
+                            color: '#a6a6a6',
                             padding: 1,
-                            border: '6px solid #404040',
-                            marginBottom: 0
+                            marginBottom: 0,
+                            opacity: 0.5,
+                            width: 65,
+                            height: 100,
+                            position: 'relative',
+                            top: '-28px',
+                            left: '3px',
+                            borderRadius: '23px',
+                            zIndex: -1,
                           },
                         }}
                       />
@@ -863,22 +932,22 @@ const Layout = () => {
                     </div>
                     <div className="titleFlex">
                       <h2 style={{ color: '#edaa38' }}>Month 2</h2>
-                      <p>Schematics</p>
+                      <p>Entitlement</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 5</h2>
-                      <p>Pre-construction</p>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapPlans}</h2>
+                      <p>Construction Docs</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 9</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapLoan}</h2>
                       <p>Permits & Loans</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 15</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapFoundation}</h2>
                       <p>Foundation</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 21</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapBuildTime}</h2>
                       <p>Delivery</p>
                     </div>
                   </div>
@@ -908,27 +977,24 @@ const Layout = () => {
                   ></DisplayTypes>
                 </LayoutButtons>
               </DisplayArea>
-              {/* <ButtonArea>
-              <Buttons
-                setTraditionalBuildTime={(value:number)=>setTraditionalBuildTime(value)}
-                changeDisplayImage={(value: string)=>setDisplayImage(value)}
-              ></Buttons>
-              <Slider 
-              range={{min:roomsMin, max:roomsMax}}
-              setRaapIncrementalRevenue={(value:number)=>setRaapIncrementalRevenue(value)}
-            ></Slider>
-            <Notes
-              title={data.notes.title}
-              placeholderText={data.notes.placeholderText}
-              submitButtonText={data.notes.submitButtonText}
-            ></Notes>
-          </ButtonArea> */}
+
               <div className="controls_container">
                 <div className="buttons_area">
+                  {/* <LocationDiv>
+                    <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
+                    <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
+                  </LocationDiv> */}
                   <Buttons
                     setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
                     changeDisplayImage={(value: string) => setDisplayImage(value)}
                     onDataReceived={onDataReceived}
+                    showButton={toggleMain}
+                    stateList={stateList}
+                    cityList={cityList}
+                    updateCityList={updateCityList}
+                    updateState={updateState}
+                    cityName={city}
+                    stateName={state}
                   ></Buttons>
                   <VerticalSlider
                     onData={handleDataFromChild}
@@ -938,21 +1004,45 @@ const Layout = () => {
                       setRoomValue(value)
                       setRaapIncrementalRevenue(value)
                     }}
+                    onStateUpdate={handleStateUpdate}
                   ></VerticalSlider>
                   {/* <VerticalSlider></VerticalSlider> */}
                 </div>
-                <div className="notes_container">
-                  <Notes
-                    title={data.notes.title}
-                    placeholderText={data.notes.placeholderText}
-                    submitButtonText={data.notes.submitButtonText}
-                  ></Notes>
+                <div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
+                    <NotesLabel>Notes</NotesLabel>
+                    <Container>
+                      <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '0px 10px' }}>
+                        <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
+                        <SubmitButton style={{ marginTop: 50 }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
+                      </div>
+                    </Container>
+                  </div>
                 </div>
               </div>
+
             </MainArea>
         }
+        <Modal
+          title="Email Form"
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleOk}>
+              Send Email
+            </Button>,
+          ]}
+        >
+          <div style={{ padding: '10px 0px' }}>
+            <Input type="email" placeholder="Email Address" value={email} onChange={handleEmailChange} />
+          </div>
+        </Modal>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 

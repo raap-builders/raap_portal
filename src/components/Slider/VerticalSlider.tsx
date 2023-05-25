@@ -59,9 +59,10 @@ interface Props {
   setRaapIncrementalRevenue: (arg0: number) => any,
   onData: (value: number) => void; // Add onData property to interface
   setRoomsValue?: any;
+  onStateUpdate: (updatedValue: number) => void;
 }
 
-const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData, setRoomsValue }: Props) => {
+const VerticalSlider = ({ onStateUpdate ,range, setRaapIncrementalRevenue, onData, setRoomsValue }: Props) => {
   const [value, setValue] = useState(data.rooms.total);
   const [childData, setChildData] = useState<number>(0);
 
@@ -73,8 +74,8 @@ const VerticalSlider = ({ range, setRaapIncrementalRevenue, onData, setRoomsValu
     setRoomsValue(newValue as number)
     setChildData(value)
     onData(newValue as number ?? 0);
+    onStateUpdate(newValue as number); // Invoke the callback function with the updated value
   };
-
   const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = parseInt(e.target.value);
     let incrementalRevenue = calculateIncrementalRevenue(newValue);

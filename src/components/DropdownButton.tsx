@@ -39,7 +39,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, onClickDropdown, options }) =
         <StyledIcon className={isOpen ? 'open' : ''}>&#9660;</StyledIcon>
       </StyledButton>
       {isOpen && (
-        <StyledMenu>
+        <StyledMenu className='hideScrollBar'>
           {options.map((item, index) => (
             <StyledMenuItem key={index} onClick={()=>{onClickDropdown(item); toggleDropdown()}}>{item}</StyledMenuItem>
           ))}
@@ -100,6 +100,8 @@ const StyledMenu = styled.ul`
   width: 100%;
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.25);
   z-index: 1;
+  overflow-y: scroll;
+  max-height: 300px;
 `;
 
 const StyledMenuItem = styled.li`
