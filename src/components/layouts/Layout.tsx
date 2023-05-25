@@ -434,6 +434,7 @@ const Layout = () => {
     setText(event.target.value);
   };
 
+
   const handleOk = async () => {
     if (containerRef.current) {
       const canvas = await html2canvas(containerRef.current);
@@ -855,6 +856,7 @@ const Layout = () => {
                       <p>Delivery</p>
                     </div>
                   </div>
+                  <div className="sliderOpacityBtn"></div>
                   <Box sx={{ width: "100%" }}>
                     <div >
                       <Slider
@@ -888,8 +890,15 @@ const Layout = () => {
                           '& .MuiSlider-thumb': {
                             color: '#a6a6a6',
                             padding: 1,
-                            border: '6px solid #404040',
                             marginBottom: 0,
+                            opacity: 0.5,
+                            width: 65,
+                            height: 100,
+                            position: 'relative',
+                            top: '-28px',
+                            left: '3px',
+                            borderRadius: '23px',
+                            zIndex: -1,
                           },
                         }}
                       />

@@ -11,6 +11,7 @@
   justify-content: center;
   flex-direction: column;
   font-size: 30px;
+  /* background-image: url(); */
 }
 .buttons_area {
   width: 54vw;
@@ -25,6 +26,11 @@
 
 .ant-btn-primary {
   background-color: #519259;
+}
+.sliderOpacityBtn{
+  background-image: url(../assets/sliderback.png);
+  width: 75px;
+  height: 100%;
 }
 
 .SliderMark {
