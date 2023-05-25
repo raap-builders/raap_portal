@@ -127,12 +127,10 @@ const data = {
 // project_cost_percent = RaaP project cost vs on-site project cost
 
 export function getValues(rooms, rsMeans) {
-
-  // console.log('value', rooms, rsMeans)
-
+  
   var rooms = rooms
   const king = 0.50
-  const RSMeans = rsMeans
+  const RSMeans = rsMeans || 261.6;
   const RSMeansAvg = 261.6
   const startBuild = 0
   const schematics = 2
@@ -164,6 +162,8 @@ export function getValues(rooms, rsMeans) {
   const siteBldgDesignCost = 2
   const BldgCostPerSqft = 80
   var buildSchematics = startBuild + schematics
+
+
   var raapPlans = schematics + raapPreCon
   var sitePlans = schematics + sitePreCon
   var raapLoan = raapPlans + raapPermits
@@ -211,7 +211,14 @@ export function getValues(rooms, rsMeans) {
     raapNetPerRoom,
     raapNetPerSqft,
     raapComplete,
-    siteComplete
+    siteComplete,
+    raapPlans,
+    sitePlans,
+    raapLoan,
+    siteLoan,
+    raapFoundation,
+    siteFoundation,
+    buildSchematics,
   }
 }
 

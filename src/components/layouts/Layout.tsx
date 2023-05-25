@@ -406,6 +406,13 @@ const NotesLabel = styled.div`
 // todo: move styled components to css file
 
 const Layout = () => {
+  const [raapPlans, setRaapPlans] = useState(3);
+  const [sitePlans, setSitePlans] = useState(3);
+  const [raapLoan, setRaapLoan] = useState(9);
+  const [siteLoan, setSiteLoan] = useState(12);
+  const [raapFoundation, setRaapFoundation] = useState(15);
+  const [siteFoundation, setSiteFoundation] = useState(18);
+
   const [traditionalBuildTime, setTraditionalBuildTime] = useState(25);
   const [toggleMain, setToggleMain] = useState(true)
   const [raapBuildTime, setRaapBuildTime] = useState(18);
@@ -430,6 +437,7 @@ const Layout = () => {
   const [email, setEmail] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState('');
+
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
@@ -565,6 +573,12 @@ const Layout = () => {
     setTraditionalCost(resp.siteTotalCost ?? 0)
     setRaapBuildTime(resp.raapComplete)
     setTraditionalBuildTime(resp.siteComplete)
+    setRaapPlans(resp.raapPlans) 
+    setSitePlans(resp.sitePlans)
+    setRaapLoan(resp.raapLoan)
+    setSiteLoan(resp.siteLoan)
+    setRaapFoundation(resp.raapFoundation)
+    setSiteFoundation(resp.siteFoundation)
   };
 
   useEffect(() => {
@@ -837,22 +851,22 @@ const Layout = () => {
                     </div>
                     <div className="titleFlex">
                       <h2>Month 2</h2>
-                      <p>Schematics</p>
+                      <p>Entitlement</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 7</h2>
-                      <p>Pre-construction</p>
+                      <h2>Month {sitePlans}</h2>
+                      <p>Construction Docs</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 12</h2>
+                      <h2>Month {siteLoan}</h2>
                       <p>Permits & Loans</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 18</h2>
+                      <h2>Month {siteFoundation}</h2>
                       <p>Foundation</p>
                     </div>
                     <div className="titleFlex">
-                      <h2>Month 30</h2>
+                      <h2>Month {traditionalBuildTime}</h2>
                       <p>Delivery</p>
                     </div>
                   </div>
@@ -867,9 +881,9 @@ const Layout = () => {
                         min={1}
                         max={6}
                         sx={{
-                          color: '#404040', // specify your custom color here
+                          color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#a6a6a6', // apply the same color to the thumb
+                            color: '#a6a6a6', 
                             padding: 1,
                             border: '6px solid #404040'
                           }
@@ -918,22 +932,22 @@ const Layout = () => {
                     </div>
                     <div className="titleFlex">
                       <h2 style={{ color: '#edaa38' }}>Month 2</h2>
-                      <p>Schematics</p>
+                      <p>Entitlement</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 5</h2>
-                      <p>Pre-construction</p>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapPlans}</h2>
+                      <p>Construction Docs</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 9</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapLoan}</h2>
                       <p>Permits & Loans</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 15</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapFoundation}</h2>
                       <p>Foundation</p>
                     </div>
                     <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 21</h2>
+                      <h2 style={{ color: '#edaa38' }}>Month {raapBuildTime}</h2>
                       <p>Delivery</p>
                     </div>
                   </div>
