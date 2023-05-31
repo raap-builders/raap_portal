@@ -60,32 +60,34 @@ interface Props {
   onData: (value: number) => void; // Add onData property to interface
   setRoomsValue?: any;
   onStateUpdate: (updatedValue: number) => void;
+  value: any;
+  onHandleChange: (newValue: any) => void; // Add onData property to interface
+  HandleNumberChange: (newValue: any) => void; // Add onData property to interface
 }
 
-const VerticalSlider = ({ onStateUpdate ,range, setRaapIncrementalRevenue, onData, setRoomsValue }: Props) => {
-  const [value, setValue] = useState(data.rooms.total);
-  const [childData, setChildData] = useState<number>(0);
+const VerticalSlider = ({ onStateUpdate ,range, setRaapIncrementalRevenue, onData,value, setRoomsValue,onHandleChange,HandleNumberChange  }: Props) => {
+  // const [value, setValue] = useState(data.rooms.total);
+  // const [childData, setChildData] = useState<number>(0);
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    // console.log(newValue)
-    let incrementalRevenue = calculateIncrementalRevenue(newValue as number)
-    setRaapIncrementalRevenue(incrementalRevenue)
-    setValue(newValue as number);
-    setRoomsValue(newValue as number)
-    setChildData(value)
-    onData(newValue as number ?? 0);
-    onStateUpdate(newValue as number); // Invoke the callback function with the updated value
-  };
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = parseInt(e.target.value);
-    let incrementalRevenue = calculateIncrementalRevenue(newValue);
-    setRaapIncrementalRevenue(incrementalRevenue);
-    setValue(newValue);
-    setRoomsValue(newValue)
+  // const handleChange = (event: Event, newValue: number | number[]) => {
+  //   let incrementalRevenue = calculateIncrementalRevenue(newValue as number)
+  //   setRaapIncrementalRevenue(incrementalRevenue)
+  //   setValue(newValue as number);
+  //   setRoomsValue(newValue as number)
+  //   setChildData(value)
+  //   onData(newValue as number ?? 0);
+  //   onStateUpdate(newValue as number); // Invoke the callback function with the updated value
+  // };
+  // const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   let newValue = parseInt(e.target.value);
+  //   let incrementalRevenue = calculateIncrementalRevenue(newValue);
+  //   setRaapIncrementalRevenue(incrementalRevenue);
+  //   setValue(newValue);
+  //   setRoomsValue(newValue)
 
-    setChildData(value)
-    onData(newValue ?? 0);
-  };
+  //   setChildData(value)
+  //   onData(newValue ?? 0);
+  // };
 
 
   useEffect(() => {
@@ -110,7 +112,7 @@ const VerticalSlider = ({ onStateUpdate ,range, setRaapIncrementalRevenue, onDat
               max={range.max}
               step={1}
               value={value}
-              onChange={handleChange}
+              onChange={onHandleChange}
               color="secondary"
             />
 
@@ -124,7 +126,7 @@ const VerticalSlider = ({ onStateUpdate ,range, setRaapIncrementalRevenue, onDat
             min={range.min}
             max={range.max}
             value={value}
-            onChange={handleNumberChange}
+            onChange={HandleNumberChange}
             className="slider"
           /></div>
       </div>

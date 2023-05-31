@@ -202,8 +202,7 @@ function App() {
       </div>
       {showMessage && (
         <div id="message">
-          <h2>Please use a bigger screen</h2>
-          <h1>(Above 786px)</h1>
+          <h2>RaaP is best viewed on a larger screen size in horizontal orientation</h2>
         </div>
       )}
     </>
