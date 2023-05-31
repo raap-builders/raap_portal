@@ -182,7 +182,7 @@ input:checked+.toggle__slider:before {
 
 .bottomSlider {
   position: relative;
-  bottom: 35px;
+  bottom: 125px;
   width: 65%;
   margin-bottom: 20px;
 }
@@ -195,6 +195,7 @@ input:checked+.toggle__slider:before {
 .bottomSlider .sliderTitles .titleFlex h2 {
   font-weight: 700;
   font-size: 18px;
+  white-space: nowrap;
 }
 
 .bottomSlider .sliderTitles .titleFlex p {

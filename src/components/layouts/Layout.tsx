@@ -149,7 +149,7 @@ const LastColumnDiv = styled.div`
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 16px;
-  width: 270px;
+  width: 15%;
   height: 100%;
   overflow: hidden;
   // background-color:purple;
@@ -298,7 +298,7 @@ const ColoredBar = styled.div<BarDivProps>`
     props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 1.6 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
   }
   }};
-  min-width: 45px;
+  min-width: 55px;
   max-width: 99%;
 `
 const ConstructionDiv = styled.div`
@@ -560,6 +560,7 @@ const Layout = () => {
   const handleSliderChange2 = (event: any, value: number | number[]) => {
     setSliderValue2(value as number);
   };
+
   const [dataFromChild, setDataFromChild] = useState<number>(0);
 
   const handleDataFromChild = (data: number) => {
@@ -573,7 +574,7 @@ const Layout = () => {
     setTraditionalCost(resp.siteTotalCost ?? 0)
     setRaapBuildTime(resp.raapComplete)
     setTraditionalBuildTime(resp.siteComplete)
-    setRaapPlans(resp.raapPlans) 
+    setRaapPlans(resp.raapPlans)
     setSitePlans(resp.sitePlans)
     setRaapLoan(resp.raapLoan)
     setSiteLoan(resp.siteLoan)
@@ -592,6 +593,34 @@ const Layout = () => {
     setRaapBuildTime(resp.raapComplete)
     setTraditionalBuildTime(resp.siteComplete)
   }, [roomValue, averageValue])
+
+
+  const [horizSliderValue, sethorizSliderValue] = useState(data.rooms.total);
+  const [childData, setChildData] = useState<number>(0);
+
+  const handleChangeSlider = (newValue: any) => {
+    console.log('asdasdwdas', newValue.target.value)
+    let ValueNumber = newValue.target.value
+    let incrementalRevenue = calculateIncrementalRevenue(ValueNumber)
+    setRaapIncrementalRevenue(incrementalRevenue)
+    sethorizSliderValue(ValueNumber);
+    setRoomValue(ValueNumber)
+    setChildData(horizSliderValue)
+    handleDataFromChild(ValueNumber ?? 0);
+    handleStateUpdate(ValueNumber); // Invoke the callback function with the updated value
+  };
+
+  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = parseInt(e.target.value);
+    let incrementalRevenue = calculateIncrementalRevenue(newValue);
+    setRaapIncrementalRevenue(incrementalRevenue);
+    sethorizSliderValue(newValue);
+    setRoomValue(newValue)
+
+    setChildData(horizSliderValue)
+    handleDataFromChild(newValue ?? 0);
+  };
+
 
   function formatNumber(num: number): string {
     if (num < 0) {
@@ -710,8 +739,8 @@ const Layout = () => {
             <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
             <BarContainerRight>
               <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 4.7}>${formatNumber(siteTotal)}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 5.1}>${formatNumber(raapTotalCost)} {roomsNumber >= 101 ? "(5% Lower)" : null}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 5.6}>${formatNumber(raapTotalNetCost)} {roomsNumber >= 101 ? "(16% Lower)" : null}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 5.1}>${formatNumber(raapTotalCost)} {roomsNumber >= 113 ? "(5% Lower)" : null}</ColoredBar>
+              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 5.6}>${formatNumber(raapTotalNetCost)} {roomsNumber >= 125 ? "(16% Lower)" : null}</ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -761,14 +790,17 @@ const Layout = () => {
                         <img
                           className='emptyImageBox'
                           src={
-                            sliderValue == 0 ?
-                              trad1 : sliderValue == 1 ?
-                                trad1 : sliderValue == 2 ?
-                                  trad2 : sliderValue == 3 ?
-                                    trad2 : sliderValue == 4 ?
-                                      trad3 : sliderValue == 5 ?
-                                        trad4 : sliderValue == 6 ?
-                                          trad5 : null
+                            sliderValue2 == 0 ?
+                              trad1 : sliderValue2 == 1 ?
+                                trad1 : sliderValue2 == 2 ?
+                                  trad2 : sliderValue2 == 3 ?
+                                    trad2 : sliderValue2 == 4 ?
+                                      trad3 : sliderValue2 == 5 ?
+                                        trad4 : sliderValue2 == 6 ?
+                                          trad4 : sliderValue2 == 7 ?
+                                            trad4 : sliderValue2 == 8 ?
+                                              trad4 : sliderValue2 == 9 ?
+                                                trad5 : null
                           }
                         />
                       </EmptyBox>
@@ -839,9 +871,12 @@ const Layout = () => {
                     setRaapIncrementalRevenue(value)
                   }}
                   onStateUpdate={handleStateUpdate}
+                  value={horizSliderValue}
+                  onHandleChange={handleChangeSlider}
+                  HandleNumberChange={handleNumberChange}
                 ></VerticalSlider>
               </div>
-              <div style={{ display: 'flex', gridGap: 20, alignItems: 'center' }}>
+              <div style={{ display: 'flex', gridGap: 30, alignItems: 'center' }}>
                 <div className="bottomSlider" style={{ marginLeft: 30 }}>
                   <div style={{ justifyContent: 'space-between', marginBottom: 10 }} className="sliderTitles">
 
@@ -874,8 +909,8 @@ const Layout = () => {
                   <Box sx={{ width: "100%" }}>
                     <div >
                       <Slider
-                        value={sliderValue}
-                        onChange={handleSliderChange}
+                        value={sliderValue2}
+                        onChange={handleSliderChange2}
                         marks={marks}
                         step={1}
                         min={1}
@@ -883,7 +918,7 @@ const Layout = () => {
                         sx={{
                           color: '#404040',
                           '& .MuiSlider-thumb': {
-                            color: '#a6a6a6', 
+                            color: '#a6a6a6',
                             padding: 1,
                             border: '6px solid #404040'
                           }
@@ -898,7 +933,7 @@ const Layout = () => {
                         step={1}
                         marks={marksRaap}
                         min={1}
-                        max={9}
+                        max={6}
                         sx={{
                           color: '#404040',
                           '& .MuiSlider-thumb': {
@@ -955,7 +990,7 @@ const Layout = () => {
                 <div style={{
                   display: 'grid',
                   position: "relative",
-                  bottom: 45,
+                  bottom: 130,
                   gridGap: 28,
                   marginBottom: 18
                 }}>
@@ -996,6 +1031,7 @@ const Layout = () => {
                     cityName={city}
                     stateName={state}
                   ></Buttons>
+
                   <VerticalSlider
                     onData={handleDataFromChild}
                     range={{ min: roomsMin, max: roomsMax }}
@@ -1005,6 +1041,9 @@ const Layout = () => {
                       setRaapIncrementalRevenue(value)
                     }}
                     onStateUpdate={handleStateUpdate}
+                    value={horizSliderValue}
+                    onHandleChange={handleChangeSlider}
+                    HandleNumberChange={handleNumberChange}
                   ></VerticalSlider>
                   {/* <VerticalSlider></VerticalSlider> */}
                 </div>
