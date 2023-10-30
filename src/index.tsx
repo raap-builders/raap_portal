@@ -1,7 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 // import { Providers } from '@microsoft/mgt-element';
 // import { Msal2Provider } from '@microsoft/mgt-msal2-provider';
@@ -23,11 +27,10 @@ import App from './App';
 // Test()
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
