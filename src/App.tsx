@@ -189,25 +189,23 @@ function App() {
     <div className="AppMain">
       <BrowserRouter>
         <Header />
-        <div className="w-100 p-4 d-flex justify-content-center align-items-center">
-          <Breadcrumb />
-        </div>
-        <Routes>
-          <Route
-            path="/"
-            Component={(_) => (
-              <>
-                <div className="d-flex" style={{ height: window.outerHeight }}>
-                  <Sider />
+        <div className="d-flex">
+          <Sider />
+          <Routes>
+            <Route
+              path="/"
+              Component={(_) => (
+                <div className="col-9">
+                  <div className="mt-3 mb-2">
+                    <Breadcrumb />
+                  </div>
                   <Landing />
                 </div>
-              </>
-            )}
-          />
-          <Route path="/view" Component={View} />
-        </Routes>
-
-        {/* <NavbarContainer>
+              )}
+            />
+            <Route path="/view" Component={View} />
+          </Routes>
+          {/* <NavbarContainer>
             <Logo src={raapLogo} alt="Company Logo" />
             <NavLinkContainer>
               <NavItem to="/">Configuration</NavItem>
@@ -216,14 +214,15 @@ function App() {
             </NavLinkContainer>
             <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
           </NavbarContainer> */}
-        <MainContainer>
+          {/* <MainContainer> */}
           {/* <Login /> */}
           {/* <Routes>
               <Route path="/" Component={Configure} />
               <Route path="/view" Component={View} />
               <Route path="/schedule" Component={Schedule} />
             </Routes> */}
-        </MainContainer>
+          {/* </MainContainer> */}
+        </div>
       </BrowserRouter>
     </div>
   );

@@ -3,8 +3,8 @@ import React from "react";
 function Landing() {
   return (
     <img
-      style={{ width: "100%", height: "100%" }}
-      src={require("../assets/main_layout_photo.png")}
+      className="w-100"
+      src={require("../assets/layout_pic.png")}
       alt="main_layout"
     />
   );
