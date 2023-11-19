@@ -1,4 +1,8 @@
-import React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const projectFactors = [
   { id: 1, name: "Total Project Cost", cost: "$13,030,048" },
@@ -164,59 +168,106 @@ function GenericEstimation() {
           On-Site
         </div>
 
-        <div className="border-top pt-2 d-flex align-items-center justify-content-between font-bold h6 text-black">
-          <p>Building Cost</p>
-          <p>$8,961,190</p>
-        </div>
-
-        {buildingFactors.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              fontSize: 14,
-            }}
-            className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+        <Accordion defaultExpanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <p>{item.name}</p>
-            <p>{item.cost}</p>
-          </div>
-        ))}
+            <Typography variant="h6" className="w-50">
+              Building Cost
+            </Typography>
+            <Typography variant="h6" className="w-50 text-right pr-4">
+              $8,961,190
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              {buildingFactors.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    fontSize: 14,
+                  }}
+                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                >
+                  <p>{item.name}</p>
+                  <p>{item.cost}</p>
+                </div>
+              ))}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-        <div className="border-top pt-2 d-flex align-items-center justify-content-between font-bold h6 text-black">
-          <p>Site Work Cost</p>
-          <p>$1,462,715</p>
-        </div>
-
-        {siteWorkFactors.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              fontSize: 14,
-            }}
-            className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+        <Accordion defaultExpanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <p>{item.name}</p>
-            <p>{item.cost}</p>
-          </div>
-        ))}
+            <Typography variant="h6" className="w-50">
+              Site Work Cost
+            </Typography>
+            <Typography variant="h6" className="w-50 text-right pr-4">
+              $1,462,715
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              {siteWorkFactors.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    fontSize: 14,
+                  }}
+                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                >
+                  <p>{item.name}</p>
+                  <p>{item.cost}</p>
+                </div>
+              ))}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
 
-        <div className="border-top pt-2 d-flex align-items-center justify-content-between font-bold h6 text-black">
-          <p>General Conditions & Fees</p>
-          <p>$141,474</p>
-        </div>
-
-        {generalFactors.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              fontSize: 14,
-            }}
-            className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+        <Accordion defaultExpanded>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <p>{item.name}</p>
-            <p>{item.cost}</p>
-          </div>
-        ))}
+            <Typography variant="h6" className="w-50">
+              General Conditions & Fees
+            </Typography>
+            <Typography variant="h6" className="w-50 text-right pr-4">
+              $141,474
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              {generalFactors.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    fontSize: 14,
+                  }}
+                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                >
+                  <p>{item.name}</p>
+                  <p>{item.cost}</p>
+                </div>
+              ))}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+      <div
+        style={{ position: "sticky", bottom: 0 }}
+        className="w-100 d-flex justify-content-center align-items-center py-3"
+      >
+        <button className="w-75 rounded bg-success text-center text-white py-3 mt-3">
+          Get Estimate
+        </button>
       </div>
     </div>
   );
