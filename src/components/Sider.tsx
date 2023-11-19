@@ -6,7 +6,7 @@ import Input from "@mui/material/Input";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -14,13 +14,9 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { TextField } from "@mui/material";
 
-interface MyComponentProps {
-  step: number;
-  changeStep: (nextStep: number) => void;
-}
-
-function Sider({ step, changeStep }: MyComponentProps) {
+function Sider() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [zipCode, setZipCode] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState(100);
 
@@ -39,7 +35,6 @@ function Sider({ step, changeStep }: MyComponentProps) {
 
   const onFormSubmitted = () => {
     console.log("number of the rooms", numberOfRooms);
-    changeStep(2);
     navigate("/generic_estimation");
     // axios
     //   .post("http://localhost:3003/api/v1/notifications", {
@@ -168,7 +163,7 @@ function Sider({ step, changeStep }: MyComponentProps) {
         </AccordionDetails>
       </Accordion>
 
-      {step === 1 && (
+      {location.pathname === "/" ? (
         <div className="d-flex align-items-center justify-content-center w-75">
           <button
             onClick={onFormSubmitted}
@@ -178,9 +173,7 @@ function Sider({ step, changeStep }: MyComponentProps) {
             See Estimate
           </button>
         </div>
-      )}
-
-      {step > 1 && (
+      ) : (
         <>
           <Accordion className="mt-3 w-75">
             <AccordionSummary

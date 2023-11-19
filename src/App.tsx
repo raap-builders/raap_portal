@@ -170,7 +170,6 @@ const LogoEmpty = styled.img`
 
 function App() {
   const [showMessage, setShowMessage] = useState(false);
-  const [step, setStep] = useState(1);
 
   useEffect(() => {
     function handleResize() {
@@ -189,18 +188,16 @@ function App() {
     };
   }, []);
 
-  const changeStep = (nextStep: number) => setStep(nextStep);
-
   return (
     <div className="AppMain">
       <BrowserRouter>
         <Header />
         <div className="d-flex col-12">
           <div className="col-3">
-            <Sider changeStep={changeStep} step={step} />
+            <Sider />
           </div>
           <div className="col-9">
-            <Breadcrumb step={step} />
+            <Breadcrumb />
             <Routes>
               <Route path="/" Component={Landing} />
               <Route path="/generic_estimation" Component={GenericEstimation} />
