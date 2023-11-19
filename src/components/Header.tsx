@@ -14,14 +14,16 @@ function Header() {
       style={{ backgroundColor: "#F1F1F2" }}
       className="px-5 py-2 d-flex align-items-center justify-content-between"
     >
-      <img
-        src={require("../assets/Header/New_RaaP_Logo.png")}
-        alt="RaaP_Logo"
-        style={{
-          width: 95,
-          height: 50,
-        }}
-      />
+      <NavLink to="/">
+        <img
+          src={require("../assets/Header/New_RaaP_Logo.png")}
+          alt="RaaP_Logo"
+          style={{
+            width: 95,
+            height: 50,
+          }}
+        />
+      </NavLink>
       <div>
         {NavLinks.map(({ id, name, to }) => (
           <NavLink

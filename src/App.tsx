@@ -20,6 +20,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Breadcrumb from "./components/Breadcrum";
 import Sider from "./components/Sider";
 import Landing from "./Pages/Landing";
+import GenericEstimation from "./Pages/GenericEstimation";
 // Define the URL of the xlsx file
 // const url = 'https://sharepoint-site.com/path/to/file.xlsx';
 const url =
@@ -169,6 +170,8 @@ const LogoEmpty = styled.img`
 
 function App() {
   const [showMessage, setShowMessage] = useState(false);
+  const [step, setStep] = useState(1);
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 786) {
@@ -185,26 +188,25 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const changeStep = (nextStep: number) => setStep(nextStep);
+
   return (
     <div className="AppMain">
       <BrowserRouter>
         <Header />
-        <div className="d-flex">
-          <Sider />
-          <Routes>
-            <Route
-              path="/"
-              Component={(_) => (
-                <div className="col-9">
-                  <div className="mt-3 mb-2">
-                    <Breadcrumb />
-                  </div>
-                  <Landing />
-                </div>
-              )}
-            />
-            <Route path="/view" Component={View} />
-          </Routes>
+        <div className="d-flex col-12">
+          <div className="col-3">
+            <Sider changeStep={changeStep} step={step} />
+          </div>
+          <div className="col-9">
+            <Breadcrumb step={step} />
+            <Routes>
+              <Route path="/" Component={Landing} />
+              <Route path="/generic_estimation" Component={GenericEstimation} />
+              <Route path="/view" Component={View} />
+            </Routes>
+          </div>
           {/* <NavbarContainer>
             <Logo src={raapLogo} alt="Company Logo" />
             <NavLinkContainer>
