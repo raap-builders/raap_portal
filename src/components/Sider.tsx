@@ -91,7 +91,11 @@ function Sider() {
       </FormLabel>
 
       <Accordion
-        onClick={(_) => setOpenCardIndex(0)}
+        onChange={(e, expanded) => {
+          if (expanded) {
+            setOpenCardIndex(0);
+          } else setOpenCardIndex(4);
+        }}
         expanded={openCardIndex === 0}
         className="mt-3 w-75 rounded"
       >
@@ -202,7 +206,11 @@ function Sider() {
       ) : (
         <>
           <Accordion
-            onClick={(_) => setOpenCardIndex(1)}
+            onChange={(e, expanded) => {
+              if (expanded) {
+                setOpenCardIndex(1);
+              } else setOpenCardIndex(4);
+            }}
             expanded={openCardIndex === 1}
             className="mt-3 w-75 rounded"
           >
@@ -275,7 +283,11 @@ function Sider() {
           </Accordion>
 
           <Accordion
-            onClick={(_) => setOpenCardIndex(2)}
+            onChange={(e, expanded) => {
+              if (expanded) {
+                setOpenCardIndex(2);
+              } else setOpenCardIndex(4);
+            }}
             expanded={openCardIndex === 2}
             className="mt-3 w-75 rounded"
           >
