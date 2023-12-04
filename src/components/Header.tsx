@@ -9,10 +9,14 @@ const NavLinks = [
 ];
 
 function Header() {
+  const divStyle = {
+    backgroundColor: "#F9F9F9",
+    boxShadow: "4px 8x 6px rgba(0, 0, 0, 0.1)", // Adjust the shadow properties as needed
+  };
   return (
     <div
-      style={{ backgroundColor: "#F1F1F2" }}
-      className="px-5 py-2 d-flex align-items-center justify-content-between"
+      style={divStyle}
+      className="px-5 py-2 d-flex align-items-center rounded justify-content-between"
     >
       <NavLink to="/">
         <img
@@ -26,14 +30,16 @@ function Header() {
       </NavLink>
       <div>
         {NavLinks.map(({ id, name, to }) => (
-          <NavLink
-            to={to}
+          <span
+            // to={name === "Budget" ? "/" : ""}
             style={{ textDecoration: "none" }}
-            className="px-4 navlink-text"
+            className={`px-4 ${
+              name === "Budget" ? "text-success" : "text-secondary"
+            }`}
             key={id}
           >
             {name}
-          </NavLink>
+          </span>
         ))}
       </div>
     </div>

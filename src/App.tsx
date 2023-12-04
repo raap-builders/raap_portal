@@ -189,14 +189,14 @@ function App() {
   }, []);
 
   return (
-    <div className="AppMain">
+    <div className="AppMain bg-white p-3" style={{ height: "100vh" }}>
       <BrowserRouter>
         <Header />
         <div className="d-flex col-12">
-          <div className="col-3">
+          <div className="col-3 pr-5 mt-4 d-flex flex-column justify-content-center">
             <Sider />
           </div>
-          <div className="col-9">
+          <div className="col-9 flex-column d-flex align-items-center">
             <Breadcrumb />
             <Routes>
               <Route path="/" Component={Landing} />

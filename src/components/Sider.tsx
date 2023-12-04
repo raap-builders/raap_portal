@@ -13,16 +13,34 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { TextField } from "@mui/material";
+import axios from "axios";
 
+let myTimeout: NodeJS.Timeout;
+interface ZipCodes {
+  id: number;
+  zipCode: string;
+  city: string;
+  state: string;
+}
 function Sider() {
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
+  const [searchedZipCodes, setSearchedZipCodes] = useState<ZipCodes[]>([]);
   const [numberOfRooms, setNumberOfRooms] = useState(100);
+  const [openCardIndex, setOpenCardIndex] = useState(0);
 
   const onZipCodeChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
     // @ts-ignore
+    clearTimeout(myTimeout);
     setZipCode(event.target.value);
+    myTimeout = setTimeout(() => {
+      axios
+        .get(`http://localhost:3003/api/v1/locations/${event.target.value}`)
+        .then((zipCodes) => {
+          setSearchedZipCodes(zipCodes.data.data);
+        });
+    }, 1500);
   };
 
   const onNumberOfRoomsChanged = (
@@ -47,28 +65,36 @@ function Sider() {
     //   });
   };
 
+  const onZipCodeSelected = (item: ZipCodes) => {
+    console.log(item);
+  };
+
   return (
     <FormControl
-      className="h-100 d-flex flex-column align-items-center"
+      className="d-flex flex-column align-items-center h-100"
       style={{
-        overflow: "hidden",
-        backgroundColor: "#3F3F40",
+        backgroundColor: "#519258",
+        borderRadius: 20,
       }}
     >
       <FormLabel
         className="w-100 text-center text-white mt-4"
         id="demo-row-radio-buttons-group-label"
       >
-        Project Information
+        Select the following to get started
       </FormLabel>
       <FormLabel
         className="w-100 text-center text-white mt-4"
         id="demo-row-radio-buttons-group-label"
       >
-        Select the following to get started
+        Project Information
       </FormLabel>
 
-      <Accordion defaultExpanded className="mt-3 w-75">
+      <Accordion
+        onClick={(_) => setOpenCardIndex(0)}
+        expanded={openCardIndex === 0}
+        className="mt-3 w-75 rounded"
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -116,41 +142,12 @@ function Sider() {
                   />
                 </RadioGroup>
               </div>
-              <div className="d-flex flex-column align-items-center justify-content-center">
-                <div className="mb-2">Rooms</div>
-                <Slider
-                  aria-valuetext="100"
-                  aria-label="Default"
-                  valueLabelDisplay="auto"
-                  style={{ color: "#519259", height: 110 }}
-                  defaultValue={100}
-                  max={120}
-                  min={80}
-                  step={1}
-                  className="mx-2"
-                  orientation="vertical"
-                  value={numberOfRooms}
-                  onChange={onNumberOfRoomsChanged}
-                />
-                <div
-                  className="text-center d-flex align-items-center justify-content-center align-middle bg-white"
-                  style={{
-                    width: 35,
-                    height: 35,
-                    top: 5,
-                    position: "relative",
-                    borderRadius: 100,
-                    border: "1px solid #519259",
-                  }}
-                >
-                  {numberOfRooms}
-                </div>
-              </div>
             </div>
+
             <div className="d-flex flex-column align-items-center justify-content-center mt-3">
-              <p className="text-center" style={{ color: "#519259" }}>
+              <div className="text-center" style={{ color: "#519259" }}>
                 Site's zip code
-              </p>
+              </div>
               <Input
                 value={zipCode}
                 onChange={onZipCodeChanged}
@@ -159,23 +156,56 @@ function Sider() {
                 placeholder="Zip Code ..."
               />
             </div>
+            {/* <div
+              style={{ overflowY: "scroll", height: 300 }}
+              className="border-1 bg-white rounded"
+            >
+              {searchedZipCodes.map((item) => {
+                return (
+                  <div
+                    onClick={(_) => onZipCodeSelected(item)}
+                    className="pointer cursor-pointer py-1"
+                    key={item.id}
+                  >{`${item.city}, ${item.zipCode}, ${item.state}`}</div>
+                );
+              })}
+            </div> */}
+
+            <div className="mt-4 w-100">
+              <div className="mb-2">Number of rooms</div>
+              <Slider
+                aria-valuetext="100"
+                aria-label="Default"
+                valueLabelDisplay="auto"
+                style={{ color: "#519259" }}
+                defaultValue={100}
+                max={120}
+                min={80}
+                step={1}
+                value={numberOfRooms}
+                onChange={onNumberOfRoomsChanged}
+              />
+              <div className="text-center font-bold h5">{numberOfRooms}</div>
+            </div>
           </Typography>
         </AccordionDetails>
       </Accordion>
 
       {location.pathname === "/" ? (
-        <div className="d-flex align-items-center justify-content-center w-75">
-          <button
-            onClick={onFormSubmitted}
-            style={{ backgroundColor: "#519259" }}
-            className="mt-5 w-75 py-2 rounded text-white align-middle text-center m-auto"
-          >
-            See Estimate
-          </button>
-        </div>
+        <button
+          onClick={onFormSubmitted}
+          style={{ backgroundColor: "#519259" }}
+          className="text-white text-center border-1 rounded border-white p-3 mt-4 w-75"
+        >
+          See Estimate
+        </button>
       ) : (
         <>
-          <Accordion className="mt-3 w-75">
+          <Accordion
+            onClick={(_) => setOpenCardIndex(1)}
+            expanded={openCardIndex === 1}
+            className="mt-3 w-75 rounded"
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
@@ -244,7 +274,11 @@ function Sider() {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion className="mt-3 w-75">
+          <Accordion
+            onClick={(_) => setOpenCardIndex(2)}
+            expanded={openCardIndex === 2}
+            className="mt-3 w-75 rounded"
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"

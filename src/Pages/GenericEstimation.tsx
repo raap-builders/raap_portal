@@ -125,9 +125,9 @@ const buildingFactors = [
 
 function GenericEstimation() {
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div className="d-flex flex-column align-items-center w-100">
       <div
-        className="w-100 d-flex justify-content-around align-items-center p-5"
+        className="w-100 d-flex justify-content-around align-items-center p-5 rounded-top-5"
         style={{
           backgroundColor: "#519259",
         }}
@@ -141,7 +141,11 @@ function GenericEstimation() {
               {item.name}
             </div>
             <div
-              style={{ fontSize: 20, backgroundColor: "#DAF2DE" }}
+              style={{
+                color: "#4F55E7",
+                fontSize: 20,
+                backgroundColor: "#DAF2DE",
+              }}
               className="py-4 font-bold text-center"
             >
               {item.cost}
@@ -150,7 +154,10 @@ function GenericEstimation() {
         ))}
       </div>
 
-      <div className="bg-white mt-5 p-2 rounded w-75">
+      <div
+        style={{ overflow: "scroll", maxHeight: 500 }}
+        className="bg-white mt-5 p-2 rounded w-75"
+      >
         <div
           style={{
             color: "#519259",
@@ -191,8 +198,8 @@ function GenericEstimation() {
                   }}
                   className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
                 >
-                  <p>{item.name}</p>
-                  <p>{item.cost}</p>
+                  <div>{item.name}</div>
+                  <div>{item.cost}</div>
                 </div>
               ))}
             </Typography>
@@ -222,8 +229,8 @@ function GenericEstimation() {
                   }}
                   className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
                 >
-                  <p>{item.name}</p>
-                  <p>{item.cost}</p>
+                  <div>{item.name}</div>
+                  <div>{item.cost}</div>
                 </div>
               ))}
             </Typography>
@@ -253,8 +260,8 @@ function GenericEstimation() {
                   }}
                   className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
                 >
-                  <p>{item.name}</p>
-                  <p>{item.cost}</p>
+                  <div>{item.name}</div>
+                  <div>{item.cost}</div>
                 </div>
               ))}
             </Typography>
