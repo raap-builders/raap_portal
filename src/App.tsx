@@ -189,7 +189,7 @@ function App() {
   }, []);
 
   return (
-    <div className="AppMain bg-white p-3" style={{ height: "100vh" }}>
+    <div className="AppMain p-3">
       <BrowserRouter>
         <Header />
         <div className="d-flex col-12">

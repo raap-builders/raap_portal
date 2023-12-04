@@ -155,24 +155,25 @@ function GenericEstimation() {
       </div>
 
       <div
-        style={{ overflow: "scroll", maxHeight: 500 }}
+        style={{ overflow: "scroll", height: 400 }}
         className="bg-white mt-5 p-2 rounded w-75"
       >
         <div
           style={{
             color: "#519259",
+            fontWeight: "bolder",
           }}
-          className="text-center h4 w-100"
+          className="font-bold h3 text-center w-100"
         >
-          OUTPUTS (Multiformat)
+          On-Site Construction Costs
         </div>
         <div
           style={{
             color: "#519259",
           }}
-          className="font-bold h3 text-center w-100"
+          className="text-center font-bold h4 w-100"
         >
-          On-Site
+          OUTPUTS (MasterFormat)
         </div>
 
         <Accordion defaultExpanded>
@@ -272,7 +273,12 @@ function GenericEstimation() {
         style={{ position: "sticky", bottom: 0 }}
         className="w-100 d-flex justify-content-center align-items-center py-3"
       >
-        <button className="w-75 rounded bg-success text-center text-white py-3 mt-3">
+        <button
+          style={{
+            backgroundColor: "#4F55E7",
+          }}
+          className="w-75 rounded text-center text-white py-3 mt-3"
+        >
           Get Estimate
         </button>
       </div>

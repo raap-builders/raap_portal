@@ -197,9 +197,8 @@ function Sider() {
 
       {location.pathname === "/" ? (
         <button
-          onClick={onFormSubmitted}
-          style={{ backgroundColor: "#519259" }}
-          className="text-white text-center border-1 rounded border-white p-3 mt-4 w-75"
+          style={{ backgroundColor: "#519259", bottom: 60 }}
+          className="text-white text-center border-1 rounded position-absolute border-white p-3 mt-4 w-75"
         >
           See Estimate
         </button>
