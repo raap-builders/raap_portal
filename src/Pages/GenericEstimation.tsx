@@ -133,7 +133,7 @@ function GenericEstimation() {
         }}
       >
         {projectFactors.map((item) => (
-          <div key={item.id} className="rounded bg-dark w-25 mx-5 border-1">
+          <div key={item.id} className="rounded bg-dark w-25 mx-3 border-1">
             <div
               style={{ color: "#519259" }}
               className="text-center border-bottom-0 bg-white font-bold py-2"
@@ -143,7 +143,8 @@ function GenericEstimation() {
             <div
               style={{
                 color: "#4F55E7",
-                fontSize: 20,
+                fontSize: 24,
+                letterSpacing: "2px",
                 backgroundColor: "#DAF2DE",
               }}
               className="py-4 font-bold text-center"
