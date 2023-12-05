@@ -156,7 +156,7 @@ function GenericEstimation() {
       </div>
 
       <div
-        style={{ overflow: "scroll", height: 400 }}
+        style={{ overflowY: "scroll", height: 400 }}
         className="bg-white mt-5 p-2 rounded w-75"
       >
         <div
