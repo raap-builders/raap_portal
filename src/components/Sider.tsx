@@ -36,7 +36,9 @@ function Sider() {
     setZipCode(event.target.value);
     myTimeout = setTimeout(() => {
       axios
-        .get(`http://localhost:3003/api/v1/locations/${event.target.value}`)
+        .get(
+          `https://raap-backend.onrender.com/api/v1/locations/${event.target.value}`
+        )
         .then((zipCodes) => {
           setSearchedZipCodes(zipCodes.data.data);
         });
