@@ -156,7 +156,7 @@ function GenericEstimation() {
       </div>
 
       <div
-        style={{ overflowY: "scroll", height: 400 }}
+        style={{ overflowY: "scroll", height: 300 }}
         className="bg-white mt-5 p-2 rounded w-75"
       >
         <div
@@ -278,7 +278,7 @@ function GenericEstimation() {
           style={{
             backgroundColor: "#4F55E7",
           }}
-          className="w-75 rounded text-center text-white py-3 mt-3"
+          className="w-75 rounded text-center text-white py-3"
         >
           Get Estimate
         </button>

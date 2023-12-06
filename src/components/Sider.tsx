@@ -86,7 +86,7 @@ function Sider() {
         Select the following to get started
       </FormLabel>
       <FormLabel
-        className="w-100 text-center text-white mt-4"
+        className="w-100 text-center text-white mt-2"
         id="demo-row-radio-buttons-group-label"
       >
         Project Information
@@ -99,7 +99,7 @@ function Sider() {
           } else setOpenCardIndex(4);
         }}
         expanded={openCardIndex === 0}
-        className="mt-3 w-75 rounded"
+        className="mt-1 w-75 rounded"
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -200,7 +200,7 @@ function Sider() {
       {location.pathname === "/" ? (
         <button
           onClick={onFormSubmitted}
-          style={{ backgroundColor: "#519259", bottom: 60 }}
+          style={{ backgroundColor: "#519259", bottom: 20 }}
           className="text-white text-center border-1 rounded position-absolute border-white p-3 mt-4 w-75"
         >
           See Estimate

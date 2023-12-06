@@ -189,7 +189,7 @@ function App() {
   }, []);
 
   return (
-    <div className="AppMain p-3">
+    <div className="AppMain px-3 py-1">
       <BrowserRouter>
         <Header />
         <div className="d-flex col-12">
