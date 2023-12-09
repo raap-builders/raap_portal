@@ -193,10 +193,10 @@ function App() {
       <BrowserRouter>
         <Header />
         <div className="d-flex col-12">
-          <div className="col-3 pr-5 mt-4 d-flex flex-column justify-content-center">
+          <div className="col-lg-3 col-sm-5 pr-5 mt-4 d-flex flex-column justify-content-center">
             <Sider />
           </div>
-          <div className="col-9 flex-column d-flex align-items-center">
+          <div className="col-lg-9 col-sm-7 flex-column d-flex align-items-center">
             <Breadcrumb />
             <Routes>
               <Route path="/" Component={Landing} />
