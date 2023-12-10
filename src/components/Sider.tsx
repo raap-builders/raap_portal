@@ -161,7 +161,7 @@ function Sider() {
               <div className="text-center" style={{ color: "#519259" }}>
                 Site's zip code
               </div>
-              {/* <Autocomplete
+              <Autocomplete
                 freeSolo
                 sx={{ width: 300 }}
                 id="free-solo-2-demo"
@@ -184,7 +184,7 @@ function Sider() {
                     }}
                   />
                 )}
-              /> */}
+              />
             </div>
 
             <div className="mt-4 w-100">
