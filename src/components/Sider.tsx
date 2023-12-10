@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -12,7 +12,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { TextField } from "@mui/material";
+import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import axios from "axios";
 
 let myTimeout: NodeJS.Timeout;
@@ -26,23 +26,32 @@ function Sider() {
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
-  const [searchedZipCodes, setSearchedZipCodes] = useState<ZipCodes[]>([]);
+  const [selectedZipCode, setSelectedZipCode] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
+  const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
 
-  const onZipCodeChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // @ts-ignore
-    clearTimeout(myTimeout);
-    setZipCode(event.target.value);
-    myTimeout = setTimeout(() => {
-      axios
-        .get(
-          `https://raap-backend.onrender.com/api/v1/locations/${event.target.value}`
-        )
-        .then((zipCodes) => {
-          setSearchedZipCodes(zipCodes.data.data);
-        });
-    }, 1500);
+  useEffect(() => {
+    getZipCodes();
+  }, []);
+
+  const getZipCodes = (zipCode?: string) => {
+    const url = zipCode
+      ? `http://localhost:3003/api/v1/locations/${zipCode}`
+      : "http://localhost:3003/api/v1/locations";
+
+    console.log("url", url, zipCode);
+    axios
+      .get(url)
+      .then((zipCodes) => {
+        setZipCodes(zipCodes.data.data);
+      })
+      .catch((error) => console.log("err", error));
+  };
+
+  const onZipCodeChanged = (event: React.ChangeEvent<{}>, newValue: string) => {
+    setZipCode(newValue);
+    if (Number.isInteger(parseInt(newValue))) getZipCodes(newValue);
   };
 
   const onNumberOfRoomsChanged = (
@@ -53,22 +62,19 @@ function Sider() {
     setNumberOfRooms(newValue);
   };
 
-  const onFormSubmitted = () => {
-    console.log("number of the rooms", numberOfRooms);
-    navigate("/generic_estimation");
-    // axios
-    //   .post("http://localhost:3003/api/v1/notifications", {
-    //     // @ts-ignore
-    //     rooms: numberOfRooms,
-    //   })
-    //   .then((res) => {
-    //     console.log("res------------------->>>", res);
-    //     // navigate("/view", { replace: true });
-    //   });
+  const onFormSubmitted = async () => {
+    const result = await axios.post("http://localhost:3003/api/v1/estimate", {
+      rooms: numberOfRooms,
+      zipCode: selectedZipCode,
+    });
+    if (result) navigate("/generic_estimation");
   };
 
-  const onZipCodeSelected = (item: ZipCodes) => {
-    console.log(item);
+  const onZipCodeSelected = (
+    event: React.ChangeEvent<{}>,
+    newValue: string
+  ) => {
+    setSelectedZipCode(newValue);
   };
 
   return (
@@ -154,12 +160,29 @@ function Sider() {
               <div className="text-center" style={{ color: "#519259" }}>
                 Site's zip code
               </div>
-              <Input
-                value={zipCode}
-                onChange={onZipCodeChanged}
-                disableUnderline
-                className="bg-white w-100 py-1 border-1 border-gray rounded pl-2 align-center m-auto"
-                placeholder="Zip Code ..."
+              <Autocomplete
+                freeSolo
+                sx={{ width: 300 }}
+                id="free-solo-2-demo"
+                disableClearable
+                inputValue={zipCode}
+                value={selectedZipCode}
+                onInputChange={onZipCodeChanged}
+                onChange={onZipCodeSelected}
+                options={zipCodes.map(
+                  (option) =>
+                    `${option.city}, ${option.state} ${option.zipCode}`
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Zip Code..."
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                    }}
+                  />
+                )}
               />
             </div>
             {/* <div
