@@ -45,7 +45,8 @@ function Sider() {
     axios
       .get(url)
       .then((zipCodes) => {
-        const arr = zipCodes.data.data.map((item: ZipCodes) => {
+        console.log("zippp", zipCodes);
+        const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {
             ...item,
             label: `${item.city}, ${item.state} ${item.zipCode}`,
