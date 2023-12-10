@@ -45,14 +45,15 @@ function Sider() {
     axios
       .get(url)
       .then((zipCodes) => {
-        setZipCodes(
-          zipCodes.data.data.map((item: ZipCodes) => {
-            return {
-              label: `${item.city}, ${item.state} ${item.zipCode}`,
-              title: `${item.city}, ${item.state} ${item.zipCode}`,
-            };
-          })
-        );
+        const arr = zipCodes.data.data.map((item: ZipCodes) => {
+          return {
+            ...item,
+            label: `${item.city}, ${item.state} ${item.zipCode}`,
+            title: `${item.city}, ${item.state} ${item.zipCode}`,
+          };
+        });
+        console.log("zipppsss", arr);
+        setZipCodes(arr);
       })
       .catch((error) => console.log("err", error));
   };
