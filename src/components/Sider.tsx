@@ -37,8 +37,8 @@ function Sider() {
 
   const getZipCodes = (zipCode?: string) => {
     const url = zipCode
-      ? `http://localhost:3003/api/v1/locations/${zipCode}`
-      : "http://localhost:3003/api/v1/locations";
+      ? `${process.env.REACT_APP_BASE_URL}/locations/${zipCode}`
+      : `${process.env.REACT_APP_BASE_URL}/locations`;
 
     console.log("url", url, zipCode);
     axios
@@ -63,10 +63,13 @@ function Sider() {
   };
 
   const onFormSubmitted = async () => {
-    const result = await axios.post("http://localhost:3003/api/v1/estimate", {
-      rooms: numberOfRooms,
-      zipCode: selectedZipCode,
-    });
+    const result = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/estimation/generic`,
+      {
+        rooms: numberOfRooms,
+        zipCode: selectedZipCode,
+      }
+    );
     if (result) navigate("/generic_estimation");
   };
 
