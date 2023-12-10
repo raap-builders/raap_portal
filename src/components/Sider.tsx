@@ -170,10 +170,14 @@ function Sider() {
                 value={selectedZipCode}
                 onInputChange={onZipCodeChanged}
                 onChange={onZipCodeSelected}
-                options={zipCodes.map(
-                  (option) =>
-                    `${option.city}, ${option.state} ${option.zipCode}`
-                )}
+                options={
+                  zipCodes && zipCodes.length
+                    ? zipCodes.map(
+                        (option) =>
+                          `${option.city}, ${option.state} ${option.zipCode}`
+                      )
+                    : [""]
+                }
                 renderInput={(params) => (
                   <TextField
                     {...params}
