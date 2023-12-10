@@ -171,6 +171,7 @@ function Sider() {
                 Site's zip code
               </div>
               <Autocomplete
+                freeSolo
                 sx={{ width: 300 }}
                 disableClearable
                 inputValue={zipCode}
