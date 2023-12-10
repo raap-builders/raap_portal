@@ -1,3 +1,4 @@
+//ts-check
 import React, { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Radio from "@mui/material/Radio";
@@ -178,7 +179,7 @@ function Sider() {
                 value={selectedZipCode}
                 onInputChange={onZipCodeChanged}
                 onChange={onZipCodeSelected}
-                options={zipCodes.map((option) => option.title)}
+                options={zipCodes.map((option) => option.label)}
                 renderInput={(params) => (
                   <TextField
                     {...params}
