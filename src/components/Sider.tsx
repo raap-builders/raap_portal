@@ -40,7 +40,6 @@ function Sider() {
       ? `${process.env.REACT_APP_BASE_URL}/locations/${zipCode}`
       : `${process.env.REACT_APP_BASE_URL}/locations`;
 
-    console.log("url", url, zipCode);
     axios
       .get(url)
       .then((zipCodes) => {
