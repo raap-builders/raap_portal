@@ -20,6 +20,8 @@ interface ZipCodes {
   zipCode: string;
   city: string;
   state: string;
+  label: string;
+  title: string;
 }
 function Sider() {
   const navigate = useNavigate();
@@ -42,7 +44,14 @@ function Sider() {
     axios
       .get(url)
       .then((zipCodes) => {
-        setZipCodes(zipCodes.data.data);
+        setZipCodes(
+          zipCodes.data.data.map((item: ZipCodes) => {
+            return {
+              label: `${item.city}, ${item.state} ${item.zipCode}`,
+              title: `${item.city}, ${item.state} ${item.zipCode}`,
+            };
+          })
+        );
       })
       .catch((error) => console.log("err", error));
   };
@@ -162,22 +171,13 @@ function Sider() {
                 Site's zip code
               </div>
               <Autocomplete
-                freeSolo
                 sx={{ width: 300 }}
-                id="free-solo-2-demo"
                 disableClearable
                 inputValue={zipCode}
                 value={selectedZipCode}
                 onInputChange={onZipCodeChanged}
                 onChange={onZipCodeSelected}
-                options={
-                  zipCodes && zipCodes.length
-                    ? zipCodes.map(
-                        (option) =>
-                          `${option.city}, ${option.state} ${option.zipCode}`
-                      )
-                    : [""]
-                }
+                options={zipCodes.map((option) => option.title)}
                 renderInput={(params) => (
                   <TextField
                     {...params}
