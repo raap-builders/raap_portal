@@ -15,7 +15,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import axios from "axios";
 
-let myTimeout: NodeJS.Timeout;
 interface ZipCodes {
   id: number;
   zipCode: string;
@@ -162,7 +161,7 @@ function Sider() {
               <div className="text-center" style={{ color: "#519259" }}>
                 Site's zip code
               </div>
-              <Autocomplete
+              {/* <Autocomplete
                 freeSolo
                 sx={{ width: 300 }}
                 id="free-solo-2-demo"
@@ -185,22 +184,8 @@ function Sider() {
                     }}
                   />
                 )}
-              />
+              /> */}
             </div>
-            {/* <div
-              style={{ overflowY: "scroll", height: 300 }}
-              className="border-1 bg-white rounded"
-            >
-              {searchedZipCodes.map((item) => {
-                return (
-                  <div
-                    onClick={(_) => onZipCodeSelected(item)}
-                    className="pointer cursor-pointer py-1"
-                    key={item.id}
-                  >{`${item.city}, ${item.zipCode}, ${item.state}`}</div>
-                );
-              })}
-            </div> */}
 
             <div className="mt-4 w-100">
               <div className="mb-2">Number of rooms</div>
