@@ -45,7 +45,6 @@ function Sider() {
     axios
       .get(url)
       .then((zipCodes) => {
-        console.log("zippp", zipCodes);
         const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {
             ...item,
@@ -53,7 +52,6 @@ function Sider() {
             title: `${item.city}, ${item.state} ${item.zipCode}`,
           };
         });
-        console.log("zipppsss", arr);
         setZipCodes(arr);
       })
       .catch((error) => console.log("err", error));
@@ -72,22 +70,16 @@ function Sider() {
     setNumberOfRooms(newValue);
   };
 
-  const onFormSubmitted = async () => {
-    const result = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/estimation/generic`,
-      {
-        rooms: numberOfRooms,
-        zipCode: selectedZipCode,
-      }
-    );
-    if (result) navigate("/generic_estimation");
+  const onFormSubmitted = () => {
+    navigate(`/generic_estimation/${numberOfRooms}/${selectedZipCode}`);
   };
 
   const onZipCodeSelected = (
     event: React.ChangeEvent<{}>,
     newValue: string
   ) => {
-    setSelectedZipCode(newValue);
+    const selectedObject = zipCodes.find((option) => option.label === newValue);
+    setSelectedZipCode(selectedObject?.zipCode || "");
   };
 
   return (

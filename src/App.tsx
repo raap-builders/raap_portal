@@ -200,7 +200,10 @@ function App() {
             <Breadcrumb />
             <Routes>
               <Route path="/" Component={Landing} />
-              <Route path="/generic_estimation" Component={GenericEstimation} />
+              <Route
+                path="/generic_estimation/:numberOfRooms/:zipCode"
+                Component={GenericEstimation}
+              />
               <Route path="/view" Component={View} />
             </Routes>
           </div>

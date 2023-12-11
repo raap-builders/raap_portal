@@ -3,7 +3,16 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { currencyFormat } from "../utils/formatter";
 
+interface GenericEstimationType {
+  generalFactors: object;
+  buildingFactors: object;
+  siteWorkFactors: object;
+}
 const projectFactors = [
   { id: 1, name: "Total Project Cost", cost: "$13,030,048" },
   { id: 2, name: "Cost Per Key", cost: "$121,776" },
@@ -11,119 +20,22 @@ const projectFactors = [
   { id: 4, name: "Build Time", cost: "14 Months" },
 ];
 
-const buildingFactors = [
-    {
-      id: 1,
-      name: "03 Concrete",
-      cost: "$346,084",
-    },
-    {
-      id: 2,
-      name: "04 Masonary",
-      cost: "$3,120,971",
-    },
-    {
-      id: 3,
-      name: "05 Metal",
-      cost: "$141,474",
-    },
-    {
-      id: 4,
-      name: "06 Wood & Plastics",
-      cost: "$346,084",
-    },
-    {
-      id: 5,
-      name: "07 Thermal & Moisture Protection",
-      cost: "$3,120,971",
-    },
-    {
-      id: 6,
-      name: "08 Openings",
-      cost: "$141,474",
-    },
-    {
-      id: 7,
-      name: "09 Finishes",
-      cost: "$346,084",
-    },
-    {
-      id: 8,
-      name: "10 Specialties",
-      cost: "$3,120,971",
-    },
-    {
-      id: 9,
-      name: "11 Equipment",
-      cost: "$ 141,474",
-    },
-    {
-      id: 10,
-      name: "12 Furnishing",
-      cost: "$346,084",
-    },
-    {
-      id: 11,
-      name: "13 Special Construction",
-      cost: "$3,120,971",
-    },
-    {
-      id: 12,
-      name: "14 Conveying Equipment",
-      cost: "$141,474",
-    },
-    {
-      id: 13,
-      name: "21 Fire",
-      cost: "$346,084",
-    },
-    {
-      id: 14,
-      name: "22 Plumbing",
-      cost: "$3,120,971",
-    },
-    {
-      id: 15,
-      name: "23 HVAC",
-      cost: "$141,474",
-    },
-    {
-      id: 16,
-      name: "26 Electrical",
-      cost: "$346,084",
-    },
-  ],
-  siteWorkFactors = [
-    {
-      id: 1,
-      name: "31 Earthwork",
-      cost: "$141,474",
-    },
-    {
-      id: 2,
-      name: "32 Exterior Improvements",
-      cost: "$346,084",
-    },
-    {
-      id: 3,
-      name: "33 Utilities",
-      cost: "$3,120,971",
-    },
-  ],
-  generalFactors = [
-    {
-      id: 1,
-      name: "01 General Requirements",
-      cost: "$346,084",
-    },
-    {
-      id: 2,
-      name: "Soft Charges & Fees",
-      cost: "$3,120,971",
-    },
-  ];
-
 function GenericEstimation() {
+  const { numberOfRooms, zipCode } = useParams();
+  const [genericEstimation, setGenericEstimation] =
+    useState<GenericEstimationType>();
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
+        rooms: numberOfRooms,
+        zipCode: zipCode,
+      })
+      .then((result) => {
+        setGenericEstimation(result.data.data);
+      });
+  }, []);
+
   return (
     <div className="d-flex flex-column align-items-center w-100">
       <div
@@ -192,18 +104,21 @@ function GenericEstimation() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              {buildingFactors.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    fontSize: 14,
-                  }}
-                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
-                >
-                  <div>{item.name}</div>
-                  <div>{item.cost}</div>
-                </div>
-              ))}
+              {genericEstimation?.buildingFactors &&
+                Object.entries(genericEstimation.buildingFactors).map(
+                  (item) => (
+                    <div
+                      key={item[0]}
+                      style={{
+                        fontSize: 14,
+                      }}
+                      className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                    >
+                      <div>{item[0]}</div>
+                      <div>{currencyFormat(item[1])}</div>
+                    </div>
+                  )
+                )}
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -223,18 +138,21 @@ function GenericEstimation() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              {siteWorkFactors.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    fontSize: 14,
-                  }}
-                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
-                >
-                  <div>{item.name}</div>
-                  <div>{item.cost}</div>
-                </div>
-              ))}
+              {genericEstimation?.siteWorkFactors &&
+                Object.entries(genericEstimation.siteWorkFactors).map(
+                  (item) => (
+                    <div
+                      key={item[0]}
+                      style={{
+                        fontSize: 14,
+                      }}
+                      className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                    >
+                      <div>{item[0]}</div>
+                      <div>{currencyFormat(item[1])}</div>
+                    </div>
+                  )
+                )}
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -254,18 +172,19 @@ function GenericEstimation() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              {generalFactors.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    fontSize: 14,
-                  }}
-                  className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
-                >
-                  <div>{item.name}</div>
-                  <div>{item.cost}</div>
-                </div>
-              ))}
+              {genericEstimation?.generalFactors &&
+                Object.entries(genericEstimation.generalFactors).map((item) => (
+                  <div
+                    key={item[0]}
+                    style={{
+                      fontSize: 14,
+                    }}
+                    className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                  >
+                    <div>{item[0]}</div>
+                    <div>{currencyFormat(item[1])}</div>
+                  </div>
+                ))}
             </Typography>
           </AccordionDetails>
         </Accordion>
