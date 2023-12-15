@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import Input from "@mui/material/Input";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
@@ -13,8 +12,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Autocomplete, CircularProgress, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
+import { useLocationStore } from "../store";
+import { Store } from "antd/es/form/interface";
 
 interface ZipCodes {
   id: number;
@@ -32,7 +33,8 @@ function Sider() {
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
   const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
-
+  //@ts-ignore
+  const { changeRooms, changeZipCode } = useLocationStore((state) => state);
   useEffect(() => {
     getZipCodes();
   }, []);
@@ -68,10 +70,11 @@ function Sider() {
   ) => {
     // @ts-ignore
     setNumberOfRooms(newValue);
+    changeRooms(newValue);
   };
 
   const onFormSubmitted = () => {
-    navigate(`/generic_estimation/${numberOfRooms}/${selectedZipCode}`);
+    navigate(`generic_estimation`);
   };
 
   const onZipCodeSelected = (
@@ -80,6 +83,7 @@ function Sider() {
   ) => {
     const selectedObject = zipCodes.find((option) => option.label === newValue);
     setSelectedZipCode(selectedObject?.zipCode || "");
+    changeZipCode(selectedObject?.zipCode || "");
   };
 
   return (

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { currencyFormat } from "../utils/formatter";
+import { useLocationStore } from "../store";
 
 interface GenericEstimationType {
   generalFactors: object;
@@ -21,11 +22,14 @@ const projectFactors = [
 ];
 
 function GenericEstimation() {
-  const { numberOfRooms, zipCode } = useParams();
+  //@ts-ignore
+  const { rooms: numberOfRooms, zipCode } = useLocationStore((state) => state);
   const [genericEstimation, setGenericEstimation] =
     useState<GenericEstimationType>();
+  //@ts-ignore
 
   useEffect(() => {
+    console.log("number", numberOfRooms, zipCode);
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
         rooms: numberOfRooms,
@@ -34,7 +38,7 @@ function GenericEstimation() {
       .then((result) => {
         setGenericEstimation(result.data.data);
       });
-  }, []);
+  }, [numberOfRooms, zipCode]);
 
   return (
     <div className="d-flex flex-column align-items-center w-100">
