@@ -61,7 +61,8 @@ function Sider() {
 
   const onZipCodeChanged = (event: React.ChangeEvent<{}>, newValue: string) => {
     setZipCode(newValue);
-    if (Number.isInteger(parseInt(newValue))) getZipCodes(newValue);
+    if (Number.isInteger(parseInt(newValue)) || !newValue)
+      getZipCodes(newValue);
   };
 
   const onNumberOfRoomsChanged = (
