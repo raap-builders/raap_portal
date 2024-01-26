@@ -4,3 +4,9 @@
 .navlink-text:hover{
     color:#519259
 }
+@media (max-width: 640px) {
+    .isVisible {
+      display: none;
+    }
+    
+}  

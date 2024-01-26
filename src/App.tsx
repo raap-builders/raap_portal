@@ -189,22 +189,29 @@ function App() {
   }, []);
 
   return (
-    <div className="AppMain px-3 py-1">
-      <BrowserRouter>
-        <Header />
-        <div className="d-flex col-12">
-          <div className="col-lg-3 col-sm-5 pr-5 mt-4 d-flex flex-column justify-content-center">
-            <Sider />
-          </div>
-          <div className="col-lg-9 col-sm-7 flex-column d-flex align-items-center">
+    <div>
+      <div className="AppMain h-[100vh] overflow-hidden scrollbar-hide px-3 py-1 hidden sm:hidden lg:block md:block 2xl:block ">
+        <BrowserRouter>
+          <Header />
+          <div>
             <Breadcrumb />
-            <Routes>
-              <Route path="/" Component={Landing} />
-              <Route path="/generic_estimation" Component={GenericEstimation} />
-              <Route path="/view" Component={View} />
-            </Routes>
           </div>
-          {/* <NavbarContainer>
+          <div className="flex flex-col sm:flex-row justify-center 2xl:gap-8  ">
+            <div className="sm:w-full md:hidden lg:block 2xl:block lg:mr-8   2xl:w-[30%] 2xl:ml-8 lg:w-1/3  ">
+              <Sider />
+            </div>
+            <div className="sm:w-full lg:w-3/4  flex flex-col items-center lg:mr-2 2xl:ml-12">
+              <Routes>
+                <Route path="/" Component={Landing} />
+                <Route
+                  path="/generic_estimation"
+                  Component={GenericEstimation}
+                />
+                <Route path="/view" Component={View} />
+              </Routes>
+            </div>
+
+            {/* <NavbarContainer>
             <Logo src={raapLogo} alt="Company Logo" />
             <NavLinkContainer>
               <NavItem to="/">Configuration</NavItem>
@@ -213,16 +220,23 @@ function App() {
             </NavLinkContainer>
             <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
           </NavbarContainer> */}
-          {/* <MainContainer> */}
-          {/* <Login /> */}
-          {/* <Routes>
+            {/* <MainContainer> */}
+            {/* <Login /> */}
+            {/* <Routes>
               <Route path="/" Component={Configure} />
               <Route path="/view" Component={View} />
               <Route path="/schedule" Component={Schedule} />
             </Routes> */}
-          {/* </MainContainer> */}
-        </div>
-      </BrowserRouter>
+            {/* </MainContainer> */}
+          </div>
+        </BrowserRouter>
+      </div>
+      <div className="block overflowY:hidden bg-[white] sm:block  md:hidden lg:hidden 2xl:hidden h-[700px]">
+        <h1 className="  justify-center w-full h-full  text-black flex items-center">
+          {" "}
+          This Site Does not<br></br> Support Mobile View.
+        </h1>
+      </div>
     </div>
   );
 }

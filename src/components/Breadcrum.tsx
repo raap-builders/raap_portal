@@ -20,11 +20,22 @@ function Breadcrum() {
     }
   };
   return (
-    <div className="py-2 d-flex justify-content-end w-100 align-items-end">
-      <Box className="w-25">
+    <div className="lg:py-4 2xl:py-4 d-flex md:justify-content-center justify-content-end w-full align-items-end ">
+      <Box className="w-[30%] md:mr-[-15px]  2xl:mt-2 lg:w-[20%] ">
         <Stepper activeStep={renderActiveStep()} alternativeLabel>
           {steps.map((label) => (
-            <Step key={label}>
+            <Step
+              key={label}
+              sx={{
+                "& .MuiStepLabel-root .Mui-completed": {
+                  color: "#519259",
+                },
+
+                "& .MuiStepLabel-root .Mui-active": {
+                  color: "gray",
+                },
+              }}
+            >
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}

@@ -1,10 +1,20 @@
+body,
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.sc-fsQiph, .hCpXUZ {
+.sc-fsQiph,
+.hCpXUZ {
   max-height: 200px;
   overflow-y: scroll;
 }

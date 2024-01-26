@@ -1,5 +1,7 @@
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 600px) {
+    
     .imageSize{
         height: 1000px !important;
+        margin-right:620px;
     }
 }

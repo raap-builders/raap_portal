@@ -11,7 +11,7 @@
 
 .breadcrumb li {
     display: inline-block;
-    margin-bottom: .2em;
+    /* margin-bottom: .2em; */
 }
 
 .breadcrumb li a {
