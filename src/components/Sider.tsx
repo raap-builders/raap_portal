@@ -51,8 +51,8 @@ function Sider() {
         const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {
             ...item,
-            label: `${item.city}, ${item.state} ${item.zipCode}`,
-            title: `${item.city}, ${item.state} ${item.zipCode}`,
+            label: `${item.city}`,
+            title: `${item.city}`,
           };
         });
         setZipCodes(arr);
