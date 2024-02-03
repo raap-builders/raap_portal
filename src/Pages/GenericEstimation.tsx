@@ -11,9 +11,9 @@ import { useLocationStore } from "../store";
 import Sider from "../components/Sider";
 
 interface GenericEstimationType {
-  generalFactors: object;
-  buildingFactors: object;
-  siteWorkFactors: object;
+  generalFactors: { generalFactorsCost: number };
+  buildingFactors: { buildingCost: number };
+  siteWorkFactors: { siteWorkCost: number };
 }
 const projectFactors = [
   { id: 1, name: "Total Project Cost", cost: "$13,030,048" },
@@ -114,7 +114,10 @@ function GenericEstimation() {
                   Building Cost
                 </Typography>
                 <Typography variant="h6" className="w-50 text-right pr-4">
-                  $8,961,190
+                  {genericEstimation?.buildingFactors &&
+                    currencyFormat(
+                      genericEstimation.buildingFactors?.buildingCost
+                    )}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -152,7 +155,10 @@ function GenericEstimation() {
                   Site Work Cost
                 </Typography>
                 <Typography variant="h6" className="w-50 text-right pr-4">
-                  $1,462,715
+                  {genericEstimation?.siteWorkFactors &&
+                    currencyFormat(
+                      genericEstimation.siteWorkFactors?.siteWorkCost
+                    )}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -190,7 +196,10 @@ function GenericEstimation() {
                   General Conditions & Fees
                 </Typography>
                 <Typography variant="h6" className="w-50 text-right pr-4">
-                  $141,474
+                  {genericEstimation?.generalFactors &&
+                    currencyFormat(
+                      genericEstimation.generalFactors?.generalFactorsCost
+                    )}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
