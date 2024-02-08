@@ -10,17 +10,18 @@ import { currencyFormat } from "../utils/formatter";
 import { useLocationStore } from "../store";
 import Sider from "../components/Sider";
 
+interface ProjectFactor {
+  id: number;
+  name: string;
+  cost: string; // Assuming the cost can be represented as a string
+}
+
 interface GenericEstimationType {
   generalFactors: { generalFactorsCost: number };
   buildingFactors: { buildingCost: number };
   siteWorkFactors: { siteWorkCost: number };
+  projectFactors: ProjectFactor[];
 }
-const projectFactors = [
-  { id: 1, name: "Total Project Cost", cost: "$13,030,048" },
-  { id: 2, name: "Cost Per Key", cost: "$121,776" },
-  { id: 3, name: "Cost Per Square Foot", cost: "$262" },
-  { id: 4, name: "Build Time", cost: "14_Months" },
-];
 
 function GenericEstimation() {
   //@ts-ignore
@@ -55,27 +56,31 @@ function GenericEstimation() {
           backgroundColor: "#519259",
         }}
       >
-        {projectFactors.map((item) => (
-          <div key={item.id} className="rounded bg-dark  mx-3 border-1 w-full ">
+        {genericEstimation &&
+          genericEstimation?.projectFactors.map((item) => (
             <div
-              style={{ color: "#519259" }}
-              className="text-center border-bottom-0 bg-white font-bold py-2"
+              key={item.id}
+              className="rounded bg-dark  mx-3 border-1 w-full "
             >
-              {item.name}
-            </div>
-            <div
-              style={{
-                color: "#4F55E7",
+              <div
+                style={{ color: "#519259" }}
+                className="text-center border-bottom-0 bg-white font-bold py-2"
+              >
+                {item.name}
+              </div>
+              <div
+                style={{
+                  color: "#4F55E7",
 
-                letterSpacing: "2px",
-                backgroundColor: "#DAF2DE",
-              }}
-              className="py-3 font-bold text-center text-2xl "
-            >
-              {item.cost}
+                  letterSpacing: "2px",
+                  backgroundColor: "#DAF2DE",
+                }}
+                className="py-3 font-bold text-center text-2xl "
+              >
+                {currencyFormat(parseFloat(item.cost))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="flex  w-100  ">
         <div className=" md:block w-[100%] lg:hidden md:mr-12 md:mt-14 2xl:hidden flex overflow-y-auto  scrollbar-hide ">
@@ -130,7 +135,9 @@ function GenericEstimation() {
                           style={{
                             fontSize: 14,
                           }}
-                          className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                          className={`border-top pt-2 ${
+                            item[0] === "buildingCost" ? "d-none" : "d-flex"
+                          } align-items-center justify-content-between text-secondary`}
                         >
                           <div>{item[0]}</div>
                           <div>{currencyFormat(item[1])}</div>
@@ -171,7 +178,9 @@ function GenericEstimation() {
                           style={{
                             fontSize: 14,
                           }}
-                          className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                          className={`border-top pt-2 ${
+                            item[0] === "siteWorkCost" ? "d-none" : "d-flex"
+                          } align-items-center justify-content-between text-secondary`}
                         >
                           <div>{item[0]}</div>
                           <div>{currencyFormat(item[1])}</div>
@@ -193,7 +202,7 @@ function GenericEstimation() {
                 id="panel1a-header"
               >
                 <Typography variant="h6" className="w-50">
-                  General Conditions & Fees
+                  GC Charges
                 </Typography>
                 <Typography variant="h6" className="w-50 text-right pr-4">
                   {genericEstimation?.generalFactors &&
@@ -212,7 +221,11 @@ function GenericEstimation() {
                           style={{
                             fontSize: 14,
                           }}
-                          className="border-top pt-2 d-flex align-items-center justify-content-between text-secondary"
+                          className={`border-top pt-2 ${
+                            item[0] === "generalFactorsCost"
+                              ? "d-none"
+                              : "d-flex"
+                          } align-items-center justify-content-between text-secondary`}
                         >
                           <div>{item[0]}</div>
                           <div>{currencyFormat(item[1])}</div>

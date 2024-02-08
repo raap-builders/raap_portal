@@ -147,15 +147,17 @@ function Sider() {
                       name="row-radio-buttons-group"
                     >
                       <FormControlLabel
+                        disabled
                         value="selectService"
                         control={
-                          <Radio size="small" style={{ color: "#519259" }} />
+                          <Radio size="small" style={{ color: "#878787" }} />
                         }
                         label={
                           <span style={{ fontSize: 12 }}>Select Services</span>
                         }
                       />
                       <FormControlLabel
+                        checked
                         value="extendedService"
                         control={
                           <Radio size="small" style={{ color: "#519259" }} />
@@ -166,6 +168,7 @@ function Sider() {
                       />
                       <FormControlLabel
                         disabled
+                        value="fullService"
                         aria-setsize={8}
                         control={
                           <Radio size="small" style={{ color: "#878787" }} />
