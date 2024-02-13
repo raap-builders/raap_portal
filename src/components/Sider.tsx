@@ -102,7 +102,7 @@ function Sider() {
           className="w-100 text-center text-white mt-2 xl:mt-0"
           id="demo-row-radio-buttons-group-label"
         >
-         <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md">
+          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md">
             {" "}
             Select the following to get started
           </span>
@@ -136,16 +136,19 @@ function Sider() {
               id="panel1a-header"
               className=" md:p-0"
             >
-              <Typography> <span className="2xl:text-lg xl:text-md   font-medium md:text-md lg:text-md md:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+              <Typography>
+                {" "}
+                <span className="2xl:text-lg xl:text-md   font-medium md:text-md lg:text-md md:px-2 xl:px-0 2xl:px-0 xl:text-lg">
                   {" "}
                   Project
-                </span></Typography>
+                </span>
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-            <Typography className="px-3">
-            <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
+              <Typography className="px-3">
+                <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
                   <div>
-                  <span
+                    <span
                       style={{ color: "#519259" }}
                       className="2xl:text-lg xl:text-md  lg:text-md md:text-md  "
                     >
@@ -157,7 +160,7 @@ function Sider() {
                       name="row-radio-buttons-group"
                     >
                       <FormControlLabel
-                      className="h-[25px] xl:mb-2 xl:text-md 2xl:mb-2 "
+                        className="h-[25px] xl:mb-2 xl:text-md 2xl:mb-2 "
                         disabled
                         value="selectService"
                         control={
@@ -165,12 +168,12 @@ function Sider() {
                         }
                         label={
                           <span className="text-[12px] 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
-                           Select Services
+                            Select Services
                           </span>
                         }
                       />
                       <FormControlLabel
-                             className="h-[25px] xl:mb-2 2xl:mb-2 "
+                        className="h-[25px] xl:mb-2 2xl:mb-2 "
                         checked
                         value="extendedService"
                         control={
@@ -183,7 +186,7 @@ function Sider() {
                         }
                       />
                       <FormControlLabel
-                      className="h-[25px]  "
+                        className="h-[25px]  "
                         disabled
                         value="fullService"
                         aria-setsize={8}
@@ -192,11 +195,11 @@ function Sider() {
                         }
                         label={
                           <span
-                          style={{ color: "#878787" }}
-                          className="2xl:text-lg sm md:text-sm lg:text-md xl:text-lg"
-                        >
-                          Full Service
-                        </span>
+                            style={{ color: "#878787" }}
+                            className="2xl:text-lg sm md:text-sm lg:text-md xl:text-lg"
+                          >
+                            Full Service
+                          </span>
                         }
                       />
                     </RadioGroup>
@@ -204,7 +207,7 @@ function Sider() {
                 </div>
 
                 <div className="d-flex flex-column align-items-center justify-content-center  xl:text-lg">
-                <div className="text-center 2xl:text-lg  md:m-0  text-[#519259] md:text-sm lg:text-md  xl:mb-0  xl:text-lg ">
+                  <div className="text-center 2xl:text-lg  md:mb-2  text-[#519259] md:text-sm lg:text-md  xl:mb-0  xl:text-lg ">
                     Site's zip code
                   </div>
                   <div className="w-full ">
@@ -232,7 +235,7 @@ function Sider() {
                 </div>
 
                 <div className=" w-100 ">
-                <div className=" 2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg">
+                  <div className=" 2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg">
                     Number of Rooms
                   </div>
                   <Slider
@@ -247,7 +250,7 @@ function Sider() {
                     value={numberOfRooms}
                     onChange={onNumberOfRoomsChanged}
                   />
-                 <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
+                  <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
                     {numberOfRooms}
                   </div>
                 </div>
@@ -278,22 +281,26 @@ function Sider() {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography><span className="2xl:text-lg  font-medium  md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                  <Typography>
+                    <span className="2xl:text-lg  font-medium  md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
                       Site
-                    </span></Typography>
+                    </span>
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Typography className=" md:px-2 xl:px-4">
-                <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
+                  <Typography className=" md:px-2 xl:px-4">
+                    <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
                       <span style={{ color: "#519259" }}>Parameter</span>
                       <span style={{ color: "#519259" }}>Default</span>
                     </div>
 
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
-                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg "> Number of floors
+                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg ">
+                        {" "}
+                        Number of floors
                       </span>
                       <TextField
-                              className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={4}
@@ -305,7 +312,7 @@ function Sider() {
                         Total Sq Ft (w/o pool)
                       </span>
                       <TextField
-                         className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={58334}
@@ -317,7 +324,7 @@ function Sider() {
                         Story Height (Ft.)
                       </span>
                       <TextField
-                             className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={10}
@@ -364,13 +371,15 @@ function Sider() {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography><span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                  <Typography>
+                    <span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
                       Rooms
-                    </span></Typography>
+                    </span>
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Typography className=" lg:pb-2 md:px-2 md:pb-2 xl:px-4">
-                <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
+                  <Typography className=" lg:pb-2 md:px-2 md:pb-2 xl:px-4">
+                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
                       <span
                         style={{ color: "#519259" }}
                         className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
@@ -392,7 +401,7 @@ function Sider() {
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
-                    <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King One Bedroom
                       </span>
                       <TextField
@@ -402,7 +411,7 @@ function Sider() {
                         defaultValue={9}
                         placeholder="9"
                       />
-                     <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                      <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
                         8%
                       </span>
                     </div>
@@ -500,7 +509,7 @@ function Sider() {
           .MuiOutlinedInput-root
           .MuiAutocomplete-input 
           {
-            padding:7px 0px 7px 0px; 
+            padding:7px 5px 7px 5px; 
           }
           .css-eg0mwd-MuiSlider-thumb {
             width:12px;
@@ -537,7 +546,7 @@ function Sider() {
           .MuiOutlinedInput-root
           .MuiAutocomplete-input 
           {
-            padding:10px 0px 10px 0px; 
+            padding:10px 5px 10px 5px; 
           }
           .css-eg0mwd-MuiSlider-thumb {
             width:16px;
