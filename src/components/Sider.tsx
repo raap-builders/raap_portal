@@ -89,36 +89,37 @@ function Sider() {
   };
 
   return (
-    <div className="w-full ">
+    <div className="2xl:text-lg  w-[100%]  ">
       <FormControl
-        className="d-flex flex-column pb-4 "
+        className="d-flex flex-column "
         style={{
           backgroundColor: "#519258",
-          borderRadius: 20,
+          borderRadius: 15,
+          marginRight: 10,
         }}
       >
         <FormLabel
-          className="w-100 text-center text-white mt-4"
+          className="w-100 text-center text-white mt-2 xl:mt-0"
           id="demo-row-radio-buttons-group-label"
         >
-          Select the following to get started
+          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md">
+            {" "}
+            Select the following to get started
+          </span>
         </FormLabel>
         <FormLabel
-          className="w-100 text-center text-white mt-2"
+          className="w-100 text-center text-white 2xl:text-lg "
           id="demo-row-radio-buttons-group-label"
         >
-          Project Information
+          <span className="2xl:text-xl xl:text-md  md:text-sm lg:text-md ">
+            Project Information
+          </span>
         </FormLabel>
         <div
-          className="flex flex-col items-center sider-accordion-container max-h-screen overflow-y-auto scrollbar-hide
+          className="flex flex-col items-center sider-accordion-container max-h-screen px-[5%] pb-[4%]  
+        
       "
-          // overflow-y-scroll  xl:max-h-[400px]
-          style={
-            {
-              // overflowY:"scroll",
-              // height:"60%"
-            }
-          }
+          style={{ maxHeight: "max-content" }}
         >
           <Accordion
             onChange={(e, expanded) => {
@@ -127,46 +128,65 @@ function Sider() {
               } else setOpenCardIndex(4);
             }}
             expanded={openCardIndex === 0}
-            className="mt-1 w-75 rounded"
+            className=" rounded w-[100%] m-0 p-0 "
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
+              className=" md:p-0"
             >
-              <Typography>Project</Typography>
+              <Typography>
+                {" "}
+                <span className="2xl:text-lg xl:text-md   font-medium md:text-md lg:text-md md:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                  {" "}
+                  Project
+                </span>
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                <div className="d-flex align-items-start justify-content-between">
+              <Typography className="px-3">
+                <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
                   <div>
-                    <span style={{ color: "#519259" }}>Hotel Type</span>
+                    <span
+                      style={{ color: "#519259" }}
+                      className="2xl:text-lg xl:text-md  lg:text-md md:text-md  "
+                    >
+                      Hotel Type
+                    </span>
                     <RadioGroup
-                      className="mt-2"
+                      className="w-[max-content] md:mt-2 xl:text-lg "
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
                     >
                       <FormControlLabel
+                        className="h-[25px] xl:mb-2 xl:text-md 2xl:mb-2 "
                         disabled
                         value="selectService"
                         control={
                           <Radio size="small" style={{ color: "#878787" }} />
                         }
                         label={
-                          <span style={{ fontSize: 12 }}>Select Services</span>
+                          <span className="text-[12px] 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                            Select Services
+                          </span>
                         }
                       />
                       <FormControlLabel
+                        className="h-[25px] xl:mb-2 2xl:mb-2 "
                         checked
                         value="extendedService"
                         control={
                           <Radio size="small" style={{ color: "#519259" }} />
                         }
                         label={
-                          <span style={{ fontSize: 12 }}>Extended Stay</span>
+                          <span className="text-[12px] 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                            Extended Stay
+                          </span>
                         }
                       />
                       <FormControlLabel
+                        className="h-[25px]  "
                         disabled
                         value="fullService"
                         aria-setsize={8}
@@ -174,7 +194,10 @@ function Sider() {
                           <Radio size="small" style={{ color: "#878787" }} />
                         }
                         label={
-                          <span style={{ fontSize: 12, color: "#878787" }}>
+                          <span
+                            style={{ color: "#878787" }}
+                            className="2xl:text-lg sm md:text-sm lg:text-md xl:text-lg"
+                          >
                             Full Service
                           </span>
                         }
@@ -183,14 +206,11 @@ function Sider() {
                   </div>
                 </div>
 
-                <div className="d-flex flex-column align-items-center justify-content-center mt-3 mb-4">
-                  <div
-                    className="text-center"
-                    style={{ color: "#519259", width: "300px", margin: "10px" }}
-                  >
+                <div className="d-flex flex-column align-items-center justify-content-center  xl:text-lg">
+                  <div className="text-center 2xl:text-lg  md:mb-2  text-[#519259] md:text-sm lg:text-md  xl:mb-0  xl:text-lg ">
                     Site's zip code
                   </div>
-                  <div className="w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
+                  <div className="w-full ">
                     <Autocomplete
                       freeSolo
                       sx={{ width: "auto" }}
@@ -214,8 +234,10 @@ function Sider() {
                   </div>
                 </div>
 
-                <div className="mt-4 w-100">
-                  <div className="mb-2">Number of rooms</div>
+                <div className=" w-100 ">
+                  <div className=" 2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg">
+                    Number of Rooms
+                  </div>
                   <Slider
                     aria-valuetext="100"
                     aria-label="Default"
@@ -228,7 +250,7 @@ function Sider() {
                     value={numberOfRooms}
                     onChange={onNumberOfRoomsChanged}
                   />
-                  <div className="text-center font-bold h5">
+                  <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
                     {numberOfRooms}
                   </div>
                 </div>
@@ -239,7 +261,7 @@ function Sider() {
             <button
               onClick={onFormSubmitted}
               style={{ backgroundColor: "#519259", bottom: 20 }}
-              className="text-white text-center border-1 rounded position-relative border-white p-3 mt-8 w-75"
+              className="text-white text-center border-1 rounded bottom-3 py-2 mt-2  w-75"
             >
               See Estimate
             </button>
@@ -252,48 +274,57 @@ function Sider() {
                   } else setOpenCardIndex(4);
                 }}
                 expanded={openCardIndex === 1}
-                className="mt-3 w-75 rounded"
+                className="mt-2 w-[100%] rounded m-0"
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography>Site</Typography>
+                  <Typography>
+                    <span className="2xl:text-lg  font-medium  md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                      Site
+                    </span>
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    <div className="d-flex justify-content-between align-items-center w-100">
+                  <Typography className=" md:px-2 xl:px-4">
+                    <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
                       <span style={{ color: "#519259" }}>Parameter</span>
                       <span style={{ color: "#519259" }}>Default</span>
                     </div>
 
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-sm w-50">Number of floors</span>
+                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
+                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg ">
+                        {" "}
+                        Number of floors
+                      </span>
                       <TextField
-                        className="w-50"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={4}
                         placeholder="4"
                       />
                     </div>
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-sm w-50">
+                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
+                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
                         Total Sq Ft (w/o pool)
                       </span>
                       <TextField
-                        className="w-50"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={58334}
                         placeholder="58,334"
                       />
                     </div>
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-sm w-50">Story Height (Ft.)</span>
+                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 2xl:mb-4">
+                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                        Story Height (Ft.)
+                      </span>
                       <TextField
-                        className="w-50"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={10}
@@ -310,10 +341,12 @@ function Sider() {
                     placeholder="Rectangle"
                   />
                 </div> */}
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-sm w-50">Perimeter (Ft.)</span>
+                    <div className="lg:mt-2 d-flex justify-content-between align-items-center xl:mb-1 w-100 md:mb-3 2xl:mb-4">
+                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                        Perimeter (Ft.)
+                      </span>
                       <TextField
-                        className="w-50"
+                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={598}
@@ -331,25 +364,46 @@ function Sider() {
                   } else setOpenCardIndex(4);
                 }}
                 expanded={openCardIndex === 2}
-                className="mt-3 w-75 rounded"
+                className="mt-2 w-[100%] rounded xl:m-0"
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography>Rooms</Typography>
+                  <Typography>
+                    <span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                      Rooms
+                    </span>
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    <div className="d-flex justify-content-between align-items-center w-100 ">
-                      <span style={{ color: "#519259" }}>Room Mix</span>
-                      <span style={{ color: "#519259" }}>No.</span>
-                      <span style={{ color: "#519259" }}>%</span>
+                  <Typography className=" lg:pb-2 md:px-2 md:pb-2 xl:px-4">
+                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        Room Mix
+                      </span>
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        No.
+                      </span>
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        %
+                      </span>
                     </div>
 
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-sm w-50">King One Bedroom</span>
+                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
+                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                        King One Bedroom
+                      </span>
                       <TextField
                         className="w-25"
                         id="outlined-basic"
@@ -357,35 +411,45 @@ function Sider() {
                         defaultValue={9}
                         placeholder="9"
                       />
-                      <span className="text-sm text-right w-25">8%</span>
+                      <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                        8%
+                      </span>
                     </div>
 
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-left text-sm w-50">
+                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
+                      <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King Studio
                       </span>
-                      <span className="text-sm text-center text-right w-25">
+                      <span className="text-sm text-center text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
                         89
                       </span>
-                      <span className="text-sm text-right w-25">83%</span>
+                      <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
+                        83%
+                      </span>
                     </div>
 
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-left text-sm w-50">
+                    <div className="mt-2 d-flex justify-content-between align-items-center w-100">
+                      <span className="text-left md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
                         Double Queen Studio
                       </span>
-                      <span className="text-sm text-center text-right w-25">
+                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
                         17
                       </span>
-                      <span className="text-sm text-right w-25">16%</span>
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        16%
+                      </span>
                     </div>
 
-                    <div className="mt-4 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-left text-sm w-50">ADA</span>
-                      <span className="text-sm text-center text-right w-25">
+                    <div className="mt-2 d-flex justify-content-between align-items-center w-100  ">
+                      <span className="text-left md:text-sm lg:text-md w-50 xl:text-lg 2xl:text-lg">
+                        ADA
+                      </span>
+                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
                         12
                       </span>
-                      <span className="text-sm text-right w-25">11%</span>
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        11%
+                      </span>
                     </div>
                   </Typography>
                 </AccordionDetails>
@@ -396,75 +460,108 @@ function Sider() {
       </FormControl>
       <style>
         {`
-        .sider-accordion-container{
-          
-        }
-      
-        @media (min-width: 768px) and (max-width: 1023px) and (min-height: 626px) and (max-height: 700px) {
-          .sider-accordion-container{
-            max-height: 43vh; 
+        @media (max-width: 1279px)  {   
+          .css-187mznn-MuiSlider-root{
+            padding: 8px 0px;
           }
-        }
-        @media (min-width: 768px) and (max-width: 1023px)  and (min-height:701px) and (max-height:789px){
-          .sider-accordion-container{
-            max-height: 48vh; 
+          .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+            font-size:1rem;
           }
+        } 
+        @media (min-width: 1279px) and (max-width: 1538px)   {   
+              .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+                padding:8px;
+              }.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+                font-size:1.125rem;
+              }.css-187mznn-MuiSlider-root{
+                padding: 15px 0px;
+              }
+        } 
+         @media (min-width: 1538px)   {   
+              .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+                padding:8px;
+              }.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+                font-size:1.4rem;
+              }.css-187mznn-MuiSlider-root{
+                padding: 15px 0px;
+              }
         }
-        @media (min-width: 768px) and (max-width: 1023px)  and (min-height:789px) and (max-height:840px){
-          .sider-accordion-container{
-            max-height: 50vh; 
+        @media (min-width: 768px) and (max-width: 1024px)  {   
+          .css-15v22id-MuiAccordionDetails-root{
+            padding: 6px 10px 6px; 
+            
           }
-        }
-      
-        @media (min-width: 768px) and (max-width: 1023px)  and (min-height:840px) {
-          .sider-accordion-container{
-            max-height: 57vh; 
+          .css-187mznn-MuiSlider-root{
+            padding:13px 0px;
           }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) 
-        and (min-height: 626px) and (max-height: 741px)
-        {
-          .sider-accordion-container{
-            max-height: 65vh; 
+          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
+            padding:0px 5px;
           }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) 
-        and (min-height: 741px)
-        {
-          .sider-accordion-container{
-            max-height: 70vh; 
+          .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+            padding:4px;
+            text-align:start;
+            
           }
-        }
-        @media(min-width:1279px) and (max-width:1440px)and (min-height:626px) and (max-height:701px){
-          .sider-accordion-container{
-            max-height: 63vh;
+          .css-1h4kevy-MuiAutocomplete-root 
+          .MuiOutlinedInput-root{
+            padding:2px;
+          }.css-1h4kevy-MuiAutocomplete-root 
+          .MuiOutlinedInput-root
+          .MuiAutocomplete-input 
+          {
+            padding:7px 5px 7px 5px; 
           }
-        }
-        @media(min-width:1279px) and (max-width:1440px) and (min-height:701px){
-          .sider-accordion-container{
-            max-height: 67vh;
+          .css-eg0mwd-MuiSlider-thumb {
+            width:12px;
+            height:12px;
           }
-        }
-        @media(min-width:1440px) and (max-width:2560px) and(min-height:626px)and (max-height:701px){
-          .sider-accordion-container{
-            max-height: 70vh;
+          .css-n5p0mp-MuiSvgIcon-root{
+            width:10px;
+            margin:0.5px 2px 0px;
           }
-        }
-        @media (min-width: 1440px) and (max-width: 2560px)  and (min-height:701px) and (max-height:789px){
-          .sider-accordion-container{
-            max-height: 67vh;
+          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded{
+            min-height:0px;
           }
-        }
-        @media (min-width: 1440px) and (max-width: 2560px)  and (min-height:789px){
-          .sider-accordion-container{
-            max-height: 70vh; 
+       }   
+       @media (min-width: 1024px) and (max-width: 1279px) and(max-height:626px) {   
+          .css-15v22id-MuiAccordionDetails-root{
+            padding: 7px 10px 6px; 
+            
           }
-        }
-        @media (min-width:2560px){
-          .sider-accordion-container{
-            max-height:67vh;
+          .css-187mznn-MuiSlider-root{
+            padding:17px 0px;
           }
-        }
+          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
+            padding:0px 5px;
+          }
+          .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+            padding:4px;
+            text-align:start;
+            
+          }
+          .css-1h4kevy-MuiAutocomplete-root 
+          .MuiOutlinedInput-root{
+            padding:2px;
+          }.css-1h4kevy-MuiAutocomplete-root 
+          .MuiOutlinedInput-root
+          .MuiAutocomplete-input 
+          {
+            padding:10px 5px 10px 5px; 
+          }
+          .css-eg0mwd-MuiSlider-thumb {
+            width:16px;
+            height:16px;
+          }
+          .css-n5p0mp-MuiSvgIcon-root{
+            width:10px;
+            margin:0.5px 2px 0px;
+          }
+          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded{
+            min-height:0px;
+          }
+         
+       }
+       
       `}
       </style>
     </div>

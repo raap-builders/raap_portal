@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import Header from "./components/Header";
 import styled from "styled-components";
-
 import Configure from "./Configure";
 import View from "./View";
 import Schedule from "./Schedule";
@@ -190,17 +189,17 @@ function App() {
 
   return (
     <div>
-      <div className="AppMain h-[100vh] overflow-hidden scrollbar-hide px-3 py-1 hidden sm:hidden lg:block md:block 2xl:block ">
+      <div className ="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden overflow-y-scroll lg:block md:block 2xl:block ">
         <BrowserRouter>
           <Header />
           <div>
             <Breadcrumb />
           </div>
-          <div className="flex flex-col sm:flex-row justify-center 2xl:gap-8  ">
-            <div className="sm:w-full md:hidden lg:block 2xl:block lg:mr-8   2xl:w-[30%] 2xl:ml-8 lg:w-1/3  ">
+          <div className="flex flex-row justify-center ">
+          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
               <Sider />
             </div>
-            <div className="sm:w-full lg:w-3/4  flex flex-col items-center lg:mr-2 2xl:ml-12">
+            <div className="sm:w-full flex-7 flex flex-col">
               <Routes>
                 <Route path="/" Component={Landing} />
                 <Route
@@ -231,10 +230,11 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-      <div className="block overflowY:hidden bg-[white] sm:block  md:hidden lg:hidden 2xl:hidden h-[700px]">
-        <h1 className="  justify-center w-full h-full  text-black flex items-center">
+      <div className="block md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
+      <h1 className="text-black text-center">
           {" "}
-          This Site Does not<br></br> Support Mobile View.
+          For a better experience, we suggest using this website on a horizontal
+          or larger screen. Thank you!
         </h1>
       </div>
     </div>
