@@ -76,7 +76,9 @@ function GenericEstimation() {
                 }}
                 className="py-3 font-bold text-center 2xl:text-lg text-lg md:text-sm lg:text-lg"
               >
-                {currencyFormat(parseFloat(item.cost))}
+                {item.name === "Build Time"
+                  ? item.cost
+                  : currencyFormat(parseFloat(item.cost))}
               </div>
             </div>
           ))}
