@@ -51,6 +51,7 @@ function Sider() {
         const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {
             ...item,
+            key: `${item.id}-${Math.random() * Math.random() + Math.random()}`,
             label: `${item.city}`,
             title: `${item.city}`,
           };
@@ -84,7 +85,6 @@ function Sider() {
     newValue: string
   ) => {
     const selectedObject = zipCodes.find((option) => option.label === newValue);
-    setSelectedZipCode(selectedObject?.zipCode || "");
     changeZipCode(selectedObject?.zipCode || "");
   };
 
