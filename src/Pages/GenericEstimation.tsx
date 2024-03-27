@@ -25,7 +25,26 @@ interface GenericEstimationType {
 
 function GenericEstimation() {
   //@ts-ignore
-  const { rooms: numberOfRooms, zipCode } = useLocationStore((state) => state);
+  const {
+    //@ts-ignore
+    rooms: numberOfRooms,
+    //@ts-ignore
+    zipCode,
+    //@ts-ignore
+    totalSqFt,
+    //@ts-ignore
+    perimeter,
+    //@ts-ignore
+    kingOneQuantity,
+    //@ts-ignore
+    kingStudioQuantity,
+    //@ts-ignore
+    ADAQuantity: adaQuantity,
+    //@ts-ignore
+    doubleQueenQuantity,
+    //@ts-ignore
+    floors,
+  } = useLocationStore((state) => state);
   const [genericEstimation, setGenericEstimation] =
     useState<GenericEstimationType>();
   const [expandedAccordion, setExpandedAccordion] = useState<string | false>(
@@ -34,16 +53,40 @@ function GenericEstimation() {
   //@ts-ignore
 
   useEffect(() => {
-    console.log("number", numberOfRooms, zipCode);
+    console.log(
+      "her",
+      kingOneQuantity,
+      kingStudioQuantity,
+      doubleQueenQuantity,
+      adaQuantity
+    );
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
         rooms: numberOfRooms,
         zipCode: zipCode,
+        totalSqFt,
+        perimeter,
+        floors,
+        adaQuantity,
+        kingOneQuantity,
+        kingStudioQuantity,
+        doubleQueenQuantity,
       })
       .then((result) => {
         setGenericEstimation(result.data.data);
-      });
-  }, [numberOfRooms, zipCode]);
+      })
+      .catch((err) => console.log("errr", err));
+  }, [
+    numberOfRooms,
+    zipCode,
+    floors,
+    totalSqFt,
+    perimeter,
+    kingOneQuantity,
+    doubleQueenQuantity,
+    adaQuantity,
+    kingStudioQuantity,
+  ]);
   const handleChangeAccordion =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpandedAccordion(isExpanded ? panel : false);
@@ -177,7 +220,6 @@ function GenericEstimation() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography className="px-2 ">
-                
                   {genericEstimation?.siteWorkFactors &&
                     Object.entries(genericEstimation.siteWorkFactors).map(
                       (item) => (

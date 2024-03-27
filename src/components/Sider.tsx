@@ -15,8 +15,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
 import { useLocationStore } from "../store";
-import { Store } from "antd/es/form/interface";
-import { fullBlack } from "material-ui/styles/colors";
 
 interface ZipCodes {
   id: number;
@@ -30,12 +28,37 @@ function Sider() {
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
-  const [selectedZipCode, setSelectedZipCode] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
+  const [numberOfFLoors, setNumberOfFloors] = useState(4);
+  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(20);
+  const [ADAQuantity, setADAQuantity] = useState(9);
+  const [kingOneQuantity, setKingOneQuantity] = useState(5);
+  const [kingStudioQuantity, setKingStudioQuantity] = useState(125);
+  const [perimeter, setPerimeter] = useState(598);
+  const [totalSqFt, setTotalSqFt] = useState(0);
   const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
-  //@ts-ignore
-  const { changeRooms, changeZipCode } = useLocationStore((state) => state);
+  //@ts-nocheck
+  const {
+    //@ts-ignore
+    changeRooms,
+    //@ts-ignore
+    changeFloors,
+    //@ts-ignore
+    changePerimeter,
+    //@ts-ignore
+    changeTotalSqFt,
+    //@ts-ignore
+    changeADA,
+    //@ts-ignore
+    changeDoubleQueen,
+    //@ts-ignore
+    changeKingStudio,
+    //@ts-ignore
+    changeKingOne,
+    //@ts-ignore
+    changeZipCode,
+  } = useLocationStore((state) => state);
   useEffect(() => {
     getZipCodes();
   }, []);
@@ -86,6 +109,55 @@ function Sider() {
   ) => {
     const selectedObject = zipCodes.find((option) => option.label === newValue);
     changeZipCode(selectedObject?.zipCode || "");
+  };
+
+  const onPerimeterChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setPerimeter(parseInt(event.target.value));
+    changePerimeter(parseInt(event.target.value));
+  };
+
+  const onTotalSqFtChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setTotalSqFt(parseInt(event.target.value));
+    changeTotalSqFt(parseInt(event.target.value));
+  };
+
+  const onKingStudioQuantityChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setKingStudioQuantity(parseInt(event.target.value));
+    changeKingStudio(parseInt(event.target.value));
+  };
+
+  const onADAChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setADAQuantity(parseInt(event.target.value));
+    changeADA(parseInt(event.target.value));
+  };
+
+  const onDoubleQueenQuantityChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setDoubleQueenQuantity(parseInt(event.target.value));
+    changeDoubleQueen(parseInt(event.target.value));
+  };
+
+  const onKingOneQuantityChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setKingOneQuantity(parseInt(event.target.value));
+    changeKingOne(parseInt(event.target.value));
+  };
+
+  const onNumberOfFloorsChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setNumberOfFloors(parseInt(event.target.value));
+    changeFloors(parseInt(event.target.value));
   };
 
   return (
@@ -216,7 +288,6 @@ function Sider() {
                       sx={{ width: "auto" }}
                       disableClearable
                       inputValue={zipCode}
-                      value={selectedZipCode}
                       onInputChange={onZipCodeChanged}
                       onChange={onZipCodeSelected}
                       options={zipCodes.map((option) => option.label)}
@@ -304,7 +375,9 @@ function Sider() {
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={4}
-                        placeholder="4"
+                        type="number"
+                        value={numberOfFLoors}
+                        onChange={onNumberOfFloorsChanged}
                       />
                     </div>
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
@@ -315,22 +388,13 @@ function Sider() {
                         className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
+                        type="number"
                         defaultValue={58334}
-                        placeholder="58,334"
+                        value={totalSqFt}
+                        onChange={onTotalSqFtChanged}
                       />
                     </div>
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 2xl:mb-4">
-                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
-                        Story Height (Ft.)
-                      </span>
-                      <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
-                        id="outlined-basic"
-                        variant="outlined"
-                        defaultValue={10}
-                        placeholder="10"
-                      />
-                    </div>
+
                     {/* <div className="mt-4 d-flex justify-content-between align-items-center w-100">
                   <span className="text-sm w-50">Building Shape</span>
                   <TextField
@@ -350,7 +414,9 @@ function Sider() {
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={598}
-                        placeholder="598"
+                        value={perimeter}
+                        type="number"
+                        onChange={onPerimeterChanged}
                       />
                     </div>
                   </Typography>
@@ -408,8 +474,10 @@ function Sider() {
                         className="w-25"
                         id="outlined-basic"
                         variant="outlined"
+                        type="number"
                         defaultValue={9}
-                        placeholder="9"
+                        value={kingOneQuantity}
+                        onChange={onKingOneQuantityChanged}
                       />
                       <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
                         8%
@@ -420,9 +488,15 @@ function Sider() {
                       <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King Studio
                       </span>
-                      <span className="text-sm text-center text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
-                        89
-                      </span>
+                      <TextField
+                        className="w-25"
+                        id="outlined-basic"
+                        variant="outlined"
+                        type="number"
+                        defaultValue={9}
+                        value={kingStudioQuantity}
+                        onChange={onKingStudioQuantityChanged}
+                      />
                       <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
                         83%
                       </span>
@@ -432,9 +506,15 @@ function Sider() {
                       <span className="text-left md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
                         Double Queen Studio
                       </span>
-                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
-                        17
-                      </span>
+                      <TextField
+                        className="w-25"
+                        id="outlined-basic"
+                        variant="outlined"
+                        type="number"
+                        defaultValue={9}
+                        value={doubleQueenQuantity}
+                        onChange={onDoubleQueenQuantityChanged}
+                      />
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
                         16%
                       </span>
@@ -444,9 +524,15 @@ function Sider() {
                       <span className="text-left md:text-sm lg:text-md w-50 xl:text-lg 2xl:text-lg">
                         ADA
                       </span>
-                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
-                        12
-                      </span>
+                      <TextField
+                        className="w-25"
+                        id="outlined-basic"
+                        variant="outlined"
+                        type="number"
+                        defaultValue={9}
+                        value={ADAQuantity}
+                        onChange={onADAChanged}
+                      />
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
                         11%
                       </span>
