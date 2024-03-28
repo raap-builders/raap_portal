@@ -36,7 +36,7 @@ function Sider() {
   const [kingOneQuantity, setKingOneQuantity] = useState(5);
   const [kingStudioQuantity, setKingStudioQuantity] = useState(125);
   const [perimeter, setPerimeter] = useState(598);
-  const [totalSqFt, setTotalSqFt] = useState(0);
+  const [totalSqFt, setTotalSqFt] = useState(58334);
   const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
   //@ts-nocheck
   const {
@@ -69,7 +69,11 @@ function Sider() {
       : `${process.env.REACT_APP_BASE_URL}/locations`;
 
     axios
-      .get(url)
+      .get(url, {
+        headers: {
+          "Content-Type": "application-json",
+        },
+      })
       .then((zipCodes) => {
         const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {
