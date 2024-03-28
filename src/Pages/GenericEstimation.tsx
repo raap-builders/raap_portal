@@ -76,7 +76,11 @@ function GenericEstimation() {
         },
         {
           headers: {
-            "Content-Type": "application-json",
+            "access-control-allow-origin": "*",
+            "access-control-expose-headers": "Content-Disposition",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "1623",
+            Connection: "keep-alive",
           },
         }
       )
