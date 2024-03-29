@@ -49,9 +49,9 @@ function GenericEstimation() {
       setExpandedAccordion(isExpanded ? panel : false);
     };
   return (
-    <div className=" d-flex flex-column align-items-center w-full ">
+    <div className=" align-items-center ">
       <div
-        className="w-[100%] d-flex justify-content-around rounded-[10px] align-items-center md:mr-[6px] md:mt-2 2xl:p-[0.5%] mt-0 md:p-2 flex-col lg:flex-row md:flex-row xl:mr-6"
+        className="w-[100%] d-flex justify-content-around rounded-[10px] align-items-center md:mr-[6px] 2xl:p-[0.5%] mt-0 md:p-2 flex-col lg:flex-row md:flex-row "
         style={{
           backgroundColor: "#519259",
         }}
@@ -81,11 +81,11 @@ function GenericEstimation() {
             </div>
           ))}
       </div>
-      <div className="flex w-full md:mt-2 h-full">
-        <div className="md:block  lg:hidden 2xl:hidden flex sider-genetic-accordion-container flex-col flex-4 w-[50%] ">
+      <div className=" lg:flex mt-2 md:grid md:grid-cols-6">
+        <div className=" lg:hidden 2xl:hidden flex sider-genetic-accordion-container md:col-span-2 ">
           <Sider />
         </div>
-        <div className="bg-white md:p-2 p-0 rounded w-full flex-6">
+        <div className="bg-white md:p-2 p-0 rounded w-full flex-6 md:col-span-4">
           <div
             style={{
               color: "#519259",
@@ -103,7 +103,7 @@ function GenericEstimation() {
           >
             (MasterFormat)
           </div>
-          <div className=" xl:max-h-full overflow-y-scroll genetic-accordion-container">
+          <div className="">
             <Accordion
               className="m-4"
               expanded={expandedAccordion === "building"}
@@ -253,44 +253,7 @@ function GenericEstimation() {
       </div>
       <style>
         {`
-        @media (min-width: 768px) and (max-width: 1024px)  and (max-height:340px) {
-          .genetic-accordion-container {
-            max-height: 100vh;
-          }
-        }
-         @media (min-width: 768px) and (max-width: 1024px)  and (max-height:540px) {
-          .genetic-accordion-container {
-            max-height: 80vh;
-          }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) and (min-height: 540px) and (max-height:625px) {
-          .genetic-accordion-container {
-            max-height: 53vh;
-          }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) and (min-height: 625px) and (max-height:700px) {
-          .genetic-accordion-container {
-            max-height: 55vh;
-          }
-        } @media (min-width: 768px) and (max-width: 1024px) and (min-height: 700px) and (max-height:800px) {
-          .genetic-accordion-container {
-            max-height: 54vh;
-          }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) and (min-height: 800px)  {
-          .genetic-accordion-container {
-            max-height: 60vh;
-          }
-        }  @media (min-width: 768px) and (max-width: 1024px) and (min-height: 900px)  {
-          .genetic-accordion-container {
-            max-height: 64vh;
-          }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) and (min-height: 1000px) {
-          .genetic-accordion-container {
-            max-height: 66vh;
-          }
-        }@media (min-width: 768px) and (max-width: 1024px) and (min-height: 1500px) {
+         @media (min-width: 1441)    and (max-height:540px) {
           .genetic-accordion-container {
             height: 100vh ;
           }

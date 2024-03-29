@@ -153,7 +153,7 @@ function Sider() {
               } else setOpenCardIndex(4);
             }}
             expanded={openCardIndex === 0}
-            className=" rounded w-[100%] m-0 p-0 "
+            className=" rounded w-[100%] m-0 p-0 2xl:h-[max-content] "
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -161,7 +161,7 @@ function Sider() {
               id="panel1a-header"
               className=" md:p-0"
             >
-              <Typography>
+              <Typography className="">
                 {" "}
                 <span className="font-semibold text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-sm md:px-2 xl:px-0">
                   {" "}
@@ -180,7 +180,7 @@ function Sider() {
                       Hotel Type
                     </span>
                     <RadioGroup
-                      className="w-[max-content] mt-8 max-[1350px]:mt-5 md:gap-3 2xl:gap-4 space"
+                      className="w-[max-content] mt-8 max-[1350px]:mt-3 md:gap-1  2xl:gap-4 space"
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group "
                     >
@@ -198,7 +198,7 @@ function Sider() {
                         }
                       />
                       <FormControlLabel
-                        className="h-[25px] xl:mb-2 2xl:mb-2 "
+                        className="h-[25px] lg:h-[28%] 2xl:h-[30%]"
                         checked
                         value="extendedService"
                         control={
@@ -211,7 +211,7 @@ function Sider() {
                         }
                       />
                       <FormControlLabel
-                        className="h-[25px]  "
+                        className="h-[25px] lg:h-[28%] 2xl:h-[30%]"
                         disabled
                         value="fullService"
                         aria-setsize={8}
@@ -231,11 +231,11 @@ function Sider() {
                   </div>
                 </div>
 
-                <div className="d-flex flex-column align-items-center gap-2 justify-content-center mt-6 min-[2000px]:my-8">
+                <div className="d-flex flex-column align-items-center justify-content-center mt-1 min-[2000px]:my-8">
                   <div className="min-[2000px]:mb-8 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px] 2xl:my-2 text-[#519259] xl:mb-0">
                     Site's zip code
                   </div>
-                  <div className="w-full ">
+                  <div className="w-full xl:mt-4 mt-2 mb-6">
                     <Autocomplete
                       freeSolo
                       sx={{ width: "auto" }}
@@ -247,6 +247,7 @@ function Sider() {
                       options={zipCodes.map((option) => option.label)}
                       renderInput={(params) => (
                         <TextField
+                        className=""
                           {...params}
                           label="Zip Code..."
                           InputProps={{
@@ -259,26 +260,7 @@ function Sider() {
                   </div>
                 </div>
 
-                <div className=" w-100 ">
-                  <div className=" 2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg">
-                    Number of Rooms
-                  </div>
-                  <Slider
-                    aria-valuetext="100"
-                    aria-label="Default"
-                    valueLabelDisplay="auto"
-                    style={{ color: "#519259" }}
-                    defaultValue={100}
-                    max={120}
-                    min={80}
-                    step={1}
-                    value={numberOfRooms}
-                    onChange={onNumberOfRoomsChanged}
-                  />
-                  <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
-                    {numberOfRooms}
-                  </div>
-                </div>
+                
               </Typography>
             </AccordionDetails>
           </Accordion>
