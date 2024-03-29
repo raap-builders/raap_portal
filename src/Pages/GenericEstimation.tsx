@@ -87,7 +87,7 @@ function GenericEstimation() {
       .then((result) => {
         setGenericEstimation(result.data.data);
       })
-      .catch((err) => console.log("errr", err));
+      .catch((err) => console.log("errr", err.message));
   }, [
     numberOfRooms,
     zipCode,
