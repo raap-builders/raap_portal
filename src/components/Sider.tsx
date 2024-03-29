@@ -89,9 +89,9 @@ function Sider() {
   };
 
   return (
-    <div className="2xl:text-lg  w-[100%]  ">
+    <div className="2xl:text-xl xl:text-lg w-[100%]">
       <FormControl
-        className="d-flex flex-column "
+        className="d-flex flex-column min-h-[max-content] max-h-full"
         style={{
           backgroundColor: "#519258",
           borderRadius: 15,
@@ -99,24 +99,49 @@ function Sider() {
         }}
       >
         <FormLabel
-          className="w-100 text-center text-white mt-2 xl:mt-0"
+          className="w-100 text-center info text-white mt-2  2xl:my-2 xl:mt-0 margin"
           id="demo-row-radio-buttons-group-label"
         >
-          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md">
+          <span className="text-4xl max-[2500px]:text-3xl max-[2000px]:text-2xl max-[1550px]:text-xl max-[1300px]:text-lg max-[1200px]:text-sm">
             {" "}
             Select the following to get started
           </span>
         </FormLabel>
         <FormLabel
-          className="w-100 text-center text-white 2xl:text-lg "
+          className="w-100 xl:my-2 my-1 text-center text-white 2xl:text-xl xl:text-lg margin"
           id="demo-row-radio-buttons-group-label"
         >
-          <span className="2xl:text-xl xl:text-md  md:text-sm lg:text-md ">
+          <span className="text-4xl max-[2500px]:text-3xl max-[2000px]:text-2xl max-[1550px]:text-xl max-[1300px]:text-lg max-[1200px]:text-sm">
             Project Information
           </span>
+          
+        </FormLabel>
+        <FormLabel  className="text-left 2xl:my-2 xl:my-2 md:my-0 text-white 2xl:text-xl xl:text-lg mx-6"
+        >
+        <div className=" w-100 ">
+                  <div className="text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1500px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                    Number of Rooms
+                  </div>
+                  {/* 519259 */}
+                  <Slider
+                    aria-valuetext="100"
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    style={{ color: "white" }}
+                    defaultValue={100}
+                    max={120}
+                    min={80}
+                    step={1}
+                    value={numberOfRooms}
+                    onChange={onNumberOfRoomsChanged}
+                  />
+                  <div className="mb-2 text-center text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                    {numberOfRooms}
+                  </div>
+                </div>
         </FormLabel>
         <div
-          className="flex flex-col items-center sider-accordion-container max-h-screen px-[5%] pb-[4%]  
+          className="flex flex-col items-center sider-accordion-container max-h-screen px-[5%] xl:gap-2 2xl;gap-3 md:gap-1 pb-[4%]  
         
       "
           style={{ maxHeight: "max-content" }}
@@ -138,7 +163,7 @@ function Sider() {
             >
               <Typography>
                 {" "}
-                <span className="2xl:text-lg xl:text-md   font-medium md:text-md lg:text-md md:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                <span className="font-semibold text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-sm md:px-2 xl:px-0">
                   {" "}
                   Project
                 </span>
@@ -146,28 +171,28 @@ function Sider() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography className="px-3">
-                <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
+                <div className="d-flex align-items-start justify-content-between mt-0 ">
                   <div>
                     <span
                       style={{ color: "#519259" }}
-                      className="2xl:text-lg xl:text-md  lg:text-md md:text-md  "
+                      className="text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]"
                     >
                       Hotel Type
                     </span>
                     <RadioGroup
-                      className="w-[max-content] md:mt-2 xl:text-lg "
+                      className="w-[max-content] mt-8 max-[1350px]:mt-5 md:gap-3 2xl:gap-4 space"
                       aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="row-radio-buttons-group"
+                      name="row-radio-buttons-group "
                     >
                       <FormControlLabel
-                        className="h-[25px] xl:mb-2 xl:text-md 2xl:mb-2 "
+                        className="h-[25px] lg:h-[28%] 2xl:h-[30%]"
                         disabled
                         value="selectService"
                         control={
                           <Radio size="small" style={{ color: "#878787" }} />
                         }
                         label={
-                          <span className="text-[12px] 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                          <span className="text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                             Select Services
                           </span>
                         }
@@ -180,7 +205,7 @@ function Sider() {
                           <Radio size="small" style={{ color: "#519259" }} />
                         }
                         label={
-                          <span className="text-[12px] 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                          <span className="text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                             Extended Stay
                           </span>
                         }
@@ -196,7 +221,7 @@ function Sider() {
                         label={
                           <span
                             style={{ color: "#878787" }}
-                            className="2xl:text-lg sm md:text-sm lg:text-md xl:text-lg"
+                            className="text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]"
                           >
                             Full Service
                           </span>
@@ -206,8 +231,8 @@ function Sider() {
                   </div>
                 </div>
 
-                <div className="d-flex flex-column align-items-center justify-content-center  xl:text-lg">
-                  <div className="text-center 2xl:text-lg  md:mb-2  text-[#519259] md:text-sm lg:text-md  xl:mb-0  xl:text-lg ">
+                <div className="d-flex flex-column align-items-center gap-2 justify-content-center mt-6 min-[2000px]:my-8">
+                  <div className="min-[2000px]:mb-8 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px] 2xl:my-2 text-[#519259] xl:mb-0">
                     Site's zip code
                   </div>
                   <div className="w-full ">
@@ -261,7 +286,7 @@ function Sider() {
             <button
               onClick={onFormSubmitted}
               style={{ backgroundColor: "#519259", bottom: 20 }}
-              className="text-white text-center border-1 rounded bottom-3 py-2 mt-2  w-75"
+              className="text-white text-center border-1 rounded bottom-3 md:py-2 xl:py-3 md:mt-4 xl:mt-6 w-75 md:mb-2 xl:mb-0 2xl:mb-0 textfont margin"
             >
               See Estimate
             </button>
@@ -282,49 +307,49 @@ function Sider() {
                   id="panel1a-header"
                 >
                   <Typography>
-                    <span className="2xl:text-lg  font-medium  md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                    <span className="font-semibold text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-sm md:px-2 lg:px-2 xl:px-0 2xl:px-0">
                       Site
                     </span>
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography className=" md:px-2 xl:px-4">
-                    <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
+                    <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px] lg:mb-8 ">
                       <span style={{ color: "#519259" }}>Parameter</span>
                       <span style={{ color: "#519259" }}>Default</span>
                     </div>
 
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
-                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg ">
+                    <div className="lg:mt-2  grid grid-cols-3  justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
+                      <span className="col-span-2 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                         {" "}
                         Number of floors
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
+                        className="w-30 w-full"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={4}
                         placeholder="4"
                       />
                     </div>
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
-                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                    <div className="lg:mt-2 grid grid-cols-3  justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
+                      <span className="grid col-span-2 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                         Total Sq Ft (w/o pool)
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        className="w-30 w-full"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={58334}
                         placeholder="58,334"
                       />
                     </div>
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 2xl:mb-4">
-                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                    <div className="lg:mt-2  grid grid-cols-3  justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 2xl:mb-4">
+                      <span className="col-span-2 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                         Story Height (Ft.)
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        className="w-30 w-full"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={10}
@@ -341,12 +366,12 @@ function Sider() {
                     placeholder="Rectangle"
                   />
                 </div> */}
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center xl:mb-1 w-100 md:mb-3 2xl:mb-4">
-                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                    <div className="lg:mt-2  grid grid-cols-3 justify-content-between align-items-center xl:mb-1 w-100 md:mb-3 2xl:mb-4">
+                      <span className="col-span-2 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                         Perimeter (Ft.)
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        className="w-30 w-full"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={598}
@@ -364,7 +389,7 @@ function Sider() {
                   } else setOpenCardIndex(4);
                 }}
                 expanded={openCardIndex === 2}
-                className="mt-2 w-[100%] rounded xl:m-0"
+                className="mt-2 w-[100%] rounded xl:m-0 mb-2"
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -372,82 +397,82 @@ function Sider() {
                   id="panel1a-header"
                 >
                   <Typography>
-                    <span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                    <span className="font-semibold text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-sm md:px-2 xl:px-0md:px-2 lg:px-2 xl:px-0 2xl:px-0">
                       Rooms
                     </span>
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography className=" lg:pb-2 md:px-2 md:pb-2 xl:px-4">
-                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
+                    <div className="grid grid-cols-7 justify-content-between align-items-center w-100 lg:mb-4 md:mb-4 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
                       <span
                         style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        className="col-span-4"
                       >
                         Room Mix
                       </span>
                       <span
                         style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        className="col-span-2 text-center"
                       >
                         No.
                       </span>
                       <span
                         style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        className="col-span-1 text-right"
                       >
                         %
                       </span>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
-                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                    <div className="grid grid-cols-7 justify-content-between align-items-center w-100 md:mb-4 xl:mb-4 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                      <span className="col-span-4">
                         King One Bedroom
                       </span>
                       <TextField
-                        className="w-25"
+                        className="w-[100%] col-span-2"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={9}
                         placeholder="9"
                       />
-                      <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                      <span className="col-span-1 text-right">
                         8%
                       </span>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
-                      <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                    <div className="grid grid-cols-7 justify-content-between align-items-center w-100 md:mb-4 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                      <span className="col-span-4">
                         King Studio
                       </span>
-                      <span className="text-sm text-center text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                      <span className="col-span-2 ml-2 my-2 text-left">
                         89
                       </span>
-                      <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
+                      <span className="col-span-1 text-right">
                         83%
                       </span>
                     </div>
 
-                    <div className="mt-2 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-left md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                    <div className="mt-2 grid grid-cols-7 justify-content-between align-items-center w-100 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                      <span className="col-span-4">
                         Double Queen Studio
                       </span>
-                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
+                      <span className="col-span-2  ml-2 my-2 text-left">
                         17
                       </span>
-                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                      <span className="col-span-1 text-right">
                         16%
                       </span>
                     </div>
 
-                    <div className="mt-2 d-flex justify-content-between align-items-center w-100  ">
-                      <span className="text-left md:text-sm lg:text-md w-50 xl:text-lg 2xl:text-lg">
+                    <div className="mt-2 grid grid-cols-7 justify-content-between align-items-center w-100 text-3xl max-[2500px]:text-2xl max-[2000px]:text-xl max-[1550px]:text-lg max-[1300px]:text-md max-[1200px]:text-sm max-[1170px]:text-[15px]">
+                      <span className="col-span-4">
                         ADA
                       </span>
-                      <span className="md:text-sm lg:text-md text-center text-right w-25 xl:text-lg 2xl:text-lg">
+                      <span className="col-span-2 ml-2 my-2 text-left">
                         12
                       </span>
-                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                      <span className="col-span-1 text-right">
                         11%
                       </span>
                     </div>
@@ -458,111 +483,38 @@ function Sider() {
           )}
         </div>
       </FormControl>
-      <style>
-        {`
-        @media (max-width: 1279px)  {   
-          .css-187mznn-MuiSlider-root{
-            padding: 8px 0px;
-          }
-          .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-            font-size:1rem;
-          }
-        } 
-        @media (min-width: 1279px) and (max-width: 1538px)   {   
-              .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-                padding:8px;
-              }.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-                font-size:1.125rem;
-              }.css-187mznn-MuiSlider-root{
-                padding: 15px 0px;
-              }
-        } 
-         @media (min-width: 1538px)   {   
-              .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-                padding:8px;
-              }.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-                font-size:1.4rem;
-              }.css-187mznn-MuiSlider-root{
-                padding: 15px 0px;
-              }
+      <style>{`
+      @media(min-width:2001px){
+        .css-1h4kevy-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input{
+          padding:16.5px 5px !important;
+        }.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+          font-size:2rem !important;
+        }input{
+          font-size:2rem !important;
+        }.space{
+          gap:3rem !important;
+        }.textfont{
+          font-size:30px !important;
+        }.margin{
+          margin:25px 0px !important;
         }
-        @media (min-width: 768px) and (max-width: 1024px)  {   
-          .css-15v22id-MuiAccordionDetails-root{
-            padding: 6px 10px 6px; 
-            
-          }
-          .css-187mznn-MuiSlider-root{
-            padding:13px 0px;
-          }
-          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
-            padding:0px 5px;
-          }
-          .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-            padding:4px;
-            text-align:start;
-            
-          }
-          .css-1h4kevy-MuiAutocomplete-root 
-          .MuiOutlinedInput-root{
-            padding:2px;
-          }.css-1h4kevy-MuiAutocomplete-root 
-          .MuiOutlinedInput-root
-          .MuiAutocomplete-input 
-          {
-            padding:7px 5px 7px 5px; 
-          }
-          .css-eg0mwd-MuiSlider-thumb {
-            width:12px;
-            height:12px;
-          }
-          .css-n5p0mp-MuiSvgIcon-root{
-            width:10px;
-            margin:0.5px 2px 0px;
-          }
-          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded{
-            min-height:0px;
-          }
-       }   
-       @media (min-width: 1024px) and (max-width: 1279px) and(max-height:626px) {   
-          .css-15v22id-MuiAccordionDetails-root{
-            padding: 7px 10px 6px; 
-            
-          }
-          .css-187mznn-MuiSlider-root{
-            padding:17px 0px;
-          }
-          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
-            padding:0px 5px;
-          }
-          .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-            padding:4px;
-            text-align:start;
-            
-          }
-          .css-1h4kevy-MuiAutocomplete-root 
-          .MuiOutlinedInput-root{
-            padding:2px;
-          }.css-1h4kevy-MuiAutocomplete-root 
-          .MuiOutlinedInput-root
-          .MuiAutocomplete-input 
-          {
-            padding:10px 5px 10px 5px; 
-          }
-          .css-eg0mwd-MuiSlider-thumb {
-            width:16px;
-            height:16px;
-          }
-          .css-n5p0mp-MuiSvgIcon-root{
-            width:10px;
-            margin:0.5px 2px 0px;
-          }
-          .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded{
-            min-height:0px;
-          }
-         
-       }
-       
-      `}
+      }
+      .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+        padding:6px;
+      }
+      @media(max-width:1279px){
+      .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
+        padding:4px !important;
+      }
+     .css-2ulfj5-MuiTypography-root{
+        padding-left:10px;
+      }
+      .css-yw020d-MuiAccordionSummary-expandIconWrapper{
+        padding:10px;
+      }
+    }
+      `
+      }
       </style>
     </div>
   );

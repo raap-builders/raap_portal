@@ -24,7 +24,6 @@ import GenericEstimation from "./Pages/GenericEstimation";
 // const url = 'https://sharepoint-site.com/path/to/file.xlsx';
 const url =
   "https://artsunitymovement-my.sharepoint.com/personal/rj_mahadev_aiota_solutions/_layouts/15/download.aspx?e=11mpJE&share=EUNnr8D7kKtGibbMGaQz1yYBfNOd0c0SSEbPxzm9_0s0Iw";
-
 // Make an HTTP GET request to fetch the file
 const fetchDataFromExcel = async () => {
   axios
@@ -56,19 +55,15 @@ const fetchDataFromExcel = async () => {
       console.error(error);
     });
 };
-
 fetchDataFromExcel();
-
 // console.log("after axios")
 const raapLogo = require("./assets/Header/pic1.png");
 const hiltonLogo = require("./assets/Header/pic2.png");
-
 const MainContainer = styled.div`
   // max-width: 800px;
   // margin: 0 auto;
   // padding: 1rem;
 `;
-
 const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -77,7 +72,6 @@ const NavbarContainer = styled.nav`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: white;
   height: 10.5vh;
-
   & a {
     font-family: "Inter", sans-serif;
     font-size: 3vmin;
@@ -87,11 +81,9 @@ const NavbarContainer = styled.nav`
     color: #4a5568;
     text-decoration: none;
     position: relative;
-
     &:hover {
       color: #48bb78;
     }
-
     &:after {
       content: "";
       position: absolute;
@@ -103,17 +95,14 @@ const NavbarContainer = styled.nav`
       transition: all 0.2s ease-out;
       transform: translateX(-50%);
     }
-
     &.active {
       color: #48bb78;
     }
-
     &.active:after {
       width: calc(100% - 10px); //width: calc(100% - 20px)
     }
   }
 `;
-
 const NavTitle = styled.h1`
   font-size: 1.5rem;
   font-weight: 700;
@@ -121,14 +110,12 @@ const NavTitle = styled.h1`
   padding: 0;
   font-family: "Poppins", sans-serif;
 `;
-
 const NavLinkContainer = styled.div`
   width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-around;
 `;
-
 const NavItem = styled(NavLink)`
   text-decoration: none;
   margin-left: 2%;
@@ -139,34 +126,28 @@ const NavItem = styled(NavLink)`
   &.active {
     color: #2acfcf;
   }
-
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
   text-align: center;
-
   color: #000000;
 `;
-
 const Logo = styled.img`
   height: 3vw;
   // width: 50px;
   margin-right: 2vw;
 `;
-
 const LogoHilton = styled.img`
   width: 6vw;
   // width: 50px;
   margin-right: 2vw;
 `;
-
 const LogoEmpty = styled.img`
   visibility: hidden;
   height: 50px;
   width: 50px;
   margin-right: 2rem;
 `;
-
 function App() {
   const [showMessage, setShowMessage] = useState(false);
 
@@ -178,7 +159,6 @@ function App() {
         setShowMessage(false);
       }
     }
-
     window.addEventListener("resize", handleResize);
     handleResize(); // Check on initial load
 
@@ -194,12 +174,12 @@ function App() {
           <Header />
           <div>
             <Breadcrumb />
-          </div>
-          <div className="flex flex-row justify-center ">
-          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
+          </div>   
+          <div  className="grid md:grid-cols-none lg:grid-cols-4 justify-center h-full overflow-y-auto ">
+            <div className="sm:w-full md:p-2 p-0 lg:mr-2 lg:grid lg:col-span-1 md:hidden">
               <Sider />
             </div>
-            <div className="sm:w-full flex-7 flex flex-col">
+            <div className="        sm:w-full lg:grid lg:col-span-3">
               <Routes>
                 <Route path="/" Component={Landing} />
                 <Route
@@ -230,8 +210,8 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-      <div className="block md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
-      <h1 className="text-black text-center">
+      <div className=" md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
+      <h1 className="text-black text-justify mx-3">
           {" "}
           For a better experience, we suggest using this website on a horizontal
           or larger screen. Thank you!

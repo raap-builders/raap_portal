@@ -20,8 +20,8 @@ function Breadcrum() {
     }
   };
   return (
-    <div className ="lg:py-2 2xl:py-2 d-flex md:justify-content-center justify-content-end w-full align-items-end ">
-      <Box  className="w-[30%] md:mr-[-15px]  lg:w-[20%] ">
+    <div className ="md:py-0 lg:py-2 d-flex md:justify-content-center justify-content-end w-full align-items-end md:my-1">
+      <Box  className="w-[30%] md:mr-[-20px] lg:mr-[-7px] xl:mr-[-20px] lg:w-[20%] ">
         <Stepper activeStep={renderActiveStep()} alternativeLabel>
           {steps.map((label) => (
             <Step

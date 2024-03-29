@@ -91,7 +91,7 @@ function GenericEstimation() {
               color: "#519259",
               fontWeight: "bolder",
             }}
-            className="font-bold h3 text-center w-full lg:mb-[10px] xl:p-0 md:text-md 2xl:text-lg"
+            className="font-bold h3 text-center w-full lg:mb-[10px] xl:p-0 md:text-md 2xl:text-lg font"
           >
             On-Site Construction Costs
           </div>
@@ -99,7 +99,7 @@ function GenericEstimation() {
             style={{
               color: "#519259",
             }}
-            className="text-center font-bold h4 w-full xl:p-0 md:text-sm 2xl:text-lg"
+            className="text-center font-bold h4 w-full xl:p-0 md:text-sm 2xl:text-lg font"
           >
             (MasterFormat)
           </div>
@@ -114,12 +114,12 @@ function GenericEstimation() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography variant="h6" className="w-50 2xl:text-lg">
+                <Typography variant="h6" className="w-50 2xl:text-lg smallfont">
                   Building Cost
                 </Typography>
                 <Typography
                   variant="h6"
-                  className="w-50 text-right pr-4 2xl:text-lg"
+                  className="w-50 text-right pr-4 2xl:text-lg "
                 >
                   {genericEstimation?.buildingFactors &&
                     currencyFormat(
@@ -128,7 +128,7 @@ function GenericEstimation() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography className="px-2">
+                <Typography className="px-2 overflow-y-auto max-h-56 lg:max-h-40 xl:max-h-64 2xl:max-h-96 height textfont mb-3">
                   {genericEstimation?.buildingFactors &&
                     Object.entries(genericEstimation.buildingFactors).map(
                       (item) => (
@@ -160,7 +160,7 @@ function GenericEstimation() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography variant="h6" className="w-50 2xl:text-lg">
+                <Typography variant="h6" className="w-50 2xl:text-lg smallfont">
                   Site Work Cost
                 </Typography>
                 <Typography
@@ -174,8 +174,7 @@ function GenericEstimation() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography className="px-2 ">
-                
+                <Typography className="px-2 overflow-y-auto max-h-56 lg:max-h-40 xl:max-h-64 2xl:max-h-96 height textfont mb-3">
                   {genericEstimation?.siteWorkFactors &&
                     Object.entries(genericEstimation.siteWorkFactors).map(
                       (item) => (
@@ -207,7 +206,7 @@ function GenericEstimation() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography variant="h6" className="w-50 2xl:text-xl">
+                <Typography variant="h6" className="w-50 2xl:text-xl smallfont">
                   GC Charges
                 </Typography>
                 <Typography
@@ -221,7 +220,7 @@ function GenericEstimation() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography className="px-2 2xl:text-xl">
+                <Typography className="px-2 2xl:text-xl overflow-y-auto max-h-56 lg:max-h-40 xl:max-h-64 2xl:max-h-96 height textfont mb-3">
                   {genericEstimation?.generalFactors &&
                     Object.entries(genericEstimation.generalFactors).map(
                       (item) => (
@@ -245,8 +244,8 @@ function GenericEstimation() {
               </AccordionDetails>
             </Accordion>
           </div>
-          <div className="flex justify-center items-center flex-col">
-            <button className="w-[55vw] rounded text-center l text-white py-3  flex flex-col  items-center bg-[#519258] sticky bottom-0">
+          <div className="flex justify-end items-center flex-col">
+            <button className="w-[55vw] rounded text-center l text-white py-3 textfont flex flex-col  items-center bg-[#519258] sticky bottom-0">
               Get Estimate
             </button>
           </div>
@@ -293,142 +292,20 @@ function GenericEstimation() {
           }
         }@media (min-width: 768px) and (max-width: 1024px) and (min-height: 1500px) {
           .genetic-accordion-container {
-            max-height: 75vh;
+            height: 100vh ;
+          }
+        }    @media (min-width: 2001px)  {
+          .height{
+            max-height: 55rem ;
+          }.font{
+            font-size:40px;
+          }.smallfont{
+            font-size:30px;
+          }.textfont{
+            font-size:25px;
           }
         }
-
-
-        //Laptop Screen//
         
-        
-        // @media (min-width: 1025px) and (max-width: 1279px)  and (max-height:300px) {
-        // .genetic-accordion-container {
-        //   max-height: 100vh;
-        // }
-      // }@media (min-width: 1025px) and (max-width: 1279px)   and (max-height:350px) {
-      //   .genetic-accordion-container {
-      //     max-height: 74vh;
-      //   }
-      // }@media (min-width: 1025px) and (max-width: 1279px)  and (max-height:450px) {
-      //   .genetic-accordion-container {
-      //     max-height: 66vh;
-      //   }
-      // }
-
-
-
-         @media (min-width: 1024px) and (max-width: 1279px)  and (max-height:540px) {
-          .genetic-accordion-container {
-            max-height: 56vh;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 540px) and (max-height:625px) {
-          .genetic-accordion-container {
-            max-height: 40vh;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 625px) and (max-height:700px) {
-          .genetic-accordion-container {
-            max-height: 40vh;
-          }
-        } @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 700px) and (max-height:800px) {
-          .genetic-accordion-container {
-            max-height: 50vh;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 800px) and (max-height:900px)  {
-          .genetic-accordion-container {
-            max-height: 56vh;
-          }
-        }  @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 901px)  {
-          .genetic-accordion-container {
-            max-height: 60vh;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 1000px) {
-          .genetic-accordion-container {
-            max-height: 65vh;
-          }
-        }@media (min-width: 1024px) and (max-width: 1279px) and (min-height: 1100px) {
-          .genetic-accordion-container {
-            max-height: 67vh;
-          }
-        }@media (min-width: 1024px) and (max-width: 1279px) and (min-height: 1200px) {
-          .genetic-accordion-container {
-            max-height: 68vh;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) and (min-height: 1500px) {
-          .genetic-accordion-container {
-            max-height: 73vh;
-          }
-        }
-      
-        //Large  Laptop Screen//
-        
-        
-        // @media (min-width: 1201px)    and (max-height:300px) {
-        // .genetic-accordion-container {
-        //   max-height: 100vh;
-        // }
-      // }@media (min-width: 1201px)     and (max-height:350px) {
-      //   .genetic-accordion-container {
-      //     max-height: 75vh;
-      //   }
-      // }@media (min-width: 1201px)    and (max-height:450px) {
-      //   .genetic-accordion-container {
-      //     max-height: 67vh;
-      //   }
-      // }
-
-
-
-         @media (min-width: 1201px)    and (max-height:540px) {
-          .genetic-accordion-container {
-            max-height: 100vh;
-          }
-        }
-        @media (min-width: 1201px)   and (min-height: 540px) and (max-height:625px) {
-          .genetic-accordion-container {
-            max-height: 59vh;
-          }
-        }
-        @media (min-width: 1201px)   and (min-height: 625px) and (max-height:700px) {
-          .genetic-accordion-container {
-            max-height: 60vh;
-          }
-        } @media (min-width: 1201px)   and (min-height: 700px) and (max-height:800px) {
-          .genetic-accordion-container {
-            max-height: 65vh;
-          }
-        }
-        @media (min-width: 1201px)   and (min-height: 800px) and (max-height:900px)  {
-          .genetic-accordion-container {
-            max-height: 57vh;
-          }
-        }  @media (min-width: 1201px)   and (min-height: 901px)  {
-          .genetic-accordion-container {
-            max-height: 60vh;
-          }
-        }
-        @media (min-width: 1201px)   and (min-height: 1000px) {
-          .genetic-accordion-container {
-            max-height: 65vh;
-          }
-        }@media (min-width: 1201px)   and (min-height: 1100px) {
-          .genetic-accordion-container {
-            max-height: 66vh;
-          }
-        }@media (min-width: 1201px)   and (min-height: 1200px) {
-          .genetic-accordion-container {
-            max-height: 69vh;
-          }
-        }
-        @media (min-width: 1201px)   and (min-height: 1500px) {
-          .genetic-accordion-container {
-            max-height: 73vh;
-          }
-        }
       
         
       `}
