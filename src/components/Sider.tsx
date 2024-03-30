@@ -60,6 +60,7 @@ function Sider() {
     changeZipCode,
   } = useLocationStore((state) => state);
   useEffect(() => {
+    fetch("http://54.241.166.221:3000/hello");
     getZipCodes();
   }, []);
 
