@@ -89,7 +89,7 @@ function Sider() {
         });
         setZipCodes(arr);
       })
-      .catch((error) => console.log("err", error.message));
+      .catch((error) => console.log("err", error));
   };
 
   const onZipCodeChanged = (event: React.ChangeEvent<{}>, newValue: string) => {
