@@ -60,7 +60,6 @@ function Sider() {
     changeZipCode,
   } = useLocationStore((state) => state);
   useEffect(() => {
-    fetch("https://aws.raapbuilders.com/api/v1/locations");
     getZipCodes();
   }, []);
 
@@ -70,15 +69,7 @@ function Sider() {
       : `${process.env.REACT_APP_BASE_URL}/locations`;
 
     axios
-      .get(url, {
-        headers: {
-          "access-control-allow-origin": "*",
-          "access-control-expose-headers": "Content-Disposition",
-          "content-type": "application/json; charset=utf-8",
-          "content-length": "1623",
-          Connection: "keep-alive",
-        },
-      })
+      .get(url)
       .then((zipCodes) => {
         const arr = zipCodes?.data?.data.map((item: ZipCodes) => {
           return {

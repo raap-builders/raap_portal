@@ -61,29 +61,17 @@ function GenericEstimation() {
       adaQuantity
     );
     axios
-      .post(
-        `${process.env.REACT_APP_BASE_URL}/estimation/generic`,
-        {
-          rooms: numberOfRooms,
-          zipCode: zipCode,
-          totalSqFt,
-          perimeter,
-          floors,
-          adaQuantity,
-          kingOneQuantity,
-          kingStudioQuantity,
-          doubleQueenQuantity,
-        },
-        {
-          headers: {
-            "access-control-allow-origin": "*",
-            "access-control-expose-headers": "Content-Disposition",
-            "content-type": "application/json; charset=utf-8",
-            "content-length": "1623",
-            Connection: "keep-alive",
-          },
-        }
-      )
+      .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
+        rooms: numberOfRooms,
+        zipCode: zipCode,
+        totalSqFt,
+        perimeter,
+        floors,
+        adaQuantity,
+        kingOneQuantity,
+        kingStudioQuantity,
+        doubleQueenQuantity,
+      })
       .then((result) => {
         setGenericEstimation(result.data.data);
       })
