@@ -60,7 +60,7 @@ function Sider() {
     changeZipCode,
   } = useLocationStore((state) => state);
   useEffect(() => {
-    fetch("http://aws.raapbuilders.com:3003/api/v1/locations");
+    fetch("http://aws.raapbuilders.com/api/v1/locations");
     getZipCodes();
   }, []);
 
