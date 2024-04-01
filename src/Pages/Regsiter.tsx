@@ -6,7 +6,7 @@ function Regsiter() {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const onPasswordChanged = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -14,10 +14,10 @@ function Regsiter() {
     setPassword(event.target.value);
   };
 
-  const onUserNameChanged = (
+  const onEmailChanged = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setUserName(event.target.value);
+    setEmail(event.target.value);
   };
 
   const onFormSubmitted = () => {
@@ -47,9 +47,10 @@ function Regsiter() {
         <TextField
           id="outlined-basic"
           className="rounded"
-          value={userName}
-          onChange={onUserNameChanged}
-          label="Username"
+          value={email}
+          onChange={onEmailChanged}
+          label="Email"
+          type="email"
           variant="filled"
           style={{ backgroundColor: "white", width: "50%" }}
         />
@@ -58,6 +59,7 @@ function Regsiter() {
           value={password}
           onChange={onPasswordChanged}
           id="outlined-basic"
+          type="password"
           label="Password"
           variant="filled"
           style={{ backgroundColor: "white", width: "50%" }}
