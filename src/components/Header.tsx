@@ -23,7 +23,7 @@ function Header() {
       style={divStyle}
       className="px-5 py-2 d-flex align-items-center rounded justify-content-between"
     >
-      <NavLink to="/">
+      <NavLink to="/landing">
         <img
           src={require("../assets/Header/New_RaaP_Logo.png")}
           alt="RaaP_Logo"

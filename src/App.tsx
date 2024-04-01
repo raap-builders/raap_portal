@@ -6,6 +6,9 @@ import {
   NavLink,
   // HashRouter,
   BrowserRouter,
+  Navigate,
+  Router,
+  Outlet,
 } from "react-router-dom";
 import Header from "./components/Header";
 import styled from "styled-components";
@@ -20,6 +23,7 @@ import Breadcrumb from "./components/Breadcrum";
 import Sider from "./components/Sider";
 import Landing from "./Pages/Landing";
 import GenericEstimation from "./Pages/GenericEstimation";
+import Regsiter from "./Pages/Regsiter";
 // Define the URL of the xlsx file
 // const url = 'https://sharepoint-site.com/path/to/file.xlsx';
 const url =
@@ -187,57 +191,60 @@ function App() {
     };
   }, []);
 
-  return (
-    <div>
-      <div className ="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden overflow-y-scroll lg:block md:block 2xl:block ">
-        <BrowserRouter>
-          <Header />
-          <div>
-            <Breadcrumb />
-          </div>
-          <div className="flex flex-row justify-center ">
-          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
-              <Sider />
-            </div>
-            <div className="sm:w-full flex-7 flex flex-col">
-              <Routes>
-                <Route path="/" Component={Landing} />
-                <Route
-                  path="/generic_estimation"
-                  Component={GenericEstimation}
-                />
-                <Route path="/view" Component={View} />
-              </Routes>
-            </div>
+  interface PrivateRouteProps {
+    children: React.ReactNode;
+  }
+  const routes = [
+    {
+      id: 1,
+      pathName: "/",
+      component: Regsiter,
+      isProtected: false,
+    },
+    {
+      id: 1,
+      pathName: "/",
+      component: Landing,
+      isProtected: true,
+    },
+    {
+      id: 1,
+      pathName: "/generic_estimation",
+      component: GenericEstimation,
+      isProtected: true,
+    },
+  ];
 
-            {/* <NavbarContainer>
-            <Logo src={raapLogo} alt="Company Logo" />
-            <NavLinkContainer>
-              <NavItem to="/">Configuration</NavItem>
-              <NavItem to="/view">Design Docs</NavItem>
-              <NavItem to="/schedule">Construction Docs</NavItem>
-            </NavLinkContainer>
-            <LogoHilton src={hiltonLogo} alt="Hilton Logo" />
-          </NavbarContainer> */}
-            {/* <MainContainer> */}
-            {/* <Login /> */}
-            {/* <Routes>
-              <Route path="/" Component={Configure} />
-              <Route path="/view" Component={View} />
-              <Route path="/schedule" Component={Schedule} />
-            </Routes> */}
-            {/* </MainContainer> */}
+  //@ts-ignore
+  const ProtectedRoutes = ({ loggedInUser }: boolean) => {
+    return (
+      <div className="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden overflow-y-scroll lg:block md:block 2xl:block ">
+        <Header />
+        <div>
+          <Breadcrumb />
+        </div>
+        <div className="flex flex-row justify-center ">
+          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
+            <Sider />
           </div>
-        </BrowserRouter>
+          {loggedInUser ? <Outlet /> : <Navigate to="/" />}
+        </div>
       </div>
-      <div className="block md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
-      <h1 className="text-black text-center">
-          {" "}
-          For a better experience, we suggest using this website on a horizontal
-          or larger screen. Thank you!
-        </h1>
-      </div>
-    </div>
+    );
+  };
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Regsiter />} />
+        {/* @ts-ignore */}
+        <Route element={<ProtectedRoutes loggedInUser={true} />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/generic_estimation" element={<GenericEstimation />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

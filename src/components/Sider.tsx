@@ -328,7 +328,7 @@ function Sider() {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          {location.pathname === "/" ? (
+          {location.pathname === "/landing" ? (
             <button
               onClick={onFormSubmitted}
               style={{ backgroundColor: "#519259", bottom: 20 }}
