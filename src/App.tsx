@@ -191,30 +191,6 @@ function App() {
     };
   }, []);
 
-  interface PrivateRouteProps {
-    children: React.ReactNode;
-  }
-  const routes = [
-    {
-      id: 1,
-      pathName: "/",
-      component: Regsiter,
-      isProtected: false,
-    },
-    {
-      id: 1,
-      pathName: "/",
-      component: Landing,
-      isProtected: true,
-    },
-    {
-      id: 1,
-      pathName: "/generic_estimation",
-      component: GenericEstimation,
-      isProtected: true,
-    },
-  ];
-
   //@ts-ignore
   const ProtectedRoutes = ({ loggedInUser }: boolean) => {
     return (
@@ -234,17 +210,26 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Regsiter />} />
-        {/* @ts-ignore */}
-        <Route element={<ProtectedRoutes loggedInUser={true} />}>
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/generic_estimation" element={<GenericEstimation />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Regsiter />} />
+          {/* @ts-ignore */}
+          <Route element={<ProtectedRoutes loggedInUser={true} />}>
+            <Route path="/landing" element={<Landing />} />
+            <Route path="/generic_estimation" element={<GenericEstimation />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+      <div className="block md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
+        <h1 className="text-black text-center">
+          {" "}
+          For a better experience, we suggest using this website on a horizontal
+          or larger screen. Thank you!
+        </h1>
+      </div>
+    </>
   );
 }
 
