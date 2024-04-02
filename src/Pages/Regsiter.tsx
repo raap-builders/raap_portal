@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 
 let loginTimeout: number;
@@ -116,8 +116,18 @@ function Regsiter() {
           className="mt-5 w-50 py-3 bg-success"
           variant="contained"
         >
-          Contained
+          Login
         </Button>
+
+        <p
+          className="mt-5 h4 text-whit"
+          style={{ backgroundColor: "rgba(0,0,0,0.1)", color: "white" }}
+        >
+          Not A Member?{" "}
+          <Link to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711">
+            Create Your Account Now!
+          </Link>
+        </p>
       </FormControl>
 
       {loginError && (
