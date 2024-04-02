@@ -24,6 +24,7 @@ import Sider from "./components/Sider";
 import Landing from "./Pages/Landing";
 import GenericEstimation from "./Pages/GenericEstimation";
 import Regsiter from "./Pages/Regsiter";
+import { useLocationStore } from "./store";
 // Define the URL of the xlsx file
 // const url = 'https://sharepoint-site.com/path/to/file.xlsx';
 const url =
@@ -173,6 +174,10 @@ const LogoEmpty = styled.img`
 
 function App() {
   const [showMessage, setShowMessage] = useState(false);
+  const {
+    //@ts-ignore
+    isUserLoggedIn,
+  } = useLocationStore((state) => state);
 
   useEffect(() => {
     function handleResize() {
@@ -208,14 +213,13 @@ function App() {
       </div>
     );
   };
-
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Regsiter />} />
           {/* @ts-ignore */}
-          <Route element={<ProtectedRoutes loggedInUser={true} />}>
+          <Route element={<ProtectedRoutes loggedInUser={isUserLoggedIn} />}>
             <Route path="/landing" element={<Landing />} />
             <Route path="/generic_estimation" element={<GenericEstimation />} />
           </Route>

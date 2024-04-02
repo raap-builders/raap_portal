@@ -1,12 +1,32 @@
-import { Button, FormControl, TextField } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  FormControl,
+  TextField,
+} from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocationStore } from "../store";
+
+let loginTimeout: number;
 
 function Regsiter() {
   const navigate = useNavigate();
+  const {
+    //@ts-ignore
+    changeIsUserLoggedIn,
+  } = useLocationStore((state) => state);
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loginError, setLoginError] = useState(false);
+
+  useEffect(() => {
+    clearTimeout(loginTimeout);
+    setLoginError(false);
+  }, []);
 
   const onPasswordChanged = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,8 +40,35 @@ function Regsiter() {
     setEmail(event.target.value);
   };
 
-  const onFormSubmitted = () => {
-    navigate("/landing");
+  const onFormSubmitted = async () => {
+    try {
+      clearTimeout(loginTimeout);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        {
+          email,
+          password,
+        }
+      );
+      if (
+        response &&
+        response.data &&
+        response.data.data &&
+        response.data.data.token
+      ) {
+        const token = response.data.data.token;
+        setLoginError(false);
+        changeIsUserLoggedIn(true);
+        localStorage.setItem("token", token);
+        navigate("/landing");
+      }
+      // Redirect to protected area
+    } catch (error) {
+      setLoginError(true);
+      //@ts-ignore
+      loginTimeout = setTimeout(() => setLoginError(false), 1500);
+    }
+    // navigate("/landing");
   };
 
   return (
@@ -72,6 +119,20 @@ function Regsiter() {
           Contained
         </Button>
       </FormControl>
+
+      {loginError && (
+        <Alert
+          className="mt-5  position-absolute"
+          style={{
+            bottom: 100,
+            right: 40,
+          }}
+          severity="error"
+        >
+          <AlertTitle>Error</AlertTitle>
+          The information you provided is not correct
+        </Alert>
+      )}
     </div>
   );
 }
