@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocationStore } from "../store";
+import { useUserStore } from "../store";
 
 let loginTimeout: number;
 
@@ -17,7 +17,7 @@ function Regsiter() {
   const {
     //@ts-ignore
     changeIsUserLoggedIn,
-  } = useLocationStore((state) => state);
+  } = useUserStore((state) => state);
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

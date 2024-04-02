@@ -7,14 +7,10 @@ import {
   // HashRouter,
   BrowserRouter,
   Navigate,
-  Router,
   Outlet,
 } from "react-router-dom";
 import Header from "./components/Header";
 import styled from "styled-components";
-import Configure from "./Configure";
-import View from "./View";
-import Schedule from "./Schedule";
 // import { Login } from '@microsoft/mgt-react';
 import axios from "axios";
 import * as xlsx from "xlsx";
@@ -24,7 +20,7 @@ import Sider from "./components/Sider";
 import Landing from "./Pages/Landing";
 import GenericEstimation from "./Pages/GenericEstimation";
 import Regsiter from "./Pages/Regsiter";
-import { useLocationStore } from "./store";
+import { useUserStore } from "./store";
 // Define the URL of the xlsx file
 // const url = 'https://sharepoint-site.com/path/to/file.xlsx';
 const url =
@@ -177,7 +173,7 @@ function App() {
   const {
     //@ts-ignore
     isUserLoggedIn,
-  } = useLocationStore((state) => state);
+  } = useUserStore((state) => state);
 
   useEffect(() => {
     function handleResize() {

@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
-import { useLocationStore } from "../store";
+import { useLocationStore, useRoomStore } from "../store";
 
 interface ZipCodes {
   id: number;
@@ -49,6 +49,10 @@ function Sider() {
     //@ts-ignore
     changeTotalSqFt,
     //@ts-ignore
+    changeZipCode,
+  } = useLocationStore((state) => state);
+  const {
+    //@ts-ignore
     changeADA,
     //@ts-ignore
     changeDoubleQueen,
@@ -56,9 +60,7 @@ function Sider() {
     changeKingStudio,
     //@ts-ignore
     changeKingOne,
-    //@ts-ignore
-    changeZipCode,
-  } = useLocationStore((state) => state);
+  } = useRoomStore((state) => state);
   useEffect(() => {
     getZipCodes();
   }, []);

@@ -5,9 +5,8 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { currencyFormat } from "../utils/formatter";
-import { useLocationStore } from "../store";
+import { useLocationStore, useRoomStore } from "../store";
 import Sider from "../components/Sider";
 
 interface ProjectFactor {
@@ -35,6 +34,10 @@ function GenericEstimation() {
     //@ts-ignore
     perimeter,
     //@ts-ignore
+    floors,
+  } = useLocationStore((state) => state);
+  const {
+    //@ts-ignore
     kingOneQuantity,
     //@ts-ignore
     kingStudioQuantity,
@@ -42,9 +45,7 @@ function GenericEstimation() {
     ADAQuantity: adaQuantity,
     //@ts-ignore
     doubleQueenQuantity,
-    //@ts-ignore
-    floors,
-  } = useLocationStore((state) => state);
+  } = useRoomStore((state) => state);
   const [genericEstimation, setGenericEstimation] =
     useState<GenericEstimationType>();
   const [expandedAccordion, setExpandedAccordion] = useState<string | false>(

@@ -1,8 +1,9 @@
+// location.js
 import { Store } from "antd/es/form/interface";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const useStore = create(
+export const useLocationStore = create(
   persist(
     (set) => ({
       zipCode: 0,
@@ -10,50 +11,45 @@ const useStore = create(
       totalSqFt: 58334,
       perimeter: 598,
       floors: 4,
-      isUserLoggedIn: false,
-      changeRooms: (rooms: number) =>
-        set((state: Store) => ({
-          rooms,
-        })),
-      changeZipCode: (zipCode: number) =>
-        set((state: Store) => ({
-          zipCode,
-        })),
-      changeFloors: (floors: number) =>
-        set((state: Store) => ({
-          floors,
-        })),
+      changeRooms: (rooms: number) => set((state: Store) => ({ rooms })),
+      changeZipCode: (zipCode: number) => set((state: Store) => ({ zipCode })),
+      changeFloors: (floors: number) => set((state: Store) => ({ floors })),
       changePerimeter: (perimeter: number) =>
-        set((state: Store) => ({
-          perimeter,
-        })),
+        set((state: Store) => ({ perimeter })),
       changeTotalSqFt: (totalSqFt: number) =>
-        set((state: Store) => ({
-          totalSqFt,
-        })),
-      changeKingOne: (kingOneQuantity: number) =>
-        set((state: Store) => ({
-          kingOneQuantity,
-        })),
-      changeKingStudio: (kingStudioQuantity: number) =>
-        set((state: Store) => ({
-          kingStudioQuantity,
-        })),
-      changeDoubleQueen: (doubleQueenQuantity: number) =>
-        set((state: Store) => ({
-          doubleQueenQuantity,
-        })),
-      changeADA: (ADAQuantity: number) =>
-        set((state: Store) => ({
-          ADAQuantity,
-        })),
-      changeIsUserLoggedIn: (isUserLoggedIn: boolean) =>
-        set((state: Store) => ({
-          isUserLoggedIn,
-        })),
+        set((state: Store) => ({ totalSqFt })),
     }),
-    { name: "raap_storage" }
+    { name: "location_storage" }
   )
 );
 
-export const useLocationStore = useStore;
+export const useUserStore = create(
+  persist(
+    (set) => ({
+      isUserLoggedIn: false,
+      changeIsUserLoggedIn: (isUserLoggedIn: boolean) =>
+        set((state: Store) => ({ isUserLoggedIn })),
+    }),
+    { name: "user_storage" }
+  )
+);
+
+export const useRoomStore = create(
+  persist(
+    (set) => ({
+      kingOneQuantity: 0,
+      kingStudioQuantity: 0,
+      doubleQueenQuantity: 0,
+      ADAQuantity: 0,
+      changeKingOne: (kingOneQuantity: number) =>
+        set((state: Store) => ({ kingOneQuantity })),
+      changeKingStudio: (kingStudioQuantity: number) =>
+        set((state: Store) => ({ kingStudioQuantity })),
+      changeDoubleQueen: (doubleQueenQuantity: number) =>
+        set((state: Store) => ({ doubleQueenQuantity })),
+      changeADA: (ADAQuantity: number) =>
+        set((state: Store) => ({ ADAQuantity })),
+    }),
+    { name: "room_storage" }
+  )
+);
