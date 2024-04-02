@@ -248,7 +248,6 @@ function GenericEstimation() {
               onChange={handleChangeAccordion("generalConditions")}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
@@ -265,29 +264,6 @@ function GenericEstimation() {
                     )}
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography className="px-2 2xl:text-xl">
-                  {genericEstimation?.generalFactors &&
-                    Object.entries(genericEstimation.generalFactors).map(
-                      (item) => (
-                        <div
-                          key={item[0]}
-                          style={{
-                            fontSize: 14,
-                          }}
-                          className={`border-top pt-2 ${
-                            item[0] === "generalFactorsCost"
-                              ? "d-none"
-                              : "d-flex"
-                          } align-items-center justify-content-between text-secondary`}
-                        >
-                          <div>{item[0]}</div>
-                          <div>{currencyFormat(item[1])}</div>
-                        </div>
-                      )
-                    )}
-                </Typography>
-              </AccordionDetails>
             </Accordion>
           </div>
           <div className="flex justify-center items-center flex-col">
