@@ -173,20 +173,12 @@ function Sider() {
         }}
       >
         <FormLabel
-          className="w-100 text-center text-white mt-2 xl:mt-0"
+          className="w-100 text-center text-white my-3 xl:mt-0"
           id="demo-row-radio-buttons-group-label"
         >
-          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md">
+          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md font-bold">
             {" "}
-            Select the following to get started
-          </span>
-        </FormLabel>
-        <FormLabel
-          className="w-100 text-center text-white 2xl:text-lg "
-          id="demo-row-radio-buttons-group-label"
-        >
-          <span className="2xl:text-xl xl:text-md  md:text-sm lg:text-md ">
-            Project Information
+            Tell Us About Your Project
           </span>
         </FormLabel>
         <div
@@ -304,27 +296,6 @@ function Sider() {
                         />
                       )}
                     />
-                  </div>
-                </div>
-
-                <div className=" w-100 ">
-                  <div className=" 2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg">
-                    Number of Rooms
-                  </div>
-                  <Slider
-                    aria-valuetext="100"
-                    aria-label="Default"
-                    valueLabelDisplay="auto"
-                    style={{ color: "#519259" }}
-                    defaultValue={100}
-                    max={120}
-                    min={80}
-                    step={1}
-                    value={numberOfRooms}
-                    onChange={onNumberOfRoomsChanged}
-                  />
-                  <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
-                    {numberOfRooms}
                   </div>
                 </div>
               </Typography>
@@ -544,6 +515,26 @@ function Sider() {
               </Accordion>
             </>
           )}
+        </div>
+        <div className=" w-100">
+          <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
+            Number of Rooms
+          </div>
+          <Slider
+            aria-valuetext="100"
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            style={{ color: "white" }}
+            defaultValue={100}
+            max={120}
+            min={80}
+            step={1}
+            value={numberOfRooms}
+            onChange={onNumberOfRoomsChanged}
+          />
+          <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
+            {numberOfRooms}
+          </div>
         </div>
       </FormControl>
       <style>

@@ -82,52 +82,65 @@ function Regsiter() {
       }}
       className="d-flex flex-column align-items-center justify-content-center"
     >
-      <img
-        src={require("../assets/Header/New_RaaP_Logo.png")}
-        alt="RaaP_Logo"
+      <FormControl
         style={{
-          position: "absolute",
-          top: "5%",
+          backgroundColor: "white",
+          width: "55%",
+          height: "70%",
+          boxShadow: "-1px 1px 0px 0px",
         }}
-      />
-      <FormControl className="d-flex flex-column align-items-center justify-content-center w-100">
-        <TextField
-          id="outlined-basic"
-          className="rounded"
-          value={email}
-          onChange={onEmailChanged}
-          label="Email"
-          type="email"
-          variant="filled"
-          style={{ backgroundColor: "white", width: "50%" }}
+        className="d-flex flex-column align-items-center justify-content-center p-5 rounded"
+      >
+        <img
+          src={require("../assets/Header/New_RaaP_Logo.png")}
+          alt="RaaP_Logo"
+          style={{
+            position: "absolute",
+            top: "5%",
+          }}
         />
-        <TextField
-          className="mt-5 rounded"
-          value={password}
-          onChange={onPasswordChanged}
-          id="outlined-basic"
-          type="password"
-          label="Password"
-          variant="filled"
-          style={{ backgroundColor: "white", width: "50%" }}
-        />
-        <Button
-          onClick={onFormSubmitted}
-          className="mt-5 w-50 py-3 bg-success"
-          variant="contained"
+        <div
+          style={{ marginTop: "15%" }}
+          className="d-flex flex-column justify-content-center align-items-center w-100"
         >
-          Login
-        </Button>
+          <TextField
+            id="outlined-basic"
+            className="rounded"
+            value={email}
+            onChange={onEmailChanged}
+            label="Email"
+            type="email"
+            variant="outlined"
+            style={{ backgroundColor: "white", width: "50%" }}
+          />
+          <TextField
+            className="mt-5 rounded"
+            value={password}
+            onChange={onPasswordChanged}
+            id="outlined-basic"
+            type="password"
+            label="Password"
+            variant="outlined"
+            style={{ backgroundColor: "white", width: "50%" }}
+          />
+          <Button
+            onClick={onFormSubmitted}
+            className="mt-5 w-50 py-3 bg-success"
+            variant="contained"
+          >
+            Login
+          </Button>
 
-        <p
-          className="mt-5 h4 text-whit"
-          style={{ backgroundColor: "rgba(0,0,0,0.1)", color: "white" }}
-        >
-          Not A Member?{" "}
-          <Link to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711">
-            Create Your Account Now!
-          </Link>
-        </p>
+          <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}>
+            New User?{" "}
+            <Link
+              className="h5 text-primary"
+              to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
+            >
+              Schedule A Call To Get Set Up
+            </Link>
+          </p>
+        </div>
       </FormControl>
 
       {loginError && (

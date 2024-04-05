@@ -11,7 +11,7 @@ function Breadcrum() {
 
   const renderActiveStep = () => {
     switch (location.pathname) {
-      case "/":
+      case "/landing":
         return 1;
       case "/generic_estimation":
         return 1;
@@ -20,8 +20,8 @@ function Breadcrum() {
     }
   };
   return (
-    <div className ="lg:py-2 2xl:py-2 d-flex md:justify-content-center justify-content-end w-full align-items-end ">
-      <Box  className="w-[30%] md:mr-[-15px]  lg:w-[20%] ">
+    <div className="lg:py-2 2xl:py-2 d-flex md:justify-content-center justify-content-end w-full align-items-end ">
+      <Box className="w-[30%] md:mr-[-15px]  lg:w-[20%] ">
         <Stepper activeStep={renderActiveStep()} alternativeLabel>
           {steps.map((label) => (
             <Step
@@ -36,7 +36,6 @@ function Breadcrum() {
                 },
                 "& .MuiStepLabel-root .Mui-disabled": {
                   color: "rgba(0, 0, 0, 0.38)",
-                  
                 },
               }}
             >

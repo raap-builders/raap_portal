@@ -5,11 +5,10 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 const NavLinks = [
   { id: 1, name: "Budget", to: "/Budget" },
-  { id: 2, name: "Prototype", to: "/Prototype" },
-  { id: 3, name: "Design", to: "/Design" },
-  { id: 4, name: "Fabricate", to: "/Fabricate" },
+  { id: 2, name: "Design", to: "/Design" },
+  { id: 3, name: "Fabricate", to: "/Fabricate" },
 ];
-const options = ["Budget", "Prototype", "Design", "Fabricate"];
+const options = ["Budget", "Design", "Fabricate"];
 const defaultOption = options[0];
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,9 +20,9 @@ function Header() {
   return (
     <div
       style={divStyle}
-      className="px-5 py-2 d-flex align-items-center rounded justify-content-between"
+      className="px-5 py-2 d-flex align-items-center rounded justify-content-start"
     >
-      <NavLink to="/landing">
+      <NavLink style={{ width: "43%" }} to="/landing">
         <img
           src={require("../assets/Header/New_RaaP_Logo.png")}
           alt="RaaP_Logo"
@@ -37,7 +36,7 @@ function Header() {
         {NavLinks.map(({ id, name, to }) => (
           <span
             // to={name === "Budget" ? "/" : ""}
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "none", fontSize: 24 }}
             className={`px-4 ${
               name === "Budget"
                 ? "text-[#519259] font-extrabold"

@@ -117,11 +117,12 @@ function GenericEstimation() {
                   color: "#4F55E7",
                   letterSpacing: "2px",
                   backgroundColor: "#DAF2DE",
+                  fontSize: 24,
                 }}
                 className="py-3 font-bold text-center 2xl:text-lg text-lg md:text-sm lg:text-lg"
               >
                 {item.name === "Build Time"
-                  ? item.cost
+                  ? `${item.cost} Months`
                   : currencyFormat(parseFloat(item.cost))}
               </div>
             </div>
@@ -181,11 +182,11 @@ function GenericEstimation() {
                         <div
                           key={item[0]}
                           style={{
-                            fontSize: 14,
+                            fontSize: 18,
                           }}
-                          className={`border-top pt-2 ${
+                          className={`border-top py-3 ${
                             item[0] === "buildingCost" ? "d-none" : "d-flex"
-                          } align-items-center justify-content-between text-secondary`}
+                          } align-items-center justify-content-between text-secondary text-capitalize`}
                         >
                           <div>{item[0]}</div>
                           <div>{currencyFormat(item[1])}</div>
