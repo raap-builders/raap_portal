@@ -62,7 +62,7 @@ function Sider() {
     changeKingOne,
   } = useRoomStore((state) => state);
   useEffect(() => {
-    getZipCodes();
+    // getZipCodes();
   }, []);
 
   const getZipCodes = (zipCode?: string) => {
@@ -81,16 +81,29 @@ function Sider() {
             title: `${item.city}`,
           };
         });
+        setZipCode(arr[0].label);
+        changeZipCode(arr[0].zipCode || "");
         setZipCodes(arr);
       })
       .catch((error) => console.log("err", error));
   };
 
-  const onZipCodeChanged = (event: React.ChangeEvent<{}>, newValue: string) => {
+  const onZipCodeChanged = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const { target = { value: "" } } = event;
+    const { value: newValue } = target;
+
     setZipCode(newValue);
-    if (Number.isInteger(parseInt(newValue)) || !newValue)
+    if (Number.isInteger(parseInt(newValue)) && newValue.length === 5)
       getZipCodes(newValue);
   };
+
+  // const onZipCodeChanged = (event: React.ChangeEvent<{}>, newValue: string) => {
+  //   setZipCode(newValue);
+  //   if (Number.isInteger(parseInt(newValue)) && newValue.length === 5)
+  //     getZipCodes(newValue);
+  // };
 
   const onNumberOfRoomsChanged = (
     event: Event,
@@ -277,7 +290,16 @@ function Sider() {
                     Site's zip code
                   </div>
                   <div className="w-full ">
-                    <Autocomplete
+                    <TextField
+                      className="w-100"
+                      id="outlined-basic"
+                      variant="outlined"
+                      placeholder="Enter The Zip Code..."
+                      onChange={onZipCodeChanged}
+                      sx={{ width: "auto" }}
+                      value={zipCode}
+                    />
+                    {/* <Autocomplete
                       freeSolo
                       sx={{ width: "auto" }}
                       disableClearable
@@ -295,7 +317,7 @@ function Sider() {
                           }}
                         />
                       )}
-                    />
+                    />*/}
                   </div>
                 </div>
               </Typography>
