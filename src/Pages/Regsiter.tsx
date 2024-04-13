@@ -95,6 +95,7 @@ function Regsiter() {
           src={require("../assets/Header/New_RaaP_Logo.png")}
           alt="RaaP_Logo"
           style={{
+            width: "15%",
             position: "absolute",
             top: "5%",
           }}

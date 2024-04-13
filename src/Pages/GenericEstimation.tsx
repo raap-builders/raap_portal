@@ -182,9 +182,9 @@ function GenericEstimation() {
                         <div
                           key={item[0]}
                           style={{
-                            fontSize: 18,
+                            fontSize: 14,
                           }}
-                          className={`border-top py-3 ${
+                          className={`border-top pt-2 ${
                             item[0] === "buildingCost" ? "d-none" : "d-flex"
                           } align-items-center justify-content-between text-secondary text-capitalize`}
                         >
@@ -208,7 +208,7 @@ function GenericEstimation() {
                 id="panel1a-header"
               >
                 <Typography variant="h6" className="w-50 2xl:text-lg">
-                  Site Work Cost
+                  Site Work Cost(Estimated)
                 </Typography>
                 <Typography
                   variant="h6"
@@ -253,7 +253,7 @@ function GenericEstimation() {
                 id="panel1a-header"
               >
                 <Typography variant="h6" className="w-50 2xl:text-xl">
-                  GC Charges
+                  GC Charges(Estimated)
                 </Typography>
                 <Typography
                   variant="h6"

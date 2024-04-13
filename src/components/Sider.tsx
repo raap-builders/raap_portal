@@ -194,7 +194,7 @@ function Sider() {
               } else setOpenCardIndex(4);
             }}
             expanded={openCardIndex === 0}
-            className=" rounded w-[100%] m-0 p-0 "
+            className="pb-3 rounded w-[100%] m-0 p-0 "
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -301,6 +301,26 @@ function Sider() {
               </Typography>
             </AccordionDetails>
           </Accordion>
+          <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
+            <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
+              Number of Rooms
+            </div>
+            <Slider
+              aria-valuetext="100"
+              aria-label="Default"
+              valueLabelDisplay="auto"
+              style={{ color: "white" }}
+              defaultValue={100}
+              max={120}
+              min={80}
+              step={1}
+              value={numberOfRooms}
+              onChange={onNumberOfRoomsChanged}
+            />
+            <div className="text-center text-white text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
+              {numberOfRooms}
+            </div>
+          </div>
           {location.pathname === "/landing" ? (
             <button
               onClick={onFormSubmitted}
@@ -515,26 +535,6 @@ function Sider() {
               </Accordion>
             </>
           )}
-        </div>
-        <div className=" w-100">
-          <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
-            Number of Rooms
-          </div>
-          <Slider
-            aria-valuetext="100"
-            aria-label="Default"
-            valueLabelDisplay="auto"
-            style={{ color: "white" }}
-            defaultValue={100}
-            max={120}
-            min={80}
-            step={1}
-            value={numberOfRooms}
-            onChange={onNumberOfRoomsChanged}
-          />
-          <div className="text-center text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
-            {numberOfRooms}
-          </div>
         </div>
       </FormControl>
       <style>
