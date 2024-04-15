@@ -175,6 +175,15 @@ function Sider() {
     changeFloors(parseInt(event.target.value));
   };
 
+  const onDefaultButtonClicked = () => {
+    setNumberOfFloors(4);
+    changeFloors(4);
+    setTotalSqFt(58334);
+    changeTotalSqFt(58334);
+    setPerimeter(598);
+    changePerimeter(598);
+  };
+
   return (
     <div className="2xl:text-lg  w-[100%]  ">
       <FormControl
@@ -323,34 +332,36 @@ function Sider() {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
-            <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
-              Number of Rooms
-            </div>
-            <Slider
-              aria-valuetext="100"
-              aria-label="Default"
-              valueLabelDisplay="auto"
-              style={{ color: "white" }}
-              defaultValue={100}
-              max={120}
-              min={80}
-              step={1}
-              value={numberOfRooms}
-              onChange={onNumberOfRoomsChanged}
-            />
-            <div className="text-center text-white text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
-              {numberOfRooms}
-            </div>
-          </div>
           {location.pathname === "/landing" ? (
-            <button
-              onClick={onFormSubmitted}
-              style={{ backgroundColor: "#519259", bottom: 20 }}
-              className="text-white text-center border-1 rounded bottom-3 py-2 mt-2  w-75"
-            >
-              See Estimate
-            </button>
+            <>
+              <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
+                <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
+                  Number of Rooms
+                </div>
+                <Slider
+                  aria-valuetext="100"
+                  aria-label="Default"
+                  valueLabelDisplay="auto"
+                  style={{ color: "white" }}
+                  defaultValue={100}
+                  max={120}
+                  min={80}
+                  step={1}
+                  value={numberOfRooms}
+                  onChange={onNumberOfRoomsChanged}
+                />
+                <div className="text-center text-white text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
+                  {numberOfRooms}
+                </div>
+              </div>
+              <button
+                onClick={onFormSubmitted}
+                style={{ backgroundColor: "#519259", bottom: 20 }}
+                className="text-white text-center border-1 rounded bottom-3 py-2 mt-2  w-75"
+              >
+                See Estimate
+              </button>
+            </>
           ) : (
             <>
               <Accordion
@@ -377,7 +388,12 @@ function Sider() {
                   <Typography className=" md:px-2 xl:px-4">
                     <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
                       <span style={{ color: "#519259" }}>Parameter</span>
-                      <span style={{ color: "#519259" }}>Default</span>
+                      <span
+                        onClick={onDefaultButtonClicked}
+                        style={{ color: "#519259", cursor: "pointer" }}
+                      >
+                        Default
+                      </span>
                     </div>
 
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
@@ -555,6 +571,26 @@ function Sider() {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
+              <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
+                <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
+                  Number of Rooms
+                </div>
+                <Slider
+                  aria-valuetext="100"
+                  aria-label="Default"
+                  valueLabelDisplay="auto"
+                  style={{ color: "white" }}
+                  defaultValue={100}
+                  max={120}
+                  min={80}
+                  step={1}
+                  value={numberOfRooms}
+                  onChange={onNumberOfRoomsChanged}
+                />
+                <div className="text-center text-white text-md md:text-sm xl:text-lg lg:text-md 2xl:text-lg">
+                  {numberOfRooms}
+                </div>
+              </div>
             </>
           )}
         </div>
