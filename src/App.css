@@ -12,18 +12,10 @@ body,
   justify-content: space-around;
 }
 
-.sc-fsQiph,
-.hCpXUZ {
-  /* max-height: 200px; */
-  /* overflow-y: scroll; */
+.scrollFix::-webkit-scrollbar {
+  display: none;
 }
-/* .sc-fsQiph, .hCpXUZ::-webkit-scrollbar {
-  display: none;
-} */
-/* .sc-fsQiph::-webkit-scrollbar {
-  display: none;
-  width: 0.4vw;
-} */
+
 .css-15v22id-MuiAccordionDetails-root {
   padding: 0px 4px 5px !important;
   line-height: norma;

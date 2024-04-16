@@ -268,7 +268,7 @@ function Sider() {
             <button
               onClick={onFormSubmitted}
               style={{ backgroundColor: "#519259", bottom: 20 }}
-              className="text-white text-center border-1 rounded bottom-3 md:py-2 xl:py-3 md:mt-4 xl:mt-6 w-75 md:mb-2 xl:mb-0 2xl:mb-0 textfont margin"
+              className="text-white text-center border-1 rounded bottom-3 md:py-2 xl:py-3 md:mt-4 mt-6 w-75 md:mb-2 xl:mb-0 2xl:mb-0 textfont margin"
             >
               See Estimate
             </button>

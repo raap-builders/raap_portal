@@ -9,7 +9,7 @@ const ViewContainer = styled.div`
   margin-right: 10vw;
 `;
 
-function App() {
+function  App() {
   return (
     <ViewContainer>
       <ViewContent></ViewContent>

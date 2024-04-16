@@ -168,39 +168,39 @@ const LogoEmpty = styled.img`
 `;
 
 function App() {
-  const [showMessage, setShowMessage] = useState(false);
 
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth <= 786) {
-        setShowMessage(true);
-      } else {
-        setShowMessage(false);
-      }
-    }
+  // useEffect(() => {
+  //   function handleResize() {
+  //     if (window.innerWidth < 786) {
+  //       document.body.style.minWidth = '786px';
+  //     } else {
+  //       document.body.style.minWidth = '';
+  //     }
+  //   }
 
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Check on initial load
+  //   window.addEventListener("resize", handleResize);
+  //   handleResize();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
 
   return (
     <div>
-      <div className ="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden  lg:block md:block 2xl:block ">
+      <div className="AppMain h-100 overflow-x-hidden px-3 py-1 lg:block md:block 2xl:block ">
         <BrowserRouter>
           <Header />
           <div>
             <Breadcrumb />
           </div>
-         
-          <div  className="grid md:grid-cols-none lg:grid-cols-4 justify-center h-full overflow-y-auto ">
-            <div className="sm:w-full md:p-2 p-0 lg:mr-2 lg:grid lg:col-span-1 md:hidden">
+
+          <div className="grid md:grid-cols-none lg:grid-cols-4 h-full overflow-x-auto ">
+            <div className="sm:w-full md:p-2 p-0 lg:mr-2 lg:grid lg:col-span-1 hidden">
               <Sider />
             </div>
-            <div className="sm:w-full lg:grid lg:col-span-3">
+            <div className="scrollFix w-full lg:grid lg:col-span-3 overflow-x-scroll min-w-[767px]">
               <Routes>
                 <Route path="/" Component={Landing} />
                 <Route
@@ -232,10 +232,10 @@ function App() {
         </BrowserRouter>
       </div>
       <div className=" md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
-      <h1 className="text-black text-justify mx-3">
+        <h1 className="text-black text-justify mx-3">
           {" "}
-          For a better experience, we suggest using this website on a horizontal
-          or larger screen. Thank you!
+          {/* For a better experience, we suggest using this website on a horizontal
+          or larger screen. Thank you! */}
         </h1>
       </div>
       <style>
@@ -245,7 +245,7 @@ function App() {
             grid-template-columns: "2fr 2fr !important"
           }
         `}
-        </style>
+      </style>
     </div>
   );
 }

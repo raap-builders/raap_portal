@@ -81,11 +81,11 @@ function GenericEstimation() {
             </div>
           ))}
       </div>
-      <div className=" lg:flex mt-2 md:grid md:grid-cols-6">
-        <div className=" lg:hidden 2xl:hidden flex sider-genetic-accordion-container md:col-span-2 ">
+      <div className=" lg:flex mt-2 grid grid-cols-6">
+        <div className=" lg:hidden 2xl:hidden flex sider-genetic-accordion-container col-span-2 ">
           <Sider />
         </div>
-        <div className="bg-white md:p-2 p-0 rounded w-full flex-6 md:col-span-4">
+        <div className="bg-white md:p-2 p-0 rounded w-full flex-6 col-span-4">
           <div
             style={{
               color: "#519259",

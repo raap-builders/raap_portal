@@ -3,13 +3,13 @@ import Sider from "../components/Sider";
 
 function Landing() {
   return (
-    <div className="md:grid md:grid-cols-6 lg:flex">
-      <div className=" md:grid md:col-span-2  lg:hidden ">
+    <div className="grid grid-cols-6 lg:flex">
+      <div className=" md:grid col-span-2  lg:hidden ">
         <Sider />
       </div>
-      <div className="w-full overflow-x-hidden md:grid md:col-span-4">
+      <div className="w-full overflow-x-hidden md:grid col-span-4">
         <img
-          className="imageSize w-full md:h-[82vh] lg:h-[80vh] 2xl:h-[82vh] "
+          className="imageSize w-full h-[82vh] lg:h-[80vh] 2xl:h-[82vh] "
           src={require("../assets/North_pic.png")}
           alt="main_layout"
         />
