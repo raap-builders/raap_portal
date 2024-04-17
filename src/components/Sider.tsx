@@ -12,10 +12,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Autocomplete, TextField } from "@mui/material";
+import { Alert, AlertTitle, TextField } from "@mui/material";
 import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
 
+let queenQuantityErrorTimeout: number;
 interface ZipCodes {
   id: number;
   zipCode: string;
@@ -28,15 +29,15 @@ function Sider() {
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
+  const [queenQuantityError, setQueenQuantityError] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
-  const [numberOfFLoors, setNumberOfFloors] = useState(4);
-  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(20);
-  const [ADAQuantity, setADAQuantity] = useState(9);
-  const [kingOneQuantity, setKingOneQuantity] = useState(5);
-  const [kingStudioQuantity, setKingStudioQuantity] = useState(125);
-  const [perimeter, setPerimeter] = useState(598);
-  const [totalSqFt, setTotalSqFt] = useState(58334);
+  const [numberOfFLoors, setNumberOfFloors] = useState(0);
+  const [ADAQuantity, setADAQuantity] = useState(0);
+  const [kingOneQuantity, setKingOneQuantity] = useState(0);
+  const [kingStudioQuantity, setKingStudioQuantity] = useState(0);
+  const [perimeter, setPerimeter] = useState(0);
+  const [totalSqFt, setTotalSqFt] = useState(0);
   const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
   //@ts-nocheck
   const {
@@ -61,9 +62,8 @@ function Sider() {
     //@ts-ignore
     changeKingOne,
   } = useRoomStore((state) => state);
-  useEffect(() => {
-    // getZipCodes();
-  }, []);
+
+  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(20);
 
   const getZipCodes = (zipCode?: string) => {
     const url = zipCode
@@ -157,8 +157,21 @@ function Sider() {
   const onDoubleQueenQuantityChanged = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    setDoubleQueenQuantity(parseInt(event.target.value));
-    changeDoubleQueen(parseInt(event.target.value));
+    clearTimeout(queenQuantityErrorTimeout);
+    if (parseInt(event.target.value) > Math.round(numberOfRooms * 0.4)) {
+      setQueenQuantityError(
+        "The quantity cannot be more than 40% of the number of the rooms"
+      );
+      //@ts-ignore
+      queenQuantityErrorTimeout = setTimeout(
+        () => setQueenQuantityError(""),
+        2500
+      );
+    } else {
+      setQueenQuantityError("");
+      setDoubleQueenQuantity(parseInt(event.target.value));
+      changeDoubleQueen(parseInt(event.target.value));
+    }
   };
 
   const onKingOneQuantityChanged = (
@@ -225,9 +238,7 @@ function Sider() {
               className=" md:p-0"
             >
               <Typography>
-                {" "}
                 <span className="2xl:text-lg xl:text-md   font-medium md:text-md lg:text-md md:px-2 xl:px-0 2xl:px-0 xl:text-lg">
-                  {" "}
                   Project
                 </span>
               </Typography>
@@ -367,6 +378,95 @@ function Sider() {
               <Accordion
                 onChange={(e, expanded) => {
                   if (expanded) {
+                    setOpenCardIndex(2);
+                  } else setOpenCardIndex(4);
+                }}
+                expanded={openCardIndex === 2}
+                className="mt-2 w-[100%] rounded xl:m-0"
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>
+                    <span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
+                      Rooms
+                    </span>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography className="lg:pb-2 md:px-2 md:pb-2 xl:px-4">
+                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        Room Mix
+                      </span>
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        No.
+                      </span>
+                    </div>
+
+                    <div className="mt-2 d-flex justify-content-between align-items-center w-100">
+                      <div className="w-50">
+                        <div className="text-left md:text-sm lg:text-md w-100 2xl:text-lg xl:text-lg">
+                          Queen Studio
+                        </div>
+                        <div
+                          className="text-left md:text-sm lg:text-md w-100 2xl:text-lg xl:text-lg"
+                          style={{ fontSize: 14 }}
+                        >
+                          {`(<40% rooms)`}
+                        </div>
+                      </div>
+                      <TextField
+                        className="w-50 mb-3"
+                        id="outlined-basic"
+                        variant="outlined"
+                        type="number"
+                        value={doubleQueenQuantity}
+                        onChange={onDoubleQueenQuantityChanged}
+                      />
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
+                      <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                        King Studio
+                      </span>
+                      <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
+                        {kingStudioQuantity}
+                      </span>
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
+                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                        King One Bedroom
+                      </span>
+                      <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                        {kingOneQuantity}
+                      </span>
+                    </div>
+
+                    <div className="mt-2 d-flex justify-content-between align-items-center w-100  ">
+                      <span className="text-left md:text-sm lg:text-md w-50 xl:text-lg 2xl:text-lg">
+                        ADA
+                      </span>
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {ADAQuantity}
+                      </span>
+                    </div>
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+
+              <Accordion
+                onChange={(e, expanded) => {
+                  if (expanded) {
                     setOpenCardIndex(1);
                   } else setOpenCardIndex(4);
                 }}
@@ -396,13 +496,28 @@ function Sider() {
                       </span>
                     </div>
 
+                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
+                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
+                        Gross Sq. Ft. (w/o pool)
+                      </span>
+                      <TextField
+                        style={{ width: "40%" }}
+                        className="text-right"
+                        id="outlined-basic"
+                        variant="outlined"
+                        type="number"
+                        value={totalSqFt}
+                        onChange={onTotalSqFtChanged}
+                      />
+                    </div>
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
                       <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg ">
                         {" "}
                         Number of floors
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
+                        style={{ width: "40%" }}
+                        className="md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={4}
@@ -411,21 +526,6 @@ function Sider() {
                         onChange={onNumberOfFloorsChanged}
                       />
                     </div>
-                    <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
-                      <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
-                        Total Sq Ft (w/o pool)
-                      </span>
-                      <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        defaultValue={58334}
-                        value={totalSqFt}
-                        onChange={onTotalSqFtChanged}
-                      />
-                    </div>
-
                     {/* <div className="mt-4 d-flex justify-content-between align-items-center w-100">
                   <span className="text-sm w-50">Building Shape</span>
                   <TextField
@@ -441,7 +541,8 @@ function Sider() {
                         Perimeter (Ft.)
                       </span>
                       <TextField
-                        className="w-30 md:w-[30%] lg:w-[30%] xl:w-[50%]"
+                        style={{ width: "40%" }}
+                        className="md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
                         variant="outlined"
                         defaultValue={598}
@@ -454,123 +555,6 @@ function Sider() {
                 </AccordionDetails>
               </Accordion>
 
-              <Accordion
-                onChange={(e, expanded) => {
-                  if (expanded) {
-                    setOpenCardIndex(2);
-                  } else setOpenCardIndex(4);
-                }}
-                expanded={openCardIndex === 2}
-                className="mt-2 w-[100%] rounded xl:m-0"
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>
-                    <span className="2xl:text-lg font-medium md:text-md lg:text-md md:px-2 lg:px-2 xl:px-0 2xl:px-0 xl:text-lg">
-                      Rooms
-                    </span>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography className=" lg:pb-2 md:px-2 md:pb-2 xl:px-4">
-                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
-                      <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
-                        Room Mix
-                      </span>
-                      <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
-                        No.
-                      </span>
-                      <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
-                        %
-                      </span>
-                    </div>
-
-                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
-                      <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
-                        King One Bedroom
-                      </span>
-                      <TextField
-                        className="w-25"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        defaultValue={9}
-                        value={kingOneQuantity}
-                        onChange={onKingOneQuantityChanged}
-                      />
-                      <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
-                        8%
-                      </span>
-                    </div>
-
-                    <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
-                      <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
-                        King Studio
-                      </span>
-                      <TextField
-                        className="w-25"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        defaultValue={9}
-                        value={kingStudioQuantity}
-                        onChange={onKingStudioQuantityChanged}
-                      />
-                      <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
-                        83%
-                      </span>
-                    </div>
-
-                    <div className="mt-2 d-flex justify-content-between align-items-center w-100">
-                      <span className="text-left md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
-                        Double Queen Studio
-                      </span>
-                      <TextField
-                        className="w-25"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        defaultValue={9}
-                        value={doubleQueenQuantity}
-                        onChange={onDoubleQueenQuantityChanged}
-                      />
-                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        16%
-                      </span>
-                    </div>
-
-                    <div className="mt-2 d-flex justify-content-between align-items-center w-100  ">
-                      <span className="text-left md:text-sm lg:text-md w-50 xl:text-lg 2xl:text-lg">
-                        ADA
-                      </span>
-                      <TextField
-                        className="w-25"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        defaultValue={9}
-                        value={ADAQuantity}
-                        onChange={onADAChanged}
-                      />
-                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        11%
-                      </span>
-                    </div>
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
               <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
                 <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
                   Number of Rooms
@@ -701,6 +685,20 @@ function Sider() {
        
       `}
       </style>
+      {queenQuantityError && queenQuantityError.length && (
+        <Alert
+          style={{
+            top: "30%",
+            left: "28%",
+            position: "absolute",
+            zIndex: 999,
+          }}
+          severity="error"
+        >
+          <AlertTitle>Error</AlertTitle>
+          {queenQuantityError}
+        </Alert>
+      )}
     </div>
   );
 }

@@ -54,13 +54,6 @@ function GenericEstimation() {
   //@ts-ignore
 
   useEffect(() => {
-    console.log(
-      "her",
-      kingOneQuantity,
-      kingStudioQuantity,
-      doubleQueenQuantity,
-      adaQuantity
-    );
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
         rooms: numberOfRooms,
@@ -182,7 +175,7 @@ function GenericEstimation() {
                         <div
                           key={item[0]}
                           style={{
-                            fontSize: 14,
+                            fontSize: 18,
                           }}
                           className={`border-top pt-2 ${
                             item[0] === "buildingCost" ? "d-none" : "d-flex"
@@ -208,7 +201,7 @@ function GenericEstimation() {
                 id="panel1a-header"
               >
                 <Typography variant="h6" className="w-50 2xl:text-lg">
-                  Site Work Cost(Estimated)
+                  Site Work Cost (Estimated)
                 </Typography>
                 <Typography
                   variant="h6"
@@ -228,7 +221,7 @@ function GenericEstimation() {
                         <div
                           key={item[0]}
                           style={{
-                            fontSize: 14,
+                            fontSize: 18,
                           }}
                           className={`border-top pt-2 ${
                             item[0] === "siteWorkCost" ? "d-none" : "d-flex"
@@ -253,7 +246,7 @@ function GenericEstimation() {
                 id="panel1a-header"
               >
                 <Typography variant="h6" className="w-50 2xl:text-xl">
-                  GC Charges(Estimated)
+                  GC Charges (Estimated)
                 </Typography>
                 <Typography
                   variant="h6"

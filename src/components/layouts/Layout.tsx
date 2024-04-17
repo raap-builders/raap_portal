@@ -1,22 +1,29 @@
 import { useCallback, useEffect, useState, useRef, ChangeEvent } from "react";
 import styled from "styled-components";
 
-import { ThemeProvider } from 'styled-components';
-import theme from '../../theme';
-import DisplayTypes from "../DisplayTypes"
-import Buttons from '../Buttons'
-import VerticalSlider from '../Slider/VerticalSlider'
-import Notes from "../Notes"
-import DisplayContent from "../DisplayContent"
-import "../../styles/layouts.css"
+import { ThemeProvider } from "styled-components";
+import theme from "../../theme";
+import DisplayTypes from "../DisplayTypes";
+import Buttons from "../Buttons";
+import VerticalSlider from "../Slider/VerticalSlider";
+import Notes from "../Notes";
+import DisplayContent from "../DisplayContent";
+import "../../styles/layouts.css";
 
 import { calculateIncrementalRevenue } from "../../utils/configuratorUtils";
-import data, { getValues } from '../../data/configurator'
+import data, { getValues } from "../../data/configurator";
 import RadioButton from "../RadioButtons/RadioButton";
-import DropdownButton from '../DropdownButton'
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill, Bs4CircleFill, Bs5CircleFill, Bs6CircleFill } from 'react-icons/bs';
+import DropdownButton from "../DropdownButton";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import {
+  Bs1CircleFill,
+  Bs2CircleFill,
+  Bs3CircleFill,
+  Bs4CircleFill,
+  Bs5CircleFill,
+  Bs6CircleFill,
+} from "react-icons/bs";
 import { Button, Input, Modal } from "antd";
 import html2canvas from "html2canvas";
 
@@ -38,23 +45,23 @@ function valuetext(value: number) {
   return `${value}°C`;
 }
 const GreenBox = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   // padding: 1rem;
-  min-height:22vh;
-  max-height:22vh;
-  width:100%;
+  min-height: 22vh;
+  max-height: 22vh;
+  width: 100%;
   background: rgba(81, 146, 89, 0.22);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); //, inset 0px 4px 4px rgba(0, 0, 0, 0.25)
-`
+`;
 
 const MainArea = styled.div`
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   height: 100%;
   width: 100%;
-`
+`;
 
 const DisplayArea = styled.div`
   width: 45.5vw;
@@ -63,88 +70,87 @@ const DisplayArea = styled.div`
   background-size: cover;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: space-around;
-`
+`;
 
 const ButtonArea = styled.div`
   // background-color:pink;
-  height:100%;
+  height: 100%;
   width: 54vw;
   padding: 0 4vw;
-  padding-top:1rem;
-`
+  padding-top: 1rem;
+`;
 
 const Container = styled.div`
   height: 100%;
   width: 100%;
-  display:flex;
-  flex-direction:column;
-`
-
+  display: flex;
+  flex-direction: column;
+`;
 
 const LayoutButtons = styled.div`
-  height:10vh;
+  height: 10vh;
   width: auto;
-`
+`;
 
 const FirstColumnDiv = styled.div`
   // background-color:blue;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  width: 16vw;//100%;
+  width: 16vw; //100%;
   height: 100%;
-  background-color:rgba(135,135,135,0.22);
+  background-color: rgba(135, 135, 135, 0.22);
   border-radius: 16px;
   // margin-right: 1vw;
-  padding-top:0.4vw;
-`
+  padding-top: 0.4vw;
+`;
 
 const OtherBenefitsHeader = styled.p`
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 1.3vw;
   text-decoration-line: underline;
-  padding-left:1vw;
-  padding-top:1vh;
-  color: #3D3D3D;
-`
+  padding-left: 1vw;
+  padding-top: 1vh;
+  color: #3d3d3d;
+`;
 
 const BulletPointsDiv = styled.div`
-  padding-left:0.5vw;
-  overflow:hidden;
-`
+  padding-left: 0.5vw;
+  overflow: hidden;
+`;
 
 const ColumnDiv = styled.div`
   // background-color:red;
   height: 100%;
   margin: 0 0.5vw;
-  overflow:hidden;
+  overflow: hidden;
   // width: 20vw;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  padding-bottom:1.5vh;
-`
+  padding-bottom: 1.5vh;
+`;
 const MiddleColumnDiv = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   height: 100%;
   width: 18.4vw; //100%;
   margin: 0 0.5vw;
-  overflow:hidden;
+  overflow: hidden;
   // background-color:green;
-  padding-bottom:1.7vh;
-`
+  padding-bottom: 1.7vh;
+`;
 
 const LastColumnDiv = styled.div`
   // margin-left: 4vw;
   padding: 0.5vw;
-  display:flex;
+  display: flex;
   flex-direction: column;
   border: 1.26px solid rgba(81, 146, 89, 1);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -153,41 +159,41 @@ const LastColumnDiv = styled.div`
   height: 100%;
   overflow: hidden;
   // background-color:purple;
-`
+`;
 
 const LeftTitleDiv = styled.div`
   width: 100%;
-  text-align:right;
+  text-align: right;
   // font-size: 2vmin;
   // line-height: 2.5vmin;
   // font-weight:500;
   // height: 20%;
-`
+`;
 
 const RightTitleDiv = styled.div`
   width: 100%;
-  text-align:left;
+  text-align: left;
   // font-size: 2vmin;
   // line-height: 2.5vmin;
   // font-weight:500;
   // height: 20%;
-`
+`;
 
 const BarContainerLeft = styled.div`
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:end;
-  height: 11.7vh//80%;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  height: 11.7vh //80%;;
+`;
 
 const BarContainerRight = styled.div`
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:start;
-  height: 11.7vh//80%;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  height: 11.7vh //80%;;
+`;
 
 const BulletList = styled.ul`
   margin: 0.1em;
@@ -198,61 +204,61 @@ const BulletList = styled.ul`
   line-height: 1.5vw;
 
   color: #000000;
-`
+`;
 
 const ListItem = styled.ul`
   list-style: disc outside none;
   display: list-item;
   margin-left: 1.5em;
-`
+`;
 
 const FourDivs = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   height: 100%;
   width: 100%;
-`
+`;
 
 const Row = styled.div`
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   height: 100%;
-  margin:0.2vh;
-`
+  margin: 0.2vh;
+`;
 
 const WhiteBox = styled.div`
-  background-color:white;
+  background-color: white;
   width: 90%;
   height: 80%;
   border-radius: 10px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
   margin: 0.4vw;
-`
+`;
 
 const BuildingRoomsHeader = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: row;
-  align-items:center;
-  justify-content:space-around;
-  margin-left:1vw;
-  margin-right:1vw;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: 1vw;
+  margin-right: 1vw;
   font-size: 1vw;
-  height:6vh;
-`
+  height: 6vh;
+`;
 
 const BoldText = styled.p`
   font-weight: 500;
   font-size: 1.8vmin;
-  text-align:center;
-`
+  text-align: center;
+`;
 
 const NormalText = styled.p`
   font-size: 1.5vmin;
   text-align: center;
-  align-items:center;
-`
+  align-items: center;
+`;
 
 const EmptySliderDiv = styled.div`
   text-align: center;
@@ -261,19 +267,19 @@ const EmptySliderDiv = styled.div`
   align-items: center;
   justify-content: center;
   grid-gap: 3px;
-  padding: 6px 0px
-`
+  padding: 6px 0px;
+`;
 
 const EmptyBarContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
-  height: 11.7vh//80%;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 11.7vh //80%;;
+`;
 
 const ColoredBar = styled.div<BarDivProps>`
-  justify-content:${props => props.barAlign == "right" ? "right" : "left"};
+  justify-content:${(props) => (props.barAlign == "right" ? "right" : "left")};
   font-style: normal;
   font-weight: 600;
   // font-size: 24px;
@@ -283,85 +289,89 @@ const ColoredBar = styled.div<BarDivProps>`
   display: flex;
   align-items: center;
 
-  color: ${props => props.barColor == "yellow" ? "#000000" : "#FFFFFF"};
+  color: ${(props) => (props.barColor == "yellow" ? "#000000" : "#FFFFFF")};
 
-  background: ${props => props.theme.barColors[props.barColor]};
+  background: ${(props) => props.theme.barColors[props.barColor]};
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: ${props => props.barAlign == "right" ? "0.4vw 0px 0px 0.4vw" : "0px 0.4vw 0.4vw 0px"};
+  border-radius: ${(props) =>
+    props.barAlign == "right" ? "0.4vw 0px 0px 0.4vw" : "0px 0.4vw 0.4vw 0px"};
   padding: 0 0.4vw;
   
   font-size: 0.9vw;//1.7vmin;
   overflow:hidden;
   // height:3vmin;
   height: 3vh;
-  width: ${(props) =>
-    props.barAlign == "right" ? props.barWidth / 1.4 + "vw" : props.barWidth * 1.6 + "vw"//(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
+  width: ${
+    (props) =>
+      props.barAlign == "right"
+        ? props.barWidth / 1.4 + "vw"
+        : props.barWidth * 1.6 + "vw" //(props.barWidth-3)*100/8 : (props.barWidth-10)*100/40
   }
   }};
   min-width: 55px;
   max-width: 99%;
-`
+`;
 const ConstructionDiv = styled.div`
-  display:flex;
-  flex-direction:row;
-  margin:1rem;
-  justify-content:space-around;
-`
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+  justify-content: space-around;
+`;
 
 const LeftDiv = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  margin:1rem;
-  align-items:center;
-`
+  margin: 1rem;
+  align-items: center;
+`;
 
 const RightDiv = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  margin:1rem;
-  align-items:center;
-`
+  margin: 1rem;
+  align-items: center;
+`;
 
 const EmptyBox = styled.div`
-  width:23vw;
+  width: 23vw;
   height: 14vw;
-  border-radius:20px;
+  border-radius: 20px;
   border: 2px solid gray;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 const LeftHeading = styled.h1`
-  color:green;
-  padding:0.2rem;
-  font-size:1.3rem;
-  font-weight:bold;
-`
+  color: green;
+  padding: 0.2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+`;
 
 const RightHeading = styled.h1`
-  color:orange;
-  padding:0.2rem;
-  font-size:1.5rem;
-  font-weight:bold;
-`
+  color: orange;
+  padding: 0.2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
 const LocationDiv = styled.div`
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:center;
-  background: #D9D9D9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #d9d9d9;
   border-radius: 1.5vmin;
   width: 21vw;
   height: 3.5vw;
   padding: 0.3vw;
 
   // filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
-`
+`;
 const Containers = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width:100%;
+  width: 100%;
   margin-bottom: 15px;
 `;
 const Textbox = styled.textarea`
@@ -390,18 +400,18 @@ const SubmitButton = styled.button`
 
 const NotesLabel = styled.div`
   /* font-family: 'Open Sans'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1vw;
-    line-height: 27px;
-    text-align: right;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1vw;
+  line-height: 27px;
+  text-align: right;
 
-    color: #000000;
-    display:flex;
-    justify-content: right;
-    width: 8vw;
-    padding-right:1.5vw;
-`
+  color: #000000;
+  display: flex;
+  justify-content: right;
+  width: 8vw;
+  padding-right: 1.5vw;
+`;
 
 // todo: move styled components to css file
 
@@ -414,11 +424,13 @@ const Layout = () => {
   const [siteFoundation, setSiteFoundation] = useState(18);
 
   const [traditionalBuildTime, setTraditionalBuildTime] = useState(25);
-  const [toggleMain, setToggleMain] = useState(true)
+  const [toggleMain, setToggleMain] = useState(true);
   const [raapBuildTime, setRaapBuildTime] = useState(18);
   const [traditionalCost, setTraditionalCost] = useState(0);
   const [raapTotalCost, setRaapTotalCost] = useState(0);
-  const [raapIncrementalRevenue, setRaapIncrementalRevenue] = useState(calculateIncrementalRevenue(data.rooms.total));
+  const [raapIncrementalRevenue, setRaapIncrementalRevenue] = useState(
+    calculateIncrementalRevenue(data.rooms.total)
+  );
   const [raapTotalNetCost, setRaapTotalNetCost] = useState(0);
   const [perRoom, setPerRoom] = useState(0);
   const [perSqft, setPerSqr] = useState(0);
@@ -429,25 +441,24 @@ const Layout = () => {
   const [roomsMin, setRoomsMin] = useState(data.rooms.min);
   const [roomsMax, setRoomsMax] = useState(data.rooms.max);
   const [roomsNumber, setRoomNumbers] = useState(0);
-  const [roomValue, setRoomValue] = useState(70)
-  const [averageValue, setAverageValue] = useState(0)
-  const [siteCompTime, setSiteCompTime] = useState(0)
-  const [receivedData, setReceivedData] = useState('');
+  const [roomValue, setRoomValue] = useState(70);
+  const [averageValue, setAverageValue] = useState(0);
+  const [siteCompTime, setSiteCompTime] = useState(0);
+  const [receivedData, setReceivedData] = useState("");
   const [visible, setVisible] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
 
-
   const handleOk = async () => {
     if (containerRef.current) {
       const canvas = await html2canvas(containerRef.current);
-      const screenshot = canvas.toDataURL('image/png');
-      console.log('Screenshot:', screenshot);
+      const screenshot = canvas.toDataURL("image/png");
+      console.log("Screenshot:", screenshot);
     }
 
     setVisible(false);
@@ -527,16 +538,16 @@ const Layout = () => {
   ];
 
   const handleStateUpdate = (updatedValue: number) => {
-    setRoomNumbers(updatedValue)
+    setRoomNumbers(updatedValue);
   };
 
   const onDataReceived = (data: number) => {
     setAverageValue(data);
-  }
+  };
 
-  const [displayImage, setDisplayImage] = useState("Glimmer")
-  const [projectType, setProjectType] = useState("Bathroom Pod")
-  const [layoutType, setlayoutType] = useState("Layout")
+  const [displayImage, setDisplayImage] = useState("Glimmer");
+  const [projectType, setProjectType] = useState("Bathroom Pod");
+  const [layoutType, setlayoutType] = useState("Layout");
   const [sliderValue, setSliderValue] = useState<number>(0);
   const [sliderValue2, setSliderValue2] = useState<number>(0);
   const trad1 = require("../../assets/Progress/Traditional/pic1.jpg");
@@ -565,47 +576,45 @@ const Layout = () => {
 
   const handleDataFromChild = (data: number) => {
     setDataFromChild(data);
-    const resp = getValues(roomValue, averageValue)
+    const resp = getValues(roomValue, averageValue);
 
-    setRaapTotalNetCost(resp.netTotalCost ?? 0)
-    setRaapTotalCost(resp.raapTotalCost)
-    setPerRoom(resp.raapNetPerRoom ?? 0)
-    setPerSqr(resp.raapNetPerSqft ?? 0)
-    setTraditionalCost(resp.siteTotalCost ?? 0)
-    setRaapBuildTime(resp.raapComplete)
-    setTraditionalBuildTime(resp.siteComplete)
-    setRaapPlans(resp.raapPlans)
-    setSitePlans(resp.sitePlans)
-    setRaapLoan(resp.raapLoan)
-    setSiteLoan(resp.siteLoan)
-    setRaapFoundation(resp.raapFoundation)
-    setSiteFoundation(resp.siteFoundation)
+    setRaapTotalNetCost(resp.netTotalCost ?? 0);
+    setRaapTotalCost(resp.raapTotalCost);
+    setPerRoom(resp.raapNetPerRoom ?? 0);
+    setPerSqr(resp.raapNetPerSqft ?? 0);
+    setTraditionalCost(resp.siteTotalCost ?? 0);
+    setRaapBuildTime(resp.raapComplete);
+    setTraditionalBuildTime(resp.siteComplete);
+    setRaapPlans(resp.raapPlans);
+    setSitePlans(resp.sitePlans);
+    setRaapLoan(resp.raapLoan);
+    setSiteLoan(resp.siteLoan);
+    setRaapFoundation(resp.raapFoundation);
+    setSiteFoundation(resp.siteFoundation);
   };
 
   useEffect(() => {
-    const resp = getValues(roomValue, averageValue)
+    const resp = getValues(roomValue, averageValue);
 
-    setRaapTotalNetCost(resp.netTotalCost)
-    setRaapTotalCost(resp.raapTotalCost)
-    setPerRoom(resp.raapNetPerRoom)
-    setPerSqr(resp.raapNetPerSqft)
-    setTraditionalCost(resp.siteTotalCost)
-    setRaapBuildTime(resp.raapComplete)
-    setTraditionalBuildTime(resp.siteComplete)
-  }, [roomValue, averageValue])
-
+    setRaapTotalNetCost(resp.netTotalCost);
+    setRaapTotalCost(resp.raapTotalCost);
+    setPerRoom(resp.raapNetPerRoom);
+    setPerSqr(resp.raapNetPerSqft);
+    setTraditionalCost(resp.siteTotalCost);
+    setRaapBuildTime(resp.raapComplete);
+    setTraditionalBuildTime(resp.siteComplete);
+  }, [roomValue, averageValue]);
 
   const [horizSliderValue, sethorizSliderValue] = useState(data.rooms.total);
   const [childData, setChildData] = useState<number>(0);
 
   const handleChangeSlider = (newValue: any) => {
-    console.log('asdasdwdas', newValue.target.value)
-    let ValueNumber = newValue.target.value
-    let incrementalRevenue = calculateIncrementalRevenue(ValueNumber)
-    setRaapIncrementalRevenue(incrementalRevenue)
+    let ValueNumber = newValue.target.value;
+    let incrementalRevenue = calculateIncrementalRevenue(ValueNumber);
+    setRaapIncrementalRevenue(incrementalRevenue);
     sethorizSliderValue(ValueNumber);
-    setRoomValue(ValueNumber)
-    setChildData(horizSliderValue)
+    setRoomValue(ValueNumber);
+    setChildData(horizSliderValue);
     handleDataFromChild(ValueNumber ?? 0);
     handleStateUpdate(ValueNumber); // Invoke the callback function with the updated value
   };
@@ -615,12 +624,11 @@ const Layout = () => {
     let incrementalRevenue = calculateIncrementalRevenue(newValue);
     setRaapIncrementalRevenue(incrementalRevenue);
     sethorizSliderValue(newValue);
-    setRoomValue(newValue)
+    setRoomValue(newValue);
 
-    setChildData(horizSliderValue)
+    setChildData(horizSliderValue);
     handleDataFromChild(newValue ?? 0);
   };
-
 
   function formatNumber(num: number): string {
     if (num < 0) {
@@ -632,16 +640,16 @@ const Layout = () => {
 
     if (nonDecimalPart >= 1000000) {
       const roundedNum = Math.round(nonDecimalPart / 1000000);
-      return roundedNum.toFixed(0) + 'M';
+      return roundedNum.toFixed(0) + "M";
     } else if (nonDecimalPart >= 1000) {
       const roundedNum = Math.round(nonDecimalPart / 1000);
-      return roundedNum.toFixed(0) + 'K';
+      return roundedNum.toFixed(0) + "K";
     } else {
       return nonDecimalPart.toString();
     }
   }
 
-  const [formattedValue, setFormattedValue] = useState('');
+  const [formattedValue, setFormattedValue] = useState("");
   const [numericValue, setNumericValue] = useState(0);
 
   useEffect(() => {
@@ -652,19 +660,25 @@ const Layout = () => {
     const newNumericValue = parseInt(splitArray[0]);
     setNumericValue(newNumericValue);
   }, [siteTotal]);
-  const [state, setState] = useState("State")
-  const [city, setCity] = useState("City")
+  const [state, setState] = useState("State");
+  const [city, setCity] = useState("City");
 
-  const [stateList, setStateList] = useState<string[]>(Object.keys(data.location));
-  const [cityList, setCityList] = useState<string[]>(Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"])));
+  const [stateList, setStateList] = useState<string[]>(
+    Object.keys(data.location)
+  );
+  const [cityList, setCityList] = useState<string[]>(
+    Object.keys(data.location["California"]).concat(
+      Object.keys(data.location["Arizona"])
+    )
+  );
 
   const setNewCity = (value: string, average: number) => {
-    setCity(value)
-    setAverageValue(average)
-    onDataReceived(average)
+    setCity(value);
+    setAverageValue(average);
+    onDataReceived(average);
     // setTraditionalBuildTime(average)
-    console.log("average for " + value + " is " + average)
-  }
+    console.log("average for " + value + " is " + average);
+  };
   const updateCityList = (value: string) => {
     let newCityList: string[] = [];
     if (value === "California") {
@@ -672,7 +686,9 @@ const Layout = () => {
     } else if (value === "Arizona") {
       newCityList = Object.keys(data.location["Arizona"]);
     } else {
-      newCityList = Object.keys(data.location["California"]).concat(Object.keys(data.location["Arizona"]));
+      newCityList = Object.keys(data.location["California"]).concat(
+        Object.keys(data.location["Arizona"])
+      );
     }
     if (!newCityList.includes(city)) {
       const cityAverage = (data.location as any)[value][newCityList[0]];
@@ -712,35 +728,97 @@ const Layout = () => {
             </BulletPointsDiv>
           </FirstColumnDiv>
           <ColumnDiv style={{ width: "24vw" }}>
-            <div className="configurator__barHeader" style={{ textAlign: "right", paddingRight: "2vw" }}>Time to complete</div>
+            <div
+              className="configurator__barHeader"
+              style={{ textAlign: "right", paddingRight: "2vw" }}
+            >
+              Time to complete
+            </div>
             <BarContainerLeft>
-              <ColoredBar barAlign="right" barColor="gray" barWidth={traditionalBuildTime - 5}>{traditionalBuildTime} Months</ColoredBar>
-              <ColoredBar barAlign="right" barColor="green" barWidth={raapBuildTime}>{raapBuildTime} Months (28% faster)</ColoredBar>
-              <ColoredBar style={{ visibility: "hidden" }} barAlign="right" barColor="yellow" barWidth={4}></ColoredBar>
+              <ColoredBar
+                barAlign="right"
+                barColor="gray"
+                barWidth={traditionalBuildTime - 5}
+              >
+                {traditionalBuildTime} Months
+              </ColoredBar>
+              <ColoredBar
+                barAlign="right"
+                barColor="green"
+                barWidth={raapBuildTime}
+              >
+                {raapBuildTime} Months (28% faster)
+              </ColoredBar>
+              <ColoredBar
+                style={{ visibility: "hidden" }}
+                barAlign="right"
+                barColor="yellow"
+                barWidth={4}
+              ></ColoredBar>
             </BarContainerLeft>
           </ColumnDiv>
           <MiddleColumnDiv>
-            <div className="configurator__barHeader" style={{ visibility: "hidden" }}>Time to complete</div>
+            <div
+              className="configurator__barHeader"
+              style={{ visibility: "hidden" }}
+            >
+              Time to complete
+            </div>
             <EmptyBarContainer className="configurator__middleText">
               <EmptySliderDiv>
-                <div style={{ width: '100%', borderBottom: '2px solid #878787' }}></div>
-                <span style={{ whiteSpace: 'nowrap' }}>Traditional Construction</span>
-                <div style={{ width: '100%', borderBottom: '2px solid #878787' }}></div>
+                <div
+                  style={{ width: "100%", borderBottom: "2px solid #878787" }}
+                ></div>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  Traditional Construction
+                </span>
+                <div
+                  style={{ width: "100%", borderBottom: "2px solid #878787" }}
+                ></div>
               </EmptySliderDiv>
               <EmptySliderDiv>
-                <div style={{ width: '100%', borderBottom: '2px solid #519259' }}></div>
-                <span style={{ whiteSpace: 'nowrap' }}>RaaP</span>
-                <div style={{ width: '100%', borderBottom: '2px solid #519259' }}></div>
+                <div
+                  style={{ width: "100%", borderBottom: "2px solid #519259" }}
+                ></div>
+                <span style={{ whiteSpace: "nowrap" }}>RaaP</span>
+                <div
+                  style={{ width: "100%", borderBottom: "2px solid #519259" }}
+                ></div>
               </EmptySliderDiv>
               <EmptySliderDiv>RaaP Net Cost (less incr. rev.)</EmptySliderDiv>
             </EmptyBarContainer>
           </MiddleColumnDiv>
           <ColumnDiv style={{ width: "24vw" }}>
-            <div className="configurator__barHeader" style={{ textAlign: "left", paddingLeft: "3.6vw" }}>Project Cost</div>
+            <div
+              className="configurator__barHeader"
+              style={{ textAlign: "left", paddingLeft: "3.6vw" }}
+            >
+              Project Cost
+            </div>
             <BarContainerRight>
-              <ColoredBar barAlign="left" barColor="gray" barWidth={numericValue - 4.7}>${formatNumber(siteTotal)}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="green" barWidth={numericValue - 5.1}>${formatNumber(raapTotalCost)} {roomsNumber >= 113 ? "(5% Lower)" : null}</ColoredBar>
-              <ColoredBar barAlign="left" barColor="yellow" barWidth={numericValue - 5.6}>${formatNumber(raapTotalNetCost)} {roomsNumber >= 125 ? "(16% Lower)" : null}</ColoredBar>
+              <ColoredBar
+                barAlign="left"
+                barColor="gray"
+                barWidth={numericValue - 4.7}
+              >
+                ${formatNumber(siteTotal)}
+              </ColoredBar>
+              <ColoredBar
+                barAlign="left"
+                barColor="green"
+                barWidth={numericValue - 5.1}
+              >
+                ${formatNumber(raapTotalCost)}{" "}
+                {roomsNumber >= 113 ? "(5% Lower)" : null}
+              </ColoredBar>
+              <ColoredBar
+                barAlign="left"
+                barColor="yellow"
+                barWidth={numericValue - 5.6}
+              >
+                ${formatNumber(raapTotalNetCost)}{" "}
+                {roomsNumber >= 125 ? "(16% Lower)" : null}
+              </ColoredBar>
             </BarContainerRight>
           </ColumnDiv>
           <LastColumnDiv>
@@ -748,7 +826,10 @@ const Layout = () => {
               Hotel
               <label className="toggle__switch">
                 <input type="checkbox"></input>
-                <span onClick={() => setToggleMain(toggleMain ? false : true)} className="toggle__slider toggle__round"></span>
+                <span
+                  onClick={() => setToggleMain(toggleMain ? false : true)}
+                  className="toggle__slider toggle__round"
+                ></span>
               </label>
               Rooms
             </BuildingRoomsHeader>
@@ -776,292 +857,381 @@ const Layout = () => {
             </FourDivs>
           </LastColumnDiv>
         </GreenBox>
-        {
-          toggleMain ?
-
-            <div>
-              <div className="RoomsContent">
-                <div className="imageBoxes">
-                  <ConstructionDiv>
-                    <LeftDiv>
-                      <LeftHeading>Traditional Contruction</LeftHeading>
-                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
-                      <EmptyBox style={{ borderColor: '#519259' }}>
-                        <img
-                          className='emptyImageBox'
-                          src={
-                            sliderValue2 == 0 ?
-                              trad1 : sliderValue2 == 1 ?
-                                trad1 : sliderValue2 == 2 ?
-                                  trad2 : sliderValue2 == 3 ?
-                                    trad2 : sliderValue2 == 4 ?
-                                      trad3 : sliderValue2 == 5 ?
-                                        trad4 : sliderValue2 == 6 ?
-                                          trad4 : sliderValue2 == 7 ?
-                                            trad4 : sliderValue2 == 8 ?
-                                              trad4 : sliderValue2 == 9 ?
-                                                trad5 : null
-                          }
-                        />
-                      </EmptyBox>
-                    </LeftDiv>
-                    <RightDiv>
-                      <RightHeading>RaaP Offsite</RightHeading>
-                      {/* <p>Cost: $9M     Revenue:30 Months</p> */}
-                      <EmptyBox style={{ borderColor: '#F6AA2A' }}>
-                        <img
-                          className='emptyImageBox'
-                          src={
-                            sliderValue2 == 0 ?
-                              pic1 : sliderValue2 == 1 ?
-                                pic1 : sliderValue2 == 2 ?
-                                  pic2 : sliderValue2 == 3 ?
-                                    pic3 : sliderValue2 == 4 ?
-                                      pic4 : sliderValue2 == 5 ?
-                                        pic5 : sliderValue2 == 6 ?
-                                          pic6 : sliderValue2 == 7 ?
-                                            pic7 : sliderValue2 == 8 ?
-                                              pic8 : sliderValue2 == 9 ?
-                                                pic9 : null
-                          }
-                        />
-                      </EmptyBox>
-                    </RightDiv>
-                  </ConstructionDiv>
-                </div>
-                <div style={{ marginTop: 20, width: '94%' }}>
-                  <div style={{ height: 'auto', width: 'auto' }} className="scrollable_buttons">
-                    <Buttons
-                      setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
-                      changeDisplayImage={(value: string) => setDisplayImage(value)}
-                      stateList={stateList}
-                      cityList={cityList}
-                      updateCityList={updateCityList}
-                      updateState={updateState}
-                      onDataReceived={onDataReceived}
-                      cityName={city}
-                      stateName={state}
-                      showButton={toggleMain}
-                    ></Buttons>
-                    <div style={{ marginLeft: 0 }} className="notes_container">
-                      {/* <Notes
+        {toggleMain ? (
+          <div>
+            <div className="RoomsContent">
+              <div className="imageBoxes">
+                <ConstructionDiv>
+                  <LeftDiv>
+                    <LeftHeading>Traditional Contruction</LeftHeading>
+                    {/* <p>Cost: $9M     Revenue:30 Months</p> */}
+                    <EmptyBox style={{ borderColor: "#519259" }}>
+                      <img
+                        className="emptyImageBox"
+                        src={
+                          sliderValue2 == 0
+                            ? trad1
+                            : sliderValue2 == 1
+                            ? trad1
+                            : sliderValue2 == 2
+                            ? trad2
+                            : sliderValue2 == 3
+                            ? trad2
+                            : sliderValue2 == 4
+                            ? trad3
+                            : sliderValue2 == 5
+                            ? trad4
+                            : sliderValue2 == 6
+                            ? trad4
+                            : sliderValue2 == 7
+                            ? trad4
+                            : sliderValue2 == 8
+                            ? trad4
+                            : sliderValue2 == 9
+                            ? trad5
+                            : null
+                        }
+                      />
+                    </EmptyBox>
+                  </LeftDiv>
+                  <RightDiv>
+                    <RightHeading>RaaP Offsite</RightHeading>
+                    {/* <p>Cost: $9M     Revenue:30 Months</p> */}
+                    <EmptyBox style={{ borderColor: "#F6AA2A" }}>
+                      <img
+                        className="emptyImageBox"
+                        src={
+                          sliderValue2 == 0
+                            ? pic1
+                            : sliderValue2 == 1
+                            ? pic1
+                            : sliderValue2 == 2
+                            ? pic2
+                            : sliderValue2 == 3
+                            ? pic3
+                            : sliderValue2 == 4
+                            ? pic4
+                            : sliderValue2 == 5
+                            ? pic5
+                            : sliderValue2 == 6
+                            ? pic6
+                            : sliderValue2 == 7
+                            ? pic7
+                            : sliderValue2 == 8
+                            ? pic8
+                            : sliderValue2 == 9
+                            ? pic9
+                            : null
+                        }
+                      />
+                    </EmptyBox>
+                  </RightDiv>
+                </ConstructionDiv>
+              </div>
+              <div style={{ marginTop: 20, width: "94%" }}>
+                <div
+                  style={{ height: "auto", width: "auto" }}
+                  className="scrollable_buttons"
+                >
+                  <Buttons
+                    setTraditionalBuildTime={(value: number) =>
+                      setTraditionalBuildTime(value)
+                    }
+                    changeDisplayImage={(value: string) =>
+                      setDisplayImage(value)
+                    }
+                    stateList={stateList}
+                    cityList={cityList}
+                    updateCityList={updateCityList}
+                    updateState={updateState}
+                    onDataReceived={onDataReceived}
+                    cityName={city}
+                    stateName={state}
+                    showButton={toggleMain}
+                  ></Buttons>
+                  <div style={{ marginLeft: 0 }} className="notes_container">
+                    {/* <Notes
                         title={data.notes.title}
                         placeholderText={data.notes.placeholderText}
                         submitButtonText={data.notes.submitButtonText}
                         isUpper={true}
                       ></Notes> */}
-                      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
-                        <NotesLabel>Notes</NotesLabel>
-                        <Container>
-                          <div style={{ width: '100%', display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
-                            <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
-                            <SubmitButton style={{ alignSelf: 'end' }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
-                          </div>
-                        </Container>
-                      </div>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "auto 1fr",
+                        gridGap: 10,
+                      }}
+                    >
+                      <NotesLabel>Notes</NotesLabel>
+                      <Container>
+                        <div
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "space-between",
+                            flexDirection: "column",
+                          }}
+                        >
+                          <Textbox
+                            placeholder={data.notes.placeholderText}
+                            value={text}
+                            onChange={handleChange}
+                          />
+                          <SubmitButton
+                            style={{ alignSelf: "end" }}
+                            onClick={handleOpenModal}
+                          >
+                            {data.notes.submitButtonText}
+                          </SubmitButton>
+                        </div>
+                      </Container>
                     </div>
                   </div>
                 </div>
+              </div>
+              <VerticalSlider
+                onData={handleDataFromChild}
+                range={{ min: roomsMin, max: roomsMax }}
+                setRoomsValue={setRoomValue}
+                setRaapIncrementalRevenue={(value: number) => {
+                  setRoomValue(value);
+                  setRaapIncrementalRevenue(value);
+                }}
+                onStateUpdate={handleStateUpdate}
+                value={horizSliderValue}
+                onHandleChange={handleChangeSlider}
+                HandleNumberChange={handleNumberChange}
+              ></VerticalSlider>
+            </div>
+            <div style={{ display: "flex", gridGap: 30, alignItems: "center" }}>
+              <div className="bottomSlider" style={{ marginLeft: 30 }}>
+                <div
+                  style={{ justifyContent: "space-between", marginBottom: 10 }}
+                  className="sliderTitles"
+                >
+                  <div className="titleFlex">
+                    <h2>Day 0</h2>
+                    <p>Start</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2>Month 2</h2>
+                    <p>Entitlement</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2>Month {sitePlans}</h2>
+                    <p>Construction Docs</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2>Month {siteLoan}</h2>
+                    <p>Permits & Loans</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2>Month {siteFoundation}</h2>
+                    <p>Foundation</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2>Month {traditionalBuildTime}</h2>
+                    <p>Delivery</p>
+                  </div>
+                </div>
+                <div className="sliderOpacityBtn"></div>
+                <Box sx={{ width: "100%" }}>
+                  <div>
+                    <Slider
+                      value={sliderValue2}
+                      onChange={handleSliderChange2}
+                      marks={marks}
+                      step={1}
+                      min={1}
+                      max={6}
+                      sx={{
+                        color: "#404040",
+                        "& .MuiSlider-thumb": {
+                          color: "#a6a6a6",
+                          padding: 1,
+                          border: "6px solid #404040",
+                        },
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 160px",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <Slider
+                      value={sliderValue2}
+                      onChange={handleSliderChange2}
+                      defaultValue={1}
+                      step={1}
+                      marks={marksRaap}
+                      min={1}
+                      max={6}
+                      sx={{
+                        color: "#404040",
+                        "& .MuiSlider-thumb": {
+                          color: "#a6a6a6",
+                          padding: 1,
+                          marginBottom: 0,
+                          opacity: 0.5,
+                          width: 65,
+                          height: 100,
+                          position: "relative",
+                          top: "-28px",
+                          left: "3px",
+                          borderRadius: "23px",
+                          zIndex: -1,
+                        },
+                      }}
+                    />
+                    <div
+                      style={{
+                        borderBottom: "3px solid",
+                        borderStyle: "dashed",
+                        width: "100%",
+                        marginTop: 14,
+                        borderColor: "#a6a6a6",
+                      }}
+                    ></div>
+                  </div>
+                </Box>
+                <div
+                  style={{ justifyContent: "space-between", marginRight: 130 }}
+                  className="sliderTitles"
+                >
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Day 0</h2>
+                    <p>Start</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Month 2</h2>
+                    <p>Entitlement</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Month {raapPlans}</h2>
+                    <p>Construction Docs</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Month {raapLoan}</h2>
+                    <p>Permits & Loans</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Month {raapFoundation}</h2>
+                    <p>Foundation</p>
+                  </div>
+                  <div className="titleFlex">
+                    <h2 style={{ color: "#edaa38" }}>Month {raapBuildTime}</h2>
+                    <p>Delivery</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  position: "relative",
+                  bottom: 130,
+                  gridGap: 28,
+                  marginBottom: 18,
+                }}
+              >
+                <h2 style={{ width: 90, fontWeight: 700, marginBottom: 10 }}>
+                  Traditional
+                </h2>
+                <h2 style={{ color: "#edaa38", width: 90, fontWeight: 700 }}>
+                  RaaP
+                </h2>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <MainArea>
+            <DisplayArea>
+              <DisplayContent
+                finishType={displayImage}
+                layoutType={layoutType}
+              ></DisplayContent>
+              <LayoutButtons>
+                <DisplayTypes
+                  onClickButton={(value: string) => setlayoutType(value)}
+                ></DisplayTypes>
+              </LayoutButtons>
+            </DisplayArea>
+
+            <div className="controls_container">
+              <div className="buttons_area">
+                {/* <LocationDiv>
+                    <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
+                    <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
+                  </LocationDiv> */}
+                <Buttons
+                  setTraditionalBuildTime={(value: number) =>
+                    setTraditionalBuildTime(value)
+                  }
+                  changeDisplayImage={(value: string) => setDisplayImage(value)}
+                  onDataReceived={onDataReceived}
+                  showButton={toggleMain}
+                  stateList={stateList}
+                  cityList={cityList}
+                  updateCityList={updateCityList}
+                  updateState={updateState}
+                  cityName={city}
+                  stateName={state}
+                ></Buttons>
+
                 <VerticalSlider
                   onData={handleDataFromChild}
                   range={{ min: roomsMin, max: roomsMax }}
                   setRoomsValue={setRoomValue}
                   setRaapIncrementalRevenue={(value: number) => {
-                    setRoomValue(value)
-                    setRaapIncrementalRevenue(value)
+                    setRoomValue(value);
+                    setRaapIncrementalRevenue(value);
                   }}
                   onStateUpdate={handleStateUpdate}
                   value={horizSliderValue}
                   onHandleChange={handleChangeSlider}
                   HandleNumberChange={handleNumberChange}
                 ></VerticalSlider>
+                {/* <VerticalSlider></VerticalSlider> */}
               </div>
-              <div style={{ display: 'flex', gridGap: 30, alignItems: 'center' }}>
-                <div className="bottomSlider" style={{ marginLeft: 30 }}>
-                  <div style={{ justifyContent: 'space-between', marginBottom: 10 }} className="sliderTitles">
-
-                    <div className="titleFlex">
-                      <h2>Day 0</h2>
-                      <p>Start</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month 2</h2>
-                      <p>Entitlement</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month {sitePlans}</h2>
-                      <p>Construction Docs</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month {siteLoan}</h2>
-                      <p>Permits & Loans</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month {siteFoundation}</h2>
-                      <p>Foundation</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2>Month {traditionalBuildTime}</h2>
-                      <p>Delivery</p>
-                    </div>
-                  </div>
-                  <div className="sliderOpacityBtn"></div>
-                  <Box sx={{ width: "100%" }}>
-                    <div >
-                      <Slider
-                        value={sliderValue2}
-                        onChange={handleSliderChange2}
-                        marks={marks}
-                        step={1}
-                        min={1}
-                        max={6}
-                        sx={{
-                          color: '#404040',
-                          '& .MuiSlider-thumb': {
-                            color: '#a6a6a6',
-                            padding: 1,
-                            border: '6px solid #404040'
-                          }
-                        }}
+              <div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "auto 1fr",
+                    gridGap: 10,
+                  }}
+                >
+                  <NotesLabel>Notes</NotesLabel>
+                  <Container>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "0px 10px",
+                      }}
+                    >
+                      <Textbox
+                        placeholder={data.notes.placeholderText}
+                        value={text}
+                        onChange={handleChange}
                       />
+                      <SubmitButton
+                        style={{ marginTop: 50 }}
+                        onClick={handleOpenModal}
+                      >
+                        {data.notes.submitButtonText}
+                      </SubmitButton>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px', alignItems: 'flex-start', }}>
-                      <Slider
-                        value={sliderValue2}
-                        onChange={handleSliderChange2}
-                        defaultValue={1}
-                        step={1}
-                        marks={marksRaap}
-                        min={1}
-                        max={6}
-                        sx={{
-                          color: '#404040',
-                          '& .MuiSlider-thumb': {
-                            color: '#a6a6a6',
-                            padding: 1,
-                            marginBottom: 0,
-                            opacity: 0.5,
-                            width: 65,
-                            height: 100,
-                            position: 'relative',
-                            top: '-28px',
-                            left: '3px',
-                            borderRadius: '23px',
-                            zIndex: -1,
-                          },
-                        }}
-                      />
-                      <div style={{
-                        borderBottom: '3px solid',
-                        borderStyle: 'dashed',
-                        width: '100%',
-                        marginTop: 14,
-                        borderColor: '#a6a6a6'
-                      }}></div>
-                    </div>
-                  </Box>
-                  <div style={{ justifyContent: 'space-between', marginRight: 130 }} className="sliderTitles">
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Day 0</h2>
-                      <p>Start</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month 2</h2>
-                      <p>Entitlement</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month {raapPlans}</h2>
-                      <p>Construction Docs</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month {raapLoan}</h2>
-                      <p>Permits & Loans</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month {raapFoundation}</h2>
-                      <p>Foundation</p>
-                    </div>
-                    <div className="titleFlex">
-                      <h2 style={{ color: '#edaa38' }}>Month {raapBuildTime}</h2>
-                      <p>Delivery</p>
-                    </div>
-                  </div>
-                </div>
-                <div style={{
-                  display: 'grid',
-                  position: "relative",
-                  bottom: 130,
-                  gridGap: 28,
-                  marginBottom: 18
-                }}>
-                  <h2 style={{ width: 90, fontWeight: 700, marginBottom: 10 }}>Traditional</h2>
-                  <h2 style={{ color: '#edaa38', width: 90, fontWeight: 700 }}>RaaP</h2>
+                  </Container>
                 </div>
               </div>
             </div>
-            :
-            <MainArea>
-              <DisplayArea>
-                <DisplayContent
-                  finishType={displayImage}
-                  layoutType={layoutType}
-                ></DisplayContent>
-                <LayoutButtons>
-                  <DisplayTypes
-                    onClickButton={(value: string) => setlayoutType(value)}
-                  ></DisplayTypes>
-                </LayoutButtons>
-              </DisplayArea>
-
-              <div className="controls_container">
-                <div className="buttons_area">
-                  {/* <LocationDiv>
-                    <DropdownButton name={city} onClickDropdown={updateState} options={cityList}></DropdownButton>
-                    <DropdownButton name={state} onClickDropdown={updateCityList} options={stateList}></DropdownButton>
-                  </LocationDiv> */}
-                  <Buttons
-                    setTraditionalBuildTime={(value: number) => setTraditionalBuildTime(value)}
-                    changeDisplayImage={(value: string) => setDisplayImage(value)}
-                    onDataReceived={onDataReceived}
-                    showButton={toggleMain}
-                    stateList={stateList}
-                    cityList={cityList}
-                    updateCityList={updateCityList}
-                    updateState={updateState}
-                    cityName={city}
-                    stateName={state}
-                  ></Buttons>
-
-                  <VerticalSlider
-                    onData={handleDataFromChild}
-                    range={{ min: roomsMin, max: roomsMax }}
-                    setRoomsValue={setRoomValue}
-                    setRaapIncrementalRevenue={(value: number) => {
-                      setRoomValue(value)
-                      setRaapIncrementalRevenue(value)
-                    }}
-                    onStateUpdate={handleStateUpdate}
-                    value={horizSliderValue}
-                    onHandleChange={handleChangeSlider}
-                    HandleNumberChange={handleNumberChange}
-                  ></VerticalSlider>
-                  {/* <VerticalSlider></VerticalSlider> */}
-                </div>
-                <div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridGap: 10 }}>
-                    <NotesLabel>Notes</NotesLabel>
-                    <Container>
-                      <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '0px 10px' }}>
-                        <Textbox placeholder={data.notes.placeholderText} value={text} onChange={handleChange} />
-                        <SubmitButton style={{ marginTop: 50 }} onClick={handleOpenModal}>{data.notes.submitButtonText}</SubmitButton>
-                      </div>
-                    </Container>
-                  </div>
-                </div>
-              </div>
-
-            </MainArea>
-        }
+          </MainArea>
+        )}
         <Modal
           title="Email Form"
           visible={visible}
@@ -1076,13 +1246,18 @@ const Layout = () => {
             </Button>,
           ]}
         >
-          <div style={{ padding: '10px 0px' }}>
-            <Input type="email" placeholder="Email Address" value={email} onChange={handleEmailChange} />
+          <div style={{ padding: "10px 0px" }}>
+            <Input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={handleEmailChange}
+            />
           </div>
         </Modal>
       </Container>
-    </ThemeProvider >
-  )
-}
+    </ThemeProvider>
+  );
+};
 
 export default Layout;
