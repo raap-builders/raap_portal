@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Alert, AlertTitle, TextField } from "@mui/material";
 import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
+import { currencyFormat, numberWithCommas } from "../utils/formatter";
 
 let queenQuantityErrorTimeout: number;
 interface ZipCodes {
@@ -456,7 +457,7 @@ function Sider() {
                         </div>
                       </div>
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        {doubleQueenQuantity}
+                        {numberWithCommas(doubleQueenQuantity)}
                       </span>
                     </div>
 
@@ -465,7 +466,7 @@ function Sider() {
                         King Studio
                       </span>
                       <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
-                        {kingStudioQuantity}
+                        {numberWithCommas(kingStudioQuantity)}
                       </span>
                     </div>
 
@@ -474,7 +475,7 @@ function Sider() {
                         King One Bedroom
                       </span>
                       <span className="text-sm text-right w-25 md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
-                        {kingOneQuantity}
+                        {numberWithCommas(kingOneQuantity)}
                       </span>
                     </div>
 
@@ -483,7 +484,7 @@ function Sider() {
                         ADA
                       </span>
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        {ADAQuantity}
+                        {numberWithCommas(ADAQuantity)}
                       </span>
                     </div>
                   </Typography>
@@ -527,7 +528,7 @@ function Sider() {
                         Gross Sq. Ft. (w/o pool)
                       </span>
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        {totalSqFt}
+                        {numberWithCommas(totalSqFt)}
                       </span>
                       {/* <TextField
                         style={{ width: "40%" }}
@@ -545,7 +546,7 @@ function Sider() {
                         Number of floors
                       </span>
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        {numberOfFLoors}
+                        {numberWithCommas(numberOfFLoors)}
                       </span>
                       {/* <TextField
                         style={{ width: "40%" }}
@@ -573,7 +574,7 @@ function Sider() {
                         Perimeter (Ft.)
                       </span>
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
-                        {perimeter}
+                        {numberWithCommas(perimeter)}
                       </span>
                       {/* <TextField
                         style={{ width: "40%" }}
