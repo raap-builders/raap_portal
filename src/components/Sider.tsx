@@ -33,12 +33,13 @@ function Sider() {
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
   const [numberOfFLoors, setNumberOfFloors] = useState(0);
+  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(0);
   const [ADAQuantity, setADAQuantity] = useState(0);
   const [kingOneQuantity, setKingOneQuantity] = useState(0);
   const [kingStudioQuantity, setKingStudioQuantity] = useState(0);
   const [perimeter, setPerimeter] = useState(0);
   const [totalSqFt, setTotalSqFt] = useState(0);
-  const [zipCodes, setZipCodes] = useState<ZipCodes[]>([]);
+
   //@ts-nocheck
   const {
     //@ts-ignore
@@ -51,7 +52,18 @@ function Sider() {
     changeTotalSqFt,
     //@ts-ignore
     changeZipCode,
+    //@ts-ignore
+    zipCodeObject,
+    //@ts-ignore
+    floors: floorsFromStore,
+    //@ts-ignore
+    totalSqFt: totalSqFtFromStore,
+    //@ts-ignore
+    perimeter: perimeterFromStore,
+    //@ts-ignore
+    rooms,
   } = useLocationStore((state) => state);
+
   const {
     //@ts-ignore
     changeADA,
@@ -61,9 +73,37 @@ function Sider() {
     changeKingStudio,
     //@ts-ignore
     changeKingOne,
+    //@ts-ignore
+    doubleQueenQuantity: doubleQueenQuantityFromStore,
+    //@ts-ignore
+    kingOneQuantity: kingOneQuantityFromStore,
+    //@ts-ignore
+    kingStudioQuantity: kingStudioQuantityFromStore,
+    //@ts-ignore
+    ADAQuantity: ADAQuantityFromStore,
   } = useRoomStore((state) => state);
 
-  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(20);
+  useEffect(() => {
+    setZipCode(zipCodeObject.label);
+    setNumberOfRooms(rooms);
+    setDoubleQueenQuantity(doubleQueenQuantityFromStore);
+    setKingOneQuantity(kingOneQuantityFromStore);
+    setKingStudioQuantity(kingStudioQuantityFromStore);
+    setADAQuantity(ADAQuantityFromStore);
+    setNumberOfFloors(floorsFromStore);
+    setPerimeter(perimeterFromStore);
+    setTotalSqFt(totalSqFtFromStore);
+  }, [
+    zipCodeObject,
+    rooms,
+    doubleQueenQuantityFromStore,
+    kingOneQuantityFromStore,
+    kingStudioQuantityFromStore,
+    ADAQuantityFromStore,
+    floorsFromStore,
+    perimeterFromStore,
+    totalSqFtFromStore,
+  ]);
 
   const getZipCodes = (zipCode?: string) => {
     const url = zipCode
@@ -82,8 +122,7 @@ function Sider() {
           };
         });
         setZipCode(arr[0].label);
-        changeZipCode(arr[0].zipCode || "");
-        setZipCodes(arr);
+        changeZipCode(arr[0]);
       })
       .catch((error) => console.log("err", error));
   };
@@ -116,14 +155,6 @@ function Sider() {
 
   const onFormSubmitted = () => {
     navigate(`generic_estimation`);
-  };
-
-  const onZipCodeSelected = (
-    event: React.ChangeEvent<{}>,
-    newValue: string
-  ) => {
-    const selectedObject = zipCodes.find((option) => option.label === newValue);
-    changeZipCode(selectedObject?.zipCode || "");
   };
 
   const onPerimeterChanged = (
@@ -424,14 +455,9 @@ function Sider() {
                           {`(<40% rooms)`}
                         </div>
                       </div>
-                      <TextField
-                        className="w-50 mb-3"
-                        id="outlined-basic"
-                        variant="outlined"
-                        type="number"
-                        value={doubleQueenQuantity}
-                        onChange={onDoubleQueenQuantityChanged}
-                      />
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {doubleQueenQuantity}
+                      </span>
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
@@ -500,7 +526,10 @@ function Sider() {
                       <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
                         Gross Sq. Ft. (w/o pool)
                       </span>
-                      <TextField
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {totalSqFt}
+                      </span>
+                      {/* <TextField
                         style={{ width: "40%" }}
                         className="text-right"
                         id="outlined-basic"
@@ -508,14 +537,17 @@ function Sider() {
                         type="number"
                         value={totalSqFt}
                         onChange={onTotalSqFtChanged}
-                      />
+                      /> */}
                     </div>
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-2 ">
                       <span className="text-sm w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg ">
                         {" "}
                         Number of floors
                       </span>
-                      <TextField
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {numberOfFLoors}
+                      </span>
+                      {/* <TextField
                         style={{ width: "40%" }}
                         className="md:w-[30%] lg:w-[30%] xl:w-[50%] p-[8px]"
                         id="outlined-basic"
@@ -524,7 +556,7 @@ function Sider() {
                         type="number"
                         value={numberOfFLoors}
                         onChange={onNumberOfFloorsChanged}
-                      />
+                      /> */}
                     </div>
                     {/* <div className="mt-4 d-flex justify-content-between align-items-center w-100">
                   <span className="text-sm w-50">Building Shape</span>
@@ -540,7 +572,10 @@ function Sider() {
                       <span className="md:text-sm lg:text-md w-50 2xl:text-lg xl:text-lg">
                         Perimeter (Ft.)
                       </span>
-                      <TextField
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {perimeter}
+                      </span>
+                      {/* <TextField
                         style={{ width: "40%" }}
                         className="md:w-[30%] lg:w-[30%] xl:w-[50%]"
                         id="outlined-basic"
@@ -549,7 +584,7 @@ function Sider() {
                         value={perimeter}
                         type="number"
                         onChange={onPerimeterChanged}
-                      />
+                      /> */}
                     </div>
                   </Typography>
                 </AccordionDetails>

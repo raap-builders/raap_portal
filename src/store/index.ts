@@ -6,13 +6,14 @@ import { persist } from "zustand/middleware";
 export const useLocationStore = create(
   persist(
     (set) => ({
-      zipCode: 0,
+      zipCodeObject: {},
       rooms: 100,
-      totalSqFt: 58334,
-      perimeter: 598,
-      floors: 4,
+      totalSqFt: 0,
+      perimeter: 0,
+      floors: 0,
       changeRooms: (rooms: number) => set((state: Store) => ({ rooms })),
-      changeZipCode: (zipCode: number) => set((state: Store) => ({ zipCode })),
+      changeZipCode: (zipCodeObject: object) =>
+        set((state: Store) => ({ zipCodeObject })),
       changeFloors: (floors: number) => set((state: Store) => ({ floors })),
       changePerimeter: (perimeter: number) =>
         set((state: Store) => ({ perimeter })),

@@ -28,14 +28,21 @@ function GenericEstimation() {
     //@ts-ignore
     rooms: numberOfRooms,
     //@ts-ignore
-    zipCode,
+    zipCodeObject,
     //@ts-ignore
     totalSqFt,
     //@ts-ignore
     perimeter,
     //@ts-ignore
     floors,
+    //@ts-ignore
+    changeTotalSqFt,
+    //@ts-ignore
+    changePerimeter,
+    //@ts-ignore
+    changeFloors,
   } = useLocationStore((state) => state);
+
   const {
     //@ts-ignore
     kingOneQuantity,
@@ -45,9 +52,19 @@ function GenericEstimation() {
     ADAQuantity: adaQuantity,
     //@ts-ignore
     doubleQueenQuantity,
+    //@ts-ignore
+    changeDoubleQueen,
+    //@ts-ignore
+    changeKingOne,
+    //@ts-ignore
+    changeKingStudio,
+    //@ts-ignore
+    changeADA,
   } = useRoomStore((state) => state);
+
   const [genericEstimation, setGenericEstimation] =
     useState<GenericEstimationType>();
+
   const [expandedAccordion, setExpandedAccordion] = useState<string | false>(
     "building"
   );
@@ -57,7 +74,7 @@ function GenericEstimation() {
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
         rooms: numberOfRooms,
-        zipCode: zipCode,
+        zipCode: zipCodeObject.zipCode,
         totalSqFt,
         perimeter,
         floors,
@@ -67,12 +84,30 @@ function GenericEstimation() {
         doubleQueenQuantity,
       })
       .then((result) => {
-        setGenericEstimation(result.data.data);
+        const { data: dataFromResult = {} } = result;
+        const { data = {} } = dataFromResult;
+        const {
+          floors,
+          kingOneQuantity,
+          kingStudioQuantity,
+          perimeter,
+          doubleQueenQuantity,
+          totalSqFt,
+          adaQuantity,
+        } = data;
+        setGenericEstimation(data);
+        changeDoubleQueen(doubleQueenQuantity);
+        changeKingStudio(kingStudioQuantity);
+        changeFloors(floors);
+        changePerimeter(perimeter);
+        changeTotalSqFt(totalSqFt);
+        changeKingOne(kingOneQuantity);
+        changeADA(adaQuantity);
       })
       .catch((err) => console.log("errr", err));
   }, [
     numberOfRooms,
-    zipCode,
+    zipCodeObject,
     floors,
     totalSqFt,
     perimeter,
