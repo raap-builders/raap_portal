@@ -82,6 +82,7 @@ function Regsiter() {
       }}
       className="d-flex flex-column align-items-center justify-content-center"
     >
+      <div>test</div>
       <FormControl
         style={{
           backgroundColor: "white",
