@@ -1,22 +1,30 @@
-.App {
-  text-align: center;
+body,
+* {
+  margin: 0;
+  padding: 0;
 }
-
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.sc-fsQiph, .hCpXUZ {
-  max-height: 200px;
-  overflow-y: scroll;
+.sc-fsQiph,
+.hCpXUZ {
+  /* max-height: 200px; */
+  /* overflow-y: scroll; */
 }
 /* .sc-fsQiph, .hCpXUZ::-webkit-scrollbar {
   display: none;
 } */
-.sc-fsQiph::-webkit-scrollbar {
+/* .sc-fsQiph::-webkit-scrollbar {
   display: none;
-  background-color: white;
   width: 0.4vw;
+} */
+.css-15v22id-MuiAccordionDetails-root {
+  padding: 0px 4px 5px !important;
+  line-height: norma;
 }
