@@ -431,13 +431,19 @@ function Sider() {
                         style={{ color: "#519259" }}
                         className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
                       >
-                        No.
+                        Quantity
+                      </span>
+                      <span
+                        style={{ color: "#519259" }}
+                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        %
                       </span>
                     </div>
 
                     <div className="mt-2 d-flex justify-content-between align-items-center w-100">
                       <div className="w-50">
-                        <div className="text-left md:text-sm lg:text-md w-100 2xl:text-lg xl:text-lg">
+                        <div className="text-left md:text-sm lg:text-md 2xl:text-lg xl:text-lg">
                           Queen Studio
                         </div>
                         <div
@@ -450,11 +456,20 @@ function Sider() {
                       <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
                         {numberWithCommas(doubleQueenQuantity)}
                       </span>
+                      <span className="md:text-sm lg:text-md text-right w-25 xl:text-lg 2xl:text-lg">
+                        {numberWithCommas(
+                          Math.ceil((doubleQueenQuantity / numberOfRooms) * 100)
+                        )}
+                        %
+                      </span>
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center w-100 md:mb-4">
-                      <span className="text-left  w-50 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                      <span className="text-left 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King Studio
+                      </span>
+                      <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
+                        {numberWithCommas(kingStudioQuantity)}
                       </span>
                       <span className="text-sm text-right w-25 lg:text-md xl:text-lg 2xl:text-lg">
                         {numberWithCommas(kingStudioQuantity)}
@@ -587,7 +602,7 @@ function Sider() {
                   valueLabelDisplay="auto"
                   style={{ color: "white" }}
                   defaultValue={100}
-                  max={120}
+                  max={150}
                   min={80}
                   step={1}
                   value={numberOfRooms}

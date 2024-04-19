@@ -132,15 +132,16 @@ function Regsiter() {
             Login
           </Button>
 
-          <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}>
-            New User?{" "}
-            <Link
-              className="h5 text-primary"
-              to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
-            >
-              Schedule A Call To Get Set Up
-            </Link>
-          </p>
+          {/* <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}> */}
+          {/* I'd like to register. */}
+          <Link
+            className="h5 text-primary mt-3"
+            to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
+          >
+            I'd like to register.
+            {/* Schedule A Call To Get Set Up */}
+          </Link>
+          {/* </p> */}
         </div>
       </FormControl>
 
