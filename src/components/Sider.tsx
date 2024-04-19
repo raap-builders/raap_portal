@@ -15,7 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Alert, AlertTitle, TextField } from "@mui/material";
 import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
-import { currencyFormat, numberWithCommas } from "../utils/formatter";
+import { numberWithCommas } from "../utils/formatter";
 
 let queenQuantityErrorTimeout: number;
 interface ZipCodes {
@@ -220,15 +220,6 @@ function Sider() {
     changeFloors(parseInt(event.target.value));
   };
 
-  const onDefaultButtonClicked = () => {
-    setNumberOfFloors(4);
-    changeFloors(4);
-    setTotalSqFt(58334);
-    changeTotalSqFt(58334);
-    setPerimeter(598);
-    changePerimeter(598);
-  };
-
   return (
     <div className="2xl:text-lg  w-[100%]  ">
       <FormControl
@@ -387,7 +378,7 @@ function Sider() {
                   valueLabelDisplay="auto"
                   style={{ color: "white" }}
                   defaultValue={100}
-                  max={120}
+                  max={150}
                   min={80}
                   step={1}
                   value={numberOfRooms}
@@ -515,12 +506,7 @@ function Sider() {
                   <Typography className=" md:px-2 xl:px-4">
                     <div className="d-flex justify-content-between align-items-center md:mb-4 xl:mb-0 w-100 2xl:text-lg xl:text-lg md:text-sm lg:text-md lg:mb-8 ">
                       <span style={{ color: "#519259" }}>Parameter</span>
-                      <span
-                        onClick={onDefaultButtonClicked}
-                        style={{ color: "#519259", cursor: "pointer" }}
-                      >
-                        Default
-                      </span>
+                      <span style={{ color: "#519259" }}>No.</span>
                     </div>
 
                     <div className="lg:mt-2 d-flex justify-content-between align-items-center w-100 xl:mb-2 md:mb-4 ">
