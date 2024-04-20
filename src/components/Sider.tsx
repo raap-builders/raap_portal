@@ -85,6 +85,18 @@ function Sider() {
   } = useRoomStore((state) => state);
 
   useEffect(() => {
+    if (!zipCodeObject || !Object.entries(zipCodeObject).length) {
+      changeZipCode({
+        id: 0,
+        key: 0,
+        zipCode: "00000",
+        city: "Nationwide Price",
+        state: "Nationwide Price",
+        label: "Nationwide Price",
+        title: "Nationwide Price",
+      });
+    }
+
     setZipCode(zipCodeObject.label);
     setNumberOfRooms(rooms);
     setDoubleQueenQuantity(doubleQueenQuantityFromStore);
