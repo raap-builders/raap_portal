@@ -44,22 +44,20 @@ function Regsiter() {
     try {
       clearTimeout(loginTimeout);
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        `${process.env.REACT_APP_BASE_URL}/token`,
         {
-          email,
+          grant_type: "password",
+          username: "mehdiamiri1404@gmail.com",
           password,
         }
       );
-      if (
-        response &&
-        response.data &&
-        response.data.data &&
-        response.data.data.token
-      ) {
-        const token = response.data.data.token;
+      if (response && response.data) {
+        const refreshToken = response.data.refresh_token;
+        const accessToken = response.data.access_token;
         setLoginError(false);
         changeIsUserLoggedIn(true);
-        localStorage.setItem("token", token);
+        localStorage.setItem("refresh_token", refreshToken);
+        localStorage.setItem("access_token", accessToken);
         navigate("/landing");
       }
       // Redirect to protected area
