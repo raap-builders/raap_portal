@@ -181,7 +181,7 @@ function GenericEstimation() {
           <div className=" xl:max-h-full overflow-y-scroll genetic-accordion-container">
             <Accordion
               className="m-4"
-              expanded={expandedAccordion === "building"}
+              defaultExpanded
               onChange={handleChangeAccordion("building")}
             >
               <AccordionSummary
@@ -227,7 +227,7 @@ function GenericEstimation() {
 
             <Accordion
               className="m-4"
-              expanded={expandedAccordion === "siteWork"}
+              defaultExpanded
               onChange={handleChangeAccordion("siteWork")}
             >
               <AccordionSummary
@@ -273,7 +273,6 @@ function GenericEstimation() {
 
             <Accordion
               className="m-4"
-              expanded={expandedAccordion === "generalConditions"}
               onChange={handleChangeAccordion("generalConditions")}
             >
               <AccordionSummary

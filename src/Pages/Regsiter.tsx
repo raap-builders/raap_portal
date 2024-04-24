@@ -44,22 +44,20 @@ function Regsiter() {
     try {
       clearTimeout(loginTimeout);
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        `${process.env.REACT_APP_BASE_URL}/token`,
         {
-          email,
+          grant_type: "password",
+          username: email,
           password,
         }
       );
-      if (
-        response &&
-        response.data &&
-        response.data.data &&
-        response.data.data.token
-      ) {
-        const token = response.data.data.token;
+      if (response && response.data) {
+        const refreshToken = response.data.refresh_token;
+        const accessToken = response.data.access_token;
         setLoginError(false);
         changeIsUserLoggedIn(true);
-        localStorage.setItem("token", token);
+        localStorage.setItem("refresh_token", refreshToken);
+        localStorage.setItem("access_token", accessToken);
         navigate("/landing");
       }
       // Redirect to protected area
@@ -132,15 +130,16 @@ function Regsiter() {
             Login
           </Button>
 
-          <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}>
-            New User?{" "}
-            <Link
-              className="h5 text-primary"
-              to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
-            >
-              Schedule A Call To Get Set Up
-            </Link>
-          </p>
+          {/* <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}> */}
+          {/* I'd like to register. */}
+          <Link
+            className="h5 text-primary mt-3"
+            to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
+          >
+            I'd like to register.
+            {/* Schedule A Call To Get Set Up */}
+          </Link>
+          {/* </p> */}
         </div>
       </FormControl>
 
