@@ -47,7 +47,7 @@ function Regsiter() {
         `${process.env.REACT_APP_BASE_URL}/token`,
         {
           grant_type: "password",
-          username: "mehdiamiri1404@gmail.com",
+          username: email,
           password,
         }
       );
