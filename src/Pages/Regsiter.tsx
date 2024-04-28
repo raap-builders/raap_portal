@@ -5,12 +5,16 @@ import {
   FormControl,
   TextField,
 } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
+import { fetchAPI } from "../utils/fetcher";
 
 let loginTimeout: number;
+interface IResponse {
+  refresh_token: string;
+  access_token: string;
+}
 
 function Regsiter() {
   const navigate = useNavigate();
@@ -43,24 +47,26 @@ function Regsiter() {
   const onFormSubmitted = async () => {
     try {
       clearTimeout(loginTimeout);
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/token`,
-        {
+
+      const response: IResponse = await fetchAPI({
+        route: "token",
+        method: "POST",
+        data: {
           grant_type: "password",
           username: email,
           password,
-        }
-      );
-      if (response && response.data) {
-        const refreshToken = response.data.refresh_token;
-        const accessToken = response.data.access_token;
+        },
+      });
+      if (response) {
+        const refreshToken = response.refresh_token;
+        const accessToken = response.access_token;
         setLoginError(false);
         changeIsUserLoggedIn(true);
         localStorage.setItem("refresh_token", refreshToken);
         localStorage.setItem("access_token", accessToken);
         navigate("/landing");
       }
-      // Redirect to protected area
+      //Redirect to protected area
     } catch (error) {
       setLoginError(true);
       //@ts-ignore

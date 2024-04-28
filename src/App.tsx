@@ -58,8 +58,6 @@ const fetchDataFromExcel = async () => {
     });
 };
 
-fetchDataFromExcel();
-
 // console.log("after axios")
 const raapLogo = require("./assets/Header/pic1.png");
 const hiltonLogo = require("./assets/Header/pic2.png");

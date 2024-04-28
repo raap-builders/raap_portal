@@ -8,11 +8,26 @@ import axios from "axios";
 import { currencyFormat } from "../utils/formatter";
 import { useLocationStore, useRoomStore } from "../store";
 import Sider from "../components/Sider";
+import { fetchAPI } from "../utils/fetcher";
 
 interface ProjectFactor {
   id: number;
   name: string;
   cost: string; // Assuming the cost can be represented as a string
+}
+
+interface IData {
+  floors: number;
+  kingOneQuantity: number;
+  kingStudioQuantity: number;
+  perimeter: number;
+  doubleQueenQuantity: number;
+  totalSqFt: number;
+  adaQuantity: number;
+}
+
+interface IResult {
+  data: IData;
 }
 
 interface GenericEstimationType {
@@ -71,40 +86,7 @@ function GenericEstimation() {
   //@ts-ignore
 
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/estimation/generic`, {
-        rooms: numberOfRooms,
-        zipCode: zipCodeObject.zipCode,
-        totalSqFt,
-        perimeter,
-        floors,
-        adaQuantity,
-        kingOneQuantity,
-        kingStudioQuantity,
-        doubleQueenQuantity,
-      })
-      .then((result) => {
-        const { data: dataFromResult = {} } = result;
-        const { data = {} } = dataFromResult;
-        const {
-          floors,
-          kingOneQuantity,
-          kingStudioQuantity,
-          perimeter,
-          doubleQueenQuantity,
-          totalSqFt,
-          adaQuantity,
-        } = data;
-        setGenericEstimation(data);
-        changeDoubleQueen(doubleQueenQuantity);
-        changeKingStudio(kingStudioQuantity);
-        changeFloors(floors);
-        changePerimeter(perimeter);
-        changeTotalSqFt(totalSqFt);
-        changeKingOne(kingOneQuantity);
-        changeADA(adaQuantity);
-      })
-      .catch((err) => console.log("errr", err));
+    getEstimation();
   }, [
     numberOfRooms,
     zipCodeObject,
@@ -116,6 +98,36 @@ function GenericEstimation() {
     adaQuantity,
     kingStudioQuantity,
   ]);
+
+  const getEstimation = async () => {
+    const result: IResult = await fetchAPI({
+      route: "estimation/generic",
+      method: "POST",
+      withAuth: true,
+      data: {
+        rooms: numberOfRooms,
+        zipCode: zipCodeObject.zipCode,
+        totalSqFt,
+        perimeter,
+        floors,
+        adaQuantity,
+        kingOneQuantity,
+        kingStudioQuantity,
+        doubleQueenQuantity,
+      },
+    });
+    const { data } = result;
+    //@ts-ignore
+    setGenericEstimation(data);
+    changeDoubleQueen(data.doubleQueenQuantity);
+    changeKingStudio(data.kingStudioQuantity);
+    changeFloors(data.floors);
+    changePerimeter(data.perimeter);
+    changeTotalSqFt(data.totalSqFt);
+    changeKingOne(data.kingOneQuantity);
+    changeADA(data.adaQuantity);
+  };
+
   const handleChangeAccordion =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpandedAccordion(isExpanded ? panel : false);
