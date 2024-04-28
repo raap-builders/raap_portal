@@ -114,6 +114,7 @@ function Regsiter() {
             value={email}
             onChange={onEmailChanged}
             label="Email"
+            InputLabelProps={{ shrink: true }}
             type="email"
             variant="outlined"
             style={{ backgroundColor: "white", width: "50%" }}
@@ -123,6 +124,7 @@ function Regsiter() {
             value={password}
             onChange={onPasswordChanged}
             id="outlined-basic"
+            InputLabelProps={{ shrink: true }}
             type="password"
             label="Password"
             variant="outlined"
