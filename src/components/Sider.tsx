@@ -1,5 +1,5 @@
 //ts-check
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Slider from "@mui/material/Slider";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -16,6 +16,9 @@ import { Alert, AlertTitle, TextField } from "@mui/material";
 import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
 import { numberWithCommas } from "../utils/formatter";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
 
 let queenQuantityErrorTimeout: number;
 interface ZipCodes {
@@ -27,6 +30,7 @@ interface ZipCodes {
   title: string;
 }
 function Sider() {
+  const zipCodeInputRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
@@ -264,6 +268,7 @@ function Sider() {
               } else setOpenCardIndex(4);
             }}
             expanded={openCardIndex === 0}
+            defaultExpanded
             className="pb-3 rounded w-[100%] m-0 p-0 "
           >
             <AccordionSummary
@@ -281,14 +286,44 @@ function Sider() {
             <AccordionDetails>
               <Typography className="px-3">
                 <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
-                  <div>
-                    <span
+                  <div className="w-100">
+                    {/* <span
                       style={{ color: "#519259" }}
                       className="2xl:text-lg xl:text-md  lg:text-md md:text-md  "
                     >
                       Hotel Type
-                    </span>
-                    <RadioGroup
+                    </span> */}
+
+                    <FormControl fullWidth>
+                      <InputLabel
+                        className="w-100"
+                        id="demo-simple-select-label"
+                      >
+                        Select Service
+                      </InputLabel>
+                      <Select
+                        className="w-100"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Select Service"
+                      >
+                        <MenuItem className="w-100" value={"Hilton Home2"}>
+                          <div className="w-100 d-flex align-items-center justify-content-start">
+                            <img
+                              style={{
+                                width: 70,
+                                height: 30,
+                              }}
+                              src={require("../assets/hilton.png")}
+                              alt="Hilton Home2"
+                            />
+                            <span className="ml-2 text-lg">Hilton Home2</span>
+                          </div>
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                    {/* <RadioGroup
+                    {/* <RadioGroup
                       className="w-[max-content] md:mt-2 xl:text-lg "
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
@@ -336,7 +371,7 @@ function Sider() {
                           </span>
                         }
                       />
-                    </RadioGroup>
+                    </RadioGroup> */}
                   </div>
                 </div>
 
@@ -346,11 +381,13 @@ function Sider() {
                   </div>
                   <div className="w-full ">
                     <TextField
+                      ref={zipCodeInputRef}
                       className="w-100"
                       id="outlined-basic"
                       variant="outlined"
                       placeholder="Enter The Zip Code..."
                       onChange={onZipCodeChanged}
+                      onFocus={(event) => event.target.select()}
                       sx={{ width: "auto" }}
                       value={zipCode}
                     />
@@ -531,41 +568,48 @@ function Sider() {
                   <Typography className="lg:pb-2 md:px-2 md:pb-2 xl:px-4">
                     <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
                       <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        style={{ color: "#519259", width: "40%" }}
+                        className="text-start 2xl:text-lg md:text-sm lg:text-md xl:text-lg"
                       >
                         Room Mix
                       </span>
                       <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        style={{ color: "#519259", width: "30%" }}
+                        className="2xl:text-lg  text-end md:text-sm lg:text-md xl:text-lg"
                       >
                         Quantity
                       </span>
                       <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                        style={{ color: "#519259", width: "30%" }}
+                        className="2xl:text-lg text-end md:text-sm lg:text-md xl:text-lg"
                       >
                         %
                       </span>
                     </div>
 
                     <div className="mt-2 d-flex justify-content-between align-items-center w-100">
-                      <div className="w-25">
-                        <div className="text-left md:text-sm lg:text-md 2xl:text-lg xl:text-lg">
-                          Queen Studio
-                        </div>
-                        <div
+                      <div
+                        style={{ width: "40%" }}
+                        className="text-start md:text-sm lg:text-md 2xl:text-lg xl:text-lg"
+                      >
+                        Queen Studio
+                      </div>
+                      {/* <div
                           className="text-left md:text-sm lg:text-md 2xl:text-lg xl:text-lg"
                           style={{ fontSize: 14 }}
                         >
                           {`(<40% rooms)`}
-                        </div>
-                      </div>
-                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
+                        </div> */}
+                      <span
+                        style={{ width: "30%" }}
+                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
+                      >
                         {numberWithCommas(doubleQueenQuantity)}
                       </span>
-                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
+                      >
                         {numberWithCommas(
                           Math.round(
                             (doubleQueenQuantity / numberOfRooms) * 100
@@ -576,38 +620,65 @@ function Sider() {
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100 md:mb-4">
-                      <span className="text-left 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
+                      <span
+                        style={{ width: "40%" }}
+                        className="text-start 2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
                         King Studio
                       </span>
-                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="text-sm text-end lg:text-md xl:text-lg 2xl:text-lg"
+                      >
                         {numberWithCommas(kingStudioQuantity)}
                       </span>
-                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="text-sm text-end lg:text-md xl:text-lg 2xl:text-lg"
+                      >
                         {Math.round((kingStudioQuantity / numberOfRooms) * 100)}
                         %
                       </span>
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
-                      <span className="w-25 text-sm 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
-                        King One Bedroom
+                      <span
+                        style={{ width: "40%" }}
+                        className="text-start text-sm 2xl:text-lg md:text-sm lg:text-md xl:text-lg"
+                      >
+                        King One
                       </span>
-                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="text-sm text-end lg:text-md xl:text-lg 2xl:text-lg"
+                      >
                         {numberWithCommas(kingOneQuantity)}
                       </span>
-                      <span className="text-sm text-right md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="text-sm text-end md:text-sm lg:text-md xl:text-lg 2xl:text-lg"
+                      >
                         {Math.round((kingOneQuantity / numberOfRooms) * 100)}%
                       </span>
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100  ">
-                      <span className="w-25 text-left md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "40%" }}
+                        className="text-start md:text-sm lg:text-md xl:text-lg 2xl:text-lg"
+                      >
                         ADA
                       </span>
-                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
+                      >
                         {numberWithCommas(ADAQuantity)}
                       </span>
-                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
+                      <span
+                        style={{ width: "30%" }}
+                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
+                      >
                         {Math.round((ADAQuantity / numberOfRooms) * 100)}%
                       </span>
                     </div>

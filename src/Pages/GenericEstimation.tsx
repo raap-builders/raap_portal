@@ -188,7 +188,7 @@ function GenericEstimation() {
             }}
             className="text-center font-bold h4 w-full xl:p-0 md:text-sm 2xl:text-lg"
           >
-            (MasterFormat)
+            (Estimated)
           </div>
           <div className=" xl:max-h-full overflow-y-scroll genetic-accordion-container">
             <Accordion
@@ -306,11 +306,11 @@ function GenericEstimation() {
               </AccordionSummary>
             </Accordion>
           </div>
-          <div className="flex justify-center items-center flex-col">
+          {/* <div className="flex justify-center items-center flex-col">
             <button className="w-[55vw] rounded text-center l text-white py-3  flex flex-col  items-center bg-[#519258] sticky bottom-0">
               Get Estimate
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <style>
