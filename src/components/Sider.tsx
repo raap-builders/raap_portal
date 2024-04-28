@@ -17,7 +17,7 @@ import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
 import { numberWithCommas } from "../utils/formatter";
 
-let queenQuantityErrorTimeout: number, apiCallTimeOut: number;
+let queenQuantityErrorTimeout: number;
 interface ZipCodes {
   id: number;
   zipCode: string;
@@ -34,10 +34,7 @@ function Sider() {
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
   const [numberOfFLoors, setNumberOfFloors] = useState(0);
-  const [serverInputDoubleQueenQuantity, setServerInputDoubleQueenQuantity] =
-    useState(0);
-  const [userInputDoubleQueenQuantity, setUserInputDoubleQueenQuantity] =
-    useState(0);
+  const [doubleQueenQuantity, setDoubleQueenQuantity] = useState(0);
   const [ADAQuantity, setADAQuantity] = useState(0);
   const [kingOneQuantity, setKingOneQuantity] = useState(0);
   const [kingStudioQuantity, setKingStudioQuantity] = useState(0);
@@ -72,8 +69,6 @@ function Sider() {
     //@ts-ignore
     changeADA,
     //@ts-ignore
-    changeUserInputDoubleQueen,
-    //@ts-ignore
     changeDoubleQueen,
     //@ts-ignore
     changeKingStudio,
@@ -104,7 +99,7 @@ function Sider() {
 
     setZipCode(zipCodeObject.label);
     setNumberOfRooms(rooms);
-    setServerInputDoubleQueenQuantity(doubleQueenQuantityFromStore);
+    setDoubleQueenQuantity(doubleQueenQuantityFromStore);
     setKingOneQuantity(kingOneQuantityFromStore);
     setKingStudioQuantity(kingStudioQuantityFromStore);
     setADAQuantity(ADAQuantityFromStore);
@@ -166,16 +161,9 @@ function Sider() {
     event: Event,
     newValue: number | number[]
   ) => {
-    clearTimeout(apiCallTimeOut);
-    setUserInputDoubleQueenQuantity(0);
     // @ts-ignore
     setNumberOfRooms(newValue);
-    // @ts-ignore
-    apiCallTimeOut = setTimeout(() => {
-      changeRooms(newValue);
-      changeUserInputDoubleQueen(0);
-      changeDoubleQueen(serverInputDoubleQueenQuantity);
-    }, 1500);
+    changeRooms(newValue);
   };
 
   const onFormSubmitted = () => {
@@ -214,7 +202,6 @@ function Sider() {
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     clearTimeout(queenQuantityErrorTimeout);
-    clearTimeout(apiCallTimeOut);
     if (parseInt(event.target.value) > Math.round(numberOfRooms * 0.4)) {
       setQueenQuantityError(
         "The quantity cannot be more than 40% of the number of the rooms"
@@ -226,12 +213,8 @@ function Sider() {
       );
     } else {
       setQueenQuantityError("");
-      setUserInputDoubleQueenQuantity(parseInt(event.target.value));
-      //@ts-ignore
-      apiCallTimeOut = setTimeout(() => {
-        changeUserInputDoubleQueen(parseInt(event.target.value));
-        changeDoubleQueen(serverInputDoubleQueenQuantity);
-      }, 1500);
+      setDoubleQueenQuantity(parseInt(event.target.value));
+      changeDoubleQueen(parseInt(event.target.value));
     }
   };
 
@@ -491,6 +474,7 @@ function Sider() {
                         onChange={onTotalSqFtChanged}
                       /> */}
                     </div>
+
                     {/* <div className="mt-4 d-flex justify-content-between align-items-center w-100">
                   <span className="text-sm w-50">Building Shape</span>
                   <TextField
@@ -545,7 +529,7 @@ function Sider() {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography className="lg:pb-2 md:px-2 md:pb-2 xl:px-4">
-                    <div className="d-flex justify-content-between w-100 align-items-center lg:mb-4 md:mb-4">
+                    <div className="d-flex justify-content-between align-items-center w-100 lg:mb-4 md:mb-4">
                       <span
                         style={{ color: "#519259" }}
                         className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
@@ -562,58 +546,29 @@ function Sider() {
                         style={{ color: "#519259" }}
                         className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
                       >
-                        Default
-                      </span>
-                      <span
-                        style={{ color: "#519259" }}
-                        className="2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
                         %
                       </span>
                     </div>
 
                     <div className="mt-2 d-flex justify-content-between align-items-center w-100">
-                      <div style={{ width: "30%" }} className="">
-                        <div className="text-start md:text-sm lg:text-md 2xl:text-lg xl:text-lg">
+                      <div className="w-25">
+                        <div className="text-left md:text-sm lg:text-md 2xl:text-lg xl:text-lg">
                           Queen Studio
                         </div>
                         <div
-                          className="text-start md:text-sm lg:text-md 2xl:text-lg xl:text-lg"
+                          className="text-left md:text-sm lg:text-md 2xl:text-lg xl:text-lg"
                           style={{ fontSize: 14 }}
                         >
                           {`(<40% rooms)`}
                         </div>
                       </div>
-                      <div
-                        style={{ width: "40%" }}
-                        className="d-flex align-items-center justify-content-center"
-                      >
-                        <TextField
-                          className="text-right w-75"
-                          id="outlined-basic"
-                          variant="outlined"
-                          type="number"
-                          value={userInputDoubleQueenQuantity}
-                          onChange={onDoubleQueenQuantityChanged}
-                        />
-                      </div>
-                      <span
-                        style={{ width: "15%" }}
-                        className="text-center md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg"
-                      >
-                        {numberWithCommas(serverInputDoubleQueenQuantity)}
+                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
+                        {numberWithCommas(doubleQueenQuantity)}
                       </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
                         {numberWithCommas(
                           Math.round(
-                            ((userInputDoubleQueenQuantity
-                              ? userInputDoubleQueenQuantity
-                              : serverInputDoubleQueenQuantity) /
-                              numberOfRooms) *
-                              100
+                            (doubleQueenQuantity / numberOfRooms) * 100
                           )
                         )}
                         %
@@ -621,83 +576,38 @@ function Sider() {
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100 md:mb-4">
-                      <span
-                        style={{ width: "30%" }}
-                        className="text-start 2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
+                      <span className="text-left 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King Studio
                       </span>
-                      <span
-                        style={{ width: "40%" }}
-                        className="text-center text-sm text-right lg:text-md xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
                         {numberWithCommas(kingStudioQuantity)}
                       </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="text-center text-sm text-right lg:text-md xl:text-lg 2xl:text-lg"
-                      >
-                        {numberWithCommas(kingStudioQuantity)}
-                      </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="text-end text-sm text-right lg:text-md xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
                         {Math.round((kingStudioQuantity / numberOfRooms) * 100)}
                         %
                       </span>
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100 md:mb-4 xl:mb-4">
-                      <span
-                        style={{ width: "30%" }}
-                        className="text-sm 2xl:text-lg md:text-sm lg:text-md xl:text-lg"
-                      >
+                      <span className="w-25 text-sm 2xl:text-lg md:text-sm lg:text-md xl:text-lg">
                         King One Bedroom
                       </span>
-                      <span
-                        style={{ width: "40%" }}
-                        className="text-sm text-center lg:text-md xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="text-sm text-right lg:text-md xl:text-lg 2xl:text-lg">
                         {numberWithCommas(kingOneQuantity)}
                       </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="text-sm text-center lg:text-md xl:text-lg 2xl:text-lg"
-                      >
-                        {numberWithCommas(kingOneQuantity)}
-                      </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="text-sm text-end md:text-sm lg:text-md xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="text-sm text-right md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
                         {Math.round((kingOneQuantity / numberOfRooms) * 100)}%
                       </span>
                     </div>
 
                     <div className="mt-4 d-flex justify-content-between align-items-center w-100  ">
-                      <span
-                        style={{ width: "30%" }}
-                        className="text-start md:text-sm lg:text-md xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="w-25 text-left md:text-sm lg:text-md xl:text-lg 2xl:text-lg">
                         ADA
                       </span>
-                      <span
-                        style={{ width: "40%" }}
-                        className="md:text-sm lg:text-md text-center xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
                         {numberWithCommas(ADAQuantity)}
                       </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="md:text-sm lg:text-md text-center xl:text-lg 2xl:text-lg"
-                      >
-                        {numberWithCommas(ADAQuantity)}
-                      </span>
-                      <span
-                        style={{ width: "15%" }}
-                        className="md:text-sm lg:text-md text-end xl:text-lg 2xl:text-lg"
-                      >
+                      <span className="md:text-sm lg:text-md text-right xl:text-lg 2xl:text-lg">
                         {Math.round((ADAQuantity / numberOfRooms) * 100)}%
                       </span>
                     </div>

@@ -53,10 +53,6 @@ function GenericEstimation() {
     //@ts-ignore
     doubleQueenQuantity,
     //@ts-ignore
-    userInputDoubleQueenQuantity,
-    //@ts-ignore
-    changeUserInputDoubleQueen,
-    //@ts-ignore
     changeDoubleQueen,
     //@ts-ignore
     changeKingOne,
@@ -85,7 +81,6 @@ function GenericEstimation() {
         adaQuantity,
         kingOneQuantity,
         kingStudioQuantity,
-        userInputDoubleQueenQuantity,
         doubleQueenQuantity,
       })
       .then((result) => {
@@ -97,13 +92,11 @@ function GenericEstimation() {
           kingStudioQuantity,
           perimeter,
           doubleQueenQuantity,
-          serverDoubleQuantity,
           totalSqFt,
           adaQuantity,
         } = data;
         setGenericEstimation(data);
-        changeDoubleQueen(serverDoubleQuantity);
-        changeUserInputDoubleQueen(doubleQueenQuantity);
+        changeDoubleQueen(doubleQueenQuantity);
         changeKingStudio(kingStudioQuantity);
         changeFloors(floors);
         changePerimeter(perimeter);
@@ -116,7 +109,6 @@ function GenericEstimation() {
     numberOfRooms,
     zipCodeObject,
     floors,
-    userInputDoubleQueenQuantity,
     totalSqFt,
     perimeter,
     kingOneQuantity,
