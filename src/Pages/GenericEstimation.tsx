@@ -188,7 +188,7 @@ function GenericEstimation() {
             }}
             className="text-center font-bold h4 w-full xl:p-0 md:text-sm 2xl:text-lg"
           >
-            (Get Estimated)
+            (Generic Estimate)
           </div>
           <div className=" xl:max-h-full overflow-y-scroll genetic-accordion-container">
             <Accordion
