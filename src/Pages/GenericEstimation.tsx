@@ -298,7 +298,6 @@ function GenericEstimation() {
                   variant="h6"
                   className="w-50 text-right pr-4 2xl:text-xl"
                 >
-                  .
                   {genericEstimation?.generalFactors &&
                     currencyFormat(
                       genericEstimation.generalFactors?.generalFactorsCost
