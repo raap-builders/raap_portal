@@ -306,8 +306,14 @@ function Sider() {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Select Service"
+                        value="Hilton Home2"
                       >
-                        <MenuItem className="w-100" value={"Hilton Home2"}>
+                        <MenuItem
+                          selected
+                          aria-selected
+                          className="w-100"
+                          value="Hilton Home2"
+                        >
                           <div className="w-100 d-flex align-items-center justify-content-start">
                             <img
                               style={{
