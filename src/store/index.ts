@@ -30,6 +30,7 @@ export const useUserStore = create(
       isUserLoggedIn: false,
       changeIsUserLoggedIn: (isUserLoggedIn: boolean) =>
         set((state: Store) => ({ isUserLoggedIn })),
+      changeMeInfo: (meInfo: object) => set((state: Store) => ({ meInfo })),
     }),
     { name: "user_storage" }
   )

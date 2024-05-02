@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import { fetchAPI } from "../utils/fetcher";
+import Cookies from "js-cookie";
 
 let loginTimeout: number;
 interface IResponse {
@@ -21,6 +22,8 @@ function Regsiter() {
   const {
     //@ts-ignore
     changeIsUserLoggedIn,
+    //@ts-ignore
+    changeMeInfo,
   } = useUserStore((state) => state);
 
   const [password, setPassword] = useState("");
@@ -62,8 +65,14 @@ function Regsiter() {
         const accessToken = response.access_token;
         setLoginError(false);
         changeIsUserLoggedIn(true);
-        localStorage.setItem("refresh_token", refreshToken);
-        localStorage.setItem("access_token", accessToken);
+        Cookies.set("accessToken", accessToken);
+        Cookies.set("refreshToken", refreshToken);
+        const meInfo = await fetchAPI({
+          method: "GET",
+          route: "users/me",
+          withAuth: true,
+        });
+        changeMeInfo(meInfo);
         navigate("/landing");
       }
       //Redirect to protected area

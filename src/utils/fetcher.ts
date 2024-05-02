@@ -15,6 +15,8 @@ const handleError = (error: any) => {
 
   // Example: Redirect to login for unauthorized errors
   if (error.response && error.response.status === 401) {
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
     window.location.href = "/login"; // Replace with your login route
   }
 
@@ -27,7 +29,7 @@ const getRequestHeaders = (withAuth?: boolean): Record<string, string> => {
   };
   if (withAuth !== undefined && withAuth) {
     // Check if withAuth is true and defined
-    headers["Authorization"] = Cookies.get("accessToken") || "";
+    headers["Authorization"] = `Bearer ${Cookies.get("accessToken")}` || "";
   }
   return headers;
 };

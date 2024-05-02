@@ -1,8 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "../styles/header.css";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import Cookies from "js-cookie";
+import { fetchAPI } from "../utils/fetcher";
+import { useUserStore } from "../store";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
+
 const NavLinks = [
   { id: 1, name: "Budget", to: "/Budget" },
   { id: 2, name: "Design", to: "/Design" },
@@ -11,7 +19,45 @@ const NavLinks = [
 const options = ["Budget", "Design", "Fabricate"];
 const defaultOption = options[0];
 function Header() {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const {
+    //@ts-ignore
+    changeMeInfo,
+    //@ts-ignore
+    meInfo,
+  } = useUserStore((state) => state);
+
+  const onLogoutClicked = async () => {
+    try {
+      // const response = await fetchAPI({
+      //   route: "logout",
+      //   method: "GET",
+      // });
+      changeMeInfo({});
+      Cookies.remove("accessTokenObject");
+      Cookies.remove("refreshToken");
+      navigate("/");
+    } catch (error) {
+      console.log("error in logout--->>", error);
+    }
+  };
 
   const divStyle = {
     backgroundColor: "#F9F9F9",
@@ -20,9 +66,9 @@ function Header() {
   return (
     <div
       style={divStyle}
-      className="px-5 py-2 d-flex align-items-center rounded justify-content-start"
+      className="px-5 py-2 d-flex align-items-center rounded justify-content-between"
     >
-      <NavLink style={{ width: "43%" }} to="/landing">
+      <NavLink to="/landing">
         <img
           src={require("../assets/Header/New_RaaP_Logo.png")}
           alt="RaaP_Logo"
@@ -95,6 +141,36 @@ function Header() {
       <div className="block sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
         <Dropdown options={options} value={defaultOption} placeholder="" />
       </div>
+      <Button
+        className="text-secondary"
+        aria-describedby={id}
+        variant="text"
+        onClick={handleClick}
+      >
+        {`${meInfo.data.firstName} ${meInfo.data.lastName}`}
+        <ArrowDropDownCircleOutlinedIcon
+          className="ml-2"
+          style={{ fontSize: 18 }}
+        />
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <Typography
+          className="cursor-pointer"
+          onClick={onLogoutClicked}
+          sx={{ p: 2 }}
+        >
+          Logout
+        </Typography>
+      </Popover>
     </div>
   );
 }
