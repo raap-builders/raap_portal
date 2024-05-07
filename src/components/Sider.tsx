@@ -243,22 +243,19 @@ function Sider() {
         style={{
           backgroundColor: "#519258",
           borderRadius: 15,
-          marginRight: 10,
         }}
       >
         <FormLabel
           className="w-100 text-center text-white my-3 xl:mt-0"
           id="demo-row-radio-buttons-group-label"
         >
-          <span className="2xl:text-xl xl:text-md md:text-sm lg:text-md font-bold">
+          <span className="text-lg font-bold">
             {" "}
             Tell Us About Your Project
           </span>
         </FormLabel>
         <div
-          className="flex flex-col items-center sider-accordion-container max-h-screen px-[5%] pb-[4%]  
-        
-      "
+          className="flex flex-col items-center sider-accordion-container w-full max-h-screen px-[5%] pb-[4%]"
           style={{ maxHeight: "max-content" }}
         >
           <Accordion
@@ -269,7 +266,7 @@ function Sider() {
             }}
             expanded={openCardIndex === 0}
             defaultExpanded
-            className="pb-3 rounded w-[100%] m-0 p-0 "
+            className="rounded w-[100%] m-0 p-0"
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -284,8 +281,8 @@ function Sider() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography className="px-3">
-                <div className="d-flex align-items-start  justify-content-between md:m-w-max  2xl:text-lg mt-0 2xl:mb-4">
+              <Typography className="px-3 pb-3">
+                <div className="d-flex align-items-start justify-content-between md:m-w-max  2xl:text-lg mt-0">
                   <div className="w-100">
                     {/* <span
                       style={{ color: "#519259" }}
@@ -314,7 +311,7 @@ function Sider() {
                           className="w-100"
                           value="Hilton Home2"
                         >
-                          <div className="w-100 d-flex align-items-center justify-content-start">
+                          <div className="w-100 d-flex align-items-center justify-content-start gap-2">
                             <img
                               style={{
                                 width: 70,
@@ -323,7 +320,7 @@ function Sider() {
                               src={require("../assets/hilton.png")}
                               alt="Hilton Home2"
                             />
-                            <span className="ml-2 text-lg">Hilton Home2</span>
+                            <span className="text-lg">Hilton Home2</span>
                           </div>
                         </MenuItem>
                       </Select>
@@ -382,7 +379,7 @@ function Sider() {
                 </div>
 
                 <div className="d-flex flex-column align-items-center justify-content-center  xl:text-lg">
-                  <div className="text-center 2xl:text-lg  md:mb-2  text-[#519259] md:text-sm lg:text-md  xl:mb-0  xl:text-lg ">
+                  <div className="text-center 2xl:text-lg my-3 text-[#519259] md:text-sm lg:text-md  xl:text-lg ">
                     Site's zip code
                   </div>
                   <div className="w-full ">
@@ -756,7 +753,6 @@ function Sider() {
             padding:0px 5px;
           }
           .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
-            padding:4px;
             text-align:start;
             
           }

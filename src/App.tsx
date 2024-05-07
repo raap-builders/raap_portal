@@ -193,16 +193,18 @@ function App() {
   //@ts-ignore
   const ProtectedRoutes = ({ loggedInUser }: boolean) => {
     return (
-      <div className="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden overflow-y-scroll lg:block md:block 2xl:block ">
+      <div className="AppMain h-[82vh] px-3 py-1">
         <Header />
         <div>
           <Breadcrumb />
         </div>
-        <div className="flex flex-row justify-center ">
-          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
+        <div className="grid grid-cols-6 gap-4 h-full max-lg:overflow-x-scroll">
+          <div className="col-span-2 max-lg:hidden">
             <Sider />
           </div>
-          {loggedInUser ? <Outlet /> : <Navigate to="/" />}
+          <div className="col-span-4 max-lg:col-span-6 max-lg:min-w-[1024px]">
+            {loggedInUser ? <Outlet /> : <Navigate to="/" />}
+          </div>
         </div>
       </div>
     );
@@ -220,13 +222,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
-      <div className="block md:hidden lg:hidden 2xl:hidden flex justify-center items-center h-screen">
-        <h1 className="text-black text-center">
-          {" "}
-          For a better experience, we suggest using this website on a horizontal
-          or larger screen. Thank you!
-        </h1>
-      </div>
     </>
   );
 }

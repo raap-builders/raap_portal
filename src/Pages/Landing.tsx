@@ -3,13 +3,13 @@ import Sider from "../components/Sider";
 
 function Landing() {
   return (
-    <div className="flex ">
-      <div className=" md:block md:mx-[-15px] flex-3 flex-col lg:hidden md:ml-0 w-[35vw] md:mr-2 2xl:hidden ">
+    <div className="flex h-full gap-3">
+      <div className="flex-3 flex-col w-1/2 hidden max-lg:block">
         <Sider />
       </div>
       <div className="w-[100%] flex-7 overflow-hidden">
         <img
-          className="imageSize  h-auto xl:w-[98%] "
+          className="imageSize h-full"
           src={require("../assets/North_pic.png")}
           alt="main_layout"
         />

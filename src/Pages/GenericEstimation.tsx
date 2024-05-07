@@ -133,9 +133,9 @@ function GenericEstimation() {
       setExpandedAccordion(isExpanded ? panel : false);
     };
   return (
-    <div className=" d-flex flex-column align-items-center w-full ">
+    <div className="d-flex flex-column align-items-center w-full gap-3">
       <div
-        className="w-[100%] d-flex justify-content-around rounded-[10px] align-items-center md:mr-[6px] md:mt-2 2xl:p-[0.5%] mt-0 md:p-2 flex-col lg:flex-row md:flex-row xl:mr-6"
+        className="w-[100%] d-flex justify-content-around rounded-[10px] align-items-center md:mr-[6px] md:mt-2 2xl:p-[0.5%] mt-0 p-2 lg:flex-row flex-row xl:mr-6"
         style={{
           backgroundColor: "#519259",
         }}
