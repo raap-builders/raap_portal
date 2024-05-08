@@ -420,7 +420,7 @@ function Sider() {
           </Accordion>
           {location.pathname === "/landing" ? (
             <>
-              <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
+              <div className="mt-3 w-75 d-flex flex-column align-items-center align-self-center">
                 <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
                   Number of Rooms
                 </div>
@@ -689,7 +689,7 @@ function Sider() {
                 </AccordionDetails>
               </Accordion>
 
-              <div className="mt-4 mb-3 w-75 d-flex flex-column align-items-center align-self-center">
+              <div className="mt-3 w-75 d-flex flex-column align-items-center align-self-center">
                 <div className="2xl:text-lg md:text-sm lg:text-md xl:mt-0 xl:text-lg text-white d-flex flex-column justify-content-center">
                   Number of Rooms
                 </div>

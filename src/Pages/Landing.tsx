@@ -9,7 +9,7 @@ function Landing() {
       </div>
       <div className="w-[100%] flex-7 overflow-hidden">
         <img
-          className="imageSize h-full"
+          className="imageSize h-full pb-3"
           src={require("../assets/North_pic.png")}
           alt="main_layout"
         />

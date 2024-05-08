@@ -9,6 +9,21 @@ body,
   justify-content: space-around;
 }
 
+.scrollBarStyle::-webkit-scrollbar {
+  width: 12px;
+}
+.scrollBarStyle::-webkit-scrollbar-track {
+  background: white;
+}
+.scrollBarStyle::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 99px;
+  background: #888;
+}
+.scrollBarStyle::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .sc-fsQiph,
 .hCpXUZ {
   /* max-height: 200px; */

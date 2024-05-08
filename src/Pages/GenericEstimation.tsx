@@ -133,7 +133,7 @@ function GenericEstimation() {
       setExpandedAccordion(isExpanded ? panel : false);
     };
   return (
-    <div className="d-flex flex-column align-items-center w-full gap-3">
+    <div className="d-flex flex-column align-items-center w-full">
       <div
         className="w-[100%] d-flex justify-content-around rounded-[10px] align-items-center md:mr-[6px] md:mt-2 2xl:p-[0.5%] mt-0 p-2 lg:flex-row flex-row xl:mr-6"
         style={{
@@ -148,7 +148,7 @@ function GenericEstimation() {
             >
               <div
                 style={{ color: "#519259" }}
-                className="text-center border-bottom-0 2xl:text-lg bg-white font-bold   md:text-sm lg:text-lg"
+                className="text-center max-md:text-sm border-bottom-0 2xl:text-lg bg-white font-bold md:text-sm lg:text-lg"
               >
                 {item.name}
               </div>
@@ -159,7 +159,7 @@ function GenericEstimation() {
                   backgroundColor: "#DAF2DE",
                   fontSize: 24,
                 }}
-                className="py-3 font-bold text-center 2xl:text-lg text-lg md:text-sm lg:text-lg"
+                className="py-3 max-md:leading-[1.25rem] font-bold text-center 2xl:text-lg text-lg md:text-sm lg:text-lg"
               >
                 {item.name === "Build Time"
                   ? `${item.cost} Months`
@@ -168,7 +168,7 @@ function GenericEstimation() {
             </div>
           ))}
       </div>
-      <div className="flex w-full md:mt-2 h-full">
+      <div className="flex w-full mt-2 h-full">
         <div className="md:block  lg:hidden 2xl:hidden flex sider-genetic-accordion-container flex-col flex-4 w-[50%] ">
           <Sider />
         </div>
@@ -190,7 +190,7 @@ function GenericEstimation() {
           >
             (Generic Estimate)
           </div>
-          <div className=" xl:max-h-full overflow-y-scroll genetic-accordion-container">
+          <div className="overflow-y-scroll max-h-[56vh] scrollBarStyle">
             <Accordion
               className="m-4"
               defaultExpanded
