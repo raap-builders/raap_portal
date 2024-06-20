@@ -4,6 +4,8 @@ import {
   Button,
   FormControl,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +18,7 @@ interface IResponse {
   access_token: string;
 }
 
-function Regsiter() {
+function Register() {
   const navigate = useNavigate();
   const {
     //@ts-ignore
@@ -26,6 +28,10 @@ function Regsiter() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loginError, setLoginError] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobileLandscape = useMediaQuery("(max-width: 768px) and (orientation: landscape)");
 
   useEffect(() => {
     clearTimeout(loginTimeout);
@@ -75,6 +81,8 @@ function Regsiter() {
     // navigate("/landing");
   };
 
+  const inputSize = isMobile || isMobileLandscape ? "small" : "medium";
+
   return (
     <div
       style={{
@@ -84,7 +92,7 @@ function Regsiter() {
         backgroundSize: "cover",
         backgroundImage: `url(${require("../assets/layout_pic.png")})`,
       }}
-      className="d-flex flex-column align-items-center justify-content-center"
+      className="d-flex flex-column align-items-center justify-content-center overflow-hidden"
     >
       <FormControl
         style={{
@@ -93,34 +101,33 @@ function Regsiter() {
           height: "70%",
           boxShadow: "-1px 1px 0px 0px",
         }}
-        className="d-flex flex-column align-items-center justify-content-center p-5 rounded"
+        className="d-flex flex-column align-items-center justify-content-center p-5 rounded max-sm:!w-3/4 !h-max max-lg:py-10"
       >
-        <img
-          src={require("../assets/Header/New_RaaP_Logo.png")}
-          alt="RaaP_Logo"
-          style={{
-            width: "15%",
-            position: "absolute",
-            top: "5%",
-          }}
-        />
         <div
-          style={{ marginTop: "15%" }}
           className="d-flex flex-column justify-content-center align-items-center w-100"
         >
+          <img
+            src={require("../assets/Header/New_RaaP_Logo.png")}
+            alt="RaaP_Logo"
+            className="max-sm:!w-2/6"
+            style={{
+              width: "15%",
+            }}
+          />
           <TextField
             id="outlined-basic"
-            className="rounded"
+            className="rounded max-md:!w-full"
             value={email}
             onChange={onEmailChanged}
             label="Email"
             InputLabelProps={{ shrink: true }}
             type="email"
             variant="outlined"
-            style={{ backgroundColor: "white", width: "50%" }}
+            size={inputSize}
+            style={{ backgroundColor: "white", width: "50%", marginTop: '40px' }}
           />
           <TextField
-            className="mt-5 rounded"
+            className="max-sm:!mt-5 rounded max-md:!w-full !mt-10"
             value={password}
             onChange={onPasswordChanged}
             id="outlined-basic"
@@ -128,32 +135,30 @@ function Regsiter() {
             type="password"
             label="Password"
             variant="outlined"
+            size={inputSize}
             style={{ backgroundColor: "white", width: "50%" }}
           />
           <Button
             onClick={onFormSubmitted}
-            className="mt-5 w-50 py-3 bg-success"
+            className="max-md:!mt-5 w-50 sm:!py-3 bg-success !mt-10"
             variant="contained"
+            size={inputSize}
           >
             Login
           </Button>
 
-          {/* <p className="mt-5 h4 text-whit" style={{ color: "#777777" }}> */}
-          {/* I'd like to register. */}
           <Link
-            className="h5 text-primary mt-3"
+            className="h5 text-primary mt-3 max-sm:!mt-1"
             to="https://meetings.hubspot.com/rj-mahadev?uuid=b1295ee6-5b2c-41c6-87f4-f477cd7ae711"
           >
             I'd like to register.
-            {/* Schedule A Call To Get Set Up */}
           </Link>
-          {/* </p> */}
         </div>
       </FormControl>
 
       {loginError && (
         <Alert
-          className="mt-5  position-absolute"
+          className="mt-5 position-absolute"
           style={{
             bottom: 100,
             right: 40,
@@ -167,4 +172,5 @@ function Regsiter() {
     </div>
   );
 }
-export default Regsiter;
+
+export default Register;

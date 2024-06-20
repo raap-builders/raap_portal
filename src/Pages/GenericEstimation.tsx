@@ -148,7 +148,7 @@ function GenericEstimation() {
             >
               <div
                 style={{ color: "#519259" }}
-                className="text-center max-md:text-sm border-bottom-0 2xl:text-lg bg-white font-bold md:text-sm lg:text-lg"
+                className="text-center max-md:text-sm border-bottom-0 2xl:text-lg bg-white font-bold md:text-sm lg:text-lg tracking-tighter"
               >
                 {item.name}
               </div>
@@ -159,7 +159,7 @@ function GenericEstimation() {
                   backgroundColor: "#DAF2DE",
                   fontSize: 24,
                 }}
-                className="py-3 max-md:leading-[1.25rem] font-bold text-center 2xl:text-lg text-lg md:text-sm lg:text-lg"
+                className="py-3 max-md:leading-[1.25rem] font-bold text-center 2xl:text-lg text-lg md:text-sm max-md:!text-xl"
               >
                 {item.name === "Build Time"
                   ? `${item.cost} Months`
