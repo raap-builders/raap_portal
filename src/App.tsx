@@ -198,11 +198,11 @@ function App() {
         <div>
           <Breadcrumb />
         </div>
-        <div className="grid grid-cols-6 gap-4 max-lg:h-[84%] h-[81%] max-lg:overflow-x-scroll overflow-y-hidden scrollBarStyle">
+        <div className="grid grid-cols-6 gap-4 max-lg:h-max h-[81%] max-lg:overflow-x-scroll overflow-y-hidden scrollBarStyle">
           <div className="col-span-2 max-lg:hidden">
             <Sider />
           </div>
-          <div className="col-span-4 max-lg:col-span-6 max-lg:min-w-[1024px]">
+          <div className="col-span-4 max-lg:col-span-6 max-lg:min-w-[640px]">
             {loggedInUser ? <Outlet /> : <Navigate to="/" />}
           </div>
         </div>
