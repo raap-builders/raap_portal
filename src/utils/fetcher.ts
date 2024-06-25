@@ -27,7 +27,7 @@ const getRequestHeaders = (withAuth?: boolean): Record<string, string> => {
   };
   if (withAuth !== undefined && withAuth) {
     // Check if withAuth is true and defined
-    headers["Authorization"] = Cookies.get("accessToken") || "";
+    headers["Authorization"] = `Bearer ${Cookies.get("accessToken") || ""}`;
   }
   return headers;
 };

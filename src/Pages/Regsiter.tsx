@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import { fetchAPI } from "../utils/fetcher";
+import Cookies from "js-cookie";
 
 let loginTimeout: number;
 interface IResponse {
@@ -31,7 +32,9 @@ function Register() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMobileLandscape = useMediaQuery("(max-width: 768px) and (orientation: landscape)");
+  const isMobileLandscape = useMediaQuery(
+    "(max-width: 768px) and (orientation: landscape)"
+  );
 
   useEffect(() => {
     clearTimeout(loginTimeout);
@@ -70,6 +73,8 @@ function Register() {
         changeIsUserLoggedIn(true);
         localStorage.setItem("refresh_token", refreshToken);
         localStorage.setItem("access_token", accessToken);
+        Cookies.set("refreshToken", refreshToken);
+        Cookies.set("accessToken", accessToken);
         navigate("/landing");
       }
       //Redirect to protected area
@@ -103,9 +108,7 @@ function Register() {
         }}
         className="d-flex flex-column align-items-center justify-content-center p-5 rounded max-sm:!w-3/4 !h-max max-lg:py-10"
       >
-        <div
-          className="d-flex flex-column justify-content-center align-items-center w-100"
-        >
+        <div className="d-flex flex-column justify-content-center align-items-center w-100">
           <img
             src={require("../assets/Header/New_RaaP_Logo.png")}
             alt="RaaP_Logo"
@@ -124,7 +127,11 @@ function Register() {
             type="email"
             variant="outlined"
             size={inputSize}
-            style={{ backgroundColor: "white", width: "50%", marginTop: '40px' }}
+            style={{
+              backgroundColor: "white",
+              width: "50%",
+              marginTop: "40px",
+            }}
           />
           <TextField
             className="max-sm:!mt-5 rounded max-md:!w-full !mt-10"

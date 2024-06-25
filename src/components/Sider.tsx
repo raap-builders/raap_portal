@@ -171,7 +171,7 @@ function Sider() {
   };
 
   const onFormSubmitted = () => {
-    navigate(`generic_estimation`);
+    navigate(`/generic_estimation`);
   };
 
   const onPerimeterChanged = (
@@ -249,10 +249,7 @@ function Sider() {
           className="w-100 text-center text-white my-3 xl:mt-0"
           id="demo-row-radio-buttons-group-label"
         >
-          <span className="text-lg font-bold">
-            {" "}
-            Tell Us About Your Project
-          </span>
+          <span className="text-lg font-bold"> Tell Us About Your Project</span>
         </FormLabel>
         <div
           className="flex flex-col items-center sider-accordion-container w-full max-h-screen px-[5%] pb-[4%]"
