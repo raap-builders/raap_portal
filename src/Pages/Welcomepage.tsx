@@ -182,7 +182,7 @@ function Welcomepage() {
       <footer className="footer11">
         <p className="disclaimer11">
           <b>Disclaimer:</b> Our Construction Cost Tool is continuously updated with new features and brands. While we strive to project accurate costs, fluctuations in local construction costs, site-specific conditions and individual project requirements can result in significant variances. Please discuss any variance directly with the RaaP team and we can help validate cost projections independently.
-          By using this tool, you acknowledge that RaaP and our partners are not llable for any errors, omissions, or consequences arising from its use.
+          By using this tool, you acknowledge that RaaP and our partners are not liable for any errors, omissions, or consequences arising from its use.
         </p>
         <p className="copyright11">
           ©2024 raap.builders and/or its affiliates. All rights reserved.
