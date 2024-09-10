@@ -19,6 +19,7 @@ import Breadcrumb from "./components/Breadcrum";
 import Sider from "./components/Sider";
 import Landing from "./Pages/Landing";
 import GenericEstimation from "./Pages/GenericEstimation";
+import Welcomepage from "./Pages/Welcomepage";
 import Regsiter from "./Pages/Regsiter";
 import { useUserStore } from "./store";
 // Define the URL of the xlsx file
@@ -219,6 +220,7 @@ function App() {
             <Route path="/landing" element={<Landing />} />
             <Route path="/generic_estimation" element={<GenericEstimation />} />
           </Route>
+          <Route path="/Welcomepage" element={<Welcomepage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
