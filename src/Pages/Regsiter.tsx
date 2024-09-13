@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import { fetchAPI } from "../utils/fetcher";
 import Cookies from "js-cookie";
@@ -21,13 +21,15 @@ interface IResponse {
 
 function Register() {
   const navigate = useNavigate();
-  const {  
+  const {
     //@ts-ignore
-        changeIsUserLoggedIn,
-       } = useUserStore((state) => state);
+    changeIsUserLoggedIn,
+  } = useUserStore((state) => state);
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
   const theme = useTheme();
@@ -50,6 +52,17 @@ function Register() {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEmail(event.target.value);
+  };
+  const onFullNameChanged = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFullName(event.target.value);
+  };
+
+  const onConfirmPasswordChanged = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setConfirmPassword(event.target.value);
   };
 
   const onFormSubmitted = async () => {
@@ -78,11 +91,35 @@ function Register() {
       }
     } catch (error) {
       setLoginError(true);
-     //@ts-ignore
-       loginTimeout = setTimeout(() => setLoginError(false), 1500);
+      //@ts-ignore
+      loginTimeout = setTimeout(() => setLoginError(false), 1500);
     }
   };
+const onSignUpFormSubmitted = async () => {
+    if (password !== confirmPassword) {
+      setLoginError(true);
+      return;
+    }
 
+    try {
+      clearTimeout(loginTimeout);
+
+      await fetchAPI({
+        route: "signup",
+        method: "POST",
+        data: {
+          fullName,
+          email,
+          password,
+        },
+      });
+      navigate("/login"); // Redirect to login after successful signup
+    } catch (error) {
+      setLoginError(true);
+      //@ts-ignore
+      loginTimeout = setTimeout(() => setLoginError(false), 1500);
+    }
+  };
   const inputSize = isMobile ? "small" : "medium";
 
   return (
@@ -250,6 +287,8 @@ function Register() {
             <TextField
               id="full-name"
               label="Full Name"
+              value={fullName}
+              onChange={onFullNameChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -258,8 +297,10 @@ function Register() {
               size={inputSize}
             />
             <TextField
-              id="business-email"
+              id="email"
               label="Business Email"
+              value={email}
+              onChange={onEmailChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -268,9 +309,11 @@ function Register() {
               size={inputSize}
             />
             <TextField
-              id="new-password"
+              id="password"
               label="Enter Password"
               type="password"
+              value={password}
+              onChange={onPasswordChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -282,6 +325,8 @@ function Register() {
               id="confirm-password"
               label="Confirm Password"
               type="password"
+              value={confirmPassword}
+              onChange={onConfirmPasswordChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -292,6 +337,7 @@ function Register() {
           </FormControl>
           <center>
             <Button
+            onClick={onSignUpFormSubmitted}
               variant="contained"
               style={{
                 backgroundColor: "#4CAF50",

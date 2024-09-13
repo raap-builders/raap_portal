@@ -7,6 +7,8 @@ const NavLinks = [
   { id: 1, name: "Budget", to: "/Budget" },
   { id: 2, name: "Design", to: "/Design" },
   { id: 3, name: "Fabricate", to: "/Fabricate" },
+  { id: 3, name: "Signout", to: "/" },
+
 ];
 const options = ["Budget", "Design", "Fabricate"];
 const defaultOption = options[0];
