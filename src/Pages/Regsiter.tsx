@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import { fetchAPI } from "../utils/fetcher";
 import Cookies from "js-cookie";
@@ -28,8 +28,6 @@ function Register() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
   const theme = useTheme();
@@ -52,17 +50,6 @@ function Register() {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEmail(event.target.value);
-  };
-  const onFullNameChanged = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFullName(event.target.value);
-  };
-
-  const onConfirmPasswordChanged = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setConfirmPassword(event.target.value);
   };
 
   const onFormSubmitted = async () => {
@@ -87,7 +74,7 @@ function Register() {
         localStorage.setItem("access_token", accessToken);
         Cookies.set("refreshToken", refreshToken);
         Cookies.set("accessToken", accessToken);
-        navigate("/landing");
+        navigate("/Welcomepage");
       }
     } catch (error) {
       setLoginError(true);
@@ -95,31 +82,7 @@ function Register() {
       loginTimeout = setTimeout(() => setLoginError(false), 1500);
     }
   };
-const onSignUpFormSubmitted = async () => {
-    if (password !== confirmPassword) {
-      setLoginError(true);
-      return;
-    }
 
-    try {
-      clearTimeout(loginTimeout);
-
-      await fetchAPI({
-        route: "signup",
-        method: "POST",
-        data: {
-          fullName,
-          email,
-          password,
-        },
-      });
-      navigate("/login"); // Redirect to login after successful signup
-    } catch (error) {
-      setLoginError(true);
-      //@ts-ignore
-      loginTimeout = setTimeout(() => setLoginError(false), 1500);
-    }
-  };
   const inputSize = isMobile ? "small" : "medium";
 
   return (
@@ -146,13 +109,13 @@ const onSignUpFormSubmitted = async () => {
         <img
           className="header-titlep"
           style={{
-            width: isMobile ? "60%" : isTablet ? "50%" : "50%",
+            width: isMobile ? "60%" : isTablet ? "43%" : "43  %",
           }}
           src={require("../assets/Header/logo 1.png")}
           alt="Header"
         />
         <br />
-        <p
+        <h6
           style={{
             textAlign: isMobile ? "center" : isTablet ? "center" : "left",
           }}
@@ -160,8 +123,8 @@ const onSignUpFormSubmitted = async () => {
           RaaP (Rooms as a Product) has been working with Hilton and other hotel
           development partners to provide more accurate hotel construction costs
           very early in the project life cycle—even during site selection.
-        </p>
-        <p
+        </h6>
+        <h6
           style={{
             textAlign: isMobile ? "center" : isTablet ? "center" : "left",
           }}
@@ -169,7 +132,7 @@ const onSignUpFormSubmitted = async () => {
           Our estimating tool applies productization and lean construction
           principles to develop standard assemblies that are priced using our
           proprietary nationwide pricing index.
-        </p>
+        </h6>
         <Button
           variant="contained"
           style={{
@@ -287,8 +250,6 @@ const onSignUpFormSubmitted = async () => {
             <TextField
               id="full-name"
               label="Full Name"
-              value={fullName}
-              onChange={onFullNameChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -297,10 +258,8 @@ const onSignUpFormSubmitted = async () => {
               size={inputSize}
             />
             <TextField
-              id="email"
+              id="business-email"
               label="Business Email"
-              value={email}
-              onChange={onEmailChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -309,11 +268,9 @@ const onSignUpFormSubmitted = async () => {
               size={inputSize}
             />
             <TextField
-              id="password"
+              id="new-password"
               label="Enter Password"
               type="password"
-              value={password}
-              onChange={onPasswordChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -325,8 +282,6 @@ const onSignUpFormSubmitted = async () => {
               id="confirm-password"
               label="Confirm Password"
               type="password"
-              value={confirmPassword}
-              onChange={onConfirmPasswordChanged}
               variant="outlined"
               style={{
                 marginBottom: "20px",
@@ -337,7 +292,6 @@ const onSignUpFormSubmitted = async () => {
           </FormControl>
           <center>
             <Button
-            onClick={onSignUpFormSubmitted}
               variant="contained"
               style={{
                 backgroundColor: "#4CAF50",
