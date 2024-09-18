@@ -3,6 +3,7 @@
 import React from "react";
 import "./Welcomepage.css";
 import { Link } from "react-router-dom";
+
 function Welcomepage() {
   return (
     <div className="container11">
@@ -12,6 +13,7 @@ function Welcomepage() {
             src={require("../assets/Header/New_RaaP_Logo.png")}
             alt="RaaP_Logo"
           />
+          
         </div>
       </header>
       <header className="header">
@@ -28,6 +30,7 @@ function Welcomepage() {
         <section className="about-section">
         <div className="about-image">
           <img src={require("../assets/Header/car-building.png")} alt="Building" />
+          
         </div>
         <div className="about-content">
           <h2>About RaaP</h2>

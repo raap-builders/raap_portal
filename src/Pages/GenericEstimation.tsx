@@ -9,6 +9,7 @@ import { currencyFormat } from "../utils/formatter";
 import { useLocationStore, useRoomStore } from "../store";
 import Sider from "../components/Sider";
 import { fetchAPI } from "../utils/fetcher";
+import { SignedIn, UserButton, } from "@clerk/clerk-react";
 
 interface ProjectFactor {
   id: number;
@@ -189,6 +190,21 @@ function GenericEstimation() {
             className="text-center font-bold h4 w-full xl:p-0 md:text-sm 2xl:text-lg"
           >
             (Generic Estimate)
+          </div>
+          <div style={{marginLeft:"750px",marginTop:"-80px"}}>
+          <SignedIn>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                padding: "20px",
+              }}
+            >
+              <UserButton />
+            </div>
+          </SignedIn>
           </div>
           <div className="overflow-y-scroll max-h-[56vh] scrollBarStyle">
             <Accordion

@@ -192,23 +192,8 @@ function App() {
   }, []);
 
   //@ts-ignore
-  const ProtectedRoutes = ({ loggedInUser }: boolean) => {
-    return (
-      <div className="AppMain h-screen px-3 py-1">
-        <Header />
-        <div>
-          <Breadcrumb />
-        </div>
-        <div className="grid grid-cols-6 gap-4 max-lg:h-max h-[81%] max-lg:overflow-x-scroll overflow-y-hidden scrollBarStyle">
-          <div className="col-span-2 max-lg:hidden">
-            <Sider />
-          </div>
-          <div className="col-span-4 max-lg:col-span-6 max-lg:min-w-[640px]">
-            {loggedInUser ? <Outlet /> : <Navigate to="/" />}
-          </div>
-        </div>
-      </div>
-    );
+  const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
+    return isUserLoggedIn ? children : <Navigate to="/" />;
   };
   return (
     <>
@@ -216,10 +201,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Regsiter />} />
           {/* @ts-ignore */}
-          <Route element={<ProtectedRoutes loggedInUser={isUserLoggedIn} />}>
             <Route path="/landing" element={<Landing />} />
             <Route path="/generic_estimation" element={<GenericEstimation />} />
-          </Route>
           <Route path="/Welcomepage" element={<Welcomepage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

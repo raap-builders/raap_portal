@@ -6,31 +6,22 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ClerkProvider } from '@clerk/clerk-react';
 
-// import { Providers } from '@microsoft/mgt-element';
-// import { Msal2Provider } from '@microsoft/mgt-msal2-provider';
-// import { Providers } from "@microsoft/mgt";
+const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
-// console.log(process.env.REACT_APP_MICROSOFT_APPLICATION_ID)
-
-// Providers.globalProvider = new Msal2Provider({
-//       clientId: process.env.REACT_APP_MICROSOFT_APPLICATION_ID || ""
-// });
-
-// async function Test() {
-//   console.log("awaiting access token...")
-//   const accessToken = await Providers.globalProvider.getAccessToken({ scopes: ['User.Read', 'Files.Read'] })
-//   console.log("accessToken:")
-//   console.log(accessToken) // Returns token!
-// }
-
-// Test()
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <App />
+    </ClerkProvider>
   </React.StrictMode>
 );
