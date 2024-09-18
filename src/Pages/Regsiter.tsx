@@ -212,24 +212,24 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "../store";
-import { fetchAPI } from "../utils/fetcher";
-import Cookies from "js-cookie";
+// import { useUserStore } from "../store";
+// import { fetchAPI } from "../utils/fetcher";
+// import Cookies from "js-cookie";
 import { SignedOut, SignInButton, useAuth } from "@clerk/clerk-react";
 
 let loginTimeout: number;
-interface IResponse {
-  refresh_token: string;
-  access_token: string;
-}
+// interface IResponse {
+//   refresh_token: string;
+//   access_token: string;
+// }
 
 function Register() {
   const navigate = useNavigate();
-  const { 
-    //@ts-ignore
-    changeIsUserLoggedIn } = useUserStore((state) => state);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  // const { 
+  //   //@ts-ignore
+  //   changeIsUserLoggedIn } = useUserStore((state) => state);
+  // const [password] = useState("");
+  // const [email] = useState("");
   const [loginError, setLoginError] = useState(false);
 
   const theme = useTheme();
@@ -251,38 +251,36 @@ function Register() {
     }
   }, [isLoaded, userId, navigate]);
 
-  const onFormSubmitted = async () => {
-    try {
-      clearTimeout(loginTimeout);
+  // const onFormSubmitted = async () => {
+  //   try {
+  //     clearTimeout(loginTimeout);
 
-      const response: IResponse = await fetchAPI({
-        route: "token",
-        method: "POST",
-        data: {
-          grant_type: "password",
-          username: email,
-          password,
-        },
-      });
-      if (response) {
-        const refreshToken = response.refresh_token;
-        const accessToken = response.access_token;
-        setLoginError(false);
-        changeIsUserLoggedIn(true);
-        localStorage.setItem("refresh_token", refreshToken);
-        localStorage.setItem("access_token", accessToken);
-        Cookies.set("refreshToken", refreshToken);
-        Cookies.set("accessToken", accessToken);
-        navigate("/Welcomepage");
-      }
-    } catch (error) {
-      setLoginError(true);
-      //@ts-ignore
-      loginTimeout = setTimeout(() => setLoginError(false), 1500);
-    }
-  };
-
-  const inputSize = isMobile ? "small" : "medium";
+  //     const response: IResponse = await fetchAPI({
+  //       route: "token",
+  //       method: "POST",
+  //       data: {
+  //         grant_type: "password",
+  //         username: email,
+  //         password,
+  //       },
+  //     });
+  //     if (response) {
+  //       const refreshToken = response.refresh_token;
+  //       const accessToken = response.access_token;
+  //       setLoginError(false);
+  //       changeIsUserLoggedIn(true);
+  //       localStorage.setItem("refresh_token", refreshToken);
+  //       localStorage.setItem("access_token", accessToken);
+  //       Cookies.set("refreshToken", refreshToken);
+  //       Cookies.set("accessToken", accessToken);
+  //       navigate("/Welcomepage");
+  //     }
+  //   } catch (error) {
+  //     setLoginError(true);
+  //     //@ts-ignore
+  //     loginTimeout = setTimeout(() => setLoginError(false), 1500);
+  //   }
+  // };
 
   return (
     <div

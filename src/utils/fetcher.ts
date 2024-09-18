@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
-interface HttpResponse<T> {
-  data: T;
-  status: number;
-  statusText: string;
-}
+// interface HttpResponse<T> {
+//   data: T;
+//   status: number;
+//   statusText: string;
+// }
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 

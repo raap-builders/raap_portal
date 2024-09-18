@@ -1,9 +1,6 @@
 //ts-check
 import React, { useEffect, useState, useRef } from "react";
 import Slider from "@mui/material/Slider";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -20,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 
-let queenQuantityErrorTimeout: number;
+// let queenQuantityErrorTimeout: number;
 interface ZipCodes {
   id: number;
   zipCode: string;
@@ -34,7 +31,7 @@ function Sider() {
   const navigate = useNavigate();
   const location = useLocation();
   const [zipCode, setZipCode] = useState("");
-  const [queenQuantityError, setQueenQuantityError] = useState("");
+  const [queenQuantityError] = useState("");
   const [numberOfRooms, setNumberOfRooms] = useState(100);
   const [openCardIndex, setOpenCardIndex] = useState(0);
   const [numberOfFLoors, setNumberOfFloors] = useState(0);
@@ -50,11 +47,11 @@ function Sider() {
     //@ts-ignore
     changeRooms,
     //@ts-ignore
-    changeFloors,
+    // changeFloors,
     //@ts-ignore
-    changePerimeter,
+    // changePerimeter,
     //@ts-ignore
-    changeTotalSqFt,
+    // changeTotalSqFt,
     //@ts-ignore
     changeZipCode,
     //@ts-ignore
@@ -71,13 +68,13 @@ function Sider() {
 
   const {
     //@ts-ignore
-    changeADA,
+    // changeADA,
     //@ts-ignore
-    changeDoubleQueen,
+    // changeDoubleQueen,
     //@ts-ignore
-    changeKingStudio,
+    // changeKingStudio,
     //@ts-ignore
-    changeKingOne,
+    // changeKingOne,
     //@ts-ignore
     doubleQueenQuantity: doubleQueenQuantityFromStore,
     //@ts-ignore
@@ -172,68 +169,6 @@ function Sider() {
 
   const onFormSubmitted = () => {
     navigate(`/generic_estimation`);
-  };
-
-  const onPerimeterChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setPerimeter(parseInt(event.target.value));
-    changePerimeter(parseInt(event.target.value));
-  };
-
-  const onTotalSqFtChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setTotalSqFt(parseInt(event.target.value));
-    changeTotalSqFt(parseInt(event.target.value));
-  };
-
-  const onKingStudioQuantityChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setKingStudioQuantity(parseInt(event.target.value));
-    changeKingStudio(parseInt(event.target.value));
-  };
-
-  const onADAChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setADAQuantity(parseInt(event.target.value));
-    changeADA(parseInt(event.target.value));
-  };
-
-  const onDoubleQueenQuantityChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    clearTimeout(queenQuantityErrorTimeout);
-    if (parseInt(event.target.value) > Math.round(numberOfRooms * 0.4)) {
-      setQueenQuantityError(
-        "The quantity cannot be more than 40% of the number of the rooms"
-      );
-      //@ts-ignore
-      queenQuantityErrorTimeout = setTimeout(
-        () => setQueenQuantityError(""),
-        2500
-      );
-    } else {
-      setQueenQuantityError("");
-      setDoubleQueenQuantity(parseInt(event.target.value));
-      changeDoubleQueen(parseInt(event.target.value));
-    }
-  };
-
-  const onKingOneQuantityChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setKingOneQuantity(parseInt(event.target.value));
-    changeKingOne(parseInt(event.target.value));
-  };
-
-  const onNumberOfFloorsChanged = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setNumberOfFloors(parseInt(event.target.value));
-    changeFloors(parseInt(event.target.value));
   };
 
   return (
