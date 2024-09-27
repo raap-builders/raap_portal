@@ -6,7 +6,7 @@ import "react-dropdown/style.css";
 const NavLinks = [
   { id: 1, name: "Budget", to: "/Budget" },
   { id: 2, name: "Design", to: "/Design" },
-  { id: 3, name: "Award", to: "#" },
+  { id: 3, name: "Try Award", to: "#" },
 ];
 const options = ["Budget", "Design", "Fabricate"];
 const defaultOption = options[0];
