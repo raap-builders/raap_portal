@@ -192,18 +192,20 @@ function App() {
   }, []);
 
   //@ts-ignore
-  const ProtectedRoutes = ({ loggedInUser }: boolean) => {
+  const ProtectedRoutes = ({ loggedInUser }: { loggedInUser: boolean }) => {
     return (
-      <div className="AppMain  h-100  overflow-x-hidden px-3 py-1 hidden sm:hidden overflow-y-scroll lg:block md:block 2xl:block ">
+      <div className="AppMain h-100 overflow-x-hidden px-3 py-1 overflow-y-scroll">
         <Header />
         <div>
           <Breadcrumb />
         </div>
-        <div className="flex flex-row justify-center ">
-          <div className="sm:w-full flex-3 xl:mr-4 md:hidden lg:block 2xl:block 2xl:w-[35vw] 2xl:max-h-[100vh]  lg:w-[35vw] md:p-2 p-0 lg:mr-2 ">
+        <div className="flex flex-row justify-center">
+          <div className="sm:w-full flex-3 xl:mr-4 2xl:w-[35vw] 2xl:max-h-[100vh] lg:w-[35vw] md:p-2 p-0 lg:mr-2">
             <Sider />
           </div>
-          {loggedInUser ? <Outlet /> : <Navigate to="/" />}
+          <div className="flex-1">
+            {loggedInUser ? <Outlet /> : <Navigate to="/" />}
+          </div>
         </div>
       </div>
     );
@@ -213,10 +215,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Regsiter />} />
+
           {/* @ts-ignore */}
-          <Route element={<ProtectedRoutes loggedInUser={isUserLoggedIn} />}>
+          <Route element={<ProtectedRoutes loggedInUser={true} />}>
+          <Route path="/generic_estimation" element={<GenericEstimation />} />
+
             <Route path="/landing" element={<Landing />} />
-            <Route path="/generic_estimation" element={<GenericEstimation />} />
           </Route>
           <Route path="/Welcomepage" element={<Welcomepage />} />
           <Route path="*" element={<Navigate to="/" />} />

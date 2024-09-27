@@ -132,6 +132,8 @@ function GenericEstimation() {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpandedAccordion(isExpanded ? panel : false);
     };
+  {console.log('genericEstimation,',genericEstimation) }
+
   return (
     <div className=" d-flex flex-column align-items-center w-full ">
       <div

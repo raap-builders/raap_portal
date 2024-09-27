@@ -12,13 +12,14 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Alert, AlertTitle, TextField } from "@mui/material";
+import { Alert, AlertTitle, TextField ,Button } from "@mui/material";
 import axios from "axios";
 import { useLocationStore, useRoomStore } from "../store";
 import { numberWithCommas } from "../utils/formatter";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import { Link } from 'react-router-dom';
 
 let queenQuantityErrorTimeout: number;
 interface ZipCodes {
@@ -836,7 +837,16 @@ function Sider() {
           {queenQuantityError}
         </Alert>
       )}
+      <div className="flex flex-col items-center mt-4">
+      <Button variant="contained" color="success" className="w-36" onClick={()=>navigate('/get-estimate')}>
+        Get Estimate
+      </Button>
+      <Link to="/methodology" className="mt-2 text-sm text-blue-600 hover:text-blue-800 text-center">
+        Click here to understand our methodology & how to further customize this tool to your project.
+      </Link>
     </div>
+    </div>
+
   );
 }
 

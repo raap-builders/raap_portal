@@ -7,7 +7,7 @@ import "../styles/breadcrum.css";
 
 function Breadcrum() {
   const location = useLocation();
-  const steps = ["Estimate", "Optimize", "Bid"];
+  const steps = ["Site Build", "Prefab"];
 
   const renderActiveStep = () => {
     switch (location.pathname) {

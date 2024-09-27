@@ -6,7 +6,7 @@ import "react-dropdown/style.css";
 const NavLinks = [
   { id: 1, name: "Budget", to: "/Budget" },
   { id: 2, name: "Design", to: "/Design" },
-  { id: 3, name: "Fabricate", to: "/Fabricate" },
+  { id: 3, name: "Award", to: "#" },
 ];
 const options = ["Budget", "Design", "Fabricate"];
 const defaultOption = options[0];
@@ -32,7 +32,7 @@ function Header() {
           }}
         />
       </NavLink>
-      <div className=" hidden sm:block md:block lg:block xl:block 2xl:block">
+      <div className="  sm:block md:block lg:block xl:block 2xl:block">
         {NavLinks.map(({ id, name, to }) => (
           <span
             // to={name === "Budget" ? "/" : ""}
