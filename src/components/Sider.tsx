@@ -144,7 +144,14 @@ function Sider() {
       })
       .catch((error) => console.log("err", error));
   };
+  const handleGetEstimate = () => {
+    window.location.href = 'https://www.raap.builders/get-estimate';
+  };
 
+  const handleMethodologyClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.location.href = 'https://www.raap.builders/methodology';
+  };
   const onZipCodeChanged = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -838,12 +845,16 @@ function Sider() {
         </Alert>
       )}
       <div className="flex flex-col items-center mt-4">
-      <Button variant="contained" color="success" className="w-36" onClick={()=>navigate('/get-estimate')}>
+      <Button variant="contained" color="success" className="w-36" onClick={handleGetEstimate}>
         Get Estimate
       </Button>
-      <Link to="/methodology" className="mt-2 text-sm text-blue-600 hover:text-blue-800 text-center">
+      <a 
+        href="https://www.raap.builders/methodology" 
+        onClick={handleMethodologyClick}
+        className="mt-2 text-sm text-blue-600 hover:text-blue-800 text-center"
+      >
         Click here to understand our methodology & how to further customize this tool to your project.
-      </Link>
+      </a>
     </div>
     </div>
 
